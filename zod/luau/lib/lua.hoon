@@ -57,6 +57,7 @@
   |.
   %+  parse-interlist  parse-binop  parse-atomic-expr
 :: TODO: This is mock and should take operator priority into account.
+::
 ++  process-expr-list
   |=  l=(interlist binop expr)
   ^-  expr
@@ -199,16 +200,7 @@
 ++  parse-exprlist
   %+  knee  *exprlist
   |.
-  ;~  (glue gaw)
-    parse-expr
-    ::
-    %-  star  
-    %+  cook  |=([* =expr] expr)
-    ;~  (glue gaw)
-      (just ',')
-      parse-expr
-    ==
-  ==
+  %+  most  (ifix [gaw gaw] com)  parse-expr
 :: Var
 ::
 +$  var
@@ -255,16 +247,7 @@
 ++  parse-varlist
   %+  knee  *varlist
   |.
-  ;~  (glue gaw)
-    parse-var
-    ::
-    %-  star  
-    %+  cook  |=([* =var] var)
-    ;~  (glue gaw)
-      (just ',')
-      parse-var
-    ==
-  ==
+  %+  most  (ifix [gaw gaw] com)  parse-var
 :: Prefix Expr
 ::
 +$  prefix-expr
@@ -352,7 +335,7 @@
 ++  parse-blok
   %+  knee  *blok
   |.
-  (plus parse-stat)
+  (most gawn parse-stat)
 :: Helpers
 ::
 ++  commaed 
