@@ -69,6 +69,10 @@
   %+  knee  *expr
   |.
   %+  cook  process-expr-list  parse-expr-list
+++  parse-parened-expr
+  %+  cook
+    |=([=expr] [%expr expr])
+  (ifix [(just '(') (just ')')] (knee *expr |.(parse-expr)))
 ++  print-expr
   |=  [=expr]
   ^-  tape
@@ -205,6 +209,7 @@
 ::
 +$  var
   $%
+    [%dot prefix-expr name]
     [%indexed prefix-expr expr]
     [%name name]
   ==
@@ -221,21 +226,50 @@
         (print-expr +>.var)
         "]"
       ==
+    %dot
+      %-  zing
+      :~
+        (print-prefix-expr +<.var)
+        "."
+        (trip +>.var)
+      ==
   ==
 ++  parse-var
   %+  knee  *var
   |.
-  ;~  pose
+  =>
+  |%
+  ++  parse-access
+    |=  =prefix-expr
     %+  cook
-      |=([=name * =expr *] [%indexed [%var [%name name]] expr])
+      |=([* =expr *] [%indexed prefix-expr expr])
     ;~  (glue gaw)
-      parse-name
       (just '[')
       parse-expr
       (just ']')
     ==
+  ++  parse-dot
+    |=  =prefix-expr
+    %+  cook
+      |=([* =name] [%dot prefix-expr name])
+    ;~  plug
+      dot
+      parse-name
+    ==
+  --
+  ;~  pose
+    ;<  prefix=name  bind  parse-name
+    ;~  pose
+      (parse-access [%var %name prefix])
+      (parse-dot [%var %name prefix])
+      (easy [%name prefix])
+    ==
     ::
-    (cook |=(=name [%name name]) parse-name)
+    ;<  prefix=prefix-expr  bind  parse-parened-expr
+    ;~  pose
+      (parse-access prefix)
+      (parse-dot prefix)
+    ==
   ==
 ::  varlist
 ::
@@ -259,13 +293,9 @@
   %+  knee  *prefix-expr
   |.
   ;~  pose
-    %+  cook
-      |=([=expr] [%expr expr])
-    (ifix [(just '(') (just ')')] (knee *expr |.(parse-expr)))
+    %+  cook  |=([=var] [%var var])  parse-var
     ::
-    %+  cook
-      |=([=var] [%var var])
-    (knee *var |.(parse-var))
+    parse-parened-expr
   ==
 ++  print-prefix-expr
   |=  [=prefix-expr]
