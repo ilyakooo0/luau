@@ -26,10 +26,11 @@
 ::
 +$  expr
   $%
-    :: [%string ~]
+    [%string string]
     [%binop expr binop expr]
     [%prefix-expr prefix-expr]
     [%num numeral]
+    [%table table]
     [%true ~]
     [%false ~]
     [%nil ~]
@@ -51,6 +52,14 @@
     %+  cook
       |=(=prefix-expr [%prefix-expr prefix-expr])
     (knee *prefix-expr |.(parse-prefix-expr))
+    ::
+    %+  cook
+      |=(=table [%table table])
+    parse-table
+    ::
+    %+  cook
+      |=(=string [%string string])
+    parse-string
   ==
 ++  parse-expr-list
   %+  knee  *(interlist binop expr)
@@ -91,6 +100,134 @@
         (print-expr +>+.expr)
       ==
     %num  (print-numeral +.expr)
+    %table  (print-table +.expr)
+    %string  (print-string +.expr)
+  ==
+:: string
+::
++$  string  @t
+++  print-string
+  |=  =string
+  %-  zing
+  :~
+    "\""
+    (trip string)
+    "\""
+  ==
+++  parse-string
+  %+  knee  *string
+  |.
+  =>
+  |%
+  ++  parse-string
+    |=  quot=char
+    =/  quot  (just quot)
+    %+  cook
+      |=([* =tape *] (crip tape))
+    ;~  plug
+      quot
+      (star ;~(less quot next))
+      quot
+    ==
+  --
+  ;~  pose
+    (parse-string '"')
+    (parse-string '\'')
+  ==
+:: table
+::
++$  table  field-list
+++  print-table
+  |=  =table
+  ^-  tape
+  %-  zing
+  :~
+    "\{"
+    (print-field-list table)
+    "}"
+  ==
+++  parse-table
+  %+  knee  *table
+  |.
+  %+  cook
+    |=([* =table *] table)
+  ;~  (glue gaw)
+    (just '{')
+    parse-field-list
+    (just '}')
+  ==
+:: field-list
+::
++$  field-list  (list field)
+++  print-field-list
+  |=  =field-list
+  ^-  tape
+  %-  commaed
+  %+  turn  field-list  print-field
+++  parse-field-list
+  %+  knee  *field-list
+  |.
+  =>
+  |%
+  ++  field-sep
+    ;~  pose
+      com
+      mic
+    ==
+  --
+  %+  cook
+    |=([=field-list *] field-list)
+  ;~  (glue gaw)
+    (more (ifix [gaw gaw] field-sep) parse-field)
+    (punt field-sep)
+  ==
+:: field
+::
++$  field
+  $%
+    [%keyed expr expr]
+    [%unkeyed expr]
+  ==
+++  print-field
+  |=  =field
+  ^-  tape
+  ?-  -.field
+    %keyed
+      %-  zing
+      :~
+        "["
+        (print-expr +<.field)
+        "] = "
+        (print-expr +>.field)
+      ==
+    %unkeyed
+      (print-expr +.field)
+  ==
+++  parse-field
+  %+  knee  *field
+  |.
+  ;~  pose
+    %+  cook
+      |=([* key=expr * * val=expr] [%keyed key val])
+    ;~  (glue gaw)
+      (just '[')
+      parse-expr
+      (just ']')
+      tis
+      parse-expr
+    ==
+    ::
+    %+  cook
+      |=([=name * =expr] [%keyed [%string name] expr])
+    ;~  (glue gaw)
+      parse-name
+      tis
+      parse-expr
+    ==
+    ::
+    %+  cook
+      |=(=expr [%unkeyed expr])
+    parse-expr
   ==
 :: binop
 ::
