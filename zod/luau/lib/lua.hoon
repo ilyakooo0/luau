@@ -310,7 +310,7 @@
 ::
 +$  numeral
   $%
-    [%int @s]
+    [%int @u]
     :: [%float @rd]
   ==
 ++  parse-numeral
@@ -318,10 +318,14 @@
   |.
   ;~  pose
     %+  cook
-      |=  [is-neg=(unit *) x=@]
-      [%int (new:si ?=(~ is-neg) x)]
-    ;~  plug
-      (punt (just '-'))
+      |=  x=@u  [%int x]
+    ;~  pose
+      ;~  pfix
+        (just '0')
+        (mask "xX")
+        hex
+      ==
+      ::
       (bass 10 (plus dit))
     ==
   ==
@@ -329,7 +333,7 @@
   |=  [num=numeral]
   ^-  tape
   ?-  -.num
-    %int  (show-s +.num)
+    %int  (show-u +.num)
   ==
 :: exprlist
 ::
@@ -524,6 +528,8 @@
   ;~(plug name-fst-char (star name-char))
 ++  show-s
   |=(s=@s `tape`[?:((syn:si s) %$ '-') (slag 2 (scow %ui (abs:si s)))])
+++  show-u
+  |=(u=@u `tape`(slag 2 (scow %ui u)))
 ++  bind
   |*  =mold
   |*  [prev=rule cont=$-(mold rule)]
