@@ -18,7 +18,7 @@
 ++  apex
   %+  knee  *ast
   |.
-  %+  ifix  [gaw gaw]
+  %+  ifix  [ws ws]
   ;~  pose
     (cook |=(=blok [%blok blok]) parse-blok)
   ==
@@ -151,7 +151,7 @@
   |.
   %+  cook
     |=([* =table *] table)
-  ;~  (glue gaw)
+  ;~  (glue ws)
     (just '{')
     parse-field-list
     (just '}')
@@ -177,8 +177,8 @@
   --
   %+  cook
     |=([=field-list *] field-list)
-  ;~  (glue gaw)
-    (more (ifix [gaw gaw] field-sep) parse-field)
+  ;~  (glue ws)
+    (more (ifix [ws ws] field-sep) parse-field)
     (punt field-sep)
   ==
 :: field
@@ -209,7 +209,7 @@
   ;~  pose
     %+  cook
       |=([* key=expr * * val=expr] [%keyed key val])
-    ;~  (glue gaw)
+    ;~  (glue ws)
       (just '[')
       parse-expr
       (just ']')
@@ -219,7 +219,7 @@
     ::
     %+  cook
       |=([=name * =expr] [%keyed [%string name] expr])
-    ;~  (glue gaw)
+    ;~  (glue ws)
       parse-name
       tis
       parse-expr
@@ -341,7 +341,7 @@
 ++  parse-exprlist
   %+  knee  *exprlist
   |.
-  %+  most  (ifix [gaw gaw] com)  parse-expr
+  %+  most  (ifix [ws ws] com)  parse-expr
 :: Var
 ::
 +$  var
@@ -380,7 +380,7 @@
     |=  =prefix-expr
     %+  cook
       |=([* =expr *] [%indexed prefix-expr expr])
-    ;~  (glue gaw)
+    ;~  (glue ws)
       (just '[')
       parse-expr
       (just ']')
@@ -418,7 +418,7 @@
 ++  parse-varlist
   %+  knee  *varlist
   |.
-  %+  most  (ifix [gaw gaw] com)  parse-var
+  %+  most  (ifix [ws ws] com)  parse-var
 :: Prefix Expr
 ::
 +$  prefix-expr
@@ -462,7 +462,7 @@
     ::
     %+  cook
       |=([* =blok *] [%blok blok])
-    ;~  (glue gawn)
+    ;~  (glue wss)
       (jest 'do')
       (knee *blok |.(parse-blok))
       (jest 'end')
@@ -470,7 +470,7 @@
     ::
     %+  cook
       |=([=varlist * =exprlist] [%asmnt varlist exprlist])
-    ;~  (glue gaw)
+    ;~  (glue ws)
       parse-varlist
       (just '=')
       parse-exprlist
@@ -502,7 +502,7 @@
 ++  parse-blok
   %+  knee  *blok
   |.
-  (most gawn parse-stat)
+  (most wss parse-stat)
 :: Helpers
 ::
 ++  commaed 
@@ -510,7 +510,7 @@
   ^-  tape
   %-  zing
   %+  join  ","  l
-++  gawn  (cold ~ (plus ;~(pose vul gah)))
+:: ++  gawn  (cold ~ (plus ;~(pose vul gah)))
 ++  parse-name
   %+  knee  *name
   |.
@@ -531,4 +531,15 @@
   =/  prev-edge  (prev nail)
   ?~  q.prev-edge  prev-edge
   ((cont p.u.q.prev-edge) q.u.q.prev-edge)
+++  w
+  ;~  pose
+    gah
+    (just '\09')
+  ==
+++  ws
+  %+  cold  ~
+  %-  star  w
+++  wss
+  %+  cold  ~
+  %-  plus  w
 --
