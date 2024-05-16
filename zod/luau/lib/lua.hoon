@@ -64,7 +64,7 @@
 ++  parse-expr-list
   %+  knee  *(interlist binop expr)
   |.
-  %+  parse-interlist  parse-binop  parse-atomic-expr
+  %+  parse-interlist  (ifix [ws ws] parse-binop)  parse-atomic-expr
 :: TODO: This is mock and should take operator priority into account.
 ::
 ++  process-expr-list
@@ -311,12 +311,16 @@
 +$  numeral
   $%
     [%int @u]
-    :: [%float @rd]
+    [%float @rd]
   ==
 ++  parse-numeral
   %+  knee  *numeral
   |.
   ;~  pose
+    %+  cook
+      |=  x=@rd  [%float x]
+    parse-float
+    ::
     %+  cook
       |=  x=@u  [%int x]
     ;~  pose
@@ -334,6 +338,7 @@
   ^-  tape
   ?-  -.num
     %int  (show-u +.num)
+    %float  (show-float +.num)
   ==
 :: exprlist
 ::
@@ -514,7 +519,6 @@
   ^-  tape
   %-  zing
   %+  join  ","  l
-:: ++  gawn  (cold ~ (plus ;~(pose vul gah)))
 ++  parse-name
   %+  knee  *name
   |.
@@ -548,4 +552,43 @@
 ++  wss
   %+  cold  ~
   %-  plus  w
---
+++  parse-float
+  %+  knee  *@rd
+  |.
+  %+  cook  ryld
+  %+  cook  royl-cell:so
+  %+  sear  
+    |=  [int=@ frac=(unit [@ @]) exp=(unit [exp-sign=? exp=@])]
+    ?:  ?=([~ ~] [frac exp])  ~
+    %-  some
+    :*
+      %d
+      &
+      int
+      (fall frac [0 0])
+      (fall exp [& 0])
+    ==
+  =/  moo
+    |=  a=tape
+    :-  (lent a)
+    (scan a (bass 10 (plus sid:ab)))
+  ;~  plug
+    ;~  plug
+      dim:ag
+      ::
+      (punt ;~(pfix dot (cook moo (plus (shim '0' '9')))))
+      ::
+      %-  punt
+      ;~  pfix
+        (mask "eE")
+        ;~(plug ;~(pose (cold | hep) (easy &)) dim:ag)
+      ==
+    ==
+  ==
+++  show-float
+  |=  x=@rd
+  ^-  tape
+  %-  r-co:co
+  %-  rlyd
+  x
+ --
