@@ -464,6 +464,7 @@
   $%
     [%blok blok]
     [%asmnt varlist exprlist]
+    [%label label]
     [%empty ~]
   ==
 ++  parse-stat
@@ -471,6 +472,10 @@
   |.
   ;~  pose
     (cold [%empty ~] (just ';'))
+    ::
+    %+  cook
+      |=  =label  [%label label]
+    parse-label
     ::
     %+  cook
       |=([* =blok *] [%blok blok])
@@ -501,6 +506,29 @@
       "="
       (commaed (turn +>.stat print-expr))
     ==
+    %label  (print-label +.stat)
+  ==
+:: label
+::
++$  label  name
+++  print-label
+  |=  =label
+  ^-  tape
+  %-  zing
+  :~
+    "::"
+    (trip label)
+    "::"
+  ==
+++  parse-label
+  %+  knee  *label
+  |.
+  %+  cook
+    |=  [* =label *]  label
+  ;~  (glue ws)
+    (jest '::')
+    parse-name
+    (jest '::')
   ==
 :: Blok
 ::
