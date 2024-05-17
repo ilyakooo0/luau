@@ -319,7 +319,10 @@
   ;~  pose
     %+  cook
       |=  x=@rd  [%float x]
-    parse-float
+    ;~  pose
+      parse-float
+      parse-hex-float
+    ==
     ::
     %+  cook
       |=  x=@u  [%int x]
@@ -585,6 +588,52 @@
       ==
     ==
   ==
+++  parse-hex-float
+  %+  knee  *@rd
+  |.
+  =<
+  %+  sear
+    |=  [* * int=tape frac=(unit tape) exp=(unit [exp-sign=? exp=@])]
+    ?:  ?=([~ ~] [frac exp])  ~
+    %-  some
+    =/  frac  (fall frac "")
+    =/  whole=@rd  (sun:rd (scan (weld int frac) hex))
+    =/  frac-exp=@rd  (sun:rd (pow 16 (lent frac)))
+    =/  without-exp  (div:rd whole frac-exp)
+    ?~  exp  without-exp
+    =/  exp-exp  (sun:rd (pow 2 exp.u.exp))
+    ?:  exp-sign.u.exp  
+      (mul:rd without-exp exp-exp)
+      (div:rd without-exp exp-exp)
+  ;~  plug
+    (just '0')
+    ::
+    (mask "xX")
+    ::
+    (plus hex-digit)
+    ::
+    %-  punt
+    ;~  pfix
+      dot
+      (plus hex-digit)
+    ==
+    ::
+    %-  punt
+    ;~  pfix
+      (mask "pP")
+      ;~(plug ;~(pose (cold | hep) (cold & lus) (easy &)) dim:ag)
+    ==
+  ==
+  |%
+  ++  hex-digit
+    %+  knee  *char
+    |.
+    ;~  pose
+      (shim '0' '9')
+      (shim 'a' 'f')
+      (shim 'A' 'F')
+    ==
+  --
 ++  show-float
   |=  x=@rd
   ^-  tape
