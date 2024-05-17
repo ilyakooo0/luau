@@ -532,17 +532,51 @@
   ==
 :: Blok
 ::
-+$  blok  (lest stat)
++$  blok  [body=(lest stat) ret=(unit ret)]
 ++  print-blok
   |=  [=blok]
   ^-  tape
   %-  zing
   %+  join  "\0a"
-  (turn blok print-stat)
+  %+  weld
+    (turn body.blok print-stat)
+    ?~  ret.blok  ~
+    ~[(print-ret u.ret.blok)]
 ++  parse-blok
   %+  knee  *blok
   |.
-  (most wss parse-stat)
+  ;~  plug
+    (most wss parse-stat)
+    ::
+    %-  punt
+    ;~  pfix
+      wss
+      parse-ret
+    ==
+  ==
+:: ret
+::
++$  ret  exprlist
+++  print-ret
+  |=  =ret
+  ^-  tape
+  %-  zing
+  :~
+    "return "
+    (print-exprlist ret)
+  ==
+++  parse-ret
+  %+  knee  *ret
+  |.
+  %+  cook
+    |=  [[* =exprlist] *]  exprlist
+  ;~  plug
+    ;~  (glue wss)
+      (jest 'return')
+      parse-exprlist
+    ==
+    (punt (just ';'))
+  ==
 :: Helpers
 ::
 ++  commaed 
