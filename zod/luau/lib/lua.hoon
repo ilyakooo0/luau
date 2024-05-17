@@ -465,6 +465,7 @@
     [%blok blok]
     [%asmnt varlist exprlist]
     [%label label]
+    [%func-call functioncall]
     [%empty ~]
   ==
 ++  parse-stat
@@ -492,6 +493,10 @@
       (just '=')
       parse-exprlist
     ==
+    ::
+    %+  cook
+      |=  =functioncall  [%func-call functioncall]
+    parse-functioncall
   ==
 ++  print-stat
   |=  [=stat]
@@ -507,7 +512,88 @@
       (commaed (turn +>.stat print-expr))
     ==
     %label  (print-label +.stat)
+    %func-call  (print-functioncall +.stat)
   ==
+:: functioncall
+::
++$  functioncall
+  $%
+    [%call func=prefix-expr =args]
+    [%method obj=prefix-expr method=name =args]
+  ==
+++  print-functioncall
+  |=  call=functioncall
+  ^-  tape
+  ?-  -.call
+    %call
+      %-  zing
+      :~
+        (print-prefix-expr func.call)
+        (print-args args.call)
+      ==
+    %method
+      %-  zing
+      :~
+        (print-prefix-expr obj.call)
+        ":"
+        (trip method.call)
+        (print-args args.call)
+      ==
+  ==
+++  parse-functioncall
+  %+  knee  *functioncall
+  |.
+  ;~  pose
+    %+  cook
+      |=  [func=prefix-expr =args]  [%call func args]
+    ;~  (glue ws)
+      parse-prefix-expr
+      parse-args
+    ==
+    ::
+    %+  cook
+      |=  [obj=prefix-expr * method=name =args]
+      [%method obj method args]
+    ;~  (glue ws)
+      parse-prefix-expr
+      (just ':')
+      parse-name
+      parse-args
+    ==
+  ==
+:: args
+::
++$  args  exprlist
+++  print-args
+  |=  =args
+  ^-  tape
+  %-  zing
+  :~
+    "("
+    (print-exprlist args)
+    ")"
+  ==
+++  parse-args
+  %+  knee  *args
+  |.
+  ;~  pose
+    %+  cook
+      |=  [* =exprlist *]  exprlist
+    ;~  (glue ws)
+      (just '(')
+      parse-exprlist
+      (just ')')
+    ==
+    ::
+    %+  cook
+      |=  =table  ~[[%table table]]
+    parse-table
+    ::
+    %+  cook
+      |=  =string  ~[[%string string]]
+    parse-string
+  ==
+::
 :: label
 ::
 +$  label  name

@@ -49,3 +49,9 @@ do
 	foo = 1
 	return 8, foo;
 end
+
+print('the way of the future')
+
+print 'hello'
+
+h{key1 = 'Sonmi~451'}
