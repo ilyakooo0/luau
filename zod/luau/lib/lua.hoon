@@ -465,7 +465,9 @@
     [%blok blok]
     [%asmnt varlist exprlist]
     [%label label]
+    [%goto label]
     [%func-call functioncall]
+    [%break ~]
     [%empty ~]
   ==
 ++  parse-stat
@@ -473,6 +475,15 @@
   |.
   ;~  pose
     (cold [%empty ~] (just ';'))
+    ::
+    (cold [%break ~] (jest 'break'))
+    ::
+    %+  cook
+      |=  [* =label]  [%goto label]
+    ;~  (glue ws)
+      (jest 'goto')
+      parse-name
+    ==
     ::
     %+  cook
       |=  =label  [%label label]
@@ -513,6 +524,13 @@
     ==
     %label  (print-label +.stat)
     %func-call  (print-functioncall +.stat)
+    %break  "break"
+    %goto
+    %-  zing
+    :~
+      "goto "
+      (trip +.stat)
+    ==
   ==
 :: functioncall
 ::
