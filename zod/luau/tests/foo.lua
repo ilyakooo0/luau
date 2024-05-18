@@ -59,3 +59,15 @@ h{key1 = 'Sonmi~451'}
 goto helli
 
 break
+
+while true do
+	break
+end
+
+repeat
+do
+	foo = 9
+	;
+end
+until true
+

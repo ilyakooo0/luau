@@ -467,6 +467,8 @@
     [%label label]
     [%goto label]
     [%func-call functioncall]
+    [%while cond=expr body=blok]
+    [%repeat body=blok cond=expr]
     [%break ~]
     [%empty ~]
   ==
@@ -477,6 +479,25 @@
     (cold [%empty ~] (just ';'))
     ::
     (cold [%break ~] (jest 'break'))
+    ::
+    %+  cook
+      |=  [* cond=expr * body=blok *]  [%while cond body]
+    ;~  (glue wss)
+      (jest 'while')
+      parse-expr
+      (jest 'do')
+      parse-blok
+      (jest 'end')
+    ==
+    ::
+    %+  cook
+      |=  [* body=blok * cond=expr]  [%repeat body cond]
+    ;~  (glue wss)
+      (jest 'repeat')
+      parse-blok
+      (jest 'until')
+      parse-expr
+    ==
     ::
     %+  cook
       |=  [* =label]  [%goto label]
@@ -530,6 +551,22 @@
     :~
       "goto "
       (trip +.stat)
+    ==
+    %while
+    %-  zing
+    :~
+      "while "
+      (print-expr cond.stat)
+      " do\0a"
+      (print-blok body.stat)
+    ==
+    %repeat
+    %-  zing
+    :~
+      "repeat\0a"
+      (print-blok body.stat)
+      "until "
+      (print-expr cond.stat)
     ==
   ==
 :: functioncall
