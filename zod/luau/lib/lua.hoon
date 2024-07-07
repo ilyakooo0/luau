@@ -75,6 +75,7 @@
     %double  [%binop val.l sep.l (process-expr-list tail.l)]
   ==
 ++  parse-expr
+  ~&  "parse-exp"
   %+  knee  *expr
   |.
   %+  cook  process-expr-list  parse-expr-list
@@ -351,6 +352,7 @@
   %-  commaed
   %+  turn  exprlist  print-expr
 ++  parse-exprlist
+  ~&  "parse-exprlist"
   %+  knee  *exprlist
   |.
   %+  most  (ifix [ws ws] com)  parse-expr
@@ -436,15 +438,28 @@
 +$  prefix-expr
   $%
     [%expr expr]
+    [%call functioncall]
     [%var var] 
   ==
-++  parse-prefix-expr
-  %+  knee  *prefix-expr
+++  parse-simple-prefix-expr
+  ~&  "parse-simple-prefix-expr"
+  %+  knee  *$%([%expr expr] [%var var])
   |.
   ;~  pose
-    %+  cook  |=([=var] [%var var])  parse-var
-    ::
     parse-parened-expr
+    ::
+    %+  cook  |=([=var] [%var var])  parse-var
+  ==
+++  parse-prefix-expr
+  ~&  "parse-prefix-expr"
+  %+  knee  *prefix-expr
+  |.
+  ;<  prefix=$%([%expr expr] [%var var])  bind  parse-simple-prefix-expr
+  ;~  pose
+    %+  cook  |=(=functioncall [%call functioncall])
+    (parse-functioncall-args prefix)
+    ::
+    (easy prefix)
   ==
 ++  print-prefix-expr
   |=  [=prefix-expr]
@@ -457,6 +472,7 @@
         (print-expr +.prefix-expr)
         ")"
       ==
+    %call  (print-functioncall +.prefix-expr)
   ==
 :: stat
 ::
@@ -469,6 +485,7 @@
     [%func-call functioncall]
     [%while cond=expr body=blok]
     [%repeat body=blok cond=expr]
+    [%if if]
     [%break ~]
     [%empty ~]
   ==
@@ -505,6 +522,10 @@
       (jest 'goto')
       parse-name
     ==
+    ::
+    %+  cook
+      |=  =if  [%if if]
+    parse-if
     ::
     %+  cook
       |=  =label  [%label label]
@@ -568,6 +589,73 @@
       "until "
       (print-expr cond.stat)
     ==
+    %if  (print-if +.stat)
+  ==
+:: if
+::
++$  if  [cond=expr body=blok elsa=(list [cond=expr body=blok]) else=(unit blok)]
+++  print-if
+  |=  =if
+  ^-  tape
+  %-  zing
+  :~
+    "if "
+    (print-expr cond.if)
+    " then\0a"
+    (print-blok body.if)
+    ::
+    ^-  tape
+    %-  zing
+    %+  turn  elsa.if
+    |=  [cond=expr body=blok]
+    %-  zing
+    :~
+      "\0aelseif"
+      (print-expr cond)
+      " then\0a"
+      (print-blok body)
+    ==
+    ::
+    ?~  else.if  ""
+    ^-  tape
+    %-  zing
+    :~
+      "\0aelse\0a"
+      (print-blok u.else.if)
+    ==
+    ::
+    "\0aend"
+  ==
+++  parse-if
+  %+  knee  *if
+  |.
+  %+  cook
+    |=  [* cond=expr * body=blok elsa=(list [cond=expr body=blok]) else=(unit blok) *]
+    [cond body elsa else]
+  ;~  (glue wss)
+    (jest 'if')
+    parse-expr
+    (jest 'then')
+    parse-blok
+    ::
+    %-  star
+    %+  cook
+      |=  [* cond=expr * body=blok]  [cond body]
+    ;~  (glue wss)
+      (jest 'elseif')
+      parse-expr
+      (jest 'then')
+      parse-blok
+    ==
+    ::
+    %-  punt
+    %+  cook
+      |=  [* =blok]  blok
+    ;~  (glue wss)
+      (jest 'else')
+      parse-blok
+    ==
+    (jest 'end')
   ==
 :: functioncall
 ::
@@ -598,22 +686,29 @@
 ++  parse-functioncall
   %+  knee  *functioncall
   |.
-  ;~  pose
-    %+  cook
-      |=  [func=prefix-expr =args]  [%call func args]
-    ;~  (glue ws)
-      parse-prefix-expr
+  ;<  prefix=prefix-expr  bind  parse-prefix-expr
+  ~&  >  prefix
+  (parse-functioncall-args prefix)
+++  parse-functioncall-args
+  ~&  "parse-functioncall-args"
+  |=  =prefix-expr
+  %+  knee  *functioncall
+  |.
+  ;~  pfix
+    ws
+    ;~  pose
+      %+  cook
+        |=  =args  [%call prefix-expr args]
       parse-args
-    ==
-    ::
-    %+  cook
-      |=  [obj=prefix-expr * method=name =args]
-      [%method obj method args]
-    ;~  (glue ws)
-      parse-prefix-expr
-      (just ':')
-      parse-name
-      parse-args
+      ::
+      %+  cook
+        |=  [* method=name =args]
+        [%method prefix-expr method args]
+      ;~  (glue ws)
+        (just ':')
+        parse-name
+        parse-args
+      ==
     ==
   ==
 :: args
@@ -629,6 +724,7 @@
     ")"
   ==
 ++  parse-args
+  ~&  "parse-args"
   %+  knee  *args
   |.
   ;~  pose
