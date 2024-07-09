@@ -74,5 +74,5 @@ until true
 
 if l == 3 then a = a + 1 ; assert(getlocal(2, 1) == "(temporary)")
 elseif l == 4 then a = a + 1; assert(getlocal(2, 1) == "A")
+else ;
 end
-

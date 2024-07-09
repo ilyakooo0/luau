@@ -16,8 +16,7 @@
     %blok  (print-blok +.ast)
   ==
 ++  apex
-  %+  knee  *ast
-  |.
+  %^  tnee  %apex  ast
   %+  ifix  [ws ws]
   ;~  pose
     (cook |=(=blok [%blok blok]) parse-blok)
@@ -36,8 +35,7 @@
     [%nil ~]
   ==
 ++  parse-atomic-expr
-  %+  knee  *expr
-  |.
+  %^  tnee  %parse-atomic-expr  expr
   ;~  pose
     (cold [%nil ~] (jest 'nil'))
     ::
@@ -56,14 +54,12 @@
     %+  cook
       |=(=table [%table table])
     parse-table
-    ::
     %+  cook
       |=(=string [%string string])
     parse-string
   ==
 ++  parse-expr-list
-  %+  knee  *(interlist binop expr)
-  |.
+  %^  tnee  %parse-expr-list  (interlist binop expr)
   %+  parse-interlist  (ifix [ws ws] parse-binop)  parse-atomic-expr
 :: TODO: This is mock and should take operator priority into account.
 ::
@@ -75,9 +71,7 @@
     %double  [%binop val.l sep.l (process-expr-list tail.l)]
   ==
 ++  parse-expr
-  ~&  "parse-exp"
-  %+  knee  *expr
-  |.
+  %^  tnee  %parse-expr  expr
   %+  cook  process-expr-list  parse-expr-list
 ++  parse-parened-expr
   %+  cook
@@ -116,8 +110,7 @@
     "\""
   ==
 ++  parse-string
-  %+  knee  *string
-  |.
+  %^  tnee  %parse-string  string
   =>
   |%
   ++  parse-string
@@ -148,8 +141,7 @@
     "}"
   ==
 ++  parse-table
-  %+  knee  *table
-  |.
+  %^  tnee  %parse-table  table
   %+  cook
     |=([* =table *] table)
   ;~  (glue ws)
@@ -166,8 +158,7 @@
   %-  commaed
   %+  turn  field-list  print-field
 ++  parse-field-list
-  %+  knee  *field-list
-  |.
+  %^  tnee  %parse-field-list  field-list
   =>
   |%
   ++  field-sep
@@ -207,6 +198,7 @@
 ++  parse-field
   %+  knee  *field
   |.
+  %^  tnee  %parse-field  field
   ;~  pose
     %+  cook
       |=([* key=expr * * val=expr] [%keyed key val])
@@ -282,8 +274,7 @@
     %concat  ".."
   ==
 ++  parse-binop
-  %+  knee  *binop
-  |.
+  %^  tnee  %parse-binop  binop
   ;~  pose
     (cold %add (jest '+'))
     (cold %sub (jest '-'))
@@ -315,8 +306,7 @@
     [%float @rd]
   ==
 ++  parse-numeral
-  %+  knee  *numeral
-  |.
+  %^  tnee  %parse-numeral  numeral
   ;~  pose
     %+  cook
       |=  x=@rd  [%float x]
@@ -352,9 +342,7 @@
   %-  commaed
   %+  turn  exprlist  print-expr
 ++  parse-exprlist
-  ~&  "parse-exprlist"
-  %+  knee  *exprlist
-  |.
+  %^  tnee  %parse-exprlist  exprlist
   %+  most  (ifix [ws ws] com)  parse-expr
 :: Var
 ::
@@ -386,8 +374,7 @@
       ==
   ==
 ++  parse-var
-  %+  knee  *var
-  |.
+  %^  tnee  %parse-var  var
   =>
   |%
   ++  parse-access
@@ -430,8 +417,7 @@
   %-  commaed
   %+  turn  varlist  print-var
 ++  parse-varlist
-  %+  knee  *varlist
-  |.
+  %^  tnee  %parse-varlist  varlist
   %+  most  (ifix [ws ws] com)  parse-var
 :: Prefix Expr
 ::
@@ -442,18 +428,14 @@
     [%var var] 
   ==
 ++  parse-simple-prefix-expr
-  ~&  "parse-simple-prefix-expr"
-  %+  knee  *$%([%expr expr] [%var var])
-  |.
+  %^  tnee  %parse-simple-prefix-expr  $%([%expr expr] [%var var])
   ;~  pose
     parse-parened-expr
     ::
     %+  cook  |=([=var] [%var var])  parse-var
   ==
 ++  parse-prefix-expr
-  ~&  "parse-prefix-expr"
-  %+  knee  *prefix-expr
-  |.
+  %^  tnee  %parse-prefix-expr  prefix-expr
   ;<  prefix=$%([%expr expr] [%var var])  bind  parse-simple-prefix-expr
   ;~  pose
     %+  cook  |=(=functioncall [%call functioncall])
@@ -492,6 +474,7 @@
 ++  parse-stat
   %+  knee  *stat
   |.
+  %^  tnee  %parse-stat  stat
   ;~  pose
     (cold [%empty ~] (just ';'))
     ::
@@ -629,6 +612,7 @@
 ++  parse-if
   %+  knee  *if
   |.
+  %^  tnee  %parse-if  if
   %+  cook
     |=  [* cond=expr * body=blok elsa=(list [cond=expr body=blok]) else=(unit blok) *]
     [cond body elsa else]
@@ -684,16 +668,17 @@
       ==
   ==
 ++  parse-functioncall
-  %+  knee  *functioncall
-  |.
+  %^  tnee  %parse-functioncall  functioncall
   ;<  prefix=prefix-expr  bind  parse-prefix-expr
-  ~&  >  prefix
-  (parse-functioncall-args prefix)
+  ;~  pose
+    (parse-functioncall-args prefix)
+    ::
+    ?:  ?=(%call -.prefix)  (easy +.prefix)  fail
+  ==
 ++  parse-functioncall-args
-  ~&  "parse-functioncall-args"
   |=  =prefix-expr
-  %+  knee  *functioncall
-  |.
+  ~&  prefix-expr
+  %^  tnee  %parse-functioncall-args  functioncall
   ;~  pfix
     ws
     ;~  pose
@@ -724,9 +709,7 @@
     ")"
   ==
 ++  parse-args
-  ~&  "parse-args"
-  %+  knee  *args
-  |.
+  %^  tnee  %parse-args  args
   ;~  pose
     %+  cook
       |=  [* =exprlist *]  exprlist
@@ -758,8 +741,7 @@
     "::"
   ==
 ++  parse-label
-  %+  knee  *label
-  |.
+  %^  tnee  %parse-label  label
   %+  cook
     |=  [* =label *]  label
   ;~  (glue ws)
@@ -780,10 +762,9 @@
     ?~  ret.blok  ~
     ~[(print-ret u.ret.blok)]
 ++  parse-blok
-  %+  knee  *blok
-  |.
+  %^  tnee  %parse-blok  blok
   ;~  plug
-    (most wss parse-stat)
+    (most ws parse-stat)
     ::
     %-  punt
     ;~  pfix
@@ -803,8 +784,7 @@
     (print-exprlist ret)
   ==
 ++  parse-ret
-  %+  knee  *ret
-  |.
+  %^  tnee  %parse-ret  ret
   %+  cook
     |=  [[* =exprlist] *]  exprlist
   ;~  plug
@@ -822,16 +802,15 @@
   %-  zing
   %+  join  ","  l
 ++  parse-name
-  %+  knee  *name
-  |.
+  :: %^  tnee  %parse-name  name
+  :: |.
   =>
   |%
   ++  name-char  ;~(pose name-fst-char dit:ab)
   ++  name-fst-char  ;~(pose alf:ab (just '_'))
   --
-  %+  cook 
-    |=  =tape  (crip tape)
-  ;~(plug name-fst-char (star name-char))
+  %+  cook  |=  =tape  (crip tape)
+  ;~(less keyword ;~(plug name-fst-char (star name-char)))
 ++  show-s
   |=(s=@s `tape`[?:((syn:si s) %$ '-') (slag 2 (scow %ui (abs:si s)))])
 ++  show-u
@@ -855,8 +834,7 @@
   %+  cold  ~
   %-  plus  w
 ++  parse-float
-  %+  knee  *@rd
-  |.
+  %^  tnee  %parse-float  @rd
   %+  cook  ryld
   %+  cook  royl-cell:so
   %+  sear  
@@ -888,8 +866,7 @@
     ==
   ==
 ++  parse-hex-float
-  %+  knee  *@rd
-  |.
+  %^  tnee  %parse-hex-float  @rd
   =<
   %+  sear
     |=  [* * int=tape frac=(unit tape) exp=(unit [exp-sign=? exp=@])]
@@ -925,9 +902,8 @@
   ==
   |%
   ++  hex-digit
-    %+  knee  *char
-    |.
-    ;~  pose
+    %^  tnee  %hex-digit  char
+      ;~  pose
       (shim '0' '9')
       (shim 'a' 'f')
       (shim 'A' 'F')
@@ -939,4 +915,41 @@
   %-  r-co:co
   %-  rlyd
   x
+++  keyword
+  %+  cold  ~
+  ;~  pose
+    (jest 'and')
+    (jest 'break')
+    (jest 'do')
+    (jest 'else')
+    (jest 'elseif')
+    (jest 'end')
+    (jest 'false')
+    (jest 'for')
+    (jest 'function')
+    (jest 'goto')
+    (jest 'if')
+    (jest 'in')
+    (jest 'local')
+    (jest 'nil')
+    (jest 'not')
+    (jest 'or')
+    (jest 'repeat')
+    (jest 'return')
+    (jest 'then')
+    (jest 'true')
+    (jest 'until')
+    (jest 'while')
+  ==
+++  tnee
+  |*  [=term gar=mold sef=rule]
+  |*  tub=nail
+  ^-  (like gar)
+  =/  trace  &
+  =/  foo  ?:  trace  ~&([term q.tub] ~)  ~
+  =/  res  (sef tub)
+  ?.  trace  res
+  ?~  q.res
+  ~&  [term %nope]  res
+  ~&  >  [term %ok]  res
  --
