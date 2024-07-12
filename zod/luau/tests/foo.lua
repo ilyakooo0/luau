@@ -1,7 +1,7 @@
 foosjis = nil
 
 baz = bar[nil]
-baz = bar
+baz = bar(1).foo
 
 i = 3
 i, a[i] = i + 1, 20 >> 9

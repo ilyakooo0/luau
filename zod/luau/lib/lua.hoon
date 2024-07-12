@@ -379,37 +379,8 @@
   ==
 ++  parse-var
   %^  tnee  %parse-var  var
-  =>
-  |%
-  ++  parse-access
-    |=  =prefix-expr
-    %+  cook
-      |=([* =expr *] [%indexed prefix-expr expr])
-    ;~  (glue ws)
-      (just '[')
-      parse-expr
-      (just ']')
-    ==
-  ++  parse-dot
-    |=  =prefix-expr
-    %+  cook
-      |=([* =name] [%dot prefix-expr name])
-    ;~  plug
-      dot
-      parse-name
-    ==
-  --
-  ;~  pose
-    ;<  prefix=prefix-expr  bind  parse-simple-prefix-expr
-    ;~  pose
-      (parse-access prefix)
-      (parse-dot prefix)
-    ==
-    ::
-    %+  cook
-      |=(=name [%name name])
-    parse-name
-  ==
+  ;<  prefix=prefix-expr  bind  parse-prefix-expr
+  ?:  ?=(%var -.prefix)  (easy +.prefix)  fail
 ::  varlist
 ::
 +$  varlist  (lest var)
@@ -428,30 +399,58 @@
     [%call functioncall]
     [%var var] 
   ==
-++  parse-simple-prefix-expr
-  %^  tnee  %parse-simple-prefix-expr  $%([%expr expr] [%var var])
-  ;~  pose
-    parse-parened-expr
-    ::
-    %+  cook  |=([=name] [%var %name name])  parse-name
-  ==
-++  parse-prefix-expr-without-functioncall
-  %^  tnee  %parse-prefix-expr  prefix-expr
-  ;~  pose
-    parse-parened-expr
-    ::
-    %+  cook  |=(=var [%var var])
-    parse-var
-  ==
 ++  parse-prefix-expr
   %^  tnee  %parse-prefix-expr  prefix-expr
-  ;<  prefix=prefix-expr  bind  parse-prefix-expr-without-functioncall
-  ;~  pose
-    %+  cook  |=(=functioncall [%call functioncall])
-    (parse-functioncall-args prefix)
-    ::
-    (easy prefix)
-  ==
+  =<
+  ;<  prefix=prefix-expr  bind
+    ;~  pose
+      %+  cook  |=(=name [%var %name name])
+      parse-name
+      ::
+      parse-parened-expr
+    ==
+  (recurse-prefix-var prefix)
+  |%
+  :: Takes a prefix (initially [%var ...]) and applies variable access and function calls.
+  :: This completely sidesteps calling the var parser.
+  ::
+  ++  recurse-prefix-var
+    |=  prefix=prefix-expr
+    %+  knee  *prefix-expr
+    |.
+    ;~  pose
+      ;<  =var  bind
+        ;~  pose
+          (parse-access prefix)
+          (parse-dot prefix)
+        ==
+      (recurse-prefix-var [%var var])
+      ::
+      ;<  prefix=prefix-expr  bind  
+        %+  cook  |=(=functioncall [%call functioncall])
+        (parse-functioncall-args prefix)
+      (recurse-prefix-var prefix)
+      ::
+      (easy prefix)
+    ==
+  ++  parse-access
+    |=  =prefix-expr
+    %+  cook
+      |=([* =expr *] [%indexed prefix-expr expr])
+    ;~  (glue ws)
+      (just '[')
+      parse-expr
+      (just ']')
+    ==
+  ++  parse-dot
+    |=  =prefix-expr
+    %+  cook
+      |=([* =name] [%dot prefix-expr name])
+    ;~  plug
+      dot
+      parse-name
+    ==
+  --
 ++  print-prefix-expr
   |=  [=prefix-expr]
   ?-  -.prefix-expr
