@@ -34,6 +34,8 @@
     [%false ~]
     [%nil ~]
   ==
+:: The expressions that are separated by binary operators
+::
 ++  parse-atomic-expr
   %^  tnee  %parse-atomic-expr  expr
   ;~  pose
@@ -58,6 +60,8 @@
       |=(=string [%string string])
     parse-string
   ==
+:: Parse expressions separated by binary operators
+::
 ++  parse-expr-list
   %^  tnee  %parse-expr-list  (interlist binop expr)
   %+  parse-interlist  (ifix [ws ws] parse-binop)  parse-atomic-expr
@@ -396,18 +400,15 @@
     ==
   --
   ;~  pose
-    ;<  prefix=name  bind  parse-name
-    ;~  pose
-      (parse-access [%var %name prefix])
-      (parse-dot [%var %name prefix])
-      (easy [%name prefix])
-    ==
-    ::
-    ;<  prefix=prefix-expr  bind  parse-parened-expr
+    ;<  prefix=prefix-expr  bind  parse-simple-prefix-expr
     ;~  pose
       (parse-access prefix)
       (parse-dot prefix)
     ==
+    ::
+    %+  cook
+      |=(=name [%name name])
+    parse-name
   ==
 ::  varlist
 ::
@@ -432,11 +433,19 @@
   ;~  pose
     parse-parened-expr
     ::
-    %+  cook  |=([=var] [%var var])  parse-var
+    %+  cook  |=([=name] [%var %name name])  parse-name
+  ==
+++  parse-prefix-expr-without-functioncall
+  %^  tnee  %parse-prefix-expr  prefix-expr
+  ;~  pose
+    parse-parened-expr
+    ::
+    %+  cook  |=(=var [%var var])
+    parse-var
   ==
 ++  parse-prefix-expr
   %^  tnee  %parse-prefix-expr  prefix-expr
-  ;<  prefix=$%([%expr expr] [%var var])  bind  parse-simple-prefix-expr
+  ;<  prefix=prefix-expr  bind  parse-prefix-expr-without-functioncall
   ;~  pose
     %+  cook  |=(=functioncall [%call functioncall])
     (parse-functioncall-args prefix)
@@ -677,7 +686,6 @@
   ==
 ++  parse-functioncall-args
   |=  =prefix-expr
-  ~&  prefix-expr
   %^  tnee  %parse-functioncall-args  functioncall
   ;~  pfix
     ws
@@ -802,8 +810,6 @@
   %-  zing
   %+  join  ","  l
 ++  parse-name
-  :: %^  tnee  %parse-name  name
-  :: |.
   =>
   |%
   ++  name-char  ;~(pose name-fst-char dit:ab)
@@ -943,10 +949,10 @@
   ==
 ++  tnee
   |*  [=term gar=mold sef=rule]
-  |*  tub=nail
+  |=  tub=nail
   ^-  (like gar)
   =/  trace  &
-  =/  foo  ?:  trace  ~&([term q.tub] ~)  ~
+  ~?  trace  [term q.tub]
   =/  res  (sef tub)
   ?.  trace  res
   ?~  q.res
