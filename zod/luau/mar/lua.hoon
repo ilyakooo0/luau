@@ -1,4 +1,6 @@
-/+  lua
+/-  lua
+/+  lua-parser
+/+  lua-printer
 
 |_  ast=ast:lua
 ++  grad  %noun
@@ -7,14 +9,14 @@
   ++  noun  ast
   ++  mime
     ^-  ^mime
-    [/text/lua (as-octt:mimes:html (print:lua ast))]
+    [/text/lua (as-octt:mimes:html (lua-printer ast))]
   --
 ++  grab
   |%
   ++  noun  ast:lua
   ++  mime
     |=  [=mite len=@ tex=@]
-    (rash tex apex:lua)
+    (rash tex lua-parser)
   --
 --
 
