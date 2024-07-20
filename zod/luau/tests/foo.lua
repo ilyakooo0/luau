@@ -82,3 +82,8 @@ for i = 1, 100 do
 end
 
 for j = 100, 1, 1 do fredSum = fredSum + j end
+
+for key, val in pairs(u) do
+  print(key, val)
+end
+

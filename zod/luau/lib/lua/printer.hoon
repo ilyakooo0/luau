@@ -206,7 +206,35 @@ print
     ==
     %if  (print-if +.stat)
     %for-range  (print-for-range +.stat)
+    %for-in  (print-for-in +.stat)
   ==
+::  for-in
+::
+++  print-for-in
+  |=  =for-in
+  ^-  tape
+  %-  zing
+  :~
+    "for "
+    (print-namelist vars.for-in)
+    " in "
+    (print-explist src.for-in)
+    "\0ado\0a"
+    (print-blok body.for-in)
+    "\0aend"
+  ==
+::  explist
+::
+++  print-explist
+  |=  =explist
+  ^-  tape
+  (commaed (turn explist print-expr))
+::  namelist
+::
+++  print-namelist
+  |=  =namelist
+  ^-  tape
+  (commaed (turn namelist trip))
 ::  for-range
 ::
 ++  print-for-range

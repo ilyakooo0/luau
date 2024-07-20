@@ -302,6 +302,10 @@ apex
     %+  cook
       |=  =for-range  [%for-range for-range]
     parse-for-range
+    ::
+    %+  cook
+      |=  =for-in  [%for-in for-in]
+    parse-for-in
   ==
 ++  parse-for-range
   %^  tnee  %for-range  for-range
@@ -335,6 +339,25 @@ apex
     wss
     (jest 'end')
   ==
+++  parse-for-in
+  %^  tnee  %parse-for-in  for-in
+  %+  cook
+    |=  [* vars=namelist * src=explist * body=blok *]  [vars src body]
+  ;~  (glue wss)
+    (jest 'for')
+    parse-namelist
+    (jest 'in')
+    parse-explist    
+    (jest 'do')
+    parse-blok
+    (jest 'end')
+  ==
+++  parse-explist
+  %^  tnee  %parse-explist  explist
+  %+  most  (ifix [ws ws] com)  parse-expr
+++  parse-namelist
+  %^  tnee  %parse-namelist  namelist
+  %+  most  (ifix [ws ws] com)  parse-name
 ++  parse-if
   %^  tnee  %parse-if  if
   %+  cook

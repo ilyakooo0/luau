@@ -1,5 +1,6 @@
 |%
 +$  name  @t
++$  namelist  (lest name)
 +$  ast
   $%
     [%blok blok]
@@ -78,9 +79,12 @@
     [%if if]
     [%break ~]
     [%for-range for-range]
+    [%for-in for-in]
     [%empty ~]
   ==
++$  explist  (lest expr)
 +$  for-range  [var=name from=expr to=expr by=(unit expr) body=blok]
++$  for-in  [vars=namelist src=explist body=blok]
 +$  if  [cond=expr body=blok elsa=(list [cond=expr body=blok]) else=(unit blok)]
 +$  functioncall
   $%
