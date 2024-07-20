@@ -77,8 +77,10 @@
     [%repeat body=blok cond=expr]
     [%if if]
     [%break ~]
+    [%for-range for-range]
     [%empty ~]
   ==
++$  for-range  [var=name from=expr to=expr by=(unit expr) body=blok]
 +$  if  [cond=expr body=blok elsa=(list [cond=expr body=blok]) else=(unit blok)]
 +$  functioncall
   $%

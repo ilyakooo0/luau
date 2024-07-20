@@ -298,10 +298,44 @@ apex
     %+  cook
       |=  =functioncall  [%func-call functioncall]
     parse-functioncall
+    ::
+    %+  cook
+      |=  =for-range  [%for-range for-range]
+    parse-for-range
+  ==
+++  parse-for-range
+  %^  tnee  %for-range  for-range
+  %+  cook  
+    |=  [* * var=name * * * from=expr * * * to=expr by=(unit expr) * * * body=blok * *]
+    [var from to by body]
+  ;~  plug
+    (jest 'for')
+    wss
+    parse-name
+    ws
+    (jest '=')
+    ws
+    parse-expr
+    ws
+    (jest ',')
+    ws
+    parse-expr
+    %-  punt
+    %+  cook  |=([* * * =expr] expr)
+    ;~  plug
+      ws
+      (jest ',')
+      wss
+      parse-expr
+    ==
+    wss
+    (jest 'do')
+    wss
+    parse-blok
+    wss
+    (jest 'end')
   ==
 ++  parse-if
-  %+  knee  *if
-  |.
   %^  tnee  %parse-if  if
   %+  cook
     |=  [* cond=expr * body=blok elsa=(list [cond=expr body=blok]) else=(unit blok) *]

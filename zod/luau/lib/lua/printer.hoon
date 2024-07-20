@@ -205,6 +205,25 @@ print
       (print-expr cond.stat)
     ==
     %if  (print-if +.stat)
+    %for-range  (print-for-range +.stat)
+  ==
+::  for-range
+::
+++  print-for-range
+  |=  =for-range
+  ^-  tape
+  %-  zing
+  :~
+    "for "
+    (trip var.for-range)
+    " = "
+    (print-expr from.for-range)
+    ", "
+    (print-expr to.for-range)
+    ?~  by.for-range  ""  (zing ~[", " (print-expr u.by.for-range)])
+    "\0ado\0a"
+    (print-blok body.for-range)
+    "\0aend"
   ==
 :: if
 ::
