@@ -82,6 +82,7 @@
     [%for-in for-in]
     [%function function]
     [%local-function local-function]
+    [%local-asmnt local-asmnt]
     [%empty ~]
   ==
 +$  explist  (lest expr)
@@ -93,6 +94,13 @@
 +$  funcbody  [pars=parlist body=blok]
 +$  parlist  [pars=(list name) wildcard=?]
 +$  local-function  [=name body=funcbody]
++$  local-asmnt  [=attnamelist rhs=(unit exprlist)]
++$  attnamelist  (lest [=name attr=(unit attrib)])
++$  attrib
+  $?
+  %const
+  %close
+  ==
 +$  functioncall
   $%
     [%call func=prefix-expr =args]

@@ -209,6 +209,37 @@ print
     %for-in  (print-for-in +.stat)
     %function  (print-function +.stat)
     %local-function  (print-local-function +.stat)
+    %local-asmnt  (print-local-asmnt +.stat)
+  ==
+:: local-asmnt
+::
+++  print-local-asmnt
+  |=  =local-asmnt
+  ^-  tape
+  %-  zing
+  :~
+    "local "
+    (print-attnamelist attnamelist.local-asmnt)
+    ?~  rhs.local-asmnt  ""  (print-explist u.rhs.local-asmnt)
+  ==
+:: attnamelist
+::
+++  print-attnamelist
+  |=  =attnamelist
+  ^-  tape
+  %-  commaed
+  %+  turn  attnamelist
+  |=  [=name attr=(unit attrib)]
+  %-  zing
+  :~
+    (trip name)
+    ?~  attr  ""
+    %-  zing
+    :~
+      " <"
+      (trip `@t`u.attr)
+      ">"
+    ==
   ==
 ::  for-in
 ::

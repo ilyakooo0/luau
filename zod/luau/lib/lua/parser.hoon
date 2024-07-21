@@ -314,6 +314,44 @@ apex
     %+  cook
       |=  =local-function  [%local-function local-function]
     parse-local-function
+    ::
+    %+  cook
+      |=  =local-asmnt  [%local-asmnt local-asmnt]
+    parse-local-asmnt
+  ==
+++  parse-local-asmnt
+  %^  tnee  %parse-local-asmnt  local-asmnt
+  %+  cook
+    |=  [* * =attnamelist rhs=(unit explist)]  [attnamelist rhs]
+  ;~  plug
+    (jest 'local')
+    wss
+    parse-attnamelist
+    %-  punt
+    ;~  pfix
+      ws
+      (just '=')
+      ws
+      parse-explist
+    ==
+  ==
+++  parse-attnamelist
+  %^  tnee  %parse-attnamelist  attnamelist
+  %+  most  (ifix [ws ws] com)
+  ;~  plug
+    parse-name
+    ::
+    %-  punt
+    %+  cook  |=  [* * =attrib *]  attrib
+    ;~  plug
+      ws
+      (just '<')
+      ;~  pose
+        %+  cold  %const  (jest 'const')
+        %+  cold  %close  (jest 'close')
+      ==
+      (just '>')
+    ==
   ==
 ++  parse-for-range
   %^  tnee  %for-range  for-range
