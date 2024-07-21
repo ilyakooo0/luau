@@ -207,6 +207,7 @@ print
     %if  (print-if +.stat)
     %for-range  (print-for-range +.stat)
     %for-in  (print-for-in +.stat)
+    %function  (print-function +.stat)
   ==
 ::  for-in
 ::
@@ -253,6 +254,55 @@ print
     (print-blok body.for-range)
     "\0aend"
   ==
+:: function
+::
+++  print-function
+  |=  =function
+  ^-  tape
+  %-  zing
+  :~
+    "function "
+    (print-funcname name.function)
+    (print-funcbody body.function)
+  ==
+:: funcname
+::
+++  print-funcname
+  |=  =funcname
+  ^-  tape
+  %-  zing
+  :~
+    (dotted (turn nested.funcname trip))
+    ::
+    ?~  with-self.funcname  ""
+    %-  zing  ~[":" (trip u.with-self.funcname)]
+  ==
+:: funcbody
+::
+++  print-funcbody
+  |=  =funcbody
+  ^-  tape
+  %-  zing
+  :~
+    "("
+    (print-parlist pars.funcbody)
+    ")\0a"
+    (print-blok body.funcbody)
+    "\0aend"
+  ==
+:: parlist
+::
+++  print-parlist
+  |=  =parlist
+  ^-  tape
+  %-  zing
+  :~
+    (commaed (turn pars.parlist trip))
+    ::
+    ?.  wildcard.parlist  ""
+    ?~  pars.parlist  "..."
+    ", ..."
+  == 
 :: if
 ::
 ++  print-if
@@ -359,6 +409,11 @@ print
   ^-  tape
   %-  zing
   %+  join  ","  l
+++  dotted
+  |=  [l=(list tape)]
+  ^-  tape
+  %-  zing
+  %+  join  "."  l
 ++  show-s
   |=(s=@s `tape`[?:((syn:si s) %$ '-') (slag 2 (scow %ui (abs:si s)))])
 ++  show-u

@@ -306,6 +306,10 @@ apex
     %+  cook
       |=  =for-in  [%for-in for-in]
     parse-for-in
+    ::
+    %+  cook
+      |=  =function  [%function function]
+    parse-function
   ==
 ++  parse-for-range
   %^  tnee  %for-range  for-range
@@ -338,6 +342,66 @@ apex
     parse-blok
     wss
     (jest 'end')
+  ==
+++  parse-function
+  %^  tnee  %parse-function  function
+  %+  cook
+    |=  [* * name=funcname * body=funcbody]
+    [name body]
+  ;~  plug
+    (jest 'function')
+    wss
+    parse-funcname
+    ws
+    parse-funcbody
+  ==
+++  parse-funcname
+  %^  tnee  %parse-funcname  funcname
+  ;~  plug
+    %+  most  dot  parse-name
+    ::
+    %-  punt
+    ;~  pfix
+      col
+      parse-name
+    ==
+  ==
+++  parse-funcbody
+  %^  tnee  %parse-funcbody  funcbody
+  %+  cook
+    |=  [* * pars=parlist * * * body=blok * *]  [pars body]
+  ;~  plug
+    (just '(')
+    ws
+    parse-parlist
+    ws
+    (just ')')
+    ws
+    parse-blok
+    wss
+    (jest 'end')
+  ==
+++  parse-parlist
+  %^  tnee  %parse-parlist  parlist
+  ;~  pose
+    %+  cold  [~ &]
+    (jest '...')
+    ::
+    ;~  plug
+      %+  most  (ifix [ws ws] com)  parse-name
+      ::
+      %+  cook
+        |=  wildcard=(unit *)  !.=(~ wildcard)
+      %-  punt
+        ;~  plug
+          ws
+          com
+          ws
+          (jest '...')
+        ==
+    ==
+    ::
+    (easy [~ |])
   ==
 ++  parse-for-in
   %^  tnee  %parse-for-in  for-in
