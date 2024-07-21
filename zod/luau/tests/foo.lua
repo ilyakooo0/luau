@@ -96,3 +96,6 @@ end
 function Dog:makeSound()                   
   print('I say ' .. self.sound)
 end
+
+
+local function g(x) return math.sin(x) end

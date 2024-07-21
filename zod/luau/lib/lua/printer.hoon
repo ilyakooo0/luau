@@ -208,6 +208,7 @@ print
     %for-range  (print-for-range +.stat)
     %for-in  (print-for-in +.stat)
     %function  (print-function +.stat)
+    %local-function  (print-local-function +.stat)
   ==
 ::  for-in
 ::
@@ -253,6 +254,18 @@ print
     "\0ado\0a"
     (print-blok body.for-range)
     "\0aend"
+  ==
+:: local-function
+::
+++  print-local-function
+  |=  =local-function
+  ^-  tape
+  %-  zing
+  :~
+    "local function "
+    (trip name.local-function)
+    "\0a"
+    (print-funcbody body.local-function)
   ==
 :: function
 ::

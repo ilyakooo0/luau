@@ -310,6 +310,10 @@ apex
     %+  cook
       |=  =function  [%function function]
     parse-function
+    ::
+    %+  cook
+      |=  =local-function  [%local-function local-function]
+    parse-local-function
   ==
 ++  parse-for-range
   %^  tnee  %for-range  for-range
@@ -352,6 +356,20 @@ apex
     (jest 'function')
     wss
     parse-funcname
+    ws
+    parse-funcbody
+  ==
+++  parse-local-function
+  %^  tnee  %parse-local-function  local-function
+  %+  cook
+    |=  [* * * * =name * body=funcbody]
+    [name body]
+  ;~  plug
+    (jest 'local')
+    wss
+    (jest 'function')
+    wss
+    parse-name
     ws
     parse-funcbody
   ==
@@ -510,14 +528,13 @@ apex
   ==
 ++  parse-blok
   %^  tnee  %parse-blok  blok
-  ;~  plug
-    (most ws parse-stat)
-    ::
-    %-  punt
-    ;~  pfix
-      wss
-      parse-ret
-    ==
+  ;<  stats=(list stat)  bind  (more ws parse-stat)
+  %+  cook
+    |=  ret=(unit ret)  [stats ret]
+  %-  punt
+  ;~  pfix
+    ?~  stats  (easy ~)  wss
+    parse-ret
   ==
 ++  parse-ret
   %^  tnee  %parse-ret  ret

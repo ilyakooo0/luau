@@ -81,6 +81,7 @@
     [%for-range for-range]
     [%for-in for-in]
     [%function function]
+    [%local-function local-function]
     [%empty ~]
   ==
 +$  explist  (lest expr)
@@ -91,6 +92,7 @@
 +$  funcname  [nested=(lest name) with-self=(unit name)]
 +$  funcbody  [pars=parlist body=blok]
 +$  parlist  [pars=(list name) wildcard=?]
++$  local-function  [=name body=funcbody]
 +$  functioncall
   $%
     [%call func=prefix-expr =args]
@@ -98,6 +100,6 @@
   ==
 +$  args  exprlist
 +$  label  name
-+$  blok  [body=(lest stat) ret=(unit ret)]
++$  blok  [body=(list stat) ret=(unit ret)]
 +$  ret  exprlist
 --
