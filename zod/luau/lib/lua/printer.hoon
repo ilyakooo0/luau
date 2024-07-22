@@ -32,6 +32,7 @@ print
     %num  (print-numeral +.expr)
     %table  (print-table +.expr)
     %string  (print-string +.expr)
+    %wildcard  "..."
   ==
 :: string
 ::

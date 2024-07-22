@@ -7,6 +7,7 @@
   ==
 +$  expr
   $%
+    [%wildcard ~]
     [%string string]
     [%binop expr binop expr]
     [%prefix-expr prefix-expr]

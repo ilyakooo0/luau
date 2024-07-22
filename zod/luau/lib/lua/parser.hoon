@@ -31,9 +31,12 @@ apex
     %+  cook
       |=(=table [%table table])
     parse-table
+    ::
     %+  cook
       |=(=string [%string string])
     parse-string
+    ::
+    (cold [%wildcard ~] (jest '...'))
   ==
 :: Parse expressions separated by binary operators
 ::
