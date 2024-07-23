@@ -107,3 +107,6 @@ local b = require('mod2')
 function adder(x)
   return function (y) return x + y end
 end
+
+
+x = -1 + 8

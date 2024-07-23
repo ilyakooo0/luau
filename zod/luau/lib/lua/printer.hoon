@@ -34,6 +34,24 @@ print
     %string  (print-string +.expr)
     %wildcard  "..."
     %functiondef  (print-funcbody +.expr)
+    %unop
+      %-  zing
+      :~
+        (print-unop +<.expr)
+        " "
+        (print-expr +>.expr)
+      ==
+  ==
+:: unop
+::
+++  print-unop
+  |=  =unop
+  ^-  tape
+  ?-  unop
+    %minus  "-"
+    %not  "not"
+    %hax  "#"
+    %sig  "~"
   ==
 :: string
 ::

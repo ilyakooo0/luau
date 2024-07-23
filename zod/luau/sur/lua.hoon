@@ -12,6 +12,7 @@
     [%string string]
     [%binop expr binop expr]
     [%prefix-expr prefix-expr]
+    [%unop op=unop =expr]
     [%num numeral]
     [%table table]
     [%true ~]
@@ -25,6 +26,13 @@
   $%
     [%keyed expr expr]
     [%unkeyed expr]
+  ==
++$  unop
+  $?
+    %minus
+    %not
+    %hax
+    %sig
   ==
 +$  binop
   $?

@@ -45,6 +45,25 @@ apex
       wss
       parse-funcbody
     ==
+    ::
+    %+  cook  |=  [=unop =expr]  [%unop unop expr]
+    ;~  plug
+      ;~  pose
+        ;~  sfix
+          ;~  pose
+            (cold %minus (just '-'))
+            (cold %sig (just '~'))
+            (cold %hax (just '#'))
+          ==
+          ws
+        ==
+        ;~  sfix
+          (cold %not (jest 'not'))
+          wss
+        ==
+      ==
+      %+  knee  *expr  |.(parse-expr)
+    ==
   ==
 :: Parse expressions separated by binary operators
 ::
