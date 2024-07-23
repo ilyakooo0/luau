@@ -7,6 +7,7 @@
   ==
 +$  expr
   $%
+    [%functiondef funcbody]
     [%wildcard ~]
     [%string string]
     [%binop expr binop expr]

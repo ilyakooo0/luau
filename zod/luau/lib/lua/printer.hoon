@@ -33,6 +33,7 @@ print
     %table  (print-table +.expr)
     %string  (print-string +.expr)
     %wildcard  "..."
+    %functiondef  (print-funcbody +.expr)
   ==
 :: string
 ::

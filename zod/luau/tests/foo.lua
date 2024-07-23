@@ -104,3 +104,6 @@ local function g(x) return math.sin(x) end
 
 local a = require('mod2')  
 local b = require('mod2')  
+function adder(x)
+  return function (y) return x + y end
+end

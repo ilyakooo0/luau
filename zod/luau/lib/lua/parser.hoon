@@ -37,6 +37,14 @@ apex
     parse-string
     ::
     (cold [%wildcard ~] (jest '...'))
+    ::
+    %+  cook
+      |=(=funcbody [%functiondef funcbody])
+    ;~  pfix
+      (jest 'function')
+      wss
+      parse-funcbody
+    ==
   ==
 :: Parse expressions separated by binary operators
 ::
