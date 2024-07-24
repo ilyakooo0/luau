@@ -116,7 +116,7 @@
     [%call func=prefix-expr =args]
     [%method obj=prefix-expr method=name =args]
   ==
-+$  args  exprlist
++$  args  (unit exprlist)
 +$  label  name
 +$  blok  [body=(list stat) ret=(unit ret)]
 +$  ret  (unit exprlist)

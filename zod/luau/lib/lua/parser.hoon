@@ -90,6 +90,7 @@ apex
   %^  tnee  %parse-expr  expr
   %+  cook  process-expr-list  parse-expr-list
 ++  parse-parened-expr
+  %^  tnee  %parse-parened-expr  prefix-expr
   %+  cook
     |=([=expr] [%expr expr])
   (ifix [(just '(') (just ')')] (knee *expr |.(parse-expr)))
@@ -238,8 +239,7 @@ apex
   ::
   ++  recurse-prefix-var
     |=  prefix=prefix-expr
-    %+  knee  *prefix-expr
-    |.
+    %^  tnee  %recurse-prefix-var  prefix-expr
     ;~  pose
       ;<  =var  bind
         ;~  pose
@@ -587,19 +587,19 @@ apex
   %^  tnee  %parse-args  args
   ;~  pose
     %+  cook
-      |=  [* =exprlist *]  exprlist
+      |=  [* args=(unit exprlist) *]  args
     ;~  (glue ws)
       (just '(')
-      parse-exprlist
+      (punt parse-exprlist)
       (just ')')
     ==
     ::
     %+  cook
-      |=  =table  ~[[%table table]]
+      |=  =table  `~[[%table table]]
     parse-table
     ::
     %+  cook
-      |=  =string  ~[[%string string]]
+      |=  =string  `~[[%string string]]
     parse-string
   ==
 ++  parse-label
@@ -637,7 +637,7 @@ apex
   ++  name-fst-char  ;~(pose alf:ab (just '_'))
   --
   %+  cook  |=  =tape  (crip tape)
-  ;~(less keyword ;~(plug name-fst-char (star name-char)))
+  ;~(less ;~(plug keyword ;~(less name-char (easy ~))) ;~(plug name-fst-char (star name-char)))
 ++  bind
   |*  =mold
   |*  [prev=rule cont=$-(mold rule)]
@@ -646,9 +646,17 @@ apex
   ?~  q.prev-edge  prev-edge
   ((cont p.u.q.prev-edge) q.u.q.prev-edge)
 ++  comment
-  ;~  pfix
-    (jest '--')
-    (star ;~(less nl next))
+  ;~  pose
+    %+  cold  ~
+    ;~  plug
+      (jest '--')
+      (long-brackets |*(closing=rule (star ;~(less closing next))))
+    ==
+    %+  cold  ~
+    ;~  plug
+      (jest '--')
+      (star ;~(less nl next))
+    ==
   ==
 ++  nl  (just '\0a')
 ++  w
@@ -739,6 +747,25 @@ apex
       (shim 'A' 'F')
     ==
   --
+++  long-brackets
+  |*  inner=$-(rule rule)
+  ;<  longness=@t  bind  
+    %+  cook
+      |=  [* =tape *]  (crip tape)
+    ;~  plug
+      (just '[')
+      (star (just '='))
+      (just '[')
+    ==
+  =/  closing
+    %+  cold  ~
+    ;~  plug
+      (just ']')
+      (jest longness)
+      (just ']')
+    ==
+  ;<  res=*  bind  (inner closing)
+  %+  cold  res  closing
 ++  keyword
   %+  cold  ~
   ;~  pose

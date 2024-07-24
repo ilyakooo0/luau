@@ -430,7 +430,7 @@ print
   %-  zing
   :~
     "("
-    (print-exprlist args)
+    ?~  args  ""  (print-exprlist u.args)
     ")"
   ==
 ::

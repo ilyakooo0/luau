@@ -115,3 +115,11 @@ if _VERSION ~= version then
                   ", not for ", _VERSION, "\nExiting tests")
   return
 end
+
+math.randomseed()
+local random_x, random_y = math.randomseed()
+do
+  -- set random seed
+  local random_x, random_y = math.randomseed()
+  print(string.format("random seeds: %d, %d", random_x, random_y))
+end
