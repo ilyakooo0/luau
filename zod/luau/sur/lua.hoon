@@ -119,5 +119,5 @@
 +$  args  exprlist
 +$  label  name
 +$  blok  [body=(list stat) ret=(unit ret)]
-+$  ret  exprlist
++$  ret  (unit exprlist)
 --

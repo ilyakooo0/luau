@@ -5,8 +5,15 @@ apex
 |%
 ++  apex
   %^  tnee  %apex  ast
-  %+  ifix  [ws ws]
-  ;~  pose
+  ;~  pfix
+    %-  punt
+    ;~  plug
+      hax
+      zap
+      (star ;~(less (just '\0a') next))
+    ==
+    ::
+    %+  ifix  [ws ws]
     (cook |=(=blok [%blok blok]) parse-blok)
   ==
 :: The expressions that are separated by binary operators
@@ -169,17 +176,17 @@ apex
     (cold %mod (jest '%'))
     (cold %band (jest '&'))
     (cold %bor (jest '|'))
-    (cold %bxor (jest '~'))
+    (cold %eq (jest '=='))
     (cold %rshft (jest '>>'))
     (cold %lshft (jest '<<'))
+    (cold %lteq (jest '<='))
+    (cold %gteq (jest '>='))
+    (cold %neq (jest '~='))
+    (cold %bxor (jest '~'))
     (cold %and (jest 'and'))
     (cold %or (jest 'or'))
     (cold %lt (jest '<'))
-    (cold %lteq (jest '<='))
-    (cold %eq (jest '=='))
     (cold %gt (jest '>'))
-    (cold %gteq (jest '>='))
-    (cold %neq (jest '~='))
     (cold %concat (jest '..'))
   ==
 ++  parse-numeral
@@ -511,31 +518,41 @@ apex
 ++  parse-if
   %^  tnee  %parse-if  if
   %+  cook
-    |=  [* cond=expr * body=blok elsa=(list [cond=expr body=blok]) else=(unit blok) *]
+    |=  [[* cond=expr * body=blok] elsa=(list [cond=expr body=blok]) else=(unit blok) *]
     [cond body elsa else]
-  ;~  (glue wss)
-    (jest 'if')
-    parse-expr
-    (jest 'then')
-    parse-blok
-    ::
-    %-  star
-    %+  cook
-      |=  [* cond=expr * body=blok]  [cond body]
+  ;~  plug
     ;~  (glue wss)
-      (jest 'elseif')
+      (jest 'if')
       parse-expr
       (jest 'then')
       parse-blok
     ==
     ::
+    %-  star
+    %+  cook
+      |=  [* cond=expr * body=blok]  [cond body]
+    ;~  pfix
+      wss
+      ;~  (glue wss)
+        (jest 'elseif')
+        parse-expr
+        (jest 'then')
+        parse-blok
+      ==
+    ==
+    ::
     %-  punt
     %+  cook
       |=  [* =blok]  blok
-    ;~  (glue wss)
-      (jest 'else')
-      parse-blok
+    ;~  pfix
+      wss
+      ;~  (glue wss)
+        (jest 'else')
+        parse-blok
+      ==
     ==
+    ::
+    wss
     (jest 'end')
   ==
 ++  parse-functioncall
@@ -601,19 +618,17 @@ apex
     |=  ret=(unit ret)  [stats ret]
   %-  punt
   ;~  pfix
-    ?~  stats  (easy ~)  wss
+    ?~  stats  ws  wss
     parse-ret
   ==
 ++  parse-ret
   %^  tnee  %parse-ret  ret
   %+  cook
-    |=  [[* =exprlist] *]  exprlist
+    |=  [* ret=(unit exprlist) *]  ret
   ;~  plug
-    ;~  (glue wss)
-      (jest 'return')
-      parse-exprlist
-    ==
-    (punt (just ';'))
+    (jest 'return')
+    (punt ;~(pfix wss parse-exprlist))
+    (punt ;~(plug ws (just ';')))
   ==
 ++  parse-name
   =>
@@ -630,8 +645,15 @@ apex
   =/  prev-edge  (prev nail)
   ?~  q.prev-edge  prev-edge
   ((cont p.u.q.prev-edge) q.u.q.prev-edge)
+++  comment
+  ;~  pfix
+    (jest '--')
+    (star ;~(less nl next))
+  ==
+++  nl  (just '\0a')
 ++  w
   ;~  pose
+    comment
     gah
     (just '\09')
   ==

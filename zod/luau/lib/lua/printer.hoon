@@ -464,7 +464,7 @@ print
   %-  zing
   :~
     "return "
-    (print-exprlist ret)
+    ?~  ret  ""  (print-exprlist u.ret)
   ==
 :: Helpers
 ::
