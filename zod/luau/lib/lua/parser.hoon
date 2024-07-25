@@ -179,8 +179,8 @@ apex
     (cold %add (jest '+'))
     (cold %sub (jest '-'))
     (cold %mul (jest '*'))
-    (cold %div (jest '/'))
     (cold %int-div (jest '//'))
+    (cold %div (jest '/'))
     (cold %pow (jest '^'))
     (cold %mod (jest '%'))
     (cold %band (jest '&'))
@@ -809,8 +809,8 @@ apex
   |*  [=term gar=mold sef=rule]
   |=  tub=nail
   ^-  (like gar)
-  =/  trace  &
-  ~?  trace  [term `tape`(scag 30 q.tub)]
+  =/  trace  |
+  ~?  trace  [p.p.tub term `tape`(scag 30 q.tub)]
   =/  res  (sef tub)
   ?.  trace  res
   ?~  q.res
