@@ -49,7 +49,7 @@ apex
       |=(=funcbody [%functiondef funcbody])
     ;~  pfix
       (jest 'function')
-      wss
+      ws
       parse-funcbody
     ==
     ::
@@ -112,6 +112,14 @@ apex
   ;~  pose
     (parse-string '"')
     (parse-string '\'')
+    ::
+    %+  cook  |=(=tape (crip tape))
+    %-  long-brackets
+    |*  closing=rule 
+    ;~  pfix
+      (punt nl)
+      %-  star  ;~(less closing next)
+    ==
   ==
 ++  parse-table
   %^  tnee  %parse-table  table
@@ -412,7 +420,7 @@ apex
     ;~  plug
       ws
       (jest ',')
-      wss
+      ws
       parse-expr
     ==
     wss
@@ -462,7 +470,7 @@ apex
 ++  parse-funcbody
   %^  tnee  %parse-funcbody  funcbody
   %+  cook
-    |=  [* * pars=parlist * * * body=blok * *]  [pars body]
+    |=  [* * pars=parlist * * * body=blok *]  [pars body]
   ;~  plug
     (just '(')
     ws
@@ -470,8 +478,13 @@ apex
     ws
     (just ')')
     ws
-    parse-blok
-    wss
+    ::
+    ;<  body=blok  bind  parse-blok
+    ;~  pfix
+      ?:  (blok-is-empty body)  ws  wss
+      (easy body)
+    ==
+    ::
     (jest 'end')
   ==
 ++  parse-parlist
@@ -764,7 +777,7 @@ apex
       (jest longness)
       (just ']')
     ==
-  ;<  res=*  bind  (inner closing)
+  ;<  res=_p:(need q:$:$:inner)  bind  (inner closing)
   %+  cold  res  closing
 ++  keyword
   %+  cold  ~
@@ -797,10 +810,14 @@ apex
   |=  tub=nail
   ^-  (like gar)
   =/  trace  &
-  ~?  trace  [term q.tub]
+  ~?  trace  [term `tape`(scag 30 q.tub)]
   =/  res  (sef tub)
   ?.  trace  res
   ?~  q.res
   ~&  [term %nope]  res
   ~&  >  [term %ok]  res
+++  blok-is-empty
+  |=  =blok
+  ^-  ?
+  &(?=(~ body.blok) ?=(~ ret.blok))
 --
