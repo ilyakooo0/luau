@@ -66,7 +66,7 @@ apex
         ==
         ;~  sfix
           (cold %not (jest 'not'))
-          wss
+          ;~(less parse-name ws)
         ==
       ==
       %+  knee  *expr  |.(parse-expr)
@@ -203,22 +203,23 @@ apex
   ;~  pose
     %+  cook
       |=  x=@rd  [%float x]
-    ;~  pose
-      parse-float
-      parse-hex-float
-    ==
+    parse-hex-float
     ::
     %+  cook
       |=  x=@u  [%int x]
-    ;~  pose
-      ;~  pfix
-        (just '0')
-        (mask "xX")
-        hex
-      ==
-      ::
-      (bass 10 (plus dit))
+    ;~  pfix
+      (just '0')
+      (mask "xX")
+      hex
     ==
+    ::
+    %+  cook
+      |=  x=@rd  [%float x]
+    parse-float
+    ::
+    %+  cook
+      |=  x=@u  [%int x]
+    (bass 10 (plus dit))
   ==
 ++  parse-exprlist
   %^  tnee  %parse-exprlist  exprlist
@@ -401,7 +402,7 @@ apex
 ++  parse-for-range
   %^  tnee  %for-range  for-range
   %+  cook  
-    |=  [* * var=name * * * from=expr * * * to=expr by=(unit expr) * * * body=blok * *]
+    |=  [* * var=name * * * from=expr * * * to=expr by=(unit expr) * * * body=blok *]
     [var from to by body]
   ;~  plug
     (jest 'for')
@@ -426,8 +427,11 @@ apex
     wss
     (jest 'do')
     wss
-    parse-blok
-    wss
+    ;<  body=blok  bind  parse-blok
+      ;~  pfix
+        ?:  (blok-is-empty body)  ws  wss
+        (easy body)
+      ==
     (jest 'end')
   ==
 ++  parse-function
@@ -512,15 +516,20 @@ apex
 ++  parse-for-in
   %^  tnee  %parse-for-in  for-in
   %+  cook
-    |=  [* vars=namelist * src=explist * body=blok *]  [vars src body]
+    |=  [* vars=namelist * src=explist * body=blok]  [vars src body]
   ;~  (glue wss)
     (jest 'for')
     parse-namelist
     (jest 'in')
     parse-explist    
     (jest 'do')
-    parse-blok
-    (jest 'end')
+    ::
+    ;<  body=blok  bind  parse-blok
+    ;~  pfix
+      ?:  (blok-is-empty)  ws  wss
+      (jest 'end')
+      (easy body)
+    ==
   ==
 ++  parse-explist
   %^  tnee  %parse-explist  explist
@@ -689,14 +698,16 @@ apex
   %+  cook  ryld
   %+  cook  royl-cell:so
   %+  sear  
-    |=  [int=@ frac=(unit [@ @]) exp=(unit [exp-sign=? exp=@])]
-    ?:  ?=([~ ~] [frac exp])  ~
+    |=  [leading-zeros=tape int=(unit @) frac=(unit (unit [@ @])) exp=(unit [exp-sign=? exp=@])]
+    =/  int=(unit @)  ?~(int ?:(?=(~ leading-zeros) ~ `0) int)
+    ?:  ?=([~ ~ ~] [int frac exp])  ~
+    ?:  ?=([~ [~ ~]] [int frac])  ~
     %-  some
     :*
       %d
       &
-      int
-      (fall frac [0 0])
+      (fall int 0)
+      (fall (fall frac `[0 0]) [0 0])
       (fall exp [& 0])
     ==
   =/  moo
@@ -704,16 +715,15 @@ apex
     :-  (lent a)
     (scan a (bass 10 (plus sid:ab)))
   ;~  plug
-    ;~  plug
-      dim:ag
-      ::
-      (punt ;~(pfix dot (cook moo (plus (shim '0' '9')))))
-      ::
-      %-  punt
-      ;~  pfix
-        (mask "eE")
-        ;~(plug ;~(pose (cold | hep) (easy &)) dim:ag)
-      ==
+    (star (just '0'))
+    (punt dim:ag)
+    ::
+    (punt ;~(pfix dot (punt (cook moo (plus (shim '0' '9'))))))
+    ::
+    %-  punt
+    ;~  pfix
+      (mask "eE")
+      ;~(plug ;~(pose (cold | hep) (cold & lus) (easy &)) dum:ag)
     ==
   ==
 ++  parse-hex-float
@@ -722,6 +732,7 @@ apex
   %+  sear
     |=  [* * int=tape frac=(unit tape) exp=(unit [exp-sign=? exp=@])]
     ?:  ?=([~ ~] [frac exp])  ~
+    ?:  ?=([~ ~] [int frac])  ~
     %-  some
     =/  frac  (fall frac "")
     =/  whole=@rd  (sun:rd (scan (weld int frac) hex))
@@ -737,7 +748,7 @@ apex
     ::
     (mask "xX")
     ::
-    (plus hex-digit)
+    (star hex-digit)
     ::
     %-  punt
     ;~  pfix
@@ -809,8 +820,8 @@ apex
   |*  [=term gar=mold sef=rule]
   |=  tub=nail
   ^-  (like gar)
-  =/  trace  |
-  ~?  trace  [p.p.tub term `tape`(scag 30 q.tub)]
+  =/  trace  &
+  ~?  trace  [p.p.tub term `tape`(scag 40 q.tub)]
   =/  res  (sef tub)
   ?.  trace  res
   ?~  q.res
