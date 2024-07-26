@@ -1,22 +1,17 @@
-/-  lua
-/+  lua-parser
-/+  lua-printer
-
-|_  ast=ast:lua
-++  grad  %noun
+|_  txt=wain
+++  grad  %mime
 ++  grow
   |%
-  ++  noun  ast
   ++  mime
     ^-  ^mime
-    [/text/lua (as-octt:mimes:html (lua-printer ast))]
+    [/text/lua (as-octs:mimes:html (of-wain:format txt))]
   --
 ++  grab
   |%
-  ++  noun  ast:lua
+  ++  noun  wain
   ++  mime
     |=  [=mite len=@ tex=@]
-    (rash tex lua-parser)
+    (to-wain:format tex)
   --
 --
 

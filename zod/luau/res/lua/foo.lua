@@ -1,6 +1,6 @@
 foosjis = nil
 
-baz = bar[nil]
+az = bar[nil]
 baz = bar(1).foo
 
 i = 3
