@@ -118,7 +118,47 @@ apex
     |*  closing=rule 
     ;~  pfix
       (punt nl)
-      %-  star  ;~(less closing next)
+      %-  star
+      ;~  less  closing
+        ;~  pose
+          %+  cold  '\07'  (jest '\\a')
+          %+  cold  '\08'  (jest '\\b')
+          %+  cold  '\0c'  (jest '\\f')
+          %+  cold  '\0a'  (jest '\\n')
+          %+  cold  '\0d'  (jest '\\r')
+          %+  cold  '\09'  (jest '\\t')
+          %+  cold  '\0b'  (jest '\\v')
+          %+  cold  '\\'  (jest '\\\\')
+          %+  cold  '"'  (jest '\\"')
+          %+  cold  '\''  (jest '\\\'')
+          %+  cold  '\0a'  (jest '\\\0a')
+          %+  cold  ''  ;~(pose (jest '\\z') (plus gaw))
+          ::
+          ;~  pfix
+            (jest '\\x')
+            ;<  hex-digits=tape  bind  ;~(plug next next (easy ~))
+            =/  digit=(unit @)  (rust hex-digits hex)
+            ?~  digit  fail  (easy `@t`u.digit)
+          ==
+          ::
+          ;~  pfix
+            (jest '\\')
+            ;<  digits=tape  bind  (stun [1 3] (shim '0' '9'))
+            =/  digit=(unit @)  (rust digits dem)
+            ?~  digit  fail  (easy `@t`u.digit)
+          ==
+          ::
+          %+  cook
+            |=  [* point=@ *]  `@t`point
+          ;~  plug
+            (jest '\\u{')
+            hex
+            (just '}')
+          ==
+          ::
+          next
+        ==
+      ==
     ==
   ==
 ++  parse-table
@@ -820,7 +860,7 @@ apex
   |*  [=term gar=mold sef=rule]
   |=  tub=nail
   ^-  (like gar)
-  =/  trace  &
+  =/  trace  |
   ~?  trace  [p.p.tub term `tape`(scag 40 q.tub)]
   =/  res  (sef tub)
   ?.  trace  res
