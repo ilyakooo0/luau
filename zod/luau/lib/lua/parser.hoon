@@ -9,7 +9,6 @@ apex
     %-  punt
     ;~  plug
       hax
-      zap
       (star ;~(less (just '\0a') next))
     ==
     ::
@@ -105,21 +104,8 @@ apex
       |=([* =tape *] (crip tape))
     ;~  plug
       quot
-      (star ;~(less quot next))
-      quot
-    ==
-  --
-  ;~  pose
-    (parse-string '"')
-    (parse-string '\'')
-    ::
-    %+  cook  |=(=tape (crip tape))
-    %-  long-brackets
-    |*  closing=rule 
-    ;~  pfix
-      (punt nl)
       %-  star
-      ;~  less  closing
+      ;~  less  quot
         ;~  pose
           %+  cold  '\07'  (jest '\\a')
           %+  cold  '\08'  (jest '\\b')
@@ -132,7 +118,7 @@ apex
           %+  cold  '"'  (jest '\\"')
           %+  cold  '\''  (jest '\\\'')
           %+  cold  '\0a'  (jest '\\\0a')
-          %+  cold  ''  ;~(pose (jest '\\z') (plus gaw))
+          %+  cold  ''  ;~(plug (jest '\\z') gaw)
           ::
           ;~  pfix
             (jest '\\x')
@@ -158,6 +144,21 @@ apex
           ::
           next
         ==
+      ==
+      quot
+    ==
+  --
+  ;~  pose
+    (parse-string '"')
+    (parse-string '\'')
+    ::
+    %+  cook  |=(=tape (crip tape))
+    %-  long-brackets
+    |*  closing=rule 
+    ;~  pfix
+      (punt nl)
+      %-  star
+      ;~  less  closing  next
       ==
     ==
   ==
@@ -317,7 +318,7 @@ apex
     |=  =prefix-expr
     %+  cook
       |=([* =name] [%dot prefix-expr name])
-    ;~  plug
+    ;~  (glue ws)
       dot
       parse-name
     ==
@@ -332,21 +333,29 @@ apex
     (cold [%break ~] (jest 'break'))
     ::
     %+  cook
-      |=  [* cond=expr * body=blok *]  [%while cond body]
+      |=  [* cond=expr * body=blok]  [%while cond body]
     ;~  (glue wss)
       (jest 'while')
       parse-expr
       (jest 'do')
-      parse-blok
-      (jest 'end')
+      ;<  body=blok  bind  parse-blok
+      ;~  pfix
+        ?:  (blok-is-empty body)  ws  wss
+        (jest 'end')
+        (easy body)
+      ==
     ==
     ::
     %+  cook
-      |=  [* body=blok * cond=expr]  [%repeat body cond]
+      |=  [* body=blok cond=expr]  [%repeat body cond]
     ;~  (glue wss)
       (jest 'repeat')
-      parse-blok
-      (jest 'until')
+      ;<  body=blok  bind  parse-blok
+      ;~  pfix
+        ?:  (blok-is-empty body)  ws  wss
+        (jest 'until')
+        (easy body)
+      ==
       parse-expr
     ==
     ::
@@ -603,18 +612,23 @@ apex
       ==
     ==
     ::
-    %-  punt
-    %+  cook
-      |=  [* =blok]  blok
-    ;~  pfix
-      wss
-      ;~  (glue wss)
-        (jest 'else')
-        parse-blok
+    ;<  else-body=(unit blok)  bind
+      %-  punt
+      %+  cook
+        |=  [* =blok]  blok
+      ;~  pfix
+        wss
+        ;~  (glue wss)
+          (jest 'else')
+          parse-blok
+        ==
       ==
+    ;~  pfix
+      ?~  else-body  wss
+      ?:  (blok-is-empty u.else-body)  ws  wss
+      (easy else-body)
     ==
     ::
-    wss
     (jest 'end')
   ==
 ++  parse-functioncall
