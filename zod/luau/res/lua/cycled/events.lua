@@ -1,30 +1,30 @@
-print("testing metatables")
-local debug = require("debug")
+print("\116\101\115\116\105\110\103\32\109\101\116\97\116\97\98\108\101\115")
+local debug = require("\100\101\98\117\103")
 X=20
 ;
 B=30
-_ENV=setmetatable({},{["__index"] = _G})
+_ENV=setmetatable({},{["\95\95\105\110\100\101\120"] = _G})
 collectgarbage()
 X=X + 10
 assert(X == 30 and _G.X == 20)
 B=false
 assert(B == false)
-_ENV["B"]=undef
+_ENV["\66"]=undef
 assert(B == 30)
 assert(getmetatable({}) == nil)
 assert(getmetatable(4) == nil)
 assert(getmetatable(nil) == nil)
-a={["name"] = "NAME"}
+a={["\110\97\109\101"] = "\78\65\77\69"}
 ;
-setmetatable(a,{["__metatable"] = "xuxu",["__tostring"] = (x)
+setmetatable(a,{["\95\95\109\101\116\97\116\97\98\108\101"] = "\120\117\120\117",["\95\95\116\111\115\116\114\105\110\103"] = function (x)
 return x.name
 end})
-assert(getmetatable(a) == "xuxu")
-assert(tostring(a) == "NAME")
+assert(getmetatable(a) == "\120\117\120\117")
+assert(tostring(a) == "\78\65\77\69")
 assert(pcall(setmetatable,a,{}) == false)
-a.name="gororoba"
-assert(tostring(a) == "gororoba")
-local a,t = {10,20,30,["x"] = "10",["y"] = "20"},{}
+a.name="\103\111\114\111\114\111\98\97"
+assert(tostring(a) == "\103\111\114\111\114\111\98\97")
+local a,t = {10,20,30,["\120"] = "\49\48",["\121"] = "\50\48"},{}
 assert(setmetatable(a,t) == a)
 assert(getmetatable(a) == t)
 assert(setmetatable(a,nil) == a)
@@ -32,12 +32,12 @@ assert(getmetatable(a) == nil)
 assert(setmetatable(a,t) == a)
 function f(t,i,e)
 assert(not e)
-local p = rawget(t,"parent")
-return (p and p[i] + 3),"dummy return"
+local p = rawget(t,"\112\97\114\101\110\116")
+return (p and p[i] + 3),"\100\117\109\109\121\32\114\101\116\117\114\110"
 end
 t.__index=f
-a.parent={["z"] = 25,["x"] = 12,[4] = 24}
-assert(a[1] == 10 and a.z == 28 and a[4] == 27 and a.x == "10")
+a.parent={["\122"] = 25,["\120"] = 12,[4] = 24}
+assert(a[1] == 10 and a.z == 28 and a[4] == 27 and a.x == "\49\48")
 collectgarbage()
 a=setmetatable({},t)
 function f(t,i,v)
@@ -47,15 +47,17 @@ setmetatable(t,t)
 t.__newindex=f
 a[1]=30
 ;
-a.x="101"
+a.x="\49\48\49"
 ;
 a[5]=200
 assert(a[1] == 27 and a.x == 98 and a[5] == 197)
+do
 local mt = {}
 mt.__newindex=mt
 local t = setmetatable({},mt)
 t[1]=10
 assert(mt[1] == 10)
+end
 local c = {}
 a=setmetatable({},t)
 t.__newindex=c
@@ -76,26 +78,29 @@ do
 assert(a[i] == i * 10)
 end
 assert(next(a) == nil)
-local a = 
+do
+local a
 ;
-a=setmetatable({},{["__index"] = setmetatable({},{["__index"] = setmetatable({},{["__index"] = (_,n)
-return a[n - 3] + 4,"lixo"
+a=setmetatable({},{["\95\95\105\110\100\101\120"] = setmetatable({},{["\95\95\105\110\100\101\120"] = setmetatable({},{["\95\95\105\110\100\101\120"] = function (_,n)
+return a[n - 3] + 4,"\108\105\120\111"
 end})})})
 a[0]=20
 for i = 0, 10
 do
 assert(a[i * 3] == 20 + i * 4)
 end
-local foi = 
+end
+do
+local foi
 local a = {}
 for i = 1, 10
 do
 a[i]=0
 ;
-a["a" .. i]=0
+a["\97" .. i]=0
 ;
 end
-setmetatable(a,{["__newindex"] = (t,k,v)
+setmetatable(a,{["\95\95\110\101\119\105\110\100\101\120"] = function (t,k,v)
 foi=true
 ;
 rawset(t,k,v)
@@ -107,12 +112,12 @@ a[1]=0
 assert(not foi)
 foi=false
 ;
-a["a1"]=0
+a["\97\49"]=0
 ;
 assert(not foi)
 foi=false
 ;
-a["a11"]=0
+a["\97\49\49"]=0
 ;
 assert(foi)
 foi=false
@@ -131,41 +136,44 @@ foi=false
 a[1]=nil
 ;
 assert(foi)
+end
 setmetatable(t,nil)
 function f(t, ...)
 return t,{...}
 end
 t.__call=f
-local x,y = a(table.unpack({"a",1}))
-assert(x == a and y[1] == "a" and y[2] == 1 and y[3] == undef)
+do
+local x,y = a(table.unpack({"\97",1}))
+assert(x == a and y[1] == "\97" and y[2] == 1 and y[3] == undef)
 x,y=a()
 assert(x == a and y[1] == undef)
+end
 local b = setmetatable({},t)
 setmetatable(b,t)
 function f(op)
-return (...)
+return function (...)
 cap={[0] = op,...}
 ;
 return (...)
 end
 end
-t.__add=f("add")
-t.__sub=f("sub")
-t.__mul=f("mul")
-t.__div=f("div")
-t.__idiv=f("idiv")
-t.__mod=f("mod")
-t.__unm=f("unm")
-t.__pow=f("pow")
-t.__len=f("len")
-t.__band=f("band")
-t.__bor=f("bor")
-t.__bxor=f("bxor")
-t.__shl=f("shl")
-t.__shr=f("shr")
-t.__bnot=f("bnot")
-t.__lt=f("lt")
-t.__le=f("le")
+t.__add=f("\97\100\100")
+t.__sub=f("\115\117\98")
+t.__mul=f("\109\117\108")
+t.__div=f("\100\105\118")
+t.__idiv=f("\105\100\105\118")
+t.__mod=f("\109\111\100")
+t.__unm=f("\117\110\109")
+t.__pow=f("\112\111\119")
+t.__len=f("\108\101\110")
+t.__band=f("\98\97\110\100")
+t.__bor=f("\98\111\114")
+t.__bxor=f("\98\120\111\114")
+t.__shl=f("\115\104\108")
+t.__shr=f("\115\104\114")
+t.__bnot=f("\98\110\111\116")
+t.__lt=f("\108\116")
+t.__le=f("\108\101")
 local function checkcap
 (t)
 assert(# cap + 1 == # t)
@@ -177,174 +185,174 @@ end
 end
 assert(b + 5 == b)
 ;
-checkcap({"add",b,5})
+checkcap({"\97\100\100",b,5})
 assert(5.2 + b == 5.2)
 ;
-checkcap({"add",5.2,b})
-assert(b + "5" == b)
+checkcap({"\97\100\100",5.2,b})
+assert(b + "\53" == b)
 ;
-checkcap({"add",b,"5"})
+checkcap({"\97\100\100",b,"\53"})
 assert(5 + b == 5)
 ;
-checkcap({"add",5,b})
-assert("5" + b == "5")
+checkcap({"\97\100\100",5,b})
+assert("\53" + b == "\53")
 ;
-checkcap({"add","5",b})
+checkcap({"\97\100\100","\53",b})
 b=b - 3
 ;
 assert(getmetatable(b) == t)
 ;
-checkcap({"sub",b,3})
+checkcap({"\115\117\98",b,3})
 assert(5 - a == 5)
 ;
-checkcap({"sub",5,a})
-assert("5" - a == "5")
+checkcap({"\115\117\98",5,a})
+assert("\53" - a == "\53")
 ;
-checkcap({"sub","5",a})
+checkcap({"\115\117\98","\53",a})
 assert(a * a == a)
 ;
-checkcap({"mul",a,a})
+checkcap({"\109\117\108",a,a})
 assert(a / 0 == a)
 ;
-checkcap({"div",a,0})
-assert(a / 0 == a)
+checkcap({"\100\105\118",a,0})
+assert(a / 0.0 == a)
 ;
-checkcap({"div",a,0})
+checkcap({"\100\105\118",a,0.0})
 assert(a % 2 == a)
 ;
-checkcap({"mod",a,2})
+checkcap({"\109\111\100",a,2})
 assert(a // (1 / 0) == a)
 ;
-checkcap({"idiv",a,1 / 0})
+checkcap({"\105\100\105\118",a,1 / 0})
 ;
-(()
-assert(a & "hi" == a)
+(function ()
+assert(a & "\104\105" == a)
 end)()
 ;
-checkcap({"band",a,"hi"})
+checkcap({"\98\97\110\100",a,"\104\105"})
 ;
-(()
+(function ()
 assert(10 & a == 10)
 end)()
 ;
-checkcap({"band",10,a})
+checkcap({"\98\97\110\100",10,a})
 ;
-(()
+(function ()
 assert(a | 10 == a)
 end)()
 ;
-checkcap({"bor",a,10})
-assert(a | "hi" == a)
+checkcap({"\98\111\114",a,10})
+assert(a | "\104\105" == a)
 ;
-checkcap({"bor",a,"hi"})
-assert("hi" ~ a == "hi")
+checkcap({"\98\111\114",a,"\104\105"})
+assert("\104\105" ~ a == "\104\105")
 ;
-checkcap({"bxor","hi",a})
+checkcap({"\98\120\111\114","\104\105",a})
 ;
-(()
+(function ()
 assert(10 ~ a == 10)
 end)()
 ;
-checkcap({"bxor",10,a})
+checkcap({"\98\120\111\114",10,a})
 assert(- a == a)
 ;
-checkcap({"unm",a,a})
-assert(a ^ 4 == a)
+checkcap({"\117\110\109",a,a})
+assert(a ^ 4.0 == a)
 ;
-checkcap({"pow",a,4})
-assert(a ^ "4" == a)
+checkcap({"\112\111\119",a,4.0})
+assert(a ^ "\52" == a)
 ;
-checkcap({"pow",a,"4"})
+checkcap({"\112\111\119",a,"\52"})
 assert(4 ^ a == 4)
 ;
-checkcap({"pow",4,a})
-assert("4" ^ a == "4")
+checkcap({"\112\111\119",4,a})
+assert("\52" ^ a == "\52")
 ;
-checkcap({"pow","4",a})
+checkcap({"\112\111\119","\52",a})
 assert(# a == a)
 ;
-checkcap({"len",a,a})
+checkcap({"\108\101\110",a,a})
 assert(~ a == a)
 ;
-checkcap({"bnot",a,a})
+checkcap({"\98\110\111\116",a,a})
 assert(a << 3 == a)
 ;
-checkcap({"shl",a,3})
+checkcap({"\115\104\108",a,3})
 assert(1.5 >> a == 1.5)
 ;
-checkcap({"shr",1.5,a})
-assert(5 > a)
+checkcap({"\115\104\114",1.5,a})
+assert(5.0 > a)
 ;
-checkcap({"lt",a,5})
+checkcap({"\108\116",a,5.0})
 assert(a >= 10)
 ;
-checkcap({"le",10,a})
-assert(a <= - 10)
+checkcap({"\108\101",10,a})
+assert(a <= - 10.0)
 ;
-checkcap({"le",a,- 10})
+checkcap({"\108\101",a,- 10.0})
 assert(a < - 10)
 ;
-checkcap({"lt",a,- 10})
-t=setmetatable({1,2,3},{["__len"] = ()
+checkcap({"\108\116",a,- 10})
+t=setmetatable({1,2,3},{["\95\95\108\101\110"] = function ()
 return 10
 end})
 assert(# t == 10 and rawlen(t) == 3)
-assert(rawlen("abc") == 3)
+assert(rawlen("\97\98\99") == 3)
 assert(not pcall(rawlen,io.stdin))
 assert(not pcall(rawlen,34))
 assert(not pcall(rawlen))
-assert(rawlen(string.rep("a",1e3)) == 1e3)
+assert(rawlen(string.rep("\97",1000)) == 1000)
 t={}
-t.__lt=(a,b,c)
+t.__lt=function (a,b,c)
 collectgarbage()
 assert(c == nil)
-if type(a) == "table" then
+if type(a) == "\116\97\98\108\101" then
 a=a.x
 end
-if type(b) == "table" then
+if type(b) == "\116\97\98\108\101" then
 b=b.x
 end
-return a < b,"dummy"
+return a < b,"\100\117\109\109\121"
 end
-t.__le=(a,b,c)
+t.__le=function (a,b,c)
 assert(c == nil)
-if type(a) == "table" then
+if type(a) == "\116\97\98\108\101" then
 a=a.x
 end
-if type(b) == "table" then
+if type(b) == "\116\97\98\108\101" then
 b=b.x
 end
-return a <= b,"dummy"
+return a <= b,"\100\117\109\109\121"
 end
-t.__eq=(a,b,c)
+t.__eq=function (a,b,c)
 assert(c == nil)
-if type(a) == "table" then
+if type(a) == "\116\97\98\108\101" then
 a=a.x
 end
-if type(b) == "table" then
+if type(b) == "\116\97\98\108\101" then
 b=b.x
 end
-return a == b,"dummy"
+return a == b,"\100\117\109\109\121"
 end
 function Op(x)
-return setmetatable({["x"] = x},t)
+return setmetatable({["\120"] = x},t)
 end
 local function test
 (a,b,c)
 assert(not (Op(1) < Op(1)) and (Op(1) < Op(2)) and not (Op(2) < Op(1)))
 assert(not (1 < Op(1)) and (Op(1) < 2) and not (2 < Op(1)))
-assert(not (Op("a") < Op("a")) and (Op("a") < Op("b")) and not (Op("b") < Op("a")))
-assert(not ("a" < Op("a")) and (Op("a") < "b") and not (Op("b") < Op("a")))
+assert(not (Op("\97") < Op("\97")) and (Op("\97") < Op("\98")) and not (Op("\98") < Op("\97")))
+assert(not ("\97" < Op("\97")) and (Op("\97") < "\98") and not (Op("\98") < Op("\97")))
 assert((Op(1) <= Op(1)) and (Op(1) <= Op(2)) and not (Op(2) <= Op(1)))
-assert((Op("a") <= Op("a")) and (Op("a") <= Op("b")) and not (Op("b") <= Op("a")))
+assert((Op("\97") <= Op("\97")) and (Op("\97") <= Op("\98")) and not (Op("\98") <= Op("\97")))
 assert(not (Op(1) > Op(1)) and not (Op(1) > Op(2)) and (Op(2) > Op(1)))
-assert(not (Op("a") > Op("a")) and not (Op("a") > Op("b")) and (Op("b") > Op("a")))
+assert(not (Op("\97") > Op("\97")) and not (Op("\97") > Op("\98")) and (Op("\98") > Op("\97")))
 assert((Op(1) >= Op(1)) and not (Op(1) >= Op(2)) and (Op(2) >= Op(1)))
 assert((1 >= Op(1)) and not (1 >= Op(2)) and (Op(2) >= 1))
-assert((Op("a") >= Op("a")) and not (Op("a") >= Op("b")) and (Op("b") >= Op("a")))
-assert(("a" >= Op("a")) and not (Op("a") >= "b") and (Op("b") >= Op("a")))
+assert((Op("\97") >= Op("\97")) and not (Op("\97") >= Op("\98")) and (Op("\98") >= Op("\97")))
+assert(("\97" >= Op("\97")) and not (Op("\97") >= "\98") and (Op("\98") >= Op("\97")))
 assert(Op(1) == Op(1) and Op(1) ~= Op(2))
-assert(Op("a") == Op("a") and Op("a") ~= Op("b"))
+assert(Op("\97") == Op("\97") and Op("\97") ~= Op("\98"))
 assert(a == a and a ~= b)
 assert(Op(3) == c)
 end
@@ -362,7 +370,7 @@ local function Set
 (x)
 return setmetatable(rawSet(x),t)
 end
-t.__lt=(a,b)
+t.__lt=function (a,b)
 for k in pairs(a)
 do
 if not b[k] then
@@ -372,7 +380,7 @@ b[k]=undef
 end
 return next(b) ~= nil
 end
-t.__le=(a,b)
+t.__le=function (a,b)
 for k in pairs(a)
 do
 if not b[k] then
@@ -388,7 +396,7 @@ assert((Set({1,2,3,4}) >= Set({1,2,3,4})))
 assert(not (Set({1,3}) <= Set({3,5})))
 assert(not (Set({1,3}) <= Set({3,5})))
 assert(not (Set({1,3}) >= Set({3,5})))
-t.__eq=(a,b)
+t.__eq=function (a,b)
 for k in pairs(a)
 do
 if not b[k] then
@@ -407,19 +415,19 @@ assert(rawSet({1,3,5,1}) == Set({3,5,1}))
 assert(Set({1,3,5}) ~= Set({3,5,1,6}))
 t[Set({1,3,5})]=1
 assert(t[Set({1,3,5})] == undef)
-local mt = {["__eq"] = true}
+do
+local mt = {["\95\95\101\113"] = true}
 local a = setmetatable({10},mt)
 local b = setmetatable({10},mt)
 mt.__eq=nil
 assert(a ~= b)
-mt.__eq=(x,y)
+mt.__eq=function (x,y)
 return x[1] == y[1]
 end
 assert(a == b)
+end
 if not T then
-(Message or print)("
- >>> testC not active: skipping tests for userdata <<<
-")
+(Message or print)("\10\32\62\62\62\32\116\101\115\116\67\32\110\111\116\32\97\99\116\105\118\101\58\32\115\107\105\112\112\105\110\103\32\116\101\115\116\115\32\102\111\114\32\117\115\101\114\100\97\116\97\32\60\60\60\10")
 else
 local u1 = T.newuserdata(0,1)
 local u2 = T.newuserdata(0,1)
@@ -431,10 +439,10 @@ debug.setuservalue(u2,2)
 ;
 debug.setuservalue(u3,1)
 ;
-debug.setmetatable(u1,{["__eq"] = (a,b)
+debug.setmetatable(u1,{["\95\95\101\113"] = function (a,b)
 return debug.getuservalue(a) == debug.getuservalue(b)
 end})
-debug.setmetatable(u2,{["__eq"] = (a,b)
+debug.setmetatable(u2,{["\95\95\101\113"] = function (a,b)
 return true
 end})
 assert(u1 == u3 and u3 == u1 and u1 ~= u2)
@@ -442,7 +450,7 @@ assert(u2 == u1 and u2 == u3 and u3 == u2)
 assert(u2 ~= {})
 assert(rawequal(u1,u1) and not rawequal(u1,u3))
 local mirror = {}
-debug.setmetatable(u3,{["__index"] = mirror,["__newindex"] = mirror})
+debug.setmetatable(u3,{["\95\95\105\110\100\101\120"] = mirror,["\95\95\110\101\119\105\110\100\101\120"] = mirror})
 for i = 1, 10
 do
 u3[i]=i
@@ -452,57 +460,57 @@ do
 assert(u3[i] == i)
 end
 end
-t.__concat=(a,b,c)
+t.__concat=function (a,b,c)
 assert(c == nil)
-if type(a) == "table" then
+if type(a) == "\116\97\98\108\101" then
 a=a.val
 end
-if type(b) == "table" then
+if type(b) == "\116\97\98\108\101" then
 b=b.val
 end
 if A then
 return a .. b
 else
-return setmetatable({["val"] = a .. b},t)
+return setmetatable({["\118\97\108"] = a .. b},t)
 end
 end
-c={["val"] = "c"}
+c={["\118\97\108"] = "\99"}
 ;
 setmetatable(c,t)
-d={["val"] = "d"}
+d={["\118\97\108"] = "\100"}
 ;
 setmetatable(d,t)
 A=true
-assert(c .. d == "cd")
-assert(0 .. "a" .. "b" .. c .. d .. "e" .. "f" .. (5 + 3) .. "g" == "0abcdef8g")
+assert(c .. d == "\99\100")
+assert(0 .. "\97" .. "\98" .. c .. d .. "\101" .. "\102" .. (5 + 3) .. "\103" == "\48\97\98\99\100\101\102\56\103")
 A=false
-assert((c .. d .. c .. d).val == "cdcd")
+assert((c .. d .. c .. d).val == "\99\100\99\100")
 x=c .. d
-assert(getmetatable(x) == t and x.val == "cd")
-x=0 .. "a" .. "b" .. c .. d .. "e" .. "f" .. "g"
-assert(x.val == "0abcdefg")
+assert(getmetatable(x) == t and x.val == "\99\100")
+x=0 .. "\97" .. "\98" .. c .. d .. "\101" .. "\102" .. "\103"
+assert(x.val == "\48\97\98\99\100\101\102\103")
 c={}
-local x = 
-setmetatable(c,{["__concat"] = (a,b)
-assert(type(a) == "number" and b == c or type(b) == "number" and a == c)
+local x
+setmetatable(c,{["\95\95\99\111\110\99\97\116"] = function (a,b)
+assert(type(a) == "\110\117\109\98\101\114" and b == c or type(b) == "\110\117\109\98\101\114" and a == c)
 return c
 end})
 assert(c .. 5 == c and 5 .. c == c)
 assert(4 .. c .. 5 == c and 4 .. 5 .. 6 .. 7 .. c == c)
-local t1,t2,c,d = 
+local t1,t2,c,d
 t1={}
 ;
 c={}
 ;
 setmetatable(c,t1)
 d={}
-t1.__eq=()
+t1.__eq=function ()
 return true
 end
-t1.__lt=()
+t1.__lt=function ()
 return true
 end
-t1.__le=()
+t1.__le=function ()
 return false
 end
 setmetatable(d,t1)
@@ -512,8 +520,8 @@ t2.__eq=t1.__eq
 t2.__lt=t1.__lt
 setmetatable(d,t2)
 assert(c == d and c < d and not (d <= c))
-local i = 
-local tt = {["__call"] = (t, ...)
+local i
+local tt = {["\95\95\99\97\108\108"] = function (t, ...)
 i=i + 1
 if t.f then
 return t.f(...)
@@ -522,37 +530,37 @@ return {...}
 end
 end}
 local a = setmetatable({},tt)
-local b = setmetatable({["f"] = a},tt)
-local c = setmetatable({["f"] = b},tt)
+local b = setmetatable({["\102"] = a},tt)
+local c = setmetatable({["\102"] = b},tt)
 i=0
 x=c(3,4,5)
 assert(i == 3 and x[1] == 3 and x[3] == 5)
 assert(_G.X == 20)
 _G.X,_G.B=nil
-print("+")
+print("\43")
 local _g = _G
-_ENV=setmetatable({},{["__index"] = (_,k)
+_ENV=setmetatable({},{["\95\95\105\110\100\101\120"] = function (_,k)
 return _g[k]
 end})
 a={}
-rawset(a,"x",1,2,3)
-assert(a.x == 1 and rawget(a,"x",3) == 1)
-print("+")
-mt={["__index"] = (a,b)
+rawset(a,"\120",1,2,3)
+assert(a.x == 1 and rawget(a,"\120",3) == 1)
+print("\43")
+mt={["\95\95\105\110\100\101\120"] = function (a,b)
 return a + b
-end,["__len"] = (x)
+end,["\95\95\108\101\110"] = function (x)
 return math.floor(x)
 end}
 debug.setmetatable(10,mt)
 assert(getmetatable(- 2) == mt)
 assert((10)[3] == 13)
-assert((10)["3"] == 13)
+assert((10)["\51"] == 13)
 assert(# 3.45 == 3)
 debug.setmetatable(23,nil)
 assert(getmetatable(- 2) == nil)
 debug.setmetatable(true,mt)
 assert(getmetatable(false) == mt)
-mt.__index=(a,b)
+mt.__index=function (a,b)
 return a or b
 end
 assert((true)[false] == true)
@@ -561,7 +569,7 @@ debug.setmetatable(false,nil)
 assert(getmetatable(true) == nil)
 debug.setmetatable(nil,mt)
 assert(getmetatable(nil) == mt)
-mt.__add=(a,b)
+mt.__add=function (a,b)
 return (a or 1) + (b or 2)
 end
 assert(10 + nil == 12)
@@ -577,15 +585,15 @@ setmetatable(a,a)
 a.__index=a
 ;
 a.__newindex=a
-assert(not pcall((a,b)
+assert(not pcall(function (a,b)
 return a[b]
 end,a,10))
-assert(not pcall((a,b,c)
+assert(not pcall(function (a,b,c)
 a[b]=c
 end,a,10,true))
 T,K,V=nil
 grandparent={}
-grandparent.__newindex=(t,k,v)
+grandparent.__newindex=function (t,k,v)
 T=t
 ;
 K=k
@@ -597,6 +605,6 @@ parent.__newindex=parent
 setmetatable(parent,grandparent)
 child=setmetatable({},parent)
 child.foo=10
-assert(T == parent and K == "foo" and V == 10)
-print("OK")
+assert(T == parent and K == "\102\111\111" and V == 10)
+print("\79\75")
 return 12

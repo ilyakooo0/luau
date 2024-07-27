@@ -13,14 +13,14 @@ return tointeger(x)
 end
 local function trymt
 (x,y,mtname)
-if type(y) ~= "string" then
+if type(y) ~= "\115\116\114\105\110\103" then
 local mt = getmetatable(y)
 local mm = mt and rawget(mt,mtname)
 if mm then
 return mm(x,y)
 end
 end
-error("attempt to '" .. strsub(mtname,3) .. "' a " .. type(x) .. " with a " .. type(y),4)
+error("\97\116\116\101\109\112\116\32\116\111\32\39" .. strsub(mtname,3) .. "\39\32\97\32" .. type(x) .. "\32\119\105\116\104\32\97\32" .. type(y),4)
 end
 local function checkargs
 (x,y,mtname)
@@ -33,27 +33,27 @@ return trymt(x,y,mtname),nil
 end
 end
 local smt = getmetatable("")
-smt.__band=(x,y)
-local x,y = checkargs(x,y,"__band")
+smt.__band=function (x,y)
+local x,y = checkargs(x,y,"\95\95\98\97\110\100")
 return y and x & y or x
 end
-smt.__bor=(x,y)
-local x,y = checkargs(x,y,"__bor")
+smt.__bor=function (x,y)
+local x,y = checkargs(x,y,"\95\95\98\111\114")
 return y and x | y or x
 end
-smt.__bxor=(x,y)
-local x,y = checkargs(x,y,"__bxor")
+smt.__bxor=function (x,y)
+local x,y = checkargs(x,y,"\95\95\98\120\111\114")
 return y and x ~ y or x
 end
-smt.__shl=(x,y)
-local x,y = checkargs(x,y,"__shl")
+smt.__shl=function (x,y)
+local x,y = checkargs(x,y,"\95\95\115\104\108")
 return y and x << y or x
 end
-smt.__shr=(x,y)
-local x,y = checkargs(x,y,"__shr")
+smt.__shr=function (x,y)
+local x,y = checkargs(x,y,"\95\95\115\104\114")
 return y and x >> y or x
 end
-smt.__bnot=(x)
-local x,y = checkargs(x,x,"__bnot")
+smt.__bnot=function (x)
+local x,y = checkargs(x,x,"\95\95\98\110\111\116")
 return y and ~ x or x
 end

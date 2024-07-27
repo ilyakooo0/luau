@@ -1,9 +1,9 @@
-print("testing bitwise operations")
-require("bwcoercion")
-local numbits = string.packsize("j") * 8
+print("\116\101\115\116\105\110\103\32\98\105\116\119\105\115\101\32\111\112\101\114\97\116\105\111\110\115")
+require("\98\119\99\111\101\114\99\105\111\110")
+local numbits = string.packsize("\106") * 8
 assert(~ 0 == - 1)
 assert((1 << (numbits - 1)) == math.mininteger)
-local a,b,c,d = 
+local a,b,c,d
 a=18446744073709551615
 assert(a == - 1 and a & - 1 == a and a & 35 == 35)
 a=17361641481138401520
@@ -18,13 +18,13 @@ c=170
 ;
 d=253
 assert(a | b ~ c & d == 244)
-a=240
+a=240.0
 ;
-b=204
+b=204.0
 ;
-c="0xAA.0"
+c="\48\120\65\65\46\48"
 ;
-d="0xFD.0"
+d="\48\120\70\68\46\48"
 assert(a | b ~ c & d == 244)
 a=4026531840
 ;
@@ -41,14 +41,16 @@ c=c << 32
 d=d << 32
 assert(a | b ~ c & d == 4093640704 << 32)
 assert(~ ~ a == a and ~ a == - 1 ~ a and - d == ~ d + 1)
-local code = string.format("return -1 >> %d",math.maxinteger)
+do
+local code = string.format("\114\101\116\117\114\110\32\45\49\32\62\62\32\37\100",math.maxinteger)
 assert(load(code)() == 0)
-local code = string.format("return -1 >> %d",math.mininteger)
+local code = string.format("\114\101\116\117\114\110\32\45\49\32\62\62\32\37\100",math.mininteger)
 assert(load(code)() == 0)
-local code = string.format("return -1 << %d",math.maxinteger)
+local code = string.format("\114\101\116\117\114\110\32\45\49\32\60\60\32\37\100",math.maxinteger)
 assert(load(code)() == 0)
-local code = string.format("return -1 << %d",math.mininteger)
+local code = string.format("\114\101\116\117\114\110\32\45\49\32\60\60\32\37\100",math.mininteger)
 assert(load(code)() == 0)
+end
 assert(- 1 >> 1 == (1 << (numbits - 1)) - 1 and 1 << 31 == 2147483648)
 assert(- 1 >> (numbits - 1) == 1)
 assert(- 1 >> numbits == 0 and - 1 >> - numbits == 0 and - 1 << numbits == 0 and - 1 << - numbits == 0)
@@ -58,35 +60,35 @@ assert(1 << math.mininteger == 0)
 assert(1 << math.maxinteger == 0)
 assert((2 ^ 30 - 1) << 2 ^ 30 == 0)
 assert((2 ^ 30 - 1) >> 2 ^ 30 == 0)
-assert(1 >> - 3 == 1 << 3 and 1e3 >> 5 == 1e3 << - 5)
-assert("0xffffffffffffffff" | 0 == - 1)
-assert("0xfffffffffffffffe" & "-1" == - 2)
-assert(" 	-0xfffffffffffffffe
-	" & "-1" == 2)
-assert("   
-  -45  	 " >> "  -2  " == - 45 * 4)
-assert("1234.0" << "5.0" == 1234 * 32)
-assert("0xffff.0" ~ "0xAAAA" == 21845)
-assert(~ "0x0.000p4" == - 1)
-assert(("7" .. 3) << 1 == 146)
-assert(4294967295 >> (1 .. "9") == 8191)
-assert(10 | (1 .. "9") == 27)
-local st,msg = pcall(()
-return 4 & "a"
+assert(1 >> - 3 == 1 << 3 and 1000 >> 5 == 1000 << - 5)
+assert("\48\120\102\102\102\102\102\102\102\102\102\102\102\102\102\102\102\102" | 0 == - 1)
+assert("\48\120\102\102\102\102\102\102\102\102\102\102\102\102\102\102\102\101" & "\45\49" == - 2)
+assert("\32\9\45\48\120\102\102\102\102\102\102\102\102\102\102\102\102\102\102\102\101\10\9" & "\45\49" == 2)
+assert("\32\32\32\10\32\32\45\52\53\32\32\9\32" >> "\32\32\45\50\32\32" == - 45 * 4)
+assert("\49\50\51\52\46\48" << "\53\46\48" == 1234 * 32)
+assert("\48\120\102\102\102\102\46\48" ~ "\48\120\65\65\65\65" == 21845)
+assert(~ "\48\120\48\46\48\48\48\112\52" == - 1)
+assert(("\55" .. 3) << 1 == 146)
+assert(4294967295 >> (1 .. "\57") == 8191)
+assert(10 | (1 .. "\57") == 27)
+do
+local st,msg = pcall(function ()
+return 4 & "\97"
 end)
-assert(string.find(msg,"'band'"))
-local st,msg = pcall(()
-return ~ "a"
+assert(string.find(msg,"\39\98\97\110\100\39"))
+local st,msg = pcall(function ()
+return ~ "\97"
 end)
-assert(string.find(msg,"'bnot'"))
-assert(not pcall(()
-return "0xffffffffffffffff.0" | 0
+assert(string.find(msg,"\39\98\110\111\116\39"))
+end
+assert(not pcall(function ()
+return "\48\120\102\102\102\102\102\102\102\102\102\102\102\102\102\102\102\102\46\48" | 0
 end))
-assert(not pcall(()
-return "0xffffffffffffffff" | 0
+assert(not pcall(function ()
+return "\48\120\102\102\102\102\102\102\102\102\102\102\102\102\102\102\102\102" | 0
 end))
-print("+")
-package.preload.bit32=()
+print("\43")
+package.preload.bit32=function ()
 local bit = {}
 function bit.bnot(a)
 return ~ a & 4294967295
@@ -159,9 +161,9 @@ end
 local function checkfield
 (f,w)
 w=w or 1
-assert(f >= 0,"field cannot be negative")
-assert(w > 0,"width must be positive")
-assert(f + w <= 32,"trying to access non-existent bits")
+assert(f >= 0,"\102\105\101\108\100\32\99\97\110\110\111\116\32\98\101\32\110\101\103\97\116\105\118\101")
+assert(w > 0,"\119\105\100\116\104\32\109\117\115\116\32\98\101\32\112\111\115\105\116\105\118\101")
+assert(f + w <= 32,"\116\114\121\105\110\103\32\116\111\32\97\99\99\101\115\115\32\110\111\110\45\101\120\105\115\116\101\110\116\32\98\105\116\115")
 return f,~ (- 1 << w)
 end
 function bit.extract(a,f,w)
@@ -176,8 +178,8 @@ return a & 4294967295
 end
 return bit
 end
-print("testing bitwise library")
-local bit32 = require("bit32")
+print("\116\101\115\116\105\110\103\32\98\105\116\119\105\115\101\32\108\105\98\114\97\114\121")
+local bit32 = require("\98\105\116\51\50")
 assert(bit32.band() == bit32.bnot(0))
 assert(bit32.btest() == true)
 assert(bit32.bor() == 0)
@@ -234,7 +236,7 @@ assert(305419896 >> 4 == 19088743)
 assert(305419896 >> 8 == 1193046)
 assert(305419896 >> 32 == 0)
 assert(305419896 >> - 32 == 1311768464867721216)
-print("+")
+print("\43")
 local c = {0,1,2,3,10,2147483648,2863311530,1431655765,4294967295,2147483647}
 for _,b in pairs(c)
 do
@@ -270,16 +272,16 @@ do
 for i = - 40, 40
 do
 local x = bit32.lshift(b,i)
-local y = math.floor(math.fmod(b * 2 ^ i,2 ^ 32))
-assert(math.fmod(x - y,2 ^ 32) == 0)
+local y = math.floor(math.fmod(b * 2.0 ^ i,2.0 ^ 32))
+assert(math.fmod(x - y,2.0 ^ 32) == 0)
 end
 end
 assert(not pcall(bit32.band,{}))
-assert(not pcall(bit32.bnot,"a"))
+assert(not pcall(bit32.bnot,"\97"))
 assert(not pcall(bit32.lshift,45))
 assert(not pcall(bit32.lshift,45,print))
 assert(not pcall(bit32.rshift,45,print))
-print("+")
+print("\43")
 assert(bit32.extract(305419896,0,4) == 8)
 assert(bit32.extract(305419896,4,4) == 7)
 assert(bit32.extract(2684358929,28,4) == 10)
@@ -296,12 +298,12 @@ assert(bit32.replace(0,1,2) == 2 ^ 2)
 assert(bit32.replace(0,- 1,4) == 2 ^ 4)
 assert(bit32.replace(- 1,0,31) == (1 << 31) - 1)
 assert(bit32.replace(- 1,0,1,2) == (1 << 32) - 7)
-assert(bit32.bor(3) == 3)
-assert(bit32.bor(- 4) == 4294967292)
-if 2 ^ 50 < 2 ^ 50 + 1 and 2 ^ 50 < (- 1 >> 1) then
-assert(bit32.bor(2 ^ 32 - 5) == 4294967291)
-assert(bit32.bor(- 2 ^ 32 - 6) == 4294967290)
-assert(bit32.bor(2 ^ 48 - 5) == 4294967291)
-assert(bit32.bor(- 2 ^ 48 - 6) == 4294967290)
+assert(bit32.bor(3.0) == 3)
+assert(bit32.bor(- 4.0) == 4294967292)
+if 2.0 ^ 50 < 2.0 ^ 50 + 1.0 and 2.0 ^ 50 < (- 1 >> 1) then
+assert(bit32.bor(2.0 ^ 32 - 5.0) == 4294967291)
+assert(bit32.bor(- 2.0 ^ 32 - 6.0) == 4294967290)
+assert(bit32.bor(2.0 ^ 48 - 5.0) == 4294967291)
+assert(bit32.bor(- 2.0 ^ 48 - 6.0) == 4294967290)
 end
-print("OK")
+print("\79\75")

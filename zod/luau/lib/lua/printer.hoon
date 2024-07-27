@@ -33,7 +33,7 @@ print
     %table  (print-table +.expr)
     %string  (print-string +.expr)
     %wildcard  "..."
-    %functiondef  (print-funcbody +.expr)
+    %functiondef  (zing ~["function " (print-funcbody +.expr)])
     %unop
       %-  zing
       :~
@@ -61,7 +61,13 @@ print
   %-  zing
   :~
     "\""
-    (trip string)
+    ::
+    ^-  tape
+    %-  zing
+    %+  turn  (trip string)
+    |=  char=@t
+    ^-  tape
+    :-  '\\'  (show-u `@`char)
     "\""
   ==
 :: table
@@ -192,7 +198,13 @@ print
   ^-  tape
   ?-  -.stat
     %empty  ";"
-    %blok  (print-blok +.stat)
+    %blok
+    %-  zing
+    :~
+      "do\0a"
+      (print-blok +.stat)
+      "\0aend"
+    ==
     %asmnt  
     %-  zing 
     :~
@@ -216,13 +228,14 @@ print
       (print-expr cond.stat)
       " do\0a"
       (print-blok body.stat)
+      "\0aend"
     ==
     %repeat
     %-  zing
     :~
       "repeat\0a"
       (print-blok body.stat)
-      "until "
+      "\0auntil "
       (print-expr cond.stat)
     ==
     %if  (print-if +.stat)
@@ -241,8 +254,12 @@ print
   :~
     "local "
     (print-attnamelist attnamelist.local-asmnt)
-    " = "
-    ?~  rhs.local-asmnt  ""  (print-explist u.rhs.local-asmnt)
+    ?~  rhs.local-asmnt  ""
+    %-  zing
+    :~
+      " = "
+      (print-explist u.rhs.local-asmnt)
+    ==
   ==
 :: attnamelist
 ::
@@ -387,7 +404,7 @@ print
     |=  [cond=expr body=blok]
     %-  zing
     :~
-      "\0aelseif"
+      "\0aelseif "
       (print-expr cond)
       " then\0a"
       (print-blok body)
@@ -487,7 +504,12 @@ print
 ++  show-float
   |=  x=@rd
   ^-  tape
-  %-  r-co:co
-  %-  rlyd
-  x
+  =/  res
+    %-  r-co:co
+    %-  rlyd
+    x
+  :: if there is no dot then it will be interpreted as an int. add `.0` to force a float.
+  ?:  =(~ (find ~['.'] res))
+  (weld res ".0")
+  res
  --

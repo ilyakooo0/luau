@@ -756,6 +756,8 @@ apex
     =/  int=(unit @)  ?~(int ?:(?=(~ leading-zeros) ~ `0) int)
     ?:  ?=([~ ~ ~] [int frac exp])  ~
     ?:  ?=([~ [~ ~]] [int frac])  ~
+    :: If there is no fractional or exponential part it should just be an int.
+    ?:  ?=([~ ~] [frac exp])  ~
     %-  some
     :*
       %d

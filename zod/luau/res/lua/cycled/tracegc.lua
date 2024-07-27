@@ -4,7 +4,7 @@ _ENV=nil
 local active = false
 local mt = {}
 function mt.__gc(o)
-stderr:write(".")
+stderr:write("\46")
 if active then
 setmetatable(o,mt)
 end
