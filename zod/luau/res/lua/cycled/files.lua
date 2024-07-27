@@ -167,7 +167,7 @@ assert(f:read(2) == "\43\32")
 assert(f:read("\110") == 0.3)
 ;
 assert(f:read(1) == "\124")
-assert(f:read("\110") == 5e-3.0)
+assert(f:read("\110") == 5e-3)
 ;
 assert(f:read(1) == "\88")
 assert(f:read("\110") == 2.34e15)

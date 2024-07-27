@@ -679,7 +679,7 @@ end
 assert(a == 1)
 a=0
 ;
-for i = 10000, 1e4.0, - 1
+for i = 10000, 1e4, - 1
 do
 a=a + 1
 end
@@ -695,7 +695,7 @@ end
 assert(a == 0)
 a=0
 ;
-for i = 9999, 1e4.0, - 1
+for i = 9999, 1e4, - 1
 do
 a=a + 1
 end
@@ -735,7 +735,7 @@ end
 assert(a == 1)
 a=0
 ;
-for i = 1e6.0, 1e6.0, - 1
+for i = 1e6, 1e6, - 1
 do
 a=a + 1
 end
@@ -751,7 +751,7 @@ end
 assert(a == 0)
 a=0
 ;
-for i = 99999, 1e5.0, - 1.0
+for i = 99999, 1e5, - 1.0
 do
 a=a + 1
 end
@@ -840,7 +840,7 @@ end
 assert(c == 10)
 c=0
 ;
-for i = 10, 1e-3.0, - 1
+for i = 10, 1e-3, - 1
 do
 checkint(i)
 end
@@ -895,11 +895,11 @@ end
 checkint(i)
 end
 assert(c == 10)
-for i = math.mininteger, - 1e101.0
+for i = math.mininteger, - 1e101
 do
 assert(false)
 end
-for i = math.maxinteger, 1e101.0, - 1
+for i = math.maxinteger, 1e101, - 1
 do
 assert(false)
 end

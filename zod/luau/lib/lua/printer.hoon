@@ -509,7 +509,7 @@ print
     %-  rlyd
     x
   :: if there is no dot then it will be interpreted as an int. add `.0` to force a float.
-  ?:  =(~ (find ~['.'] res))
+  ?:  ?&(=(~ (find ~['.'] res)) =(~ (find ~['e'] res)))
   (weld res ".0")
   res
  --

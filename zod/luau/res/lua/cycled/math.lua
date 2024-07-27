@@ -35,9 +35,9 @@ local function eq
 (a,b,limit)
 if not limit then
 if floatbits >= 50 then
-limit=1e-11.0
+limit=1e-11
 else
-limit=1e-5.0
+limit=1e-5
 end
 end
 return a == b or math.abs(a - b) <= limit
@@ -67,10 +67,10 @@ local a,b = math.modf(3.5)
 assert(a == 3.0 and b == 0.5)
 a,b=math.modf(- 2.5)
 assert(a == - 2.0 and b == - 0.5)
-a,b=math.modf(- 3e23.0)
-assert(a == - 3e23.0 and b == 0.0)
-a,b=math.modf(3e35.0)
-assert(a == 3e35.0 and b == 0.0)
+a,b=math.modf(- 3e23)
+assert(a == - 3e23 and b == 0.0)
+a,b=math.modf(3e35)
+assert(a == 3e35 and b == 0.0)
 a,b=math.modf(- 1 / 0)
 assert(a == - 1 / 0 and b == 0.0)
 a,b=math.modf(1 / 0)
@@ -82,8 +82,8 @@ assert(eqT(a,3) and eqT(b,0.0))
 a,b=math.modf(minint)
 assert(eqT(a,minint) and eqT(b,0.0))
 end
-assert(math.huge > 1e31.0)
-assert(- math.huge < - 1e31.0)
+assert(math.huge > 1e31)
+assert(- math.huge < - 1e31)
 assert(minint < minint + 1)
 assert(maxint - 1 < maxint)
 assert(0 - minint == minint)
@@ -313,13 +313,13 @@ return s
 end
 assert(eqT(tonumber(incd(maxint)),maxint + 1.0))
 assert(eqT(tonumber(incd(minint)),minint - 1.0))
-assert(eqT(tonumber("\49" .. string.rep("\48",30)),1e30.0))
-assert(eqT(tonumber("\45\49" .. string.rep("\48",30)),- 1e30.0))
+assert(eqT(tonumber("\49" .. string.rep("\48",30)),1e30))
+assert(eqT(tonumber("\45\49" .. string.rep("\48",30)),- 1e30))
 assert(eqT(tonumber("\48\120\49" .. string.rep("\48",30)),0))
 assert(minint == load("\114\101\116\117\114\110\32" .. minint)())
 assert(eqT(maxint,load("\114\101\116\117\114\110\32" .. maxint)()))
-assert(eqT(1e22.0,10000000000000000000000))
-assert(eqT(- 1e22.0,- 10000000000000000000000))
+assert(eqT(1e22,10000000000000000000000))
+assert(eqT(- 1e22,- 10000000000000000000000))
 end
 assert(tonumber(3.4) == 3.4)
 assert(eqT(tonumber(3),3))
@@ -432,7 +432,7 @@ assert(100.0 == 100.0 and 0.01 == 0.01)
 assert(1111111111 - 1111111110 == 1.0)
 assert(1.1 == "\49\46" + "\46\49")
 assert(tonumber("\49\49\49\49\49\49\49\49\49\49") - tonumber("\49\49\49\49\49\49\49\49\49\48") == tonumber("\32\32\43\48\46\48\48\49\101\43\51\32\10\9"))
-assert(1e-31.0 > 9e-32.0 and 9e29.0 < 1e30.0)
+assert(1e-31 > 9e-32 and 9e29 < 1e30)
 assert(0.123456 > 0.123455)
 assert(tonumber("\43\49\46\50\51\69\49\56") == 1.23 * 10.0 ^ 18)
 assert(not (1 < 1) and (1 < 2) and not (2 < 1))
@@ -461,7 +461,7 @@ assert(eqT(10.0 % 2,0.0))
 assert(eqT(- 10.0 % 2,0.0))
 assert(eqT(- 10.0 % - 2,0.0))
 assert(math.pi - math.pi % 1 == 3)
-assert(math.pi - math.pi % 1e-3.0 == 3.141)
+assert(math.pi - math.pi % 1e-3 == 3.141)
 do
 local i,j = 0,20000
 while i < j do
@@ -526,12 +526,12 @@ end
 anan(0.0 % 0)
 anan(1.3 % 0)
 anan(math.huge % 1)
-anan(math.huge % 1e30.0)
-anan(- math.huge % 1e30.0)
-anan(- math.huge % - 1e30.0)
+anan(math.huge % 1e30)
+anan(- math.huge % 1e30)
+anan(- math.huge % - 1e30)
 assert(1 % math.huge == 1)
-assert(1e30.0 % math.huge == 1e30.0)
-assert(1e30.0 % - math.huge == - math.huge)
+assert(1e30 % math.huge == 1e30)
+assert(1e30 % - math.huge == - math.huge)
 assert(- 1 % math.huge == math.huge)
 assert(- 1 % - math.huge == - 1)
 end
@@ -575,10 +575,10 @@ assert(eqT(math.floor(minint),minint))
 assert(eqT(math.floor(minint + 0.0),minint))
 assert(eqT(math.ceil(minint),minint))
 assert(eqT(math.ceil(minint + 0.0),minint))
-assert(math.floor(1e50.0) == 1e50.0)
-assert(math.ceil(1e50.0) == 1e50.0)
-assert(math.floor(- 1e50.0) == - 1e50.0)
-assert(math.ceil(- 1e50.0) == - 1e50.0)
+assert(math.floor(1e50) == 1e50)
+assert(math.ceil(1e50) == 1e50)
+assert(math.floor(- 1e50) == - 1e50)
+assert(math.ceil(- 1e50) == - 1e50)
 for _,p in pairs({31,32,63,64})
 do
 assert(math.floor(2 ^ p) == 2 ^ p)
@@ -632,13 +632,13 @@ checkerror("\118\97\108\117\101\32\101\120\112\101\99\116\101\100",math.max)
 checkerror("\118\97\108\117\101\32\101\120\112\101\99\116\101\100",math.min)
 assert(eqT(math.max(3),3))
 assert(eqT(math.max(3,5,9,1),9))
-assert(math.max(maxint,1e61.0) == 1e61.0)
+assert(math.max(maxint,1e61) == 1e61)
 assert(eqT(math.max(minint,minint + 1),minint + 1))
 assert(eqT(math.min(3),3))
 assert(eqT(math.min(3,5,9,1),1))
 assert(math.min(3.2,5.9,- 9.2,1.1) == - 9.2)
 assert(math.min(1.9,1.7,1.72) == 1.7)
-assert(math.min(- 1e61.0,minint) == - 1e61.0)
+assert(math.min(- 1e61,minint) == - 1e61)
 assert(eqT(math.min(maxint,maxint - 1),maxint - 1))
 assert(eqT(math.min(maxint - 2,maxint,maxint - 1),maxint - 2))
 end
@@ -737,7 +737,7 @@ counts[bit + 1]=counts[bit + 1] + 1
 end
 end
 totalrounds=totalrounds + rounds
-if not (eq(up,1,1e-3.0) and eq(low,0,1e-3.0)) then
+if not (eq(up,1,1e-3) and eq(low,0,1e-3)) then
 goto doagain
 end
 local expected = (totalrounds / randbits / 2)
@@ -780,7 +780,7 @@ if not testnear(counts[i],expected,0.1) then
 goto doagain
 end
 end
-print(string.format("\105\110\116\101\103\101\114\32\114\97\110\100\111\109\32\114\97\110\103\101\32\105\110\32\37\100\32\99\97\108\108\115\58\32\91\109\105\110\105\110\116\32\43\32\37\46\48\102\112\112\109\44\32\109\97\120\105\110\116\32\45\32\37\46\48\102\112\112\109\93",totalrounds,(minint - low) / minint * 1e6.0,(maxint - up) / maxint * 1e6.0))
+print(string.format("\105\110\116\101\103\101\114\32\114\97\110\100\111\109\32\114\97\110\103\101\32\105\110\32\37\100\32\99\97\108\108\115\58\32\91\109\105\110\105\110\116\32\43\32\37\46\48\102\112\112\109\44\32\109\97\120\105\110\116\32\45\32\37\46\48\102\112\112\109\93",totalrounds,(minint - low) / minint * 1e6,(maxint - up) / maxint * 1e6))
 end
 do
 local count = {0,0,0,0,0,0}
