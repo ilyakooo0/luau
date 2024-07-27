@@ -55,6 +55,7 @@ print
   ==
 :: string
 ::
+:: NOTE: does not handle escaping chars
 ++  print-string
   |=  =string
   %-  zing
@@ -240,6 +241,7 @@ print
   :~
     "local "
     (print-attnamelist attnamelist.local-asmnt)
+    " = "
     ?~  rhs.local-asmnt  ""  (print-explist u.rhs.local-asmnt)
   ==
 :: attnamelist

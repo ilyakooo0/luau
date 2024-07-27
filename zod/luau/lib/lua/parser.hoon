@@ -709,7 +709,7 @@ apex
 ++  parse-name
   =>
   |%
-  ++  name-char  ;~(pose name-fst-char dit:ab)
+  ++  name-char  ;~(pose name-fst-char (shim '0' '9'))
   ++  name-fst-char  ;~(pose alf:ab (just '_'))
   --
   %+  cook  |=  =tape  (crip tape)
