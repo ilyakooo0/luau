@@ -1,5 +1,5 @@
-print("\116\101\115\116\105\110\103\32\85\84\70\45\56\32\108\105\98\114\97\114\121")
-local utf8 = require("\117\116\102\56")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{55}\u{54}\u{46}\u{2d}\u{38}\u{20}\u{6c}\u{69}\u{62}\u{72}\u{61}\u{72}\u{79}")
+local utf8 = require("\u{75}\u{74}\u{66}\u{38}")
 local function checkerror
 (msg,f, ...)
 local s,err = pcall(f,...)
@@ -7,22 +7,22 @@ assert(not s and string.find(err,msg))
 end
 local function len
 (s)
-return # string.gsub(s,"\91\128\45\191\93","")
+return # string.gsub(s,"\u{5b}\u{80}\u{2d}\u{bf}\u{5d}","")
 end
-local justone = "\94" .. utf8.charpattern .. "\36"
+local justone = "\u{5e}" .. utf8.charpattern .. "\u{24}"
 local function checksyntax
 (s,t)
-local ts = {"\114\101\116\117\114\110\32\39"}
+local ts = {"\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{27}"}
 for i = 1, # t
 do
-ts[i + 1]=string.format("\92\117\123\37\120\125",t[i])
+ts[i + 1]=string.format("\u{5c}\u{75}\u{7b}\u{25}\u{78}\u{7d}",t[i])
 end
-ts[# t + 2]="\39"
+ts[# t + 2]="\u{27}"
 ts=table.concat(ts)
 assert(assert(load(ts))() == s)
 end
-assert(not utf8.offset("\97\108\111",5))
-assert(not utf8.offset("\97\108\111",- 4))
+assert(not utf8.offset("\u{61}\u{6c}\u{6f}",5))
+assert(not utf8.offset("\u{61}\u{6c}\u{6f}",- 4))
 local function check
 (s,t,nonstrict)
 local l = utf8.len(s,1,- 1,nonstrict)
@@ -84,112 +84,112 @@ local function check
 local a,b = utf8.len(s)
 assert(not a and b == p)
 end
-check("\97\98\99\227\100\101\102",4)
-check("\244\159\191",1)
-check("\244\159\191\191",1)
-check("\230\177\137\229\173\151\128",# ("\230\177\137\229\173\151") + 1)
-check("\128\104\101\108\108\111",1)
-check("\104\101\108\128\108\111",4)
-check("\230\177\137\229\173\151\191",# ("\230\177\137\229\173\151") + 1)
-check("\191\104\101\108\108\111",1)
-check("\104\101\108\191\108\111",4)
+check("\u{61}\u{62}\u{63}\u{e3}\u{64}\u{65}\u{66}",4)
+check("\u{f4}\u{9f}\u{bf}",1)
+check("\u{f4}\u{9f}\u{bf}\u{bf}",1)
+check("\u{e6}\u{b1}\u{89}\u{e5}\u{ad}\u{97}\u{80}",# ("\u{e6}\u{b1}\u{89}\u{e5}\u{ad}\u{97}") + 1)
+check("\u{80}\u{68}\u{65}\u{6c}\u{6c}\u{6f}",1)
+check("\u{68}\u{65}\u{6c}\u{80}\u{6c}\u{6f}",4)
+check("\u{e6}\u{b1}\u{89}\u{e5}\u{ad}\u{97}\u{bf}",# ("\u{e6}\u{b1}\u{89}\u{e5}\u{ad}\u{97}") + 1)
+check("\u{bf}\u{68}\u{65}\u{6c}\u{6c}\u{6f}",1)
+check("\u{68}\u{65}\u{6c}\u{bf}\u{6c}\u{6f}",4)
 end
 do
 local function errorcodes
 (s)
-checkerror("\105\110\118\97\108\105\100\32\85\84\70\37\45\56\32\99\111\100\101",function ()
+checkerror("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{55}\u{54}\u{46}\u{25}\u{2d}\u{38}\u{20}\u{63}\u{6f}\u{64}\u{65}",function ()
 for c in utf8.codes(s)
 do
 assert(c)
 end
 end)
 end
-errorcodes("\97\98\255")
-errorcodes("\0\0\17")
-errorcodes("\105\110\128\118\97\108\105\100")
-errorcodes("\191\105\110\118\97\108\105\100")
-errorcodes("\206\177\206\187\207\134\191\206\177")
+errorcodes("\u{61}\u{62}\u{ff}")
+errorcodes("\u{110000}")
+errorcodes("\u{69}\u{6e}\u{80}\u{76}\u{61}\u{6c}\u{69}\u{64}")
+errorcodes("\u{bf}\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}")
+errorcodes("\u{ce}\u{b1}\u{ce}\u{bb}\u{cf}\u{86}\u{bf}\u{ce}\u{b1}")
 local f = utf8.codes("")
 assert(f("",2) == nil)
 assert(f("",- 1) == nil)
 assert(f("",math.mininteger) == nil)
 end
-checkerror("\112\111\115\105\116\105\111\110\32\111\117\116\32\111\102\32\98\111\117\110\100\115",utf8.offset,"\97\98\99",1,5)
-checkerror("\112\111\115\105\116\105\111\110\32\111\117\116\32\111\102\32\98\111\117\110\100\115",utf8.offset,"\97\98\99",1,- 4)
-checkerror("\112\111\115\105\116\105\111\110\32\111\117\116\32\111\102\32\98\111\117\110\100\115",utf8.offset,"",1,2)
-checkerror("\112\111\115\105\116\105\111\110\32\111\117\116\32\111\102\32\98\111\117\110\100\115",utf8.offset,"",1,- 1)
-checkerror("\99\111\110\116\105\110\117\97\116\105\111\110\32\98\121\116\101",utf8.offset,"\240\166\167\186",1,2)
-checkerror("\99\111\110\116\105\110\117\97\116\105\111\110\32\98\121\116\101",utf8.offset,"\240\166\167\186",1,2)
-checkerror("\99\111\110\116\105\110\117\97\116\105\111\110\32\98\121\116\101",utf8.offset,"\128",1)
-checkerror("\111\117\116\32\111\102\32\98\111\117\110\100\115",utf8.len,"\97\98\99",0,2)
-checkerror("\111\117\116\32\111\102\32\98\111\117\110\100\115",utf8.len,"\97\98\99",1,4)
-local s = "\104\101\108\108\111\32\87\111\114\108\100"
+checkerror("\u{70}\u{6f}\u{73}\u{69}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{62}\u{6f}\u{75}\u{6e}\u{64}\u{73}",utf8.offset,"\u{61}\u{62}\u{63}",1,5)
+checkerror("\u{70}\u{6f}\u{73}\u{69}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{62}\u{6f}\u{75}\u{6e}\u{64}\u{73}",utf8.offset,"\u{61}\u{62}\u{63}",1,- 4)
+checkerror("\u{70}\u{6f}\u{73}\u{69}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{62}\u{6f}\u{75}\u{6e}\u{64}\u{73}",utf8.offset,"",1,2)
+checkerror("\u{70}\u{6f}\u{73}\u{69}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{62}\u{6f}\u{75}\u{6e}\u{64}\u{73}",utf8.offset,"",1,- 1)
+checkerror("\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{62}\u{79}\u{74}\u{65}",utf8.offset,"\u{f0}\u{a6}\u{a7}\u{ba}",1,2)
+checkerror("\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{62}\u{79}\u{74}\u{65}",utf8.offset,"\u{f0}\u{a6}\u{a7}\u{ba}",1,2)
+checkerror("\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{62}\u{79}\u{74}\u{65}",utf8.offset,"\u{80}",1)
+checkerror("\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{62}\u{6f}\u{75}\u{6e}\u{64}\u{73}",utf8.len,"\u{61}\u{62}\u{63}",0,2)
+checkerror("\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{62}\u{6f}\u{75}\u{6e}\u{64}\u{73}",utf8.len,"\u{61}\u{62}\u{63}",1,4)
+local s = "\u{68}\u{65}\u{6c}\u{6c}\u{6f}\u{20}\u{57}\u{6f}\u{72}\u{6c}\u{64}"
 local t = {string.byte(s,1,- 1)}
 for i = 1, utf8.len(s)
 do
 assert(t[i] == string.byte(s,i))
 end
 check(s,t)
-check("\230\177\137\229\173\151\47\230\188\162\229\173\151",{27721,23383,47,28450,23383})
+check("\u{e6}\u{b1}\u{89}\u{e5}\u{ad}\u{97}\u{2f}\u{e6}\u{bc}\u{a2}\u{e5}\u{ad}\u{97}",{27721,23383,47,28450,23383})
 do
-local s = "\195\161\195\169\195\173\128"
+local s = "\u{c3}\u{a1}\u{c3}\u{a9}\u{c3}\u{ad}\u{80}"
 local t = {utf8.codepoint(s,1,# s - 1)}
 assert(# t == 3 and t[1] == 225 and t[2] == 233 and t[3] == 237)
-checkerror("\105\110\118\97\108\105\100\32\85\84\70\37\45\56\32\99\111\100\101",utf8.codepoint,s,1,# s)
-checkerror("\111\117\116\32\111\102\32\98\111\117\110\100\115",utf8.codepoint,s,# s + 1)
+checkerror("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{55}\u{54}\u{46}\u{25}\u{2d}\u{38}\u{20}\u{63}\u{6f}\u{64}\u{65}",utf8.codepoint,s,1,# s)
+checkerror("\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{62}\u{6f}\u{75}\u{6e}\u{64}\u{73}",utf8.codepoint,s,# s + 1)
 t={utf8.codepoint(s,4,3)}
 assert(# t == 0)
-checkerror("\111\117\116\32\111\102\32\98\111\117\110\100\115",utf8.codepoint,s,- (# s + 1),1)
-checkerror("\111\117\116\32\111\102\32\98\111\117\110\100\115",utf8.codepoint,s,1,# s + 1)
-assert(utf8.codepoint("\255\215") == 55296 - 1)
-assert(utf8.codepoint("\0\224") == 57343 + 1)
-assert(utf8.codepoint("\0\216",1,1,true) == 55296)
-assert(utf8.codepoint("\255\223",1,1,true) == 57343)
-assert(utf8.codepoint("\255\255\255\127",1,1,true) == 2147483647)
+checkerror("\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{62}\u{6f}\u{75}\u{6e}\u{64}\u{73}",utf8.codepoint,s,- (# s + 1),1)
+checkerror("\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{62}\u{6f}\u{75}\u{6e}\u{64}\u{73}",utf8.codepoint,s,1,# s + 1)
+assert(utf8.codepoint("\u{d7ff}") == 55296 - 1)
+assert(utf8.codepoint("\u{e000}") == 57343 + 1)
+assert(utf8.codepoint("\u{d800}",1,1,true) == 55296)
+assert(utf8.codepoint("\u{dfff}",1,1,true) == 57343)
+assert(utf8.codepoint("\u{7fffffff}",1,1,true) == 2147483647)
 end
 assert(utf8.char() == "")
-assert(utf8.char(0,97,98,99,1) == "\97\98\99\1")
+assert(utf8.char(0,97,98,99,1) == "\u{0}\u{61}\u{62}\u{63}\u{1}")
 assert(utf8.codepoint(utf8.char(1114111)) == 1114111)
 assert(utf8.codepoint(utf8.char(2147483647),1,1,true) == (1 << 31) - 1)
-checkerror("\118\97\108\117\101\32\111\117\116\32\111\102\32\114\97\110\103\101",utf8.char,2147483647 + 1)
-checkerror("\118\97\108\117\101\32\111\117\116\32\111\102\32\114\97\110\103\101",utf8.char,- 1)
+checkerror("\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{72}\u{61}\u{6e}\u{67}\u{65}",utf8.char,2147483647 + 1)
+checkerror("\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{72}\u{61}\u{6e}\u{67}\u{65}",utf8.char,- 1)
 local function invalid
 (s)
-checkerror("\105\110\118\97\108\105\100\32\85\84\70\37\45\56\32\99\111\100\101",utf8.codepoint,s)
+checkerror("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{55}\u{54}\u{46}\u{25}\u{2d}\u{38}\u{20}\u{63}\u{6f}\u{64}\u{65}",utf8.codepoint,s)
 assert(not utf8.len(s))
 end
-invalid("\244\159\191\191")
-invalid("\0\216")
-invalid("\255\223")
-invalid("\192\128")
-invalid("\193\191")
-invalid("\224\159\191")
-invalid("\240\143\191\191")
-invalid("\128")
-invalid("\191")
-invalid("\254")
-invalid("\255")
+invalid("\u{f4}\u{9f}\u{bf}\u{bf}")
+invalid("\u{d800}")
+invalid("\u{dfff}")
+invalid("\u{c0}\u{80}")
+invalid("\u{c1}\u{bf}")
+invalid("\u{e0}\u{9f}\u{bf}")
+invalid("\u{f0}\u{8f}\u{bf}\u{bf}")
+invalid("\u{80}")
+invalid("\u{bf}")
+invalid("\u{fe}")
+invalid("\u{ff}")
 check("",{})
-s="\32\127\194\128\32\223\191\224\160\128\32\239\191\191\240\144\128\128\32\32\244\143\191\191"
-s=string.gsub(s,"\32","")
+s="\u{0}\u{20}\u{7f}\u{c2}\u{80}\u{20}\u{df}\u{bf}\u{e0}\u{a0}\u{80}\u{20}\u{ef}\u{bf}\u{bf}\u{f0}\u{90}\u{80}\u{80}\u{20}\u{20}\u{f4}\u{8f}\u{bf}\u{bf}"
+s=string.gsub(s,"\u{20}","")
 check(s,{0,127,128,2047,2048,65535,65536,1114111})
 do
-local s = "\0\0\0\4\255\255\255\127"
+local s = "\u{4000000}\u{7fffffff}"
 assert(# s == 12)
 check(s,{67108864,2147483647},true)
-s="\0\0\32\255\255\255\3"
+s="\u{200000}\u{3ffffff}"
 assert(# s == 10)
 check(s,{2097152,67108863},true)
-s="\0\0\1\255\255\31"
+s="\u{10000}\u{1fffff}"
 assert(# s == 8)
 check(s,{65536,2097151},true)
 end
-local x = "\230\151\165\230\156\172\232\170\158\97\45\52\195\169\195\179"
+local x = "\u{e6}\u{97}\u{a5}\u{e6}\u{9c}\u{ac}\u{e8}\u{aa}\u{9e}\u{61}\u{2d}\u{34}\u{0}\u{c3}\u{a9}\u{c3}\u{b3}"
 check(x,{26085,26412,35486,97,45,52,0,233,243})
-check("\240\163\178\183\240\160\156\142\240\160\177\147\240\161\129\187\240\160\181\188\97\98\240\160\186\162",{146615,132878,134227,135291,134524,97,98,134818})
-check("\240\168\179\138\240\169\182\152\240\166\167\186\240\168\179\146\240\165\132\171\240\164\147\147\244\143\191\191",{167114,171416,158202,167122,151851,148691,1114111})
+check("\u{f0}\u{a3}\u{b2}\u{b7}\u{f0}\u{a0}\u{9c}\u{8e}\u{f0}\u{a0}\u{b1}\u{93}\u{f0}\u{a1}\u{81}\u{bb}\u{f0}\u{a0}\u{b5}\u{bc}\u{61}\u{62}\u{f0}\u{a0}\u{ba}\u{a2}",{146615,132878,134227,135291,134524,97,98,134818})
+check("\u{f0}\u{a8}\u{b3}\u{8a}\u{f0}\u{a9}\u{b6}\u{98}\u{f0}\u{a6}\u{a7}\u{ba}\u{f0}\u{a8}\u{b3}\u{92}\u{f0}\u{a5}\u{84}\u{ab}\u{f0}\u{a4}\u{93}\u{93}\u{f4}\u{8f}\u{bf}\u{bf}",{167114,171416,158202,167122,151851,148691,1114111})
 local i = 0
-for p,c in string.gmatch(x,"\40\41\40" .. utf8.charpattern .. "\41")
+for p,c in string.gmatch(x,"\u{28}\u{29}\u{28}" .. utf8.charpattern .. "\u{29}")
 do
 i=i + 1
 assert(utf8.offset(x,i) == p)
@@ -200,4 +200,4 @@ do
 assert(utf8.offset(x,0,p + j - 1) == p)
 end
 end
-print("\111\107")
+print("\u{6f}\u{6b}")

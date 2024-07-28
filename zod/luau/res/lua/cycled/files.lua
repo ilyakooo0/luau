@@ -1,8 +1,8 @@
-local debug = require("\100\101\98\117\103")
+local debug = require("\u{64}\u{65}\u{62}\u{75}\u{67}")
 local maxint = math.maxinteger
-assert(type(os.getenv("\80\65\84\72")) == "\115\116\114\105\110\103")
+assert(type(os.getenv("\u{50}\u{41}\u{54}\u{48}")) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")
 assert(io.input(io.stdin) == io.stdin)
-assert(not pcall(io.input,"\110\111\110\45\101\120\105\115\116\101\110\116\45\102\105\108\101"))
+assert(not pcall(io.input,"\u{6e}\u{6f}\u{6e}\u{2d}\u{65}\u{78}\u{69}\u{73}\u{74}\u{65}\u{6e}\u{74}\u{2d}\u{66}\u{69}\u{6c}\u{65}"))
 assert(io.output(io.stdout) == io.stdout)
 local function testerr
 (msg,f, ...)
@@ -14,37 +14,37 @@ local function checkerr
 assert(testerr(msg,f,...))
 end
 assert(not io.close(io.stdin) and not io.stdout:close() and not io.stderr:close())
-checkerr("\103\111\116\32\110\111\32\118\97\108\117\101",io.stdin.close)
-assert(type(io.input()) == "\117\115\101\114\100\97\116\97" and io.type(io.output()) == "\102\105\108\101")
-assert(type(io.stdin) == "\117\115\101\114\100\97\116\97" and io.type(io.stderr) == "\102\105\108\101")
+checkerr("\u{67}\u{6f}\u{74}\u{20}\u{6e}\u{6f}\u{20}\u{76}\u{61}\u{6c}\u{75}\u{65}",io.stdin.close)
+assert(type(io.input()) == "\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}" and io.type(io.output()) == "\u{66}\u{69}\u{6c}\u{65}")
+assert(type(io.stdin) == "\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}" and io.type(io.stderr) == "\u{66}\u{69}\u{6c}\u{65}")
 assert(not io.type(8))
 local a = {}
 ;
 setmetatable(a,{})
 assert(not io.type(a))
-assert(getmetatable(io.input()).__name == "\70\73\76\69\42")
-local a,b,c = io.open("\120\117\120\117\95\110\97\111\95\101\120\105\115\116\101")
-assert(not a and type(b) == "\115\116\114\105\110\103" and type(c) == "\110\117\109\98\101\114")
-a,b,c=io.open("\47\97\47\98\47\99\47\100","\119")
-assert(not a and type(b) == "\115\116\114\105\110\103" and type(c) == "\110\117\109\98\101\114")
+assert(getmetatable(io.input()).__name == "\u{46}\u{49}\u{4c}\u{45}\u{2a}")
+local a,b,c = io.open("\u{78}\u{75}\u{78}\u{75}\u{5f}\u{6e}\u{61}\u{6f}\u{5f}\u{65}\u{78}\u{69}\u{73}\u{74}\u{65}")
+assert(not a and type(b) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")
+a,b,c=io.open("\u{2f}\u{61}\u{2f}\u{62}\u{2f}\u{63}\u{2f}\u{64}","\u{77}")
+assert(not a and type(b) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")
 local file = os.tmpname()
-local f,msg = io.open(file,"\119")
+local f,msg = io.open(file,"\u{77}")
 if not f then
-(Message or print)("\39\111\115\46\116\109\112\110\97\109\101\39\32\102\105\108\101\32\99\97\110\110\111\116\32\98\101\32\111\112\101\110\59\32\115\107\105\112\112\105\110\103\32\102\105\108\101\32\116\101\115\116\115")
+(Message or print)("\u{27}\u{6f}\u{73}\u{2e}\u{74}\u{6d}\u{70}\u{6e}\u{61}\u{6d}\u{65}\u{27}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{20}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{6f}\u{70}\u{65}\u{6e}\u{3b}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}")
 else
 f:close()
-print("\116\101\115\116\105\110\103\32\105\47\111")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{69}\u{2f}\u{6f}")
 local otherfile = os.tmpname()
-checkerr("\105\110\118\97\108\105\100\32\109\111\100\101",io.open,file,"\114\119")
-checkerr("\105\110\118\97\108\105\100\32\109\111\100\101",io.open,file,"\114\98\43")
-checkerr("\105\110\118\97\108\105\100\32\109\111\100\101",io.open,file,"\114\43\98\107")
-checkerr("\105\110\118\97\108\105\100\32\109\111\100\101",io.open,file,"")
-checkerr("\105\110\118\97\108\105\100\32\109\111\100\101",io.open,file,"\43")
-checkerr("\105\110\118\97\108\105\100\32\109\111\100\101",io.open,file,"\98")
-assert(io.open(file,"\114\43\98")):close()
-assert(io.open(file,"\114\43")):close()
-assert(io.open(file,"\114\98")):close()
-assert(os.setlocale("\67","\97\108\108"))
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6d}\u{6f}\u{64}\u{65}",io.open,file,"\u{72}\u{77}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6d}\u{6f}\u{64}\u{65}",io.open,file,"\u{72}\u{62}\u{2b}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6d}\u{6f}\u{64}\u{65}",io.open,file,"\u{72}\u{2b}\u{62}\u{6b}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6d}\u{6f}\u{64}\u{65}",io.open,file,"")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6d}\u{6f}\u{64}\u{65}",io.open,file,"\u{2b}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6d}\u{6f}\u{64}\u{65}",io.open,file,"\u{62}")
+assert(io.open(file,"\u{72}\u{2b}\u{62}")):close()
+assert(io.open(file,"\u{72}\u{2b}")):close()
+assert(io.open(file,"\u{72}\u{62}")):close()
+assert(os.setlocale("\u{43}","\u{61}\u{6c}\u{6c}"))
 io.input(io.stdin)
 ;
 io.output(io.stdout)
@@ -56,28 +56,28 @@ assert(not io.open(file))
 io.output(file)
 assert(io.output() ~= io.stdout)
 if not _port then
-local status,msg,code = io.stdin:seek("\115\101\116",1000)
-assert(not status and type(msg) == "\115\116\114\105\110\103" and type(code) == "\110\117\109\98\101\114")
+local status,msg,code = io.stdin:seek("\u{73}\u{65}\u{74}",1000)
+assert(not status and type(msg) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and type(code) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")
 end
 assert(io.output():seek() == 0)
-assert(io.write("\97\108\111\32\97\108\111"):seek() == string.len("\97\108\111\32\97\108\111"))
-assert(io.output():seek("\99\117\114",- 3) == string.len("\97\108\111\32\97\108\111") - 3)
-assert(io.write("\106\111\97\111"))
-assert(io.output():seek("\101\110\100") == string.len("\97\108\111\32\106\111\97\111"))
-assert(io.output():seek("\115\101\116") == 0)
-assert(io.write("\34\97\108\111\34","\123\97\125\10","\115\101\99\111\110\100\32\108\105\110\101\10","\116\104\105\114\100\32\108\105\110\101\32\10"))
-assert(io.write("\88\102\111\117\114\116\104\95\108\105\110\101"))
+assert(io.write("\u{61}\u{6c}\u{6f}\u{20}\u{61}\u{6c}\u{6f}"):seek() == string.len("\u{61}\u{6c}\u{6f}\u{20}\u{61}\u{6c}\u{6f}"))
+assert(io.output():seek("\u{63}\u{75}\u{72}",- 3) == string.len("\u{61}\u{6c}\u{6f}\u{20}\u{61}\u{6c}\u{6f}") - 3)
+assert(io.write("\u{6a}\u{6f}\u{61}\u{6f}"))
+assert(io.output():seek("\u{65}\u{6e}\u{64}") == string.len("\u{61}\u{6c}\u{6f}\u{20}\u{6a}\u{6f}\u{61}\u{6f}"))
+assert(io.output():seek("\u{73}\u{65}\u{74}") == 0)
+assert(io.write("\u{22}\u{61}\u{6c}\u{6f}\u{22}","\u{7b}\u{61}\u{7d}\u{a}","\u{73}\u{65}\u{63}\u{6f}\u{6e}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{a}","\u{74}\u{68}\u{69}\u{72}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{20}\u{a}"))
+assert(io.write("\u{58}\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}"))
 io.output(io.stdout)
 collectgarbage()
 assert(io.input() == io.stdin and rawequal(io.output(),io.stdout))
-print("\43")
+print("\u{2b}")
 collectgarbage()
 for i = 1, 120
 do
 for i = 1, 5
 do
 io.input(file)
-assert(io.open(file,"\114"))
+assert(io.open(file,"\u{72}"))
 io.lines(file)
 end
 collectgarbage()
@@ -86,125 +86,125 @@ io.input():close()
 io.close()
 assert(os.rename(file,otherfile))
 assert(not os.rename(file,otherfile))
-io.output(io.open(otherfile,"\97\98"))
-assert(io.write("\10\10\9\9\32\32",3450,"\10"))
+io.output(io.open(otherfile,"\u{61}\u{62}"))
+assert(io.write("\u{a}\u{a}\u{9}\u{9}\u{20}\u{20}",3450,"\u{a}"))
 ;
 io.close()
 do
 local F = nil
 do
-local f <close> = assert(io.open(file,"\119"))
+local f <close> = assert(io.open(file,"\u{77}"))
 F=f
 end
-assert(tostring(F) == "\102\105\108\101\32\40\99\108\111\115\101\100\41")
+assert(tostring(F) == "\u{66}\u{69}\u{6c}\u{65}\u{20}\u{28}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{29}")
 end
 assert(os.remove(file))
 do
-local f <close> = assert(io.open(file,"\119"))
-f:write(maxint,"\10")
-f:write(string.format("\48\88\37\120\10",maxint))
-f:write("\48\120\65\66\67\112\45\51","\10")
-f:write(0,"\10")
-f:write(- maxint,"\10")
-f:write(string.format("\48\120\37\88\10",- maxint))
-f:write("\45\48\120\65\66\67\112\45\51","\10")
+local f <close> = assert(io.open(file,"\u{77}"))
+f:write(maxint,"\u{a}")
+f:write(string.format("\u{30}\u{58}\u{25}\u{78}\u{a}",maxint))
+f:write("\u{30}\u{78}\u{41}\u{42}\u{43}\u{70}\u{2d}\u{33}","\u{a}")
+f:write(0,"\u{a}")
+f:write(- maxint,"\u{a}")
+f:write(string.format("\u{30}\u{78}\u{25}\u{58}\u{a}",- maxint))
+f:write("\u{2d}\u{30}\u{78}\u{41}\u{42}\u{43}\u{70}\u{2d}\u{33}","\u{a}")
 assert(f:close())
-local f <close> = assert(io.open(file,"\114"))
-assert(f:read("\110") == maxint)
-assert(f:read("\110") == maxint)
-assert(f:read("\110") == 343.5)
-assert(f:read("\110") == 0)
-assert(f:read("\42\110") == - maxint)
-assert(f:read("\110") == - maxint)
-assert(f:read("\42\110") == - 343.5)
+local f <close> = assert(io.open(file,"\u{72}"))
+assert(f:read("\u{6e}") == maxint)
+assert(f:read("\u{6e}") == maxint)
+assert(f:read("\u{6e}") == 343.5)
+assert(f:read("\u{6e}") == 0)
+assert(f:read("\u{2a}\u{6e}") == - maxint)
+assert(f:read("\u{6e}") == - maxint)
+assert(f:read("\u{2a}\u{6e}") == - 343.5)
 end
 assert(os.remove(file))
 do
-local f <close> = assert(io.open(file,"\119"))
-f:write("\97\32\108\105\110\101\10\97\110\111\116\104\101\114\32\108\105\110\101\10\49\50\51\52\10\51\46\52\53\10\111\110\101\10\116\119\111\10\116\104\114\101\101\10")
+local f <close> = assert(io.open(file,"\u{77}"))
+f:write("\u{61}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{a}\u{61}\u{6e}\u{6f}\u{74}\u{68}\u{65}\u{72}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{a}\u{31}\u{32}\u{33}\u{34}\u{a}\u{33}\u{2e}\u{34}\u{35}\u{a}\u{6f}\u{6e}\u{65}\u{a}\u{74}\u{77}\u{6f}\u{a}\u{74}\u{68}\u{72}\u{65}\u{65}\u{a}")
 local l1,l2,l3,l4,n1,n2,c,dummy
 assert(f:close())
-local f <close> = assert(io.open(file,"\114"))
-l1,l2,n1,n2,dummy=f:read("\108","\76","\110","\110")
-assert(l1 == "\97\32\108\105\110\101" and l2 == "\97\110\111\116\104\101\114\32\108\105\110\101\10" and n1 == 1234 and n2 == 3.45 and dummy == nil)
+local f <close> = assert(io.open(file,"\u{72}"))
+l1,l2,n1,n2,dummy=f:read("\u{6c}","\u{4c}","\u{6e}","\u{6e}")
+assert(l1 == "\u{61}\u{20}\u{6c}\u{69}\u{6e}\u{65}" and l2 == "\u{61}\u{6e}\u{6f}\u{74}\u{68}\u{65}\u{72}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{a}" and n1 == 1234 and n2 == 3.45 and dummy == nil)
 assert(f:close())
-local f <close> = assert(io.open(file,"\114"))
-l1,l2,n1,n2,c,l3,l4,dummy=f:read(7,"\108","\110","\110",1,"\108","\108")
-assert(l1 == "\97\32\108\105\110\101\10" and l2 == "\97\110\111\116\104\101\114\32\108\105\110\101" and c == "\10" and n1 == 1234 and n2 == 3.45 and l3 == "\111\110\101" and l4 == "\116\119\111" and dummy == nil)
+local f <close> = assert(io.open(file,"\u{72}"))
+l1,l2,n1,n2,c,l3,l4,dummy=f:read(7,"\u{6c}","\u{6e}","\u{6e}",1,"\u{6c}","\u{6c}")
+assert(l1 == "\u{61}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{a}" and l2 == "\u{61}\u{6e}\u{6f}\u{74}\u{68}\u{65}\u{72}\u{20}\u{6c}\u{69}\u{6e}\u{65}" and c == "\u{a}" and n1 == 1234 and n2 == 3.45 and l3 == "\u{6f}\u{6e}\u{65}" and l4 == "\u{74}\u{77}\u{6f}" and dummy == nil)
 assert(f:close())
-local f <close> = assert(io.open(file,"\114"))
-l1,n1,n2,dummy=f:read("\108","\110","\110","\108")
-assert(l1 == "\97\32\108\105\110\101" and not n1)
+local f <close> = assert(io.open(file,"\u{72}"))
+l1,n1,n2,dummy=f:read("\u{6c}","\u{6e}","\u{6e}","\u{6c}")
+assert(l1 == "\u{61}\u{20}\u{6c}\u{69}\u{6e}\u{65}" and not n1)
 end
 assert(os.remove(file))
-f=assert(io.open(file,"\119"))
-f:write("\108\111\99\97\108\32\120\44\32\122\32\61\32\99\111\114\111\117\116\105\110\101\46\121\105\101\108\100\40\49\48\41\10\108\111\99\97\108\32\121\32\61\32\99\111\114\111\117\116\105\110\101\46\121\105\101\108\100\40\50\48\41\10\114\101\116\117\114\110\32\120\32\43\32\121\32\42\32\122\10")
+f=assert(io.open(file,"\u{77}"))
+f:write("\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{78}\u{2c}\u{20}\u{7a}\u{20}\u{3d}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{2e}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{28}\u{31}\u{30}\u{29}\u{a}\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{79}\u{20}\u{3d}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{2e}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{28}\u{32}\u{30}\u{29}\u{a}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{78}\u{20}\u{2b}\u{20}\u{79}\u{20}\u{2a}\u{20}\u{7a}\u{a}")
 assert(f:close())
 f=coroutine.wrap(dofile)
 assert(f(file) == 10)
 assert(f(100,101) == 20)
 assert(f(200) == 100 + 200 * 101)
 assert(os.remove(file))
-f=assert(io.open(file,"\119"))
-f:write("\45\49\50\46\51\45\9\45\48\120\102\102\102\102\43\32\32\46\51\124\53\46\69\45\51\88\32\32\43\50\51\52\101\43\49\51\69\32\48\120\68\69\65\68\66\69\69\70\68\69\65\68\66\69\69\70\120\10\48\120\49\46\49\51\65\112\43\51\101\10")
-f:write("\49\50\51\52")
+f=assert(io.open(file,"\u{77}"))
+f:write("\u{2d}\u{31}\u{32}\u{2e}\u{33}\u{2d}\u{9}\u{2d}\u{30}\u{78}\u{66}\u{66}\u{66}\u{66}\u{2b}\u{20}\u{20}\u{2e}\u{33}\u{7c}\u{35}\u{2e}\u{45}\u{2d}\u{33}\u{58}\u{20}\u{20}\u{2b}\u{32}\u{33}\u{34}\u{65}\u{2b}\u{31}\u{33}\u{45}\u{20}\u{30}\u{78}\u{44}\u{45}\u{41}\u{44}\u{42}\u{45}\u{45}\u{46}\u{44}\u{45}\u{41}\u{44}\u{42}\u{45}\u{45}\u{46}\u{78}\u{a}\u{30}\u{78}\u{31}\u{2e}\u{31}\u{33}\u{41}\u{70}\u{2b}\u{33}\u{65}\u{a}")
+f:write("\u{31}\u{32}\u{33}\u{34}")
 ;
 for i = 1, 1000
 do
-f:write("\48")
+f:write("\u{30}")
 end
 ;
-f:write("\10")
-f:write("\46\101\43\9\48\46\101\59\9\45\45\59\32\32\48\120\88\59\10")
+f:write("\u{a}")
+f:write("\u{2e}\u{65}\u{2b}\u{9}\u{30}\u{2e}\u{65}\u{3b}\u{9}\u{2d}\u{2d}\u{3b}\u{20}\u{20}\u{30}\u{78}\u{58}\u{3b}\u{a}")
 assert(f:close())
-f=assert(io.open(file,"\114"))
-assert(f:read("\110") == - 12.3)
+f=assert(io.open(file,"\u{72}"))
+assert(f:read("\u{6e}") == - 12.3)
 ;
-assert(f:read(1) == "\45")
-assert(f:read("\110") == - 65535)
+assert(f:read(1) == "\u{2d}")
+assert(f:read("\u{6e}") == - 65535)
 ;
-assert(f:read(2) == "\43\32")
-assert(f:read("\110") == 0.3)
+assert(f:read(2) == "\u{2b}\u{20}")
+assert(f:read("\u{6e}") == 0.3)
 ;
-assert(f:read(1) == "\124")
-assert(f:read("\110") == 5e-3)
+assert(f:read(1) == "\u{7c}")
+assert(f:read("\u{6e}") == 5e-3)
 ;
-assert(f:read(1) == "\88")
-assert(f:read("\110") == 2.34e15)
+assert(f:read(1) == "\u{58}")
+assert(f:read("\u{6e}") == 2.34e15)
 ;
-assert(f:read(1) == "\69")
-assert(f:read("\110") == 16045690984833335023)
+assert(f:read(1) == "\u{45}")
+assert(f:read("\u{6e}") == 16045690984833335023)
 ;
-assert(f:read(2) == "\120\10")
-assert(f:read("\110") == 8.61328125)
+assert(f:read(2) == "\u{78}\u{a}")
+assert(f:read("\u{6e}") == 8.61328125)
 ;
-assert(f:read(1) == "\101")
+assert(f:read(1) == "\u{65}")
 do
-assert(not f:read("\110"))
-local s = f:read("\76")
-assert(string.find(s,"\94\48\48\42\10\36"))
+assert(not f:read("\u{6e}"))
+local s = f:read("\u{4c}")
+assert(string.find(s,"\u{5e}\u{30}\u{30}\u{2a}\u{a}\u{24}"))
 end
-assert(not f:read("\110"))
+assert(not f:read("\u{6e}"))
 ;
-assert(f:read(2) == "\101\43")
-assert(not f:read("\110"))
+assert(f:read(2) == "\u{65}\u{2b}")
+assert(not f:read("\u{6e}"))
 ;
-assert(f:read(1) == "\59")
-assert(not f:read("\110"))
+assert(f:read(1) == "\u{3b}")
+assert(not f:read("\u{6e}"))
 ;
-assert(f:read(2) == "\45\59")
-assert(not f:read("\110"))
+assert(f:read(2) == "\u{2d}\u{3b}")
+assert(not f:read("\u{6e}"))
 ;
-assert(f:read(1) == "\88")
-assert(not f:read("\110"))
+assert(f:read(1) == "\u{58}")
+assert(not f:read("\u{6e}"))
 ;
-assert(f:read(1) == "\59")
-assert(not f:read("\110"))
+assert(f:read(1) == "\u{3b}")
+assert(not f:read("\u{6e}"))
 ;
 assert(not f:read(0))
 assert(f:close())
 assert(os.remove(file))
-assert(not pcall(io.lines,"\110\111\110\45\101\120\105\115\116\101\110\116\45\102\105\108\101"))
+assert(not pcall(io.lines,"\u{6e}\u{6f}\u{6e}\u{2d}\u{65}\u{78}\u{69}\u{73}\u{74}\u{65}\u{6e}\u{74}\u{2d}\u{66}\u{69}\u{6c}\u{65}"))
 assert(os.rename(otherfile,file))
 io.output(otherfile)
 local n = 0
@@ -214,36 +214,36 @@ n=n + 1
 end
 ;
 assert(n == 6)
-checkerr("\102\105\108\101\32\105\115\32\97\108\114\101\97\100\121\32\99\108\111\115\101\100",f)
-checkerr("\102\105\108\101\32\105\115\32\97\108\114\101\97\100\121\32\99\108\111\115\101\100",f)
+checkerr("\u{66}\u{69}\u{6c}\u{65}\u{20}\u{69}\u{73}\u{20}\u{61}\u{6c}\u{72}\u{65}\u{61}\u{64}\u{79}\u{20}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}",f)
+checkerr("\u{66}\u{69}\u{6c}\u{65}\u{20}\u{69}\u{73}\u{20}\u{61}\u{6c}\u{72}\u{65}\u{61}\u{64}\u{79}\u{20}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}",f)
 n=0
 for l in io.lines(file)
 do
-io.write(l,"\10")
+io.write(l,"\u{a}")
 ;
 n=n + 1
 end
 io.close()
 assert(n == 6)
 local f = assert(io.open(otherfile))
-assert(io.type(f) == "\102\105\108\101")
+assert(io.type(f) == "\u{66}\u{69}\u{6c}\u{65}")
 io.output(file)
 assert(not io.output():read())
 n=0
 for l in f:lines()
 do
-io.write(l,"\10")
+io.write(l,"\u{a}")
 ;
 n=n + 1
 end
-assert(tostring(f):sub(1,5) == "\102\105\108\101\32")
+assert(tostring(f):sub(1,5) == "\u{66}\u{69}\u{6c}\u{65}\u{20}")
 assert(f:close())
 ;
 io.close()
 assert(n == 6)
-checkerr("\99\108\111\115\101\100\32\102\105\108\101",io.close,f)
-assert(tostring(f) == "\102\105\108\101\32\40\99\108\111\115\101\100\41")
-assert(io.type(f) == "\99\108\111\115\101\100\32\102\105\108\101")
+checkerr("\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{20}\u{66}\u{69}\u{6c}\u{65}",io.close,f)
+assert(tostring(f) == "\u{66}\u{69}\u{6c}\u{65}\u{20}\u{28}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{29}")
+assert(io.type(f) == "\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{20}\u{66}\u{69}\u{6c}\u{65}")
 io.input(file)
 f=io.open(otherfile):lines()
 n=0
@@ -260,7 +260,7 @@ assert(n == 6)
 assert(os.remove(otherfile))
 do
 io.output(otherfile)
-io.write(string.rep("\97",300),"\10")
+io.write(string.rep("\u{61}",300),"\u{a}")
 io.close()
 local t = {}
 ;
@@ -269,49 +269,49 @@ do
 t[i]=1
 end
 t={io.lines(otherfile,table.unpack(t))()}
-assert(# t == 250 and t[1] == "\97" and t[# t] == "\97")
+assert(# t == 250 and t[1] == "\u{61}" and t[# t] == "\u{61}")
 t[# t + 1]=1
-checkerr("\116\111\111\32\109\97\110\121\32\97\114\103\117\109\101\110\116\115",io.lines,otherfile,table.unpack(t))
+checkerr("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{61}\u{72}\u{67}\u{75}\u{6d}\u{65}\u{6e}\u{74}\u{73}",io.lines,otherfile,table.unpack(t))
 collectgarbage()
 assert(os.remove(otherfile))
 end
 io.input(file)
 do
-local a,b,c = io.input():write("\120\117\120\117")
-assert(not a and type(b) == "\115\116\114\105\110\103" and type(c) == "\110\117\109\98\101\114")
+local a,b,c = io.input():write("\u{78}\u{75}\u{78}\u{75}")
+assert(not a and type(b) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")
 end
-checkerr("\105\110\118\97\108\105\100\32\102\111\114\109\97\116",io.read,"\120")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{66}\u{6f}\u{72}\u{6d}\u{61}\u{74}",io.read,"\u{78}")
 assert(io.read(0) == "")
-assert(io.read(5,"\108") == "\34\97\108\111\34")
+assert(io.read(5,"\u{6c}") == "\u{22}\u{61}\u{6c}\u{6f}\u{22}")
 assert(io.read(0) == "")
-assert(io.read() == "\115\101\99\111\110\100\32\108\105\110\101")
+assert(io.read() == "\u{73}\u{65}\u{63}\u{6f}\u{6e}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}")
 local x = io.input():seek()
-assert(io.read() == "\116\104\105\114\100\32\108\105\110\101\32")
-assert(io.input():seek("\115\101\116",x))
-assert(io.read("\76") == "\116\104\105\114\100\32\108\105\110\101\32\10")
-assert(io.read(1) == "\88")
-assert(io.read(string.len("\102\111\117\114\116\104\95\108\105\110\101")) == "\102\111\117\114\116\104\95\108\105\110\101")
-assert(io.input():seek("\99\117\114",- string.len("\102\111\117\114\116\104\95\108\105\110\101")))
-assert(io.read() == "\102\111\117\114\116\104\95\108\105\110\101")
+assert(io.read() == "\u{74}\u{68}\u{69}\u{72}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{20}")
+assert(io.input():seek("\u{73}\u{65}\u{74}",x))
+assert(io.read("\u{4c}") == "\u{74}\u{68}\u{69}\u{72}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{20}\u{a}")
+assert(io.read(1) == "\u{58}")
+assert(io.read(string.len("\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}")) == "\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}")
+assert(io.input():seek("\u{63}\u{75}\u{72}",- string.len("\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}")))
+assert(io.read() == "\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}")
 assert(io.read() == "")
-assert(io.read("\110") == 3450)
-assert(io.read(1) == "\10")
+assert(io.read("\u{6e}") == 3450)
+assert(io.read(1) == "\u{a}")
 assert(not io.read(0))
 assert(not io.read(1))
 assert(not io.read(30000))
 assert(({io.read(1)})[2] == undef)
 assert(not io.read())
 assert(({io.read()})[2] == undef)
-assert(not io.read("\110"))
-assert(({io.read("\110")})[2] == undef)
-assert(io.read("\97") == "")
-assert(io.read("\97") == "")
+assert(not io.read("\u{6e}"))
+assert(({io.read("\u{6e}")})[2] == undef)
+assert(io.read("\u{61}") == "")
+assert(io.read("\u{61}") == "")
 collectgarbage()
-print("\43")
+print("\u{2b}")
 io.close(io.input())
-checkerr("\32\105\110\112\117\116\32\102\105\108\101\32\105\115\32\99\108\111\115\101\100",io.read)
+checkerr("\u{20}\u{69}\u{6e}\u{70}\u{75}\u{74}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{20}\u{69}\u{73}\u{20}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}",io.read)
 assert(os.remove(file))
-local t = "\48\49\50\51\52\53\54\55\56\57"
+local t = "\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}"
 for i = 1, 10
 do
 t=t .. t
@@ -319,42 +319,42 @@ t=t .. t
 end
 assert(string.len(t) == 10 * 2 ^ 10)
 io.output(file)
-io.write("\97\108\111"):write("\10")
+io.write("\u{61}\u{6c}\u{6f}"):write("\u{a}")
 io.close()
-checkerr("\32\111\117\116\112\117\116\32\102\105\108\101\32\105\115\32\99\108\111\115\101\100",io.write)
-local f = io.open(file,"\97\43\98")
+checkerr("\u{20}\u{6f}\u{75}\u{74}\u{70}\u{75}\u{74}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{20}\u{69}\u{73}\u{20}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}",io.write)
+local f = io.open(file,"\u{61}\u{2b}\u{62}")
 io.output(f)
 collectgarbage()
-assert(io.write("\32" .. t .. "\32"))
-assert(io.write("\59","\101\110\100\32\111\102\32\102\105\108\101\10"))
+assert(io.write("\u{20}" .. t .. "\u{20}"))
+assert(io.write("\u{3b}","\u{65}\u{6e}\u{64}\u{20}\u{6f}\u{66}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{a}"))
 f:flush()
 ;
 io.flush()
 f:close()
-print("\43")
+print("\u{2b}")
 io.input(file)
-assert(io.read() == "\97\108\111")
-assert(io.read(1) == "\32")
+assert(io.read() == "\u{61}\u{6c}\u{6f}")
+assert(io.read(1) == "\u{20}")
 assert(io.read(string.len(t)) == t)
-assert(io.read(1) == "\32")
+assert(io.read(1) == "\u{20}")
 assert(io.read(0))
-assert(io.read("\97") == "\59\101\110\100\32\111\102\32\102\105\108\101\10")
+assert(io.read("\u{61}") == "\u{3b}\u{65}\u{6e}\u{64}\u{20}\u{6f}\u{66}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{a}")
 assert(not io.read(0))
 assert(io.close(io.input()))
 do
 local function ismsg
 (m)
-return (type(m) == "\115\116\114\105\110\103" and not tonumber(m))
+return (type(m) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and not tonumber(m))
 end
-local f = io.open(file,"\119")
+local f = io.open(file,"\u{77}")
 local r,m,c = f:read()
-assert(not r and ismsg(m) and type(c) == "\110\117\109\98\101\114")
+assert(not r and ismsg(m) and type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")
 assert(f:close())
-f=io.open(file,"\114")
-r,m,c=f:write("\119\104\97\116\101\118\101\114")
-assert(not r and ismsg(m) and type(c) == "\110\117\109\98\101\114")
+f=io.open(file,"\u{72}")
+r,m,c=f:write("\u{77}\u{68}\u{61}\u{74}\u{65}\u{76}\u{65}\u{72}")
+assert(not r and ismsg(m) and type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")
 assert(f:close())
-f=io.open(file,"\119")
+f=io.open(file,"\u{77}")
 r,m=pcall(f:lines())
 assert(r == false and ismsg(m))
 assert(f:close())
@@ -362,47 +362,47 @@ end
 assert(os.remove(file))
 io.output(file)
 ;
-io.write("\10\10\108\105\110\101\10\111\116\104\101\114"):close()
+io.write("\u{a}\u{a}\u{6c}\u{69}\u{6e}\u{65}\u{a}\u{6f}\u{74}\u{68}\u{65}\u{72}"):close()
 io.input(file)
-assert(io.read("\76") == "\10")
-assert(io.read("\76") == "\10")
-assert(io.read("\76") == "\108\105\110\101\10")
-assert(io.read("\76") == "\111\116\104\101\114")
-assert(not io.read("\76"))
+assert(io.read("\u{4c}") == "\u{a}")
+assert(io.read("\u{4c}") == "\u{a}")
+assert(io.read("\u{4c}") == "\u{6c}\u{69}\u{6e}\u{65}\u{a}")
+assert(io.read("\u{4c}") == "\u{6f}\u{74}\u{68}\u{65}\u{72}")
+assert(not io.read("\u{4c}"))
 io.input():close()
 local f = assert(io.open(file))
 local s = ""
-for l in f:lines("\76")
+for l in f:lines("\u{4c}")
 do
 s=s .. l
 end
-assert(s == "\10\10\108\105\110\101\10\111\116\104\101\114")
+assert(s == "\u{a}\u{a}\u{6c}\u{69}\u{6e}\u{65}\u{a}\u{6f}\u{74}\u{68}\u{65}\u{72}")
 f:close()
 io.input(file)
 s=""
-for l in io.lines(nil,"\76")
+for l in io.lines(nil,"\u{4c}")
 do
 s=s .. l
 end
-assert(s == "\10\10\108\105\110\101\10\111\116\104\101\114")
+assert(s == "\u{a}\u{a}\u{6c}\u{69}\u{6e}\u{65}\u{a}\u{6f}\u{74}\u{68}\u{65}\u{72}")
 io.input():close()
 s=""
-for l in io.lines(file,"\76")
+for l in io.lines(file,"\u{4c}")
 do
 s=s .. l
 end
-assert(s == "\10\10\108\105\110\101\10\111\116\104\101\114")
+assert(s == "\u{a}\u{a}\u{6c}\u{69}\u{6e}\u{65}\u{a}\u{6f}\u{74}\u{68}\u{65}\u{72}")
 s=""
-for l in io.lines(file,"\108")
+for l in io.lines(file,"\u{6c}")
 do
 s=s .. l
 end
-assert(s == "\108\105\110\101\111\116\104\101\114")
+assert(s == "\u{6c}\u{69}\u{6e}\u{65}\u{6f}\u{74}\u{68}\u{65}\u{72}")
 io.output(file)
 ;
-io.write("\97\32\61\32\49\48\32\43\32\51\52\10\97\32\61\32\50\42\97\10\97\32\61\32\45\97\10"):close()
+io.write("\u{61}\u{20}\u{3d}\u{20}\u{31}\u{30}\u{20}\u{2b}\u{20}\u{33}\u{34}\u{a}\u{61}\u{20}\u{3d}\u{20}\u{32}\u{2a}\u{61}\u{a}\u{61}\u{20}\u{3d}\u{20}\u{2d}\u{61}\u{a}"):close()
 local t = {}
-assert(load(io.lines(file,"\76"),nil,nil,t))()
+assert(load(io.lines(file,"\u{4c}"),nil,nil,t))()
 assert(t.a == - ((10 + 34) * 2))
 do
 local function gettoclose
@@ -412,7 +412,7 @@ local stvar = 0
 for i = 1, 1000
 do
 local n,v = debug.getlocal(lv,i)
-if n == "\40\102\111\114\32\115\116\97\116\101\41" then
+if n == "\u{28}\u{66}\u{6f}\u{72}\u{20}\u{73}\u{74}\u{61}\u{74}\u{65}\u{29}" then
 stvar=stvar + 1
 if stvar == 4 then
 return v
@@ -424,50 +424,50 @@ local f
 for l in io.lines(file)
 do
 f=gettoclose(1)
-assert(io.type(f) == "\102\105\108\101")
+assert(io.type(f) == "\u{66}\u{69}\u{6c}\u{65}")
 break
 end
-assert(io.type(f) == "\99\108\111\115\101\100\32\102\105\108\101")
+assert(io.type(f) == "\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{20}\u{66}\u{69}\u{6c}\u{65}")
 f=nil
 local function foo
 (name)
 for l in io.lines(name)
 do
 f=gettoclose(1)
-assert(io.type(f) == "\102\105\108\101")
+assert(io.type(f) == "\u{66}\u{69}\u{6c}\u{65}")
 error(f)
 end
 end
 local st,msg = pcall(foo,file)
-assert(st == false and io.type(msg) == "\99\108\111\115\101\100\32\102\105\108\101")
+assert(st == false and io.type(msg) == "\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{20}\u{66}\u{69}\u{6c}\u{65}")
 end
 io.output(file)
 ;
-io.write("\48\49\50\51\52\53\54\55\56\57\10"):close()
+io.write("\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{a}"):close()
 for a,b in io.lines(file,1,1)
 do
-if a == "\10" then
+if a == "\u{a}" then
 assert(not b)
 else
 assert(tonumber(a) == tonumber(b) - 1)
 end
 end
-for a,b,c in io.lines(file,1,2,"\97")
+for a,b,c in io.lines(file,1,2,"\u{61}")
 do
-assert(a == "\48" and b == "\49\50" and c == "\51\52\53\54\55\56\57\10")
+assert(a == "\u{30}" and b == "\u{31}\u{32}" and c == "\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{a}")
 end
-for a,b,c in io.lines(file,"\97",0,1)
+for a,b,c in io.lines(file,"\u{61}",0,1)
 do
 if a == "" then
 break
 end
-assert(a == "\48\49\50\51\52\53\54\55\56\57\10" and not b and not c)
+assert(a == "\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{a}" and not b and not c)
 end
 collectgarbage()
 io.output(file)
 ;
-io.write("\48\48\10\49\48\10\50\48\10\51\48\10\52\48\10"):close()
-for a,b in io.lines(file,"\110","\110")
+io.write("\u{30}\u{30}\u{a}\u{31}\u{30}\u{a}\u{32}\u{30}\u{a}\u{33}\u{30}\u{a}\u{34}\u{30}\u{a}"):close()
+for a,b in io.lines(file,"\u{6e}","\u{6e}")
 do
 if a == 40 then
 assert(not b)
@@ -477,26 +477,26 @@ end
 end
 io.output(file)
 ;
-io.write("\108\111\99\97\108\32\121\10\61\32\88\10\88\32\61\10\88\32\42\10\50\32\43\10\88\59\10\88\32\61\10\88\10\45\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\121\59\10"):close()
+io.write("\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{79}\u{a}\u{3d}\u{20}\u{58}\u{a}\u{58}\u{20}\u{3d}\u{a}\u{58}\u{20}\u{2a}\u{a}\u{32}\u{20}\u{2b}\u{a}\u{58}\u{3b}\u{a}\u{58}\u{20}\u{3d}\u{a}\u{58}\u{a}\u{2d}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{79}\u{3b}\u{a}"):close()
 _G.X=1
 assert(not load((io.lines(file))))
 collectgarbage()
-load((io.lines(file,"\76")))()
+load((io.lines(file,"\u{4c}")))()
 assert(_G.X == 2)
 load((io.lines(file,1)))()
 assert(_G.X == 4)
 load((io.lines(file,3)))()
 assert(_G.X == 8)
 _G.X=nil
-print("\43")
-local x1 = "\115\116\114\105\110\103\10\10\92\99\111\109\32\34\34\39\39\99\111\105\115\97\115\32\91\91\101\115\116\114\97\110\104\97\115\93\93\32\93\93\39"
+print("\u{2b}")
+local x1 = "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{a}\u{a}\u{5c}\u{63}\u{6f}\u{6d}\u{20}\u{22}\u{22}\u{27}\u{27}\u{63}\u{6f}\u{69}\u{73}\u{61}\u{73}\u{20}\u{5b}\u{5b}\u{65}\u{73}\u{74}\u{72}\u{61}\u{6e}\u{68}\u{61}\u{73}\u{5d}\u{5d}\u{20}\u{5d}\u{5d}\u{27}"
 io.output(file)
-assert(io.write(string.format("\88\50\32\61\32\37\113\10\45\45\32\99\111\109\109\101\110\116\32\119\105\116\104\111\117\116\32\101\110\100\105\110\103\32\69\79\83",x1)))
+assert(io.write(string.format("\u{58}\u{32}\u{20}\u{3d}\u{20}\u{25}\u{71}\u{a}\u{2d}\u{2d}\u{20}\u{63}\u{6f}\u{6d}\u{6d}\u{65}\u{6e}\u{74}\u{20}\u{77}\u{69}\u{74}\u{68}\u{6f}\u{75}\u{74}\u{20}\u{65}\u{6e}\u{64}\u{69}\u{6e}\u{67}\u{20}\u{45}\u{4f}\u{53}",x1)))
 io.close()
 assert(loadfile(file))()
 assert(x1 == _G.X2)
 _G.X2=nil
-print("\43")
+print("\u{2b}")
 assert(os.remove(file))
 assert(not os.remove(file))
 assert(not os.remove(otherfile))
@@ -512,142 +512,142 @@ assert(os.remove(file))
 assert(res == expres)
 end
 testloadfile(nil,nil)
-testloadfile("\35\32\97\32\110\111\110\45\101\110\100\105\110\103\32\99\111\109\109\101\110\116",nil)
-testloadfile("\239\187\191\35\32\115\111\109\101\32\99\111\109\109\101\110\116\10\114\101\116\117\114\110\32\50\51\52",234)
-testloadfile("\239\187\191\114\101\116\117\114\110\32\50\51\57",239)
-testloadfile("\239\187\191",nil)
-testloadfile("\35\32\97\32\99\111\109\109\101\110\116\10\114\101\116\117\114\110\32\114\101\113\117\105\114\101\39\100\101\98\117\103\39\46\103\101\116\105\110\102\111\40\49\41\46\99\117\114\114\101\110\116\108\105\110\101",2)
-io.output(io.open(file,"\119\98"))
+testloadfile("\u{23}\u{20}\u{61}\u{20}\u{6e}\u{6f}\u{6e}\u{2d}\u{65}\u{6e}\u{64}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6f}\u{6d}\u{6d}\u{65}\u{6e}\u{74}",nil)
+testloadfile("\u{ef}\u{bb}\u{bf}\u{23}\u{20}\u{73}\u{6f}\u{6d}\u{65}\u{20}\u{63}\u{6f}\u{6d}\u{6d}\u{65}\u{6e}\u{74}\u{a}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{32}\u{33}\u{34}",234)
+testloadfile("\u{ef}\u{bb}\u{bf}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{32}\u{33}\u{39}",239)
+testloadfile("\u{ef}\u{bb}\u{bf}",nil)
+testloadfile("\u{23}\u{20}\u{61}\u{20}\u{63}\u{6f}\u{6d}\u{6d}\u{65}\u{6e}\u{74}\u{a}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{72}\u{65}\u{71}\u{75}\u{69}\u{72}\u{65}\u{27}\u{64}\u{65}\u{62}\u{75}\u{67}\u{27}\u{2e}\u{67}\u{65}\u{74}\u{69}\u{6e}\u{66}\u{6f}\u{28}\u{31}\u{29}\u{2e}\u{63}\u{75}\u{72}\u{72}\u{65}\u{6e}\u{74}\u{6c}\u{69}\u{6e}\u{65}",2)
+io.output(io.open(file,"\u{77}\u{62}"))
 assert(io.write(string.dump(function ()
-return 10,"\97\108\111\255","\104\105"
+return 10,"\u{0}\u{61}\u{6c}\u{6f}\u{ff}","\u{68}\u{69}"
 end)))
 io.close()
 a,b,c=assert(loadfile(file))()
-assert(a == 10 and b == "\97\108\111\255" and c == "\104\105")
+assert(a == 10 and b == "\u{0}\u{61}\u{6c}\u{6f}\u{ff}" and c == "\u{68}\u{69}")
 assert(os.remove(file))
 do
-io.output(io.open(file,"\119\98"))
+io.output(io.open(file,"\u{77}\u{62}"))
 assert(io.write(string.dump(function ()
 return 1
 end)))
 io.close()
-f=assert(loadfile(file,"\98",{}))
-assert(type(f) == "\102\117\110\99\116\105\111\110" and f() == 1)
+f=assert(loadfile(file,"\u{62}",{}))
+assert(type(f) == "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}" and f() == 1)
 assert(os.remove(file))
 end
-io.output(io.open(file,"\119\98"))
-assert(io.write("\35\116\104\105\115\32\105\115\32\97\32\99\111\109\109\101\110\116\32\102\111\114\32\97\32\98\105\110\97\114\121\32\102\105\108\101\10",string.dump(function ()
-return 20,""
+io.output(io.open(file,"\u{77}\u{62}"))
+assert(io.write("\u{23}\u{74}\u{68}\u{69}\u{73}\u{20}\u{69}\u{73}\u{20}\u{61}\u{20}\u{63}\u{6f}\u{6d}\u{6d}\u{65}\u{6e}\u{74}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{61}\u{20}\u{62}\u{69}\u{6e}\u{61}\u{72}\u{79}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{0}\u{a}",string.dump(function ()
+return 20,"\u{0}\u{0}\u{0}"
 end)))
 io.close()
 a,b,c=assert(loadfile(file))()
-assert(a == 20 and b == "" and c == nil)
+assert(a == 20 and b == "\u{0}\u{0}\u{0}" and c == nil)
 assert(os.remove(file))
 do
-local f = io.open(file,"\119")
-f:write("\32\32\32\32\105\102\32\40\46\46\46\41\32\116\104\101\110\32\97\32\61\32\49\53\59\32\114\101\116\117\114\110\32\98\44\32\99\44\32\100\10\32\32\32\32\101\108\115\101\32\114\101\116\117\114\110\32\95\69\78\86\10\32\32\32\32\101\110\100\10\32\32")
+local f = io.open(file,"\u{77}")
+f:write("\u{20}\u{20}\u{20}\u{20}\u{69}\u{66}\u{20}\u{28}\u{2e}\u{2e}\u{2e}\u{29}\u{20}\u{74}\u{68}\u{65}\u{6e}\u{20}\u{61}\u{20}\u{3d}\u{20}\u{31}\u{35}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{62}\u{2c}\u{20}\u{63}\u{2c}\u{20}\u{64}\u{a}\u{20}\u{20}\u{20}\u{20}\u{65}\u{6c}\u{73}\u{65}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{5f}\u{45}\u{4e}\u{56}\u{a}\u{20}\u{20}\u{20}\u{20}\u{65}\u{6e}\u{64}\u{a}\u{20}\u{20}")
 f:close()
-local t = {["\98"] = 12,["\99"] = "\120\117\120\117",["\100"] = print}
-local f = assert(loadfile(file,"\116",t))
+local t = {["\u{62}"] = 12,["\u{63}"] = "\u{78}\u{75}\u{78}\u{75}",["\u{64}"] = print}
+local f = assert(loadfile(file,"\u{74}",t))
 local b,c,d = f(1)
 assert(t.a == 15 and b == 12 and c == t.c and d == print)
 assert(f() == t)
-f=assert(loadfile(file,"\116",nil))
+f=assert(loadfile(file,"\u{74}",nil))
 assert(f() == nil)
 f=assert(loadfile(file))
 assert(f() == _G)
 assert(os.remove(file))
 end
 do
-io.open(file,"\119"):write("\114\101\116\117\114\110\32\49\48"):close()
-local s,m = loadfile(file,"\98")
-assert(not s and string.find(m,"\97\32\116\101\120\116\32\99\104\117\110\107"))
-io.open(file,"\119"):write("\27\32\114\101\116\117\114\110\32\49\48"):close()
-local s,m = loadfile(file,"\116")
-assert(not s and string.find(m,"\97\32\98\105\110\97\114\121\32\99\104\117\110\107"))
+io.open(file,"\u{77}"):write("\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}\u{30}"):close()
+local s,m = loadfile(file,"\u{62}")
+assert(not s and string.find(m,"\u{61}\u{20}\u{74}\u{65}\u{78}\u{74}\u{20}\u{63}\u{68}\u{75}\u{6e}\u{6b}"))
+io.open(file,"\u{77}"):write("\u{1b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}\u{30}"):close()
+local s,m = loadfile(file,"\u{74}")
+assert(not s and string.find(m,"\u{61}\u{20}\u{62}\u{69}\u{6e}\u{61}\u{72}\u{79}\u{20}\u{63}\u{68}\u{75}\u{6e}\u{6b}"))
 assert(os.remove(file))
 end
 io.output(file)
-assert(io.write("\113\117\97\108\113\117\101\114\32\99\111\105\115\97\10"))
-assert(io.write("\109\97\105\115\32\113\117\97\108\113\117\101\114\32\99\111\105\115\97"))
+assert(io.write("\u{71}\u{75}\u{61}\u{6c}\u{71}\u{75}\u{65}\u{72}\u{20}\u{63}\u{6f}\u{69}\u{73}\u{61}\u{a}"))
+assert(io.write("\u{6d}\u{61}\u{69}\u{73}\u{20}\u{71}\u{75}\u{61}\u{6c}\u{71}\u{75}\u{65}\u{72}\u{20}\u{63}\u{6f}\u{69}\u{73}\u{61}"))
 io.close()
-assert(io.output(assert(io.open(otherfile,"\119\98"))):write("\111\117\116\114\97\32\99\111\105\115\97\1\3\255"):close())
-local filehandle = assert(io.open(file,"\114\43"))
-local otherfilehandle = assert(io.open(otherfile,"\114\98"))
+assert(io.output(assert(io.open(otherfile,"\u{77}\u{62}"))):write("\u{6f}\u{75}\u{74}\u{72}\u{61}\u{20}\u{63}\u{6f}\u{69}\u{73}\u{61}\u{0}\u{1}\u{3}\u{0}\u{0}\u{0}\u{0}\u{ff}\u{0}"):close())
+local filehandle = assert(io.open(file,"\u{72}\u{2b}"))
+local otherfilehandle = assert(io.open(otherfile,"\u{72}\u{62}"))
 assert(filehandle ~= otherfilehandle)
-assert(type(filehandle) == "\117\115\101\114\100\97\116\97")
-assert(filehandle:read("\108") == "\113\117\97\108\113\117\101\114\32\99\111\105\115\97")
+assert(type(filehandle) == "\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}")
+assert(filehandle:read("\u{6c}") == "\u{71}\u{75}\u{61}\u{6c}\u{71}\u{75}\u{65}\u{72}\u{20}\u{63}\u{6f}\u{69}\u{73}\u{61}")
 io.input(otherfilehandle)
-assert(io.read(string.len("\111\117\116\114\97\32\99\111\105\115\97")) == "\111\117\116\114\97\32\99\111\105\115\97")
-assert(filehandle:read("\108") == "\109\97\105\115\32\113\117\97\108\113\117\101\114\32\99\111\105\115\97")
+assert(io.read(string.len("\u{6f}\u{75}\u{74}\u{72}\u{61}\u{20}\u{63}\u{6f}\u{69}\u{73}\u{61}")) == "\u{6f}\u{75}\u{74}\u{72}\u{61}\u{20}\u{63}\u{6f}\u{69}\u{73}\u{61}")
+assert(filehandle:read("\u{6c}") == "\u{6d}\u{61}\u{69}\u{73}\u{20}\u{71}\u{75}\u{61}\u{6c}\u{71}\u{75}\u{65}\u{72}\u{20}\u{63}\u{6f}\u{69}\u{73}\u{61}")
 filehandle:close()
 ;
-assert(type(filehandle) == "\117\115\101\114\100\97\116\97")
+assert(type(filehandle) == "\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}")
 io.input(otherfilehandle)
-assert(io.read(4) == "\1\3")
-assert(io.read(3) == "")
+assert(io.read(4) == "\u{0}\u{1}\u{3}\u{0}")
+assert(io.read(3) == "\u{0}\u{0}\u{0}")
 assert(io.read(0) == "")
-assert(io.read(1) == "\255")
-assert(io.read("\97") == "")
+assert(io.read(1) == "\u{ff}")
+assert(io.read("\u{61}") == "\u{0}")
 assert(not io.read(0))
 assert(otherfilehandle == io.input())
 otherfilehandle:close()
 assert(os.remove(file))
 assert(os.remove(otherfile))
 collectgarbage()
-io.output(file):write("\32\49\50\51\46\52\9\45\53\54\101\45\50\32\32\110\111\116\32\97\32\110\117\109\98\101\114\10\115\101\99\111\110\100\32\108\105\110\101\10\116\104\105\114\100\32\108\105\110\101\10\10\97\110\100\32\116\104\101\32\114\101\115\116\32\111\102\32\116\104\101\32\102\105\108\101\10"):close()
+io.output(file):write("\u{20}\u{31}\u{32}\u{33}\u{2e}\u{34}\u{9}\u{2d}\u{35}\u{36}\u{65}\u{2d}\u{32}\u{20}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{20}\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}\u{a}\u{73}\u{65}\u{63}\u{6f}\u{6e}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{a}\u{74}\u{68}\u{69}\u{72}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{a}\u{a}\u{61}\u{6e}\u{64}\u{20}\u{74}\u{68}\u{65}\u{20}\u{72}\u{65}\u{73}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{a}"):close()
 io.input(file)
-local _,a,b,c,d,e,h,__ = io.read(1,"\110","\110","\108","\108","\108","\97",10)
+local _,a,b,c,d,e,h,__ = io.read(1,"\u{6e}","\u{6e}","\u{6c}","\u{6c}","\u{6c}","\u{61}",10)
 assert(io.close(io.input()))
-assert(_ == "\32" and not __)
-assert(type(a) == "\110\117\109\98\101\114" and a == 123.4 and b == - 0.56)
-assert(d == "\115\101\99\111\110\100\32\108\105\110\101" and e == "\116\104\105\114\100\32\108\105\110\101")
-assert(h == "\10\97\110\100\32\116\104\101\32\114\101\115\116\32\111\102\32\116\104\101\32\102\105\108\101\10")
+assert(_ == "\u{20}" and not __)
+assert(type(a) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}" and a == 123.4 and b == - 0.56)
+assert(d == "\u{73}\u{65}\u{63}\u{6f}\u{6e}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}" and e == "\u{74}\u{68}\u{69}\u{72}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}")
+assert(h == "\u{a}\u{61}\u{6e}\u{64}\u{20}\u{74}\u{68}\u{65}\u{20}\u{72}\u{65}\u{73}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{a}")
 assert(os.remove(file))
 collectgarbage()
 do
-local f = assert(io.open(file,"\119"))
-local fr = assert(io.open(file,"\114"))
-assert(f:setvbuf("\102\117\108\108",2000))
-f:write("\120")
-assert(fr:read("\97\108\108") == "")
+local f = assert(io.open(file,"\u{77}"))
+local fr = assert(io.open(file,"\u{72}"))
+assert(f:setvbuf("\u{66}\u{75}\u{6c}\u{6c}",2000))
+f:write("\u{78}")
+assert(fr:read("\u{61}\u{6c}\u{6c}") == "")
 f:close()
-fr:seek("\115\101\116")
-assert(fr:read("\97\108\108") == "\120")
-f=assert(io.open(file),"\119")
-assert(f:setvbuf("\110\111"))
-f:write("\120")
-fr:seek("\115\101\116")
-assert(fr:read("\97\108\108") == "\120")
+fr:seek("\u{73}\u{65}\u{74}")
+assert(fr:read("\u{61}\u{6c}\u{6c}") == "\u{78}")
+f=assert(io.open(file),"\u{77}")
+assert(f:setvbuf("\u{6e}\u{6f}"))
+f:write("\u{78}")
+fr:seek("\u{73}\u{65}\u{74}")
+assert(fr:read("\u{61}\u{6c}\u{6c}") == "\u{78}")
 f:close()
-f=assert(io.open(file,"\97"))
-assert(f:setvbuf("\108\105\110\101"))
-f:write("\120")
-fr:seek("\115\101\116",1)
-assert(fr:read("\97\108\108") == "")
-f:write("\97\10"):seek("\115\101\116",1)
-assert(fr:read("\97\108\108") == "\120\97\10")
+f=assert(io.open(file,"\u{61}"))
+assert(f:setvbuf("\u{6c}\u{69}\u{6e}\u{65}"))
+f:write("\u{78}")
+fr:seek("\u{73}\u{65}\u{74}",1)
+assert(fr:read("\u{61}\u{6c}\u{6c}") == "")
+f:write("\u{61}\u{a}"):seek("\u{73}\u{65}\u{74}",1)
+assert(fr:read("\u{61}\u{6c}\u{6c}") == "\u{78}\u{61}\u{a}")
 f:close()
 ;
 fr:close()
 assert(os.remove(file))
 end
 if not _soft then
-print("\116\101\115\116\105\110\103\32\108\97\114\103\101\32\102\105\108\101\115\32\40\62\32\66\85\70\83\73\90\41")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{6c}\u{61}\u{72}\u{67}\u{65}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{73}\u{20}\u{28}\u{3e}\u{20}\u{42}\u{55}\u{46}\u{53}\u{49}\u{5a}\u{29}")
 io.output(file)
 for i = 1, 5001
 do
-io.write("\48\49\50\51\52\53\54\55\56\57\49\50\51")
+io.write("\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{31}\u{32}\u{33}")
 end
-io.write("\10\49\50\51\52\54"):close()
+io.write("\u{a}\u{31}\u{32}\u{33}\u{34}\u{36}"):close()
 io.input(file)
-local x = io.read("\97")
-io.input():seek("\115\101\116",0)
+local x = io.read("\u{61}")
+io.input():seek("\u{73}\u{65}\u{74}",0)
 local y = io.read(30001) .. io.read(1005) .. io.read(0) .. io.read(1) .. io.read(100003)
 assert(x == y and string.len(x) == 5001 * 13 + 6)
-io.input():seek("\115\101\116",0)
+io.input():seek("\u{73}\u{65}\u{74}",0)
 y=io.read()
-assert(x == y .. "\10" .. io.read())
+assert(x == y .. "\u{a}" .. io.read())
 assert(not io.read())
 io.close(io.input())
 assert(os.remove(file))
@@ -663,31 +663,31 @@ local i = 0
 while arg[i] do
 i=i - 1
 end
-progname="\34" .. arg[i + 1] .. "\34"
+progname="\u{22}" .. arg[i + 1] .. "\u{22}"
 end
-print("\116\101\115\116\105\110\103\32\112\111\112\101\110\47\112\99\108\111\115\101\32\97\110\100\32\101\120\101\99\117\116\101")
-checkerr("\105\110\118\97\108\105\100\32\109\111\100\101",io.popen,"\99\97\116","")
-checkerr("\105\110\118\97\108\105\100\32\109\111\100\101",io.popen,"\99\97\116","\114\43")
-checkerr("\105\110\118\97\108\105\100\32\109\111\100\101",io.popen,"\99\97\116","\114\119")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{70}\u{6f}\u{70}\u{65}\u{6e}\u{2f}\u{70}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{65}\u{78}\u{65}\u{63}\u{75}\u{74}\u{65}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6d}\u{6f}\u{64}\u{65}",io.popen,"\u{63}\u{61}\u{74}","")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6d}\u{6f}\u{64}\u{65}",io.popen,"\u{63}\u{61}\u{74}","\u{72}\u{2b}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6d}\u{6f}\u{64}\u{65}",io.popen,"\u{63}\u{61}\u{74}","\u{72}\u{77}")
 do
 local file = os.tmpname()
-local f = assert(io.popen("\99\97\116\32\45\32\62\32" .. file,"\119"))
-f:write("\97\32\108\105\110\101")
+local f = assert(io.popen("\u{63}\u{61}\u{74}\u{20}\u{2d}\u{20}\u{3e}\u{20}" .. file,"\u{77}"))
+f:write("\u{61}\u{20}\u{6c}\u{69}\u{6e}\u{65}")
 assert(f:close())
-local f = assert(io.popen("\99\97\116\32\45\32\60\32" .. file,"\114"))
-assert(f:read("\97") == "\97\32\108\105\110\101")
+local f = assert(io.popen("\u{63}\u{61}\u{74}\u{20}\u{2d}\u{20}\u{3c}\u{20}" .. file,"\u{72}"))
+assert(f:read("\u{61}") == "\u{61}\u{20}\u{6c}\u{69}\u{6e}\u{65}")
 assert(f:close())
 assert(os.remove(file))
 end
-local tests = {{"\108\115\32\62\32\47\100\101\118\47\110\117\108\108","\111\107"},{"\110\111\116\45\116\111\45\98\101\45\102\111\117\110\100\45\99\111\109\109\97\110\100","\101\120\105\116"},{"\101\120\105\116\32\51","\101\120\105\116",3},{"\101\120\105\116\32\49\50\57","\101\120\105\116",129},{"\107\105\108\108\32\45\115\32\72\85\80\32\36\36","\115\105\103\110\97\108",1},{"\107\105\108\108\32\45\115\32\75\73\76\76\32\36\36","\115\105\103\110\97\108",9},{"\115\104\32\45\99\32\39\107\105\108\108\32\45\115\32\72\85\80\32\36\36\39","\101\120\105\116"},{progname .. "\32\45\101\32\34\32\34","\111\107"},{progname .. "\32\45\101\32\34\111\115\46\101\120\105\116\40\48\44\32\116\114\117\101\41\34","\111\107"},{progname .. "\32\45\101\32\34\111\115\46\101\120\105\116\40\50\48\44\32\116\114\117\101\41\34","\101\120\105\116",20}}
-print("\10\40\115\111\109\101\32\101\114\114\111\114\32\109\101\115\115\97\103\101\115\32\97\114\101\32\101\120\112\101\99\116\101\100\32\110\111\119\41")
+local tests = {{"\u{6c}\u{73}\u{20}\u{3e}\u{20}\u{2f}\u{64}\u{65}\u{76}\u{2f}\u{6e}\u{75}\u{6c}\u{6c}","\u{6f}\u{6b}"},{"\u{6e}\u{6f}\u{74}\u{2d}\u{74}\u{6f}\u{2d}\u{62}\u{65}\u{2d}\u{66}\u{6f}\u{75}\u{6e}\u{64}\u{2d}\u{63}\u{6f}\u{6d}\u{6d}\u{61}\u{6e}\u{64}","\u{65}\u{78}\u{69}\u{74}"},{"\u{65}\u{78}\u{69}\u{74}\u{20}\u{33}","\u{65}\u{78}\u{69}\u{74}",3},{"\u{65}\u{78}\u{69}\u{74}\u{20}\u{31}\u{32}\u{39}","\u{65}\u{78}\u{69}\u{74}",129},{"\u{6b}\u{69}\u{6c}\u{6c}\u{20}\u{2d}\u{73}\u{20}\u{48}\u{55}\u{50}\u{20}\u{24}\u{24}","\u{73}\u{69}\u{67}\u{6e}\u{61}\u{6c}",1},{"\u{6b}\u{69}\u{6c}\u{6c}\u{20}\u{2d}\u{73}\u{20}\u{4b}\u{49}\u{4c}\u{4c}\u{20}\u{24}\u{24}","\u{73}\u{69}\u{67}\u{6e}\u{61}\u{6c}",9},{"\u{73}\u{68}\u{20}\u{2d}\u{63}\u{20}\u{27}\u{6b}\u{69}\u{6c}\u{6c}\u{20}\u{2d}\u{73}\u{20}\u{48}\u{55}\u{50}\u{20}\u{24}\u{24}\u{27}","\u{65}\u{78}\u{69}\u{74}"},{progname .. "\u{20}\u{2d}\u{65}\u{20}\u{22}\u{20}\u{22}","\u{6f}\u{6b}"},{progname .. "\u{20}\u{2d}\u{65}\u{20}\u{22}\u{6f}\u{73}\u{2e}\u{65}\u{78}\u{69}\u{74}\u{28}\u{30}\u{2c}\u{20}\u{74}\u{72}\u{75}\u{65}\u{29}\u{22}","\u{6f}\u{6b}"},{progname .. "\u{20}\u{2d}\u{65}\u{20}\u{22}\u{6f}\u{73}\u{2e}\u{65}\u{78}\u{69}\u{74}\u{28}\u{32}\u{30}\u{2c}\u{20}\u{74}\u{72}\u{75}\u{65}\u{29}\u{22}","\u{65}\u{78}\u{69}\u{74}",20}}
+print("\u{a}\u{28}\u{73}\u{6f}\u{6d}\u{65}\u{20}\u{65}\u{72}\u{72}\u{6f}\u{72}\u{20}\u{6d}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{73}\u{20}\u{61}\u{72}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}\u{20}\u{6e}\u{6f}\u{77}\u{29}")
 for _,v in ipairs(tests)
 do
 local x,y,z = io.popen(v[1]):close()
 local x1,y1,z1 = os.execute(v[1])
 assert(x == x1 and y == y1 and z == z1)
-if v[2] == "\111\107" then
-assert(x and y == "\101\120\105\116" and z == 0)
+if v[2] == "\u{6f}\u{6b}" then
+assert(x and y == "\u{65}\u{78}\u{69}\u{74}" and z == 0)
 else
 assert(not x and y == v[2])
 assert((v[3] == nil and z > 0) or v[3] == z)
@@ -695,28 +695,28 @@ end
 end
 end
 f=io.tmpfile()
-assert(io.type(f) == "\102\105\108\101")
-f:write("\97\108\111")
-f:seek("\115\101\116")
-assert(f:read("\97") == "\97\108\111")
+assert(io.type(f) == "\u{66}\u{69}\u{6c}\u{65}")
+f:write("\u{61}\u{6c}\u{6f}")
+f:seek("\u{73}\u{65}\u{74}")
+assert(f:read("\u{61}") == "\u{61}\u{6c}\u{6f}")
 end
-print("\43")
-print("\116\101\115\116\105\110\103\32\100\97\116\101\47\116\105\109\101")
+print("\u{2b}")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{64}\u{61}\u{74}\u{65}\u{2f}\u{74}\u{69}\u{6d}\u{65}")
 assert(os.date("") == "")
-assert(os.date("\33") == "")
-assert(os.date("") == "")
-assert(os.date("\33") == "")
-local x = string.rep("\97",10000)
+assert(os.date("\u{21}") == "")
+assert(os.date("\u{0}\u{0}") == "\u{0}\u{0}")
+assert(os.date("\u{21}\u{0}\u{0}") == "\u{0}\u{0}")
+local x = string.rep("\u{61}",10000)
 assert(os.date(x) == x)
 local t = os.time()
-D=os.date("\42\116",t)
-assert(os.date(string.rep("\37\100",1000),t) == string.rep(os.date("\37\100",t),1000))
-assert(os.date(string.rep("\37",200)) == string.rep("\37",100))
+D=os.date("\u{2a}\u{74}",t)
+assert(os.date(string.rep("\u{25}\u{64}",1000),t) == string.rep(os.date("\u{25}\u{64}",t),1000))
+assert(os.date(string.rep("\u{25}",200)) == string.rep("\u{25}",100))
 local function checkDateTable
 (t)
-_G.D=os.date("\42\116",t)
+_G.D=os.date("\u{2a}\u{74}",t)
 assert(os.time(D) == t)
-load(os.date("\97\115\115\101\114\116\40\68\46\121\101\97\114\61\61\37\89\32\97\110\100\32\68\46\109\111\110\116\104\61\61\37\109\32\97\110\100\32\68\46\100\97\121\61\61\37\100\32\97\110\100\10\32\32\32\32\68\46\104\111\117\114\61\61\37\72\32\97\110\100\32\68\46\109\105\110\61\61\37\77\32\97\110\100\32\68\46\115\101\99\61\61\37\83\32\97\110\100\10\32\32\32\32\68\46\119\100\97\121\61\61\37\119\43\49\32\97\110\100\32\68\46\121\100\97\121\61\61\37\106\41",t))()
+load(os.date("\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}\u{28}\u{44}\u{2e}\u{79}\u{65}\u{61}\u{72}\u{3d}\u{3d}\u{25}\u{59}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{44}\u{2e}\u{6d}\u{6f}\u{6e}\u{74}\u{68}\u{3d}\u{3d}\u{25}\u{6d}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{44}\u{2e}\u{64}\u{61}\u{79}\u{3d}\u{3d}\u{25}\u{64}\u{20}\u{61}\u{6e}\u{64}\u{a}\u{20}\u{20}\u{20}\u{20}\u{44}\u{2e}\u{68}\u{6f}\u{75}\u{72}\u{3d}\u{3d}\u{25}\u{48}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{44}\u{2e}\u{6d}\u{69}\u{6e}\u{3d}\u{3d}\u{25}\u{4d}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{44}\u{2e}\u{73}\u{65}\u{63}\u{3d}\u{3d}\u{25}\u{53}\u{20}\u{61}\u{6e}\u{64}\u{a}\u{20}\u{20}\u{20}\u{20}\u{44}\u{2e}\u{77}\u{64}\u{61}\u{79}\u{3d}\u{3d}\u{25}\u{77}\u{2b}\u{31}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{44}\u{2e}\u{79}\u{64}\u{61}\u{79}\u{3d}\u{3d}\u{25}\u{6a}\u{29}",t))()
 _G.D=nil
 end
 checkDateTable(os.time())
@@ -727,92 +727,92 @@ checkDateTable(1000)
 checkDateTable(2147483647)
 checkDateTable(2147483648)
 end
-checkerr("\105\110\118\97\108\105\100\32\99\111\110\118\101\114\115\105\111\110\32\115\112\101\99\105\102\105\101\114",os.date,"\37")
-checkerr("\105\110\118\97\108\105\100\32\99\111\110\118\101\114\115\105\111\110\32\115\112\101\99\105\102\105\101\114",os.date,"\37\57")
-checkerr("\105\110\118\97\108\105\100\32\99\111\110\118\101\114\115\105\111\110\32\115\112\101\99\105\102\105\101\114",os.date,"\37")
-checkerr("\105\110\118\97\108\105\100\32\99\111\110\118\101\114\115\105\111\110\32\115\112\101\99\105\102\105\101\114",os.date,"\37\79")
-checkerr("\105\110\118\97\108\105\100\32\99\111\110\118\101\114\115\105\111\110\32\115\112\101\99\105\102\105\101\114",os.date,"\37\69")
-checkerr("\105\110\118\97\108\105\100\32\99\111\110\118\101\114\115\105\111\110\32\115\112\101\99\105\102\105\101\114",os.date,"\37\69\97")
-checkerr("\110\111\116\32\97\110\32\105\110\116\101\103\101\114",os.time,{["\121\101\97\114"] = 1000,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1,["\104\111\117\114"] = "\120"})
-checkerr("\110\111\116\32\97\110\32\105\110\116\101\103\101\114",os.time,{["\121\101\97\114"] = 1000,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1,["\104\111\117\114"] = 1.5})
-checkerr("\109\105\115\115\105\110\103",os.time,{["\104\111\117\114"] = 12})
-if string.packsize("\105") == 4 then
-checkerr("\102\105\101\108\100\32\39\121\101\97\114\39\32\105\115\32\111\117\116\45\111\102\45\98\111\117\110\100",os.time,{["\121\101\97\114"] = - (1 << 31) + 1899,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1})
-checkerr("\102\105\101\108\100\32\39\121\101\97\114\39\32\105\115\32\111\117\116\45\111\102\45\98\111\117\110\100",os.time,{["\121\101\97\114"] = - (1 << 31),["\109\111\110\116\104"] = 1,["\100\97\121"] = 1})
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{63}\u{6f}\u{6e}\u{76}\u{65}\u{72}\u{73}\u{69}\u{6f}\u{6e}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{65}\u{72}",os.date,"\u{25}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{63}\u{6f}\u{6e}\u{76}\u{65}\u{72}\u{73}\u{69}\u{6f}\u{6e}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{65}\u{72}",os.date,"\u{25}\u{39}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{63}\u{6f}\u{6e}\u{76}\u{65}\u{72}\u{73}\u{69}\u{6f}\u{6e}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{65}\u{72}",os.date,"\u{25}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{63}\u{6f}\u{6e}\u{76}\u{65}\u{72}\u{73}\u{69}\u{6f}\u{6e}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{65}\u{72}",os.date,"\u{25}\u{4f}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{63}\u{6f}\u{6e}\u{76}\u{65}\u{72}\u{73}\u{69}\u{6f}\u{6e}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{65}\u{72}",os.date,"\u{25}\u{45}")
+checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{63}\u{6f}\u{6e}\u{76}\u{65}\u{72}\u{73}\u{69}\u{6f}\u{6e}\u{20}\u{73}\u{70}\u{65}\u{63}\u{69}\u{66}\u{69}\u{65}\u{72}",os.date,"\u{25}\u{45}\u{61}")
+checkerr("\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{6e}\u{20}\u{69}\u{6e}\u{74}\u{65}\u{67}\u{65}\u{72}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 1000,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1,["\u{68}\u{6f}\u{75}\u{72}"] = "\u{78}"})
+checkerr("\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{6e}\u{20}\u{69}\u{6e}\u{74}\u{65}\u{67}\u{65}\u{72}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 1000,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1,["\u{68}\u{6f}\u{75}\u{72}"] = 1.5})
+checkerr("\u{6d}\u{69}\u{73}\u{73}\u{69}\u{6e}\u{67}",os.time,{["\u{68}\u{6f}\u{75}\u{72}"] = 12})
+if string.packsize("\u{69}") == 4 then
+checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = - (1 << 31) + 1899,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1})
+checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = - (1 << 31),["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1})
 if math.maxinteger > 2 ^ 31 then
-checkerr("\102\105\101\108\100\32\39\121\101\97\114\39\32\105\115\32\111\117\116\45\111\102\45\98\111\117\110\100",os.time,{["\121\101\97\114"] = (1 << 31) + 1900,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1})
+checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = (1 << 31) + 1900,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1})
 end
 end
 if not _port then
-assert(type(os.date("\37\69\120")) == "\115\116\114\105\110\103")
-assert(type(os.date("\37\79\121")) == "\115\116\114\105\110\103")
-local t0 = os.time({["\121\101\97\114"] = 1970,["\109\111\110\116\104"] = 1,["\100\97\121"] = 0})
-local t1 = os.time({["\121\101\97\114"] = 1970,["\109\111\110\116\104"] = 1,["\100\97\121"] = 0,["\115\101\99"] = (1 << 31) - 1})
+assert(type(os.date("\u{25}\u{45}\u{78}")) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")
+assert(type(os.date("\u{25}\u{4f}\u{79}")) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")
+local t0 = os.time({["\u{79}\u{65}\u{61}\u{72}"] = 1970,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 0})
+local t1 = os.time({["\u{79}\u{65}\u{61}\u{72}"] = 1970,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 0,["\u{73}\u{65}\u{63}"] = (1 << 31) - 1})
 assert(t1 - t0 == (1 << 31) - 1)
-t0=os.time({["\121\101\97\114"] = 1970,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1})
-t1=os.time({["\121\101\97\114"] = 1970,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1,["\115\101\99"] = - (1 << 31)})
+t0=os.time({["\u{79}\u{65}\u{61}\u{72}"] = 1970,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1})
+t1=os.time({["\u{79}\u{65}\u{61}\u{72}"] = 1970,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1,["\u{73}\u{65}\u{63}"] = - (1 << 31)})
 assert(t1 - t0 == - (1 << 31))
 if maxint >= 2 ^ 62 then
-checkerr("\111\117\116\45\111\102\45\98\111\117\110\100",os.time,{["\121\101\97\114"] = - maxint,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1})
-if string.packsize("\105") == 4 then
-if testerr("\111\117\116\45\111\102\45\98\111\117\110\100",os.date,"\37\89",2 ^ 40) then
-print("\32\32\52\45\98\121\116\101\32\116\105\109\101\95\116")
-checkerr("\99\97\110\110\111\116\32\98\101\32\114\101\112\114\101\115\101\110\116\101\100",os.time,{["\121\101\97\114"] = 4000,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1})
+checkerr("\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = - maxint,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1})
+if string.packsize("\u{69}") == 4 then
+if testerr("\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.date,"\u{25}\u{59}",2 ^ 40) then
+print("\u{20}\u{20}\u{34}\u{2d}\u{62}\u{79}\u{74}\u{65}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{5f}\u{74}")
+checkerr("\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{72}\u{65}\u{70}\u{72}\u{65}\u{73}\u{65}\u{6e}\u{74}\u{65}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 4000,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1})
 else
-print("\32\32\56\45\98\121\116\101\32\116\105\109\101\95\116")
-checkerr("\99\97\110\110\111\116\32\98\101\32\114\101\112\114\101\115\101\110\116\101\100",os.date,"\37\89",2 ^ 60)
-assert(tonumber(os.time({["\121\101\97\114"] = (1 << 31) + 1899,["\109\111\110\116\104"] = 12,["\100\97\121"] = 31,["\104\111\117\114"] = 23,["\109\105\110"] = 59,["\115\101\99"] = 59})))
-checkerr("\114\101\112\114\101\115\101\110\116\101\100",os.time,{["\121\101\97\114"] = (1 << 31) + 1899,["\109\111\110\116\104"] = 12,["\100\97\121"] = 31,["\104\111\117\114"] = 23,["\109\105\110"] = 59,["\115\101\99"] = 60})
+print("\u{20}\u{20}\u{38}\u{2d}\u{62}\u{79}\u{74}\u{65}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{5f}\u{74}")
+checkerr("\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{72}\u{65}\u{70}\u{72}\u{65}\u{73}\u{65}\u{6e}\u{74}\u{65}\u{64}",os.date,"\u{25}\u{59}",2 ^ 60)
+assert(tonumber(os.time({["\u{79}\u{65}\u{61}\u{72}"] = (1 << 31) + 1899,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 12,["\u{64}\u{61}\u{79}"] = 31,["\u{68}\u{6f}\u{75}\u{72}"] = 23,["\u{6d}\u{69}\u{6e}"] = 59,["\u{73}\u{65}\u{63}"] = 59})))
+checkerr("\u{72}\u{65}\u{70}\u{72}\u{65}\u{73}\u{65}\u{6e}\u{74}\u{65}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = (1 << 31) + 1899,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 12,["\u{64}\u{61}\u{79}"] = 31,["\u{68}\u{6f}\u{75}\u{72}"] = 23,["\u{6d}\u{69}\u{6e}"] = 59,["\u{73}\u{65}\u{63}"] = 60})
 end
-checkerr("\102\105\101\108\100\32\39\100\97\121\39\32\105\115\32\111\117\116\45\111\102\45\98\111\117\110\100",os.time,{["\121\101\97\114"] = 0,["\109\111\110\116\104"] = 1,["\100\97\121"] = 2 ^ 32})
-checkerr("\102\105\101\108\100\32\39\109\111\110\116\104\39\32\105\115\32\111\117\116\45\111\102\45\98\111\117\110\100",os.time,{["\121\101\97\114"] = 0,["\109\111\110\116\104"] = - ((1 << 31) + 1),["\100\97\121"] = 1})
-checkerr("\102\105\101\108\100\32\39\121\101\97\114\39\32\105\115\32\111\117\116\45\111\102\45\98\111\117\110\100",os.time,{["\121\101\97\114"] = (1 << 31) + 1900,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1})
+checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{64}\u{61}\u{79}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 0,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 2 ^ 32})
+checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{6d}\u{6f}\u{6e}\u{74}\u{68}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 0,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = - ((1 << 31) + 1),["\u{64}\u{61}\u{79}"] = 1})
+checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = (1 << 31) + 1900,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1})
 else
-print("\32\32\56\45\98\121\116\101\32\116\105\109\101\95\116")
-assert(tonumber(os.date("\37\89",2 ^ 60)))
-checkerr("\99\97\110\110\111\116\32\98\101\32\114\101\112\114\101\115\101\110\116\101\100",os.time,{["\121\101\97\114"] = 2 ^ 60,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1})
+print("\u{20}\u{20}\u{38}\u{2d}\u{62}\u{79}\u{74}\u{65}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{5f}\u{74}")
+assert(tonumber(os.date("\u{25}\u{59}",2 ^ 60)))
+checkerr("\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{72}\u{65}\u{70}\u{72}\u{65}\u{73}\u{65}\u{6e}\u{74}\u{65}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 2 ^ 60,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1})
 end
 end
 end
 do
-local D = os.date("\42\116")
+local D = os.date("\u{2a}\u{74}")
 local t = os.time(D)
 if D.isdst == nil then
-print("\110\111\32\100\97\121\108\105\103\104\116\32\115\97\118\105\110\103\32\105\110\102\111\114\109\97\116\105\111\110")
+print("\u{6e}\u{6f}\u{20}\u{64}\u{61}\u{79}\u{6c}\u{69}\u{67}\u{68}\u{74}\u{20}\u{73}\u{61}\u{76}\u{69}\u{6e}\u{67}\u{20}\u{69}\u{6e}\u{66}\u{6f}\u{72}\u{6d}\u{61}\u{74}\u{69}\u{6f}\u{6e}")
 else
-assert(type(D.isdst) == "\98\111\111\108\101\97\110")
+assert(type(D.isdst) == "\u{62}\u{6f}\u{6f}\u{6c}\u{65}\u{61}\u{6e}")
 end
 D.isdst=nil
 local t1 = os.time(D)
 assert(t == t1)
 end
-local D = os.date("\42\116")
+local D = os.date("\u{2a}\u{74}")
 t=os.time(D)
 D.year=D.year - 1
 ;
 local t1 = os.time(D)
 assert(math.abs(os.difftime(t,t1) / (24 * 3600) - 365) < 2)
 t=os.time()
-t1=os.time(os.date("\42\116"))
+t1=os.time(os.date("\u{2a}\u{74}"))
 local diff = os.difftime(t1,t)
 assert(0 <= diff and diff <= 1)
 diff=os.difftime(t,t1)
 assert(- 1 <= diff and diff <= 0)
-local t1 = os.time({["\121\101\97\114"] = 2000,["\109\111\110\116\104"] = 10,["\100\97\121"] = 1,["\104\111\117\114"] = 23,["\109\105\110"] = 12})
-local t2 = os.time({["\121\101\97\114"] = 2000,["\109\111\110\116\104"] = 10,["\100\97\121"] = 1,["\104\111\117\114"] = 23,["\109\105\110"] = 10,["\115\101\99"] = 19})
+local t1 = os.time({["\u{79}\u{65}\u{61}\u{72}"] = 2000,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 10,["\u{64}\u{61}\u{79}"] = 1,["\u{68}\u{6f}\u{75}\u{72}"] = 23,["\u{6d}\u{69}\u{6e}"] = 12})
+local t2 = os.time({["\u{79}\u{65}\u{61}\u{72}"] = 2000,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 10,["\u{64}\u{61}\u{79}"] = 1,["\u{68}\u{6f}\u{75}\u{72}"] = 23,["\u{6d}\u{69}\u{6e}"] = 10,["\u{73}\u{65}\u{63}"] = 19})
 assert(os.difftime(t1,t2) == 60 * 2 - 19)
-t1={["\121\101\97\114"] = 2005,["\109\111\110\116\104"] = 1,["\100\97\121"] = 1,["\104\111\117\114"] = 1,["\109\105\110"] = 0,["\115\101\99"] = - 3602}
+t1={["\u{79}\u{65}\u{61}\u{72}"] = 2005,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 1,["\u{64}\u{61}\u{79}"] = 1,["\u{68}\u{6f}\u{75}\u{72}"] = 1,["\u{6d}\u{69}\u{6e}"] = 0,["\u{73}\u{65}\u{63}"] = - 3602}
 os.time(t1)
 assert(t1.day == 31 and t1.month == 12 and t1.year == 2004 and t1.hour == 23 and t1.min == 59 and t1.sec == 58 and t1.yday == 366)
 io.output(io.stdout)
-local t = os.date("\37\100\32\37\109\32\37\89\32\37\72\32\37\77\32\37\83")
-local d,m,a,h,min,s = string.match(t,"\40\37\100\43\41\32\40\37\100\43\41\32\40\37\100\43\41\32\40\37\100\43\41\32\40\37\100\43\41\32\40\37\100\43\41")
+local t = os.date("\u{25}\u{64}\u{20}\u{25}\u{6d}\u{20}\u{25}\u{59}\u{20}\u{25}\u{48}\u{20}\u{25}\u{4d}\u{20}\u{25}\u{53}")
+local d,m,a,h,min,s = string.match(t,"\u{28}\u{25}\u{64}\u{2b}\u{29}\u{20}\u{28}\u{25}\u{64}\u{2b}\u{29}\u{20}\u{28}\u{25}\u{64}\u{2b}\u{29}\u{20}\u{28}\u{25}\u{64}\u{2b}\u{29}\u{20}\u{28}\u{25}\u{64}\u{2b}\u{29}\u{20}\u{28}\u{25}\u{64}\u{2b}\u{29}")
 d=tonumber(d)
 m=tonumber(m)
 a=tonumber(a)
 h=tonumber(h)
 min=tonumber(min)
 s=tonumber(s)
-io.write(string.format("\116\101\115\116\32\100\111\110\101\32\111\110\32\37\50\46\50\100\47\37\50\46\50\100\47\37\100",d,m,a))
-io.write(string.format("\44\32\97\116\32\37\50\46\50\100\58\37\50\46\50\100\58\37\50\46\50\100\10",h,min,s))
-io.write(string.format("\37\115\10",_VERSION))
+io.write(string.format("\u{74}\u{65}\u{73}\u{74}\u{20}\u{64}\u{6f}\u{6e}\u{65}\u{20}\u{6f}\u{6e}\u{20}\u{25}\u{32}\u{2e}\u{32}\u{64}\u{2f}\u{25}\u{32}\u{2e}\u{32}\u{64}\u{2f}\u{25}\u{64}",d,m,a))
+io.write(string.format("\u{2c}\u{20}\u{61}\u{74}\u{20}\u{25}\u{32}\u{2e}\u{32}\u{64}\u{3a}\u{25}\u{32}\u{2e}\u{32}\u{64}\u{3a}\u{25}\u{32}\u{2e}\u{32}\u{64}\u{a}",h,min,s))
+io.write(string.format("\u{25}\u{73}\u{a}",_VERSION))

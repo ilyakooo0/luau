@@ -1,6 +1,6 @@
-print("\116\101\115\116\105\110\103\32\108\111\99\97\108\32\118\97\114\105\97\98\108\101\115\32\97\110\100\32\101\110\118\105\114\111\110\109\101\110\116\115")
-local debug = require("\100\101\98\117\103")
-local tracegc = require("\116\114\97\99\101\103\99")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{76}\u{61}\u{72}\u{69}\u{61}\u{62}\u{6c}\u{65}\u{73}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{65}\u{6e}\u{76}\u{69}\u{72}\u{6f}\u{6e}\u{6d}\u{65}\u{6e}\u{74}\u{73}")
+local debug = require("\u{64}\u{65}\u{62}\u{75}\u{67}")
+local tracegc = require("\u{74}\u{72}\u{61}\u{63}\u{65}\u{67}\u{63}")
 local function f
 (x)
 x=nil
@@ -48,7 +48,7 @@ f=nil
 local f
 local x = 1
 a=nil
-load("\108\111\99\97\108\32\97\32\61\32\123\125")()
+load("\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{61}\u{20}\u{3d}\u{20}\u{7b}\u{7d}")()
 assert(a == nil)
 function f(a)
 local _1,_2,_3,_4,_5
@@ -57,7 +57,7 @@ local x = 3
 local b = a
 local c,d = a,b
 if (d == b) then
-local x = "\113"
+local x = "\u{71}"
 x=b
 assert(x == 2)
 else
@@ -79,17 +79,17 @@ assert(a + 1 == b)
 until a + b == 3
 assert(x == 1)
 f(2)
-assert(type(f) == "\102\117\110\99\116\105\111\110")
+assert(type(f) == "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}")
 local function getenv
 (f)
 local a,b = debug.getupvalue(f,1)
-assert(a == "\95\69\78\86")
+assert(a == "\u{5f}\u{45}\u{4e}\u{56}")
 return b
 end
-assert(getenv(load("\97\61\51")) == _G)
+assert(getenv(load("\u{61}\u{3d}\u{33}")) == _G)
 local c = {}
 ;
-local f = load("\97\32\61\32\51",nil,nil,c)
+local f = load("\u{61}\u{20}\u{3d}\u{20}\u{33}",nil,nil,c)
 assert(getenv(f) == c)
 assert(c.a == nil)
 f()
@@ -100,19 +100,19 @@ local p = 4
 repeat
 for j = - 3, 3
 do
-assert(load(string.format("\108\111\99\97\108\32\97\61\37\115\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\97\61\97\43\37\115\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\97\115\115\101\114\116\40\97\32\61\61\50\94\37\115\41",j,p - j,i),""))()
-assert(load(string.format("\108\111\99\97\108\32\97\61\37\115\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\97\61\97\45\37\115\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\97\115\115\101\114\116\40\97\61\61\45\50\94\37\115\41",- j,p - j,i),""))()
-assert(load(string.format("\108\111\99\97\108\32\97\44\98\61\48\44\37\115\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\97\61\98\45\37\115\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\97\115\115\101\114\116\40\97\61\61\45\50\94\37\115\41",- j,p - j,i),""))()
+assert(load(string.format("\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{61}\u{3d}\u{25}\u{73}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{61}\u{3d}\u{61}\u{2b}\u{25}\u{73}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}\u{28}\u{61}\u{20}\u{3d}\u{3d}\u{32}\u{5e}\u{25}\u{73}\u{29}",j,p - j,i),""))()
+assert(load(string.format("\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{61}\u{3d}\u{25}\u{73}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{61}\u{3d}\u{61}\u{2d}\u{25}\u{73}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}\u{28}\u{61}\u{3d}\u{3d}\u{2d}\u{32}\u{5e}\u{25}\u{73}\u{29}",- j,p - j,i),""))()
+assert(load(string.format("\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{61}\u{2c}\u{62}\u{3d}\u{30}\u{2c}\u{25}\u{73}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{61}\u{3d}\u{62}\u{2d}\u{25}\u{73}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}\u{28}\u{61}\u{3d}\u{3d}\u{2d}\u{32}\u{5e}\u{25}\u{73}\u{29}",- j,p - j,i),""))()
 end
 p=2 * p
 ;
 i=i + 1
 until p <= 0
 end
-print("\43")
-if rawget(_G,"\84") then
-collectgarbage("\115\116\111\112")
-local a = {[{}] = 4,[3] = 0,["\97\108\111"] = 1,["\97\49\50\51\52\53\54\55\56\57\48\49\50\51\52\53\54\55\56\57\48\49\50\51\52\53\54\55\56\57\48\49\50\51\52\53\54\55\56\57\48"] = 10}
+print("\u{2b}")
+if rawget(_G,"\u{54}") then
+collectgarbage("\u{73}\u{74}\u{6f}\u{70}")
+local a = {[{}] = 4,[3] = 0,["\u{61}\u{6c}\u{6f}"] = 1,["\u{61}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}"] = 10}
 local t = T.querytab(a)
 for k,_ in pairs(a)
 do
@@ -122,7 +122,7 @@ collectgarbage()
 for i = 0, t - 1
 do
 local k = querytab(a,i)
-assert(k == nil or type(k) == "\110\117\109\98\101\114" or k == "\97\108\111")
+assert(k == nil or type(k) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}" or k == "\u{61}\u{6c}\u{6f}")
 end
 local a = {}
 local function additems
@@ -160,11 +160,11 @@ local _ENV = (function (...)
 return ...
 end)(_G,dummy)
 do
-local _ENV = {["\97\115\115\101\114\116"] = assert}
+local _ENV = {["\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}"] = assert}
 ;
 assert(true)
 end
-local mt = {["\95\71"] = _G}
+local mt = {["\u{5f}\u{47}"] = _G}
 local foo,x
 A=false
 do
@@ -182,15 +182,15 @@ end
 end
 end
 assert(getenv(foo) == mt)
-x=foo("\104\105")
+x=foo("\u{68}\u{69}")
 ;
-assert(mt.A == "\104\105" and A == 1000)
-assert(x("\42") == mt.A .. "\42")
+assert(mt.A == "\u{68}\u{69}" and A == 1000)
+assert(x("\u{2a}") == mt.A .. "\u{2a}")
 do
-local _ENV = {["\97\115\115\101\114\116"] = assert,["\65"] = 10}
+local _ENV = {["\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}"] = assert,["\u{41}"] = 10}
 ;
 do
-local _ENV = {["\97\115\115\101\114\116"] = assert,["\65"] = 20}
+local _ENV = {["\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}"] = assert,["\u{41}"] = 20}
 ;
 assert(A == 20)
 ;
@@ -207,25 +207,25 @@ assert(a == 10 and b == 60 and c == 30)
 local function checkro
 (name,code)
 local st,msg = load(code)
-local gab = string.format("\97\116\116\101\109\112\116\32\116\111\32\97\115\115\105\103\110\32\116\111\32\99\111\110\115\116\32\118\97\114\105\97\98\108\101\32\39\37\115\39",name)
+local gab = string.format("\u{61}\u{74}\u{74}\u{65}\u{6d}\u{70}\u{74}\u{20}\u{74}\u{6f}\u{20}\u{61}\u{73}\u{73}\u{69}\u{67}\u{6e}\u{20}\u{74}\u{6f}\u{20}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{20}\u{76}\u{61}\u{72}\u{69}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{27}\u{25}\u{73}\u{27}",name)
 assert(not st and string.find(msg,gab))
 end
-checkro("\121","\108\111\99\97\108\32\120\44\32\121\32\60\99\111\110\115\116\62\44\32\122\32\61\32\49\48\44\32\50\48\44\32\51\48\59\32\120\32\61\32\49\49\59\32\121\32\61\32\49\50")
-checkro("\120","\108\111\99\97\108\32\120\32\60\99\111\110\115\116\62\44\32\121\44\32\122\32\60\99\111\110\115\116\62\32\61\32\49\48\44\32\50\48\44\32\51\48\59\32\120\32\61\32\49\49")
-checkro("\122","\108\111\99\97\108\32\120\32\60\99\111\110\115\116\62\44\32\121\44\32\122\32\60\99\111\110\115\116\62\32\61\32\49\48\44\32\50\48\44\32\51\48\59\32\121\32\61\32\49\48\59\32\122\32\61\32\49\49")
-checkro("\102\111\111","\108\111\99\97\108\32\102\111\111\32\60\99\111\110\115\116\62\32\61\32\49\48\59\32\102\117\110\99\116\105\111\110\32\102\111\111\40\41\32\101\110\100")
-checkro("\102\111\111","\108\111\99\97\108\32\102\111\111\32\60\99\111\110\115\116\62\32\61\32\123\125\59\32\102\117\110\99\116\105\111\110\32\102\111\111\40\41\32\101\110\100")
-checkro("\122","\32\32\32\32\108\111\99\97\108\32\97\44\32\122\32\60\99\111\110\115\116\62\44\32\98\32\61\32\49\48\59\10\32\32\32\32\102\117\110\99\116\105\111\110\32\102\111\111\40\41\32\97\32\61\32\50\48\59\32\122\32\61\32\51\50\59\32\101\110\100\10\32\32")
-checkro("\118\97\114\49","\32\32\32\32\108\111\99\97\108\32\97\44\32\118\97\114\49\32\60\99\111\110\115\116\62\32\61\32\49\48\59\10\32\32\32\32\102\117\110\99\116\105\111\110\32\102\111\111\40\41\32\97\32\61\32\50\48\59\32\122\32\61\32\102\117\110\99\116\105\111\110\32\40\41\32\118\97\114\49\32\61\32\49\50\59\32\101\110\100\32\32\101\110\100\10\32\32")
+checkro("\u{79}","\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{78}\u{2c}\u{20}\u{79}\u{20}\u{3c}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{3e}\u{2c}\u{20}\u{7a}\u{20}\u{3d}\u{20}\u{31}\u{30}\u{2c}\u{20}\u{32}\u{30}\u{2c}\u{20}\u{33}\u{30}\u{3b}\u{20}\u{78}\u{20}\u{3d}\u{20}\u{31}\u{31}\u{3b}\u{20}\u{79}\u{20}\u{3d}\u{20}\u{31}\u{32}")
+checkro("\u{78}","\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{78}\u{20}\u{3c}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{3e}\u{2c}\u{20}\u{79}\u{2c}\u{20}\u{7a}\u{20}\u{3c}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{3e}\u{20}\u{3d}\u{20}\u{31}\u{30}\u{2c}\u{20}\u{32}\u{30}\u{2c}\u{20}\u{33}\u{30}\u{3b}\u{20}\u{78}\u{20}\u{3d}\u{20}\u{31}\u{31}")
+checkro("\u{7a}","\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{78}\u{20}\u{3c}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{3e}\u{2c}\u{20}\u{79}\u{2c}\u{20}\u{7a}\u{20}\u{3c}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{3e}\u{20}\u{3d}\u{20}\u{31}\u{30}\u{2c}\u{20}\u{32}\u{30}\u{2c}\u{20}\u{33}\u{30}\u{3b}\u{20}\u{79}\u{20}\u{3d}\u{20}\u{31}\u{30}\u{3b}\u{20}\u{7a}\u{20}\u{3d}\u{20}\u{31}\u{31}")
+checkro("\u{66}\u{6f}\u{6f}","\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{66}\u{6f}\u{6f}\u{20}\u{3c}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{3e}\u{20}\u{3d}\u{20}\u{31}\u{30}\u{3b}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{66}\u{6f}\u{6f}\u{28}\u{29}\u{20}\u{65}\u{6e}\u{64}")
+checkro("\u{66}\u{6f}\u{6f}","\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{66}\u{6f}\u{6f}\u{20}\u{3c}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{3e}\u{20}\u{3d}\u{20}\u{7b}\u{7d}\u{3b}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{66}\u{6f}\u{6f}\u{28}\u{29}\u{20}\u{65}\u{6e}\u{64}")
+checkro("\u{7a}","\u{20}\u{20}\u{20}\u{20}\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{61}\u{2c}\u{20}\u{7a}\u{20}\u{3c}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{3e}\u{2c}\u{20}\u{62}\u{20}\u{3d}\u{20}\u{31}\u{30}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{66}\u{6f}\u{6f}\u{28}\u{29}\u{20}\u{61}\u{20}\u{3d}\u{20}\u{32}\u{30}\u{3b}\u{20}\u{7a}\u{20}\u{3d}\u{20}\u{33}\u{32}\u{3b}\u{20}\u{65}\u{6e}\u{64}\u{a}\u{20}\u{20}")
+checkro("\u{76}\u{61}\u{72}\u{31}","\u{20}\u{20}\u{20}\u{20}\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{61}\u{2c}\u{20}\u{76}\u{61}\u{72}\u{31}\u{20}\u{3c}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{3e}\u{20}\u{3d}\u{20}\u{31}\u{30}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{66}\u{6f}\u{6f}\u{28}\u{29}\u{20}\u{61}\u{20}\u{3d}\u{20}\u{32}\u{30}\u{3b}\u{20}\u{7a}\u{20}\u{3d}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{28}\u{29}\u{20}\u{76}\u{61}\u{72}\u{31}\u{20}\u{3d}\u{20}\u{31}\u{32}\u{3b}\u{20}\u{65}\u{6e}\u{64}\u{20}\u{20}\u{65}\u{6e}\u{64}\u{a}\u{20}\u{20}")
 end
-print("\116\101\115\116\105\110\103\32\116\111\45\98\101\45\99\108\111\115\101\100\32\118\97\114\105\97\98\108\101\115")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{6f}\u{2d}\u{62}\u{65}\u{2d}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{20}\u{76}\u{61}\u{72}\u{69}\u{61}\u{62}\u{6c}\u{65}\u{73}")
 local function stack
 (n)
 n=((n == 0) or stack(n - 1))
 end
 local function func2close
 (f,x,y)
-local obj = setmetatable({},{["\95\95\99\108\111\115\101"] = f})
+local obj = setmetatable({},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = f})
 if x then
 return x,obj,y
 else
@@ -236,20 +236,20 @@ do
 local a = {}
 do
 local b <close> = false
-local x <close> = setmetatable({"\120"},{["\95\95\99\108\111\115\101"] = function (self)
+local x <close> = setmetatable({"\u{78}"},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = function (self)
 a[# a + 1]=self[1]
 end})
 local w,y <close>,z = func2close(function (self,err)
 assert(err == nil)
 ;
-a[# a + 1]="\121"
+a[# a + 1]="\u{79}"
 end,10,20)
 local c <close> = nil
-a[# a + 1]="\105\110"
+a[# a + 1]="\u{69}\u{6e}"
 assert(w == 10 and z == 20)
 end
-a[# a + 1]="\111\117\116"
-assert(a[1] == "\105\110" and a[2] == "\121" and a[3] == "\120" and a[4] == "\111\117\116")
+a[# a + 1]="\u{6f}\u{75}\u{74}"
+assert(a[1] == "\u{69}\u{6e}" and a[2] == "\u{79}" and a[3] == "\u{78}" and a[4] == "\u{6f}\u{75}\u{74}")
 end
 do
 local X = false
@@ -273,7 +273,7 @@ assert(a == 1.5 and b == false and c == 23 and X == true)
 X=false
 foo=function (x)
 local _ <close> = func2close(function (_,msg)
-assert(debug.getinfo(2).name == "\102\111\111")
+assert(debug.getinfo(2).name == "\u{66}\u{6f}\u{6f}")
 assert(msg == nil)
 end)
 local _ <close> = closescope
@@ -290,7 +290,7 @@ assert(foo() == closescope and X == true)
 end
 do
 local flag = false
-local x = setmetatable({},{["\95\95\99\108\111\115\101"] = function ()
+local x = setmetatable({},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = function ()
 assert(flag == false)
 ;
 flag=true
@@ -304,7 +304,7 @@ assert(flag)
 end
 do
 local flag = false
-local x = setmetatable({},{["\95\95\99\108\111\115\101"] = function ()
+local x = setmetatable({},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = function ()
 assert(flag == false)
 ;
 flag=true
@@ -375,7 +375,7 @@ assert(closed == true)
 end
 do
 local closed = false
-local o1 = setmetatable({},{["\95\95\99\108\111\115\101"] = function ()
+local o1 = setmetatable({},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = function ()
 closed=true
 end})
 local function test
@@ -393,86 +393,86 @@ end
 test()
 end
 do
-print("\116\101\115\116\105\110\103\32\101\114\114\111\114\115\32\105\110\32\95\95\99\108\111\115\101")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{65}\u{72}\u{72}\u{6f}\u{72}\u{73}\u{20}\u{69}\u{6e}\u{20}\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}")
 local function foo
 ()
 local x <close> = func2close(function (self,msg)
-assert(string.find(msg,"\64\121"))
-error("\64\120")
+assert(string.find(msg,"\u{40}\u{79}"))
+error("\u{40}\u{78}")
 end)
 local x1 <close> = func2close(function (self,msg)
-assert(string.find(msg,"\64\121"))
+assert(string.find(msg,"\u{40}\u{79}"))
 end)
 local gc <close> = func2close(function ()
 collectgarbage()
 end)
 local y <close> = func2close(function (self,msg)
-assert(string.find(msg,"\64\122"))
-error("\64\121")
+assert(string.find(msg,"\u{40}\u{7a}"))
+error("\u{40}\u{79}")
 end)
 local z <close> = func2close(function (self,msg)
 assert(msg == nil)
-error("\64\122")
+error("\u{40}\u{7a}")
 end)
 return 200
 end
 local stat,msg = pcall(foo,false)
-assert(string.find(msg,"\64\120"))
+assert(string.find(msg,"\u{40}\u{78}"))
 local function foo
 ()
 local x <close> = func2close(function (self,msg)
-assert(debug.getinfo(2).name == "\112\99\97\108\108")
-assert(string.find(msg,"\64\120\49"))
+assert(debug.getinfo(2).name == "\u{70}\u{63}\u{61}\u{6c}\u{6c}")
+assert(string.find(msg,"\u{40}\u{78}\u{31}"))
 end)
 local x1 <close> = func2close(function (self,msg)
-assert(debug.getinfo(2).name == "\112\99\97\108\108")
-assert(string.find(msg,"\64\121"))
-error("\64\120\49")
+assert(debug.getinfo(2).name == "\u{70}\u{63}\u{61}\u{6c}\u{6c}")
+assert(string.find(msg,"\u{40}\u{79}"))
+error("\u{40}\u{78}\u{31}")
 end)
 local gc <close> = func2close(function ()
 collectgarbage()
 end)
 local y <close> = func2close(function (self,msg)
-assert(debug.getinfo(2).name == "\112\99\97\108\108")
-assert(string.find(msg,"\64\122"))
-error("\64\121")
+assert(debug.getinfo(2).name == "\u{70}\u{63}\u{61}\u{6c}\u{6c}")
+assert(string.find(msg,"\u{40}\u{7a}"))
+error("\u{40}\u{79}")
 end)
 local first = true
 local z <close> = func2close(function (self,msg)
-assert(debug.getinfo(2).name == "\112\99\97\108\108")
+assert(debug.getinfo(2).name == "\u{70}\u{63}\u{61}\u{6c}\u{6c}")
 assert(first and msg == 4)
 first=false
-error("\64\122")
+error("\u{40}\u{7a}")
 end)
 error(4)
 end
 local stat,msg = pcall(foo,true)
-assert(string.find(msg,"\64\120\49"))
+assert(string.find(msg,"\u{40}\u{78}\u{31}"))
 local function foo
 (...)
 do
 local x1 <close> = func2close(function (self,msg)
-assert(string.find(msg,"\64\88"))
-error("\64\89")
+assert(string.find(msg,"\u{40}\u{58}"))
+error("\u{40}\u{59}")
 end)
 local x123 <close> = func2close(function (_,msg)
 assert(msg == nil)
-error("\64\88")
+error("\u{40}\u{58}")
 end)
 end
 os.exit(false)
 end
 local st,msg = xpcall(foo,debug.traceback)
-assert(string.match(msg,"\94\91\94\32\93\42\32\64\89"))
+assert(string.match(msg,"\u{5e}\u{5b}\u{5e}\u{20}\u{5d}\u{2a}\u{20}\u{40}\u{59}"))
 local function foo
 (...)
 local x123 <close> = func2close(function ()
-error("\64\120\49\50\51")
+error("\u{40}\u{78}\u{31}\u{32}\u{33}")
 end)
 end
 local st,msg = xpcall(foo,debug.traceback)
-assert(string.match(msg,"\94\91\94\32\93\42\32\64\120\49\50\51"))
-assert(string.find(msg,"\105\110\32\109\101\116\97\109\101\116\104\111\100\32\39\99\108\111\115\101\39"))
+assert(string.match(msg,"\u{5e}\u{5b}\u{5e}\u{20}\u{5d}\u{2a}\u{20}\u{40}\u{78}\u{31}\u{32}\u{33}"))
+assert(string.find(msg,"\u{69}\u{6e}\u{20}\u{6d}\u{65}\u{74}\u{61}\u{6d}\u{65}\u{74}\u{68}\u{6f}\u{64}\u{20}\u{27}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{27}"))
 end
 do
 local function foo
@@ -481,21 +481,21 @@ local x <close> = {}
 os.exit(false)
 end
 local stat,msg = pcall(foo)
-assert(not stat and string.find(msg,"\118\97\114\105\97\98\108\101\32\39\120\39\32\103\111\116\32\97\32\110\111\110\37\45\99\108\111\115\97\98\108\101\32\118\97\108\117\101"))
+assert(not stat and string.find(msg,"\u{76}\u{61}\u{72}\u{69}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{27}\u{78}\u{27}\u{20}\u{67}\u{6f}\u{74}\u{20}\u{61}\u{20}\u{6e}\u{6f}\u{6e}\u{25}\u{2d}\u{63}\u{6c}\u{6f}\u{73}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{76}\u{61}\u{6c}\u{75}\u{65}"))
 local function foo
 ()
-local xyz <close> = setmetatable({},{["\95\95\99\108\111\115\101"] = print})
+local xyz <close> = setmetatable({},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = print})
 getmetatable(xyz).__close=nil
 end
 local stat,msg = pcall(foo)
-assert(not stat and string.find(msg,"\109\101\116\97\109\101\116\104\111\100\32\39\99\108\111\115\101\39"))
+assert(not stat and string.find(msg,"\u{6d}\u{65}\u{74}\u{61}\u{6d}\u{65}\u{74}\u{68}\u{6f}\u{64}\u{20}\u{27}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{27}"))
 local function foo
 ()
 local a1 <close> = func2close(function (_,msg)
-assert(string.find(msg,"\110\117\109\98\101\114\32\118\97\108\117\101"))
+assert(string.find(msg,"\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}\u{20}\u{76}\u{61}\u{6c}\u{75}\u{65}"))
 error(12)
 end)
-local a2 <close> = setmetatable({},{["\95\95\99\108\111\115\101"] = print})
+local a2 <close> = setmetatable({},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = print})
 local a3 <close> = func2close(function (_,msg)
 assert(msg == nil)
 error(123)
@@ -512,38 +512,38 @@ local function foo
 local x <close> = func2close(function ()
 local xx <close> = func2close(function (_,msg)
 assert(msg == nil)
-track[# track + 1]="\120\120"
+track[# track + 1]="\u{78}\u{78}"
 end)
-track[# track + 1]="\120"
+track[# track + 1]="\u{78}"
 end)
-track[# track + 1]="\102\111\111"
+track[# track + 1]="\u{66}\u{6f}\u{6f}"
 return 20,30,40
 end
 local a,b,c,d = foo()
 assert(a == 20 and b == 30 and c == 40 and d == nil)
-assert(track[1] == "\102\111\111" and track[2] == "\120" and track[3] == "\120\120")
+assert(track[1] == "\u{66}\u{6f}\u{6f}" and track[2] == "\u{78}" and track[3] == "\u{78}\u{78}")
 local track = {}
 local function foo
 ()
 local x0 <close> = func2close(function (_,msg)
 assert(msg == 202)
-track[# track + 1]="\120\48"
+track[# track + 1]="\u{78}\u{30}"
 end)
 local x <close> = func2close(function ()
 local xx <close> = func2close(function (_,msg)
 assert(msg == 101)
-track[# track + 1]="\120\120"
+track[# track + 1]="\u{78}\u{78}"
 error(202)
 end)
-track[# track + 1]="\120"
+track[# track + 1]="\u{78}"
 error(101)
 end)
-track[# track + 1]="\102\111\111"
+track[# track + 1]="\u{66}\u{6f}\u{6f}"
 return 20,30,40
 end
 local st,msg = pcall(foo)
 assert(not st and msg == 202)
-assert(track[1] == "\102\111\111" and track[2] == "\120" and track[3] == "\120\120" and track[4] == "\120\48")
+assert(track[1] == "\u{66}\u{6f}\u{6f}" and track[2] == "\u{78}" and track[3] == "\u{78}\u{78}" and track[4] == "\u{78}\u{30}")
 end
 local function checktable
 (t1,t2)
@@ -560,7 +560,7 @@ overflow(n + 1)
 end
 local function errorh
 (m)
-assert(string.find(m,"\115\116\97\99\107\32\111\118\101\114\102\108\111\119"))
+assert(string.find(m,"\u{73}\u{74}\u{61}\u{63}\u{6b}\u{20}\u{6f}\u{76}\u{65}\u{72}\u{66}\u{6c}\u{6f}\u{77}"))
 local x <close> = func2close(function (o)
 o[1]=10
 end)
@@ -581,7 +581,7 @@ end)
 co()
 assert(not st and obj[1] == 10 and flag[1] == 100)
 end
-if rawget(_G,"\84") then
+if rawget(_G,"\u{54}") then
 do
 collectgarbage()
 ;
@@ -594,10 +594,10 @@ if n < 400 then
 loop(n + 1)
 end
 end
-local o = setmetatable({},{["\95\95\99\108\111\115\101"] = function ()
+local o = setmetatable({},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = function ()
 loop(0)
 end})
-local script = "\116\111\99\108\111\115\101\32\50\59\32\115\101\116\116\111\112\32\49\59\32\114\101\116\117\114\110\32\49"
+local script = "\u{74}\u{6f}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{20}\u{32}\u{3b}\u{20}\u{73}\u{65}\u{74}\u{74}\u{6f}\u{70}\u{20}\u{31}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}"
 assert(T.testC(script,o) == script)
 end
 local function foo
@@ -605,7 +605,7 @@ local function foo
 local y <close> = func2close(function ()
 T.alloccount()
 end)
-local x <close> = setmetatable({},{["\95\95\99\108\111\115\101"] = function ()
+local x <close> = setmetatable({},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = function ()
 T.alloccount(0)
 ;
 local x = {}
@@ -614,7 +614,7 @@ error(1000)
 end
 stack(5)
 local _,msg = pcall(foo)
-assert(msg == "\110\111\116\32\101\110\111\117\103\104\32\109\101\109\111\114\121")
+assert(msg == "\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}")
 local closemsg
 local close = func2close(function (self,msg)
 T.alloccount()
@@ -633,42 +633,42 @@ local x <close> = enter(0)
 local y = {}
 end
 local _,msg = pcall(test)
-assert(msg == "\110\111\116\32\101\110\111\117\103\104\32\109\101\109\111\114\121" and closemsg == "\110\111\116\32\101\110\111\117\103\104\32\109\101\109\111\114\121")
+assert(msg == "\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}" and closemsg == "\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}")
 local function test
 ()
 local xxx <close> = func2close(function (self,msg)
-assert(msg == "\110\111\116\32\101\110\111\117\103\104\32\109\101\109\111\114\121")
+assert(msg == "\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}")
 ;
 error(1000)
 end)
 local xx <close> = func2close(function (self,msg)
-assert(msg == "\110\111\116\32\101\110\111\117\103\104\32\109\101\109\111\114\121")
+assert(msg == "\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}")
 ;
 end)
 local x <close> = enter(0)
 local y = {}
 end
 local _,msg = pcall(test)
-assert(msg == 1000 and closemsg == "\110\111\116\32\101\110\111\117\103\104\32\109\101\109\111\114\121")
+assert(msg == 1000 and closemsg == "\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}")
 do
 collectgarbage()
-local s = string.rep("\97",10000)
+local s = string.rep("\u{61}",10000)
 local m = T.totalmem()
-collectgarbage("\115\116\111\112")
+collectgarbage("\u{73}\u{74}\u{6f}\u{70}")
 s=string.upper(s)
 assert(T.totalmem() - m <= 11000)
-collectgarbage("\114\101\115\116\97\114\116")
+collectgarbage("\u{72}\u{65}\u{73}\u{74}\u{61}\u{72}\u{74}")
 end
 do
 local lim = 10000
 local extra = 2000
-local s = string.rep("\97",lim)
+local s = string.rep("\u{61}",lim)
 local a = {s,s}
 collectgarbage()
 ;
 collectgarbage()
 local m = T.totalmem()
-collectgarbage("\115\116\111\112")
+collectgarbage("\u{73}\u{74}\u{6f}\u{70}")
 T.totalmem(m + extra)
 assert(not pcall(table.concat,a))
 assert(T.totalmem() - m <= extra)
@@ -681,25 +681,25 @@ assert(T.totalmem() - m <= extra)
 T.totalmem(m + 4 * lim + extra)
 assert(# table.concat(a) == 2 * lim)
 T.totalmem(0)
-collectgarbage("\114\101\115\116\97\114\116")
-print("\43")
+collectgarbage("\u{72}\u{65}\u{73}\u{74}\u{61}\u{72}\u{74}")
+print("\u{2b}")
 end
 do
 local trace = {}
 local function hook
 (event)
-trace[# trace + 1]=event .. "\32" .. (debug.getinfo(2).name or "\63")
+trace[# trace + 1]=event .. "\u{20}" .. (debug.getinfo(2).name or "\u{3f}")
 end
 local x = func2close(function (_,msg)
-trace[# trace + 1]="\120"
+trace[# trace + 1]="\u{78}"
 end)
 local y = func2close(function (_,msg)
-trace[# trace + 1]="\121"
+trace[# trace + 1]="\u{79}"
 end)
-debug.sethook(hook,"\114")
-local t = {T.testC("\32\32\32\32\32\32\32\116\111\99\108\111\115\101\32\50\32\32\32\32\32\32\35\32\120\10\32\32\32\32\32\32\32\112\117\115\104\110\117\109\32\49\48\10\32\32\32\32\32\32\32\112\117\115\104\105\110\116\32\50\48\10\32\32\32\32\32\32\32\116\111\99\108\111\115\101\32\51\32\32\32\32\32\32\35\32\121\10\32\32\32\32\32\32\32\114\101\116\117\114\110\32\50\10\32\32\32\32",x,y)}
+debug.sethook(hook,"\u{72}")
+local t = {T.testC("\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{74}\u{6f}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{20}\u{32}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{78}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{31}\u{30}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{69}\u{6e}\u{74}\u{20}\u{32}\u{30}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{74}\u{6f}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{20}\u{33}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{79}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{32}\u{a}\u{20}\u{20}\u{20}\u{20}",x,y)}
 debug.sethook()
-checktable(trace,{"\114\101\116\117\114\110\32\115\101\116\104\111\111\107","\121","\114\101\116\117\114\110\32\63","\120","\114\101\116\117\114\110\32\63","\114\101\116\117\114\110\32\116\101\115\116\67"})
+checktable(trace,{"\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{73}\u{65}\u{74}\u{68}\u{6f}\u{6f}\u{6b}","\u{79}","\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{3f}","\u{78}","\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{3f}","\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}"})
 checktable(t,{10,20})
 end
 end
@@ -707,58 +707,58 @@ do
 local trace = {}
 local function hook
 (event)
-trace[# trace + 1]=event .. "\32" .. debug.getinfo(2).name
+trace[# trace + 1]=event .. "\u{20}" .. debug.getinfo(2).name
 end
 local function foo
 (...)
 local x <close> = func2close(function (_,msg)
-trace[# trace + 1]="\120"
+trace[# trace + 1]="\u{78}"
 end)
 local y <close> = func2close(function (_,msg)
-debug.sethook(hook,"\114")
+debug.sethook(hook,"\u{72}")
 end)
 return ...
 end
 local t = {foo(10,20,30)}
 debug.sethook()
 checktable(t,{10,20,30})
-checktable(trace,{"\114\101\116\117\114\110\32\115\101\116\104\111\111\107","\114\101\116\117\114\110\32\99\108\111\115\101","\120","\114\101\116\117\114\110\32\99\108\111\115\101","\114\101\116\117\114\110\32\102\111\111"})
+checktable(trace,{"\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{73}\u{65}\u{74}\u{68}\u{6f}\u{6f}\u{6b}","\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{63}\u{6c}\u{6f}\u{73}\u{65}","\u{78}","\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{63}\u{6c}\u{6f}\u{73}\u{65}","\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{66}\u{6f}\u{6f}"})
 end
-print("\116\111\45\98\101\45\99\108\111\115\101\100\32\118\97\114\105\97\98\108\101\115\32\105\110\32\99\111\114\111\117\116\105\110\101\115")
+print("\u{74}\u{6f}\u{2d}\u{62}\u{65}\u{2d}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{20}\u{76}\u{61}\u{72}\u{69}\u{61}\u{62}\u{6c}\u{65}\u{73}\u{20}\u{69}\u{6e}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{73}")
 do
 local trace = {}
 local co = coroutine.wrap(function ()
-trace[# trace + 1]="\110\111\119\88"
+trace[# trace + 1]="\u{6e}\u{6f}\u{77}\u{58}"
 local x <close> = func2close(function (_,msg)
 assert(msg == nil)
-trace[# trace + 1]="\120\49"
-coroutine.yield("\120")
-trace[# trace + 1]="\120\50"
+trace[# trace + 1]="\u{78}\u{31}"
+coroutine.yield("\u{78}")
+trace[# trace + 1]="\u{78}\u{32}"
 end)
 return pcall(function ()
 do
 local z <close> = func2close(function (_,msg)
 assert(msg == nil)
-trace[# trace + 1]="\122\49"
-coroutine.yield("\122")
-trace[# trace + 1]="\122\50"
+trace[# trace + 1]="\u{7a}\u{31}"
+coroutine.yield("\u{7a}")
+trace[# trace + 1]="\u{7a}\u{32}"
 end)
 end
-trace[# trace + 1]="\110\111\119\89"
+trace[# trace + 1]="\u{6e}\u{6f}\u{77}\u{59}"
 local y <close> = func2close(function (_,msg)
 assert(msg == nil)
-trace[# trace + 1]="\121\49"
-coroutine.yield("\121")
-trace[# trace + 1]="\121\50"
+trace[# trace + 1]="\u{79}\u{31}"
+coroutine.yield("\u{79}")
+trace[# trace + 1]="\u{79}\u{32}"
 end)
 return 10,20,30
 end)
 end)
-assert(co() == "\122")
-assert(co() == "\121")
-assert(co() == "\120")
+assert(co() == "\u{7a}")
+assert(co() == "\u{79}")
+assert(co() == "\u{78}")
 checktable({co()},{true,10,20,30})
-checktable(trace,{"\110\111\119\88","\122\49","\122\50","\110\111\119\89","\121\49","\121\50","\120\49","\120\50"})
+checktable(trace,{"\u{6e}\u{6f}\u{77}\u{58}","\u{7a}\u{31}","\u{7a}\u{32}","\u{6e}\u{6f}\u{77}\u{59}","\u{79}\u{31}","\u{79}\u{32}","\u{78}\u{31}","\u{78}\u{32}"})
 end
 do
 local extrares
@@ -775,7 +775,7 @@ local res2 = table.pack(co())
 assert(res2.n == t.n)
 for i = 1, # t
 do
-if t[i] == "\120" then
+if t[i] == "\u{78}" then
 assert(res2[i] == res[1])
 else
 assert(res2[i] == t[i])
@@ -792,7 +792,7 @@ end)
 extrares=extra
 return table.unpack({10,x,30})
 end
-check(foo,true,10,"\120",30)
+check(foo,true,10,"\u{78}",30)
 assert(extrares == 100)
 local function foo
 ()
@@ -806,7 +806,7 @@ local x <close> = func2close(coroutine.yield)
 local y,z = 20,30
 return x
 end
-check(foo,false,"\120")
+check(foo,false,"\u{78}")
 local function foo
 ()
 local x <close> = func2close(coroutine.yield)
@@ -821,19 +821,19 @@ local function foo
 (err)
 local z <close> = func2close(function (_,msg)
 assert(msg == nil or msg == err + 20)
-coroutine.yield("\122")
+coroutine.yield("\u{7a}")
 return 100,200
 end)
 local y <close> = func2close(function (_,msg)
 assert(msg == err or (msg == nil and err == 1))
-coroutine.yield("\121")
+coroutine.yield("\u{79}")
 if err then
 error(err + 20)
 end
 end)
 local x <close> = func2close(function (_,msg)
 assert(msg == err or (msg == nil and err == 1))
-coroutine.yield("\120")
+coroutine.yield("\u{78}")
 return 100,200
 end)
 if err == 10 then
@@ -847,27 +847,27 @@ coroutine.yield(pcall(foo,1))
 return pcall(foo,10)
 end)
 local a,b = co()
-assert(a == "\120" and b == nil)
+assert(a == "\u{78}" and b == nil)
 a,b=co()
-assert(a == "\121" and b == nil)
+assert(a == "\u{79}" and b == nil)
 a,b=co()
-assert(a == "\122" and b == nil)
+assert(a == "\u{7a}" and b == nil)
 local a,b,c = co()
 assert(a and b == 10 and c == 20)
 local a,b = co()
-assert(a == "\120" and b == nil)
+assert(a == "\u{78}" and b == nil)
 a,b=co()
-assert(a == "\121" and b == nil)
+assert(a == "\u{79}" and b == nil)
 a,b=co()
-assert(a == "\122" and b == nil)
+assert(a == "\u{7a}" and b == nil)
 local st,msg = co()
 assert(not st and msg == 21)
 local a,b = co()
-assert(a == "\120" and b == nil)
+assert(a == "\u{78}" and b == nil)
 a,b=co()
-assert(a == "\121" and b == nil)
+assert(a == "\u{79}" and b == nil)
 a,b=co()
-assert(a == "\122" and b == nil)
+assert(a == "\u{7a}" and b == nil)
 local st,msg = co()
 assert(not st and msg == 10 + 20)
 end
@@ -900,13 +900,13 @@ local co = coroutine.wrap(function ()
 local xx <close> = func2close(function (_,msg)
 x=x + 1
 ;
-assert(string.find(msg,"\64\88\88\88"))
-error("\64\89\89\89")
+assert(string.find(msg,"\u{40}\u{58}\u{58}\u{58}"))
+error("\u{40}\u{59}\u{59}\u{59}")
 end)
 local xv <close> = func2close(function ()
 x=x + 1
 ;
-error("\64\88\88\88")
+error("\u{40}\u{58}\u{58}\u{58}")
 end)
 coroutine.yield(100)
 error(200)
@@ -917,20 +917,20 @@ assert(x == 0)
 local st,msg = pcall(co)
 ;
 assert(x == 2)
-assert(not st and string.find(msg,"\64\89\89\89"))
+assert(not st and string.find(msg,"\u{40}\u{59}\u{59}\u{59}"))
 local x = 0
 local y = 0
 co=coroutine.wrap(function ()
 local xx <close> = func2close(function (_,err)
 y=y + 1
 ;
-assert(string.find(err,"\88\88\88"))
-error("\89\89\89")
+assert(string.find(err,"\u{58}\u{58}\u{58}"))
+error("\u{59}\u{59}\u{59}")
 end)
 local xv <close> = func2close(function ()
 x=x + 1
 ;
-error("\88\88\88")
+error("\u{58}\u{58}\u{58}")
 end)
 coroutine.yield(100)
 return 200
@@ -940,7 +940,7 @@ assert(co() == 100)
 assert(x == 0)
 local st,msg = pcall(co)
 assert(x == 1 and y == 1)
-assert(not st and string.find(msg,"\37\119\43\37\46\37\119\43\58\37\100\43\58\32\89\89\89"))
+assert(not st and string.find(msg,"\u{25}\u{77}\u{2b}\u{25}\u{2e}\u{25}\u{77}\u{2b}\u{3a}\u{25}\u{64}\u{2b}\u{3a}\u{20}\u{59}\u{59}\u{59}"))
 end
 local co
 co=coroutine.wrap(function ()
@@ -953,12 +953,12 @@ end)
 co()
 assert(co == nil)
 collectgarbage()
-if rawget(_G,"\84") then
-print("\116\111\45\98\101\45\99\108\111\115\101\100\32\118\97\114\105\97\98\108\101\115\32\120\32\99\111\114\111\117\116\105\110\101\115\32\105\110\32\67")
+if rawget(_G,"\u{54}") then
+print("\u{74}\u{6f}\u{2d}\u{62}\u{65}\u{2d}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{20}\u{76}\u{61}\u{72}\u{69}\u{61}\u{62}\u{6c}\u{65}\u{73}\u{20}\u{78}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{73}\u{20}\u{69}\u{6e}\u{20}\u{43}")
 do
 local token = 0
 local count = 0
-local f = T.makeCfunc("\32\32\32\32\32\32\116\111\99\108\111\115\101\32\49\10\32\32\32\32\32\32\116\111\99\108\111\115\101\32\50\10\32\32\32\32\32\32\114\101\116\117\114\110\32\46\10\32\32\32\32")
+local f = T.makeCfunc("\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{74}\u{6f}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{20}\u{31}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{74}\u{6f}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{20}\u{32}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{2e}\u{a}\u{20}\u{20}\u{20}\u{20}")
 local obj = func2close(function (_,msg)
 count=count + 1
 token=coroutine.yield(count,token)
@@ -973,33 +973,33 @@ assert(res[1] == 10 and res[2] == 20 and res[3] == 30 and res[4] == nil)
 assert(token == 200)
 end
 do
-local f = T.makeCfunc("\32\32\32\32\32\32\116\111\99\108\111\115\101\32\49\10\32\32\32\32\32\32\114\101\116\117\114\110\32\46\10\32\32\32\32")
+local f = T.makeCfunc("\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{74}\u{6f}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{20}\u{31}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{2e}\u{a}\u{20}\u{20}\u{20}\u{20}")
 local obj = func2close(function ()
 local temp
 local x <close> = func2close(function ()
 coroutine.yield(temp)
 return 1,2,3
 end)
-temp=coroutine.yield("\99\108\111\115\105\110\103\32\111\98\106")
+temp=coroutine.yield("\u{63}\u{6c}\u{6f}\u{73}\u{69}\u{6e}\u{67}\u{20}\u{6f}\u{62}\u{6a}")
 return 1,2,3
 end)
 local co = coroutine.wrap(f)
 local res = co(obj,10,30,1)
-assert(res == "\99\108\111\115\105\110\103\32\111\98\106")
-res=co("\99\108\111\115\105\110\103\32\120")
-assert(res == "\99\108\111\115\105\110\103\32\120")
+assert(res == "\u{63}\u{6c}\u{6f}\u{73}\u{69}\u{6e}\u{67}\u{20}\u{6f}\u{62}\u{6a}")
+res=co("\u{63}\u{6c}\u{6f}\u{73}\u{69}\u{6e}\u{67}\u{20}\u{78}")
+assert(res == "\u{63}\u{6c}\u{6f}\u{73}\u{69}\u{6e}\u{67}\u{20}\u{78}")
 res={co()}
 assert(res[1] == 30 and res[2] == nil)
 end
 do
-local f = T.makeCfunc("\32\32\32\32\32\32\116\111\99\108\111\115\101\32\49\10\32\32\32\32\32\32\99\108\111\115\101\115\108\111\116\32\49\10\32\32\32\32")
+local f = T.makeCfunc("\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{74}\u{6f}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{20}\u{31}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{73}\u{6c}\u{6f}\u{74}\u{20}\u{31}\u{a}\u{20}\u{20}\u{20}\u{20}")
 local obj = func2close(coroutine.yield)
 local co = coroutine.create(f)
 local st,msg = coroutine.resume(co,obj)
-assert(not st and string.find(msg,"\97\116\116\101\109\112\116\32\116\111\32\121\105\101\108\100\32\97\99\114\111\115\115"))
-local f = T.makeCfunc("\32\32\32\32\32\32\116\111\99\108\111\115\101\32\49\10\32\32\32\32")
+assert(not st and string.find(msg,"\u{61}\u{74}\u{74}\u{65}\u{6d}\u{70}\u{74}\u{20}\u{74}\u{6f}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{61}\u{63}\u{72}\u{6f}\u{73}\u{73}"))
+local f = T.makeCfunc("\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{74}\u{6f}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{20}\u{31}\u{a}\u{20}\u{20}\u{20}\u{20}")
 local st,msg = pcall(f,obj)
-assert(not st and string.find(msg,"\97\116\116\101\109\112\116\32\116\111\32\121\105\101\108\100\32\102\114\111\109\32\111\117\116\115\105\100\101"))
+assert(not st and string.find(msg,"\u{61}\u{74}\u{74}\u{65}\u{6d}\u{70}\u{74}\u{20}\u{74}\u{6f}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{66}\u{72}\u{6f}\u{6d}\u{20}\u{6f}\u{75}\u{74}\u{73}\u{69}\u{64}\u{65}"))
 end
 end
 do
@@ -1045,6 +1045,6 @@ end
 ::endloop::
 assert(s == 375 and numopen == 0)
 end
-print("\79\75")
+print("\u{4f}\u{4b}")
 return 5,f
 end

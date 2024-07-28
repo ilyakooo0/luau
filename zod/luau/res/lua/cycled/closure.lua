@@ -1,5 +1,5 @@
-print("\116\101\115\116\105\110\103\32\99\108\111\115\117\114\101\115")
-local A,B = 0,{["\103"] = 10}
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6c}\u{6f}\u{73}\u{75}\u{72}\u{65}\u{73}")
+local A,B = 0,{["\u{67}"] = 10}
 local function f
 (x)
 local a = {}
@@ -34,7 +34,7 @@ return a
 end
 local a = f(10)
 local x = {[1] = {}}
-setmetatable(x,{["\95\95\109\111\100\101"] = "\107\118"})
+setmetatable(x,{["\u{5f}\u{5f}\u{6d}\u{6f}\u{64}\u{65}"] = "\u{6b}\u{76}"})
 while x[1] do
 local a = A .. A .. A .. A
 A=A + 1
@@ -47,7 +47,7 @@ assert(a[2]() == 20 + A)
 assert(a[2]() == 30 + A)
 assert(a[3]() == 20 + A)
 assert(a[8]() == 10 + A)
-assert(getmetatable(x).__mode == "\107\118")
+assert(getmetatable(x).__mode == "\u{6b}\u{76}")
 assert(B.g == 19)
 a={}
 for i = 1, 5
@@ -70,9 +70,9 @@ end
 a={}
 for i = 1, 10
 do
-a[i]={["\115\101\116"] = function (x)
+a[i]={["\u{73}\u{65}\u{74}"] = function (x)
 i=x
-end,["\103\101\116"] = function ()
+end,["\u{67}\u{65}\u{74}"] = function ()
 return i
 end}
 if i == 3 then
@@ -82,19 +82,19 @@ end
 assert(a[4] == undef)
 a[1].set(10)
 assert(a[2].get() == 2)
-a[2].set("\97")
+a[2].set("\u{61}")
 assert(a[3].get() == 3)
-assert(a[2].get() == "\97")
+assert(a[2].get() == "\u{61}")
 a={}
-local t = {"\97","\98"}
+local t = {"\u{61}","\u{62}"}
 for i = 1, # t
 do
 local k = t[i]
-a[i]={["\115\101\116"] = function (x,y)
+a[i]={["\u{73}\u{65}\u{74}"] = function (x,y)
 i=x
 ;
 k=y
-end,["\103\101\116"] = function ()
+end,["\u{67}\u{65}\u{74}"] = function ()
 return i,k
 end}
 if i == 2 then
@@ -103,12 +103,12 @@ end
 end
 a[1].set(10,20)
 local r,s = a[2].get()
-assert(r == 2 and s == "\98")
+assert(r == 2 and s == "\u{62}")
 r,s=a[1].get()
 assert(r == 10 and s == 20)
-a[2].set("\97","\98")
+a[2].set("\u{61}","\u{62}")
 r,s=a[2].get()
-assert(r == "\97" and s == "\98")
+assert(r == "\u{61}" and s == "\u{62}")
 local f
 for i = 1, 3
 do
@@ -127,7 +127,7 @@ end
 break
 end
 assert(({f()})[1] == 1)
-assert(({f()})[2] == "\97")
+assert(({f()})[2] == "\u{61}")
 local b
 function f(x)
 local first = 1
@@ -135,9 +135,9 @@ while 1 do
 if x == 3 and not first then
 return 
 end
-local a = "\120\117\120\117"
+local a = "\u{78}\u{75}\u{78}\u{75}"
 b=function (op,y)
-if op == "\115\101\116" then
+if op == "\u{73}\u{65}\u{74}" then
 a=x + y
 else
 return a
@@ -160,18 +160,18 @@ end
 for i = 1, 3
 do
 f(i)
-assert(b("\103\101\116") == "\120\117\120\117")
-b("\115\101\116",10)
+assert(b("\u{67}\u{65}\u{74}") == "\u{78}\u{75}\u{78}\u{75}")
+b("\u{73}\u{65}\u{74}",10)
 ;
-assert(b("\103\101\116") == 10 + i)
+assert(b("\u{67}\u{65}\u{74}") == 10 + i)
 b=nil
 end
 pcall(f,4)
 ;
-assert(b("\103\101\116") == "\120\117\120\117")
-b("\115\101\116",10)
+assert(b("\u{67}\u{65}\u{74}") == "\u{78}\u{75}\u{78}\u{75}")
+b("\u{73}\u{65}\u{74}",10)
 ;
-assert(b("\103\101\116") == 14)
+assert(b("\u{67}\u{65}\u{74}") == 14)
 local y,w
 function f(x)
 return function (y)
@@ -228,7 +228,7 @@ return t
 end
 elseif i % 3 == 1 then
 goto L1
-error("\110\111\116\32\104\101\114\101")
+error("\u{6e}\u{6f}\u{74}\u{20}\u{68}\u{65}\u{72}\u{65}")
 ::L1::
 local y = 1
 a[i]=function (x)
@@ -245,7 +245,7 @@ goto l4
 a[i]=t
 ;
 goto l4b
-error("\115\104\111\117\108\100\32\110\101\118\101\114\32\98\101\32\104\101\114\101\33")
+error("\u{73}\u{68}\u{6f}\u{75}\u{6c}\u{64}\u{20}\u{6e}\u{65}\u{76}\u{65}\u{72}\u{20}\u{62}\u{65}\u{20}\u{68}\u{65}\u{72}\u{65}\u{21}")
 ::l4::
 local y = 2
 t=function (x)
@@ -256,7 +256,7 @@ y=x
 return t
 end
 goto l4a
-error("\115\104\111\117\108\100\32\110\101\118\101\114\32\98\101\32\104\101\114\101\33")
+error("\u{73}\u{68}\u{6f}\u{75}\u{6c}\u{64}\u{20}\u{6e}\u{65}\u{76}\u{65}\u{72}\u{20}\u{62}\u{65}\u{20}\u{68}\u{65}\u{72}\u{65}\u{21}")
 ::l4b::
 end
 end
@@ -264,16 +264,16 @@ for i = 1, 10
 do
 assert(a[i](i * 10) == i % 3 and a[i]() == i * 10)
 end
-print("\43")
+print("\u{2b}")
 local function t
 ()
 local function c
 (a,b)
-assert(a == "\116\101\115\116" and b == "\79\75")
+assert(a == "\u{74}\u{65}\u{73}\u{74}" and b == "\u{4f}\u{4b}")
 end
 local function v
 (f, ...)
-c("\116\101\115\116",f() ~= 1 and "\70\65\73\76\69\68" or "\79\75")
+c("\u{74}\u{65}\u{73}\u{74}",f() ~= 1 and "\u{46}\u{41}\u{49}\u{4c}\u{45}\u{44}" or "\u{4f}\u{4b}")
 end
 local x = 1
 return v(function ()
@@ -281,7 +281,7 @@ return x
 end)
 end
 t()
-local debug = require("\100\101\98\117\103")
+local debug = require("\u{64}\u{65}\u{62}\u{75}\u{67}")
 local foo1,foo2,foo3
 do
 local a,b,c = 3,5,7
@@ -309,7 +309,7 @@ assert(debug.upvalueid(foo1,2) == debug.upvalueid(foo2,1))
 assert(debug.upvalueid(foo3,1))
 assert(debug.upvalueid(foo1,1) ~= debug.upvalueid(foo3,1))
 assert(debug.upvalueid(foo1,2) == debug.upvalueid(foo3,2))
-assert(debug.upvalueid(string.gmatch("\120","\120"),1) ~= nil)
+assert(debug.upvalueid(string.gmatch("\u{78}","\u{78}"),1) ~= nil)
 assert(foo1() == 3 + 5 and foo2() == 5 + 3)
 debug.upvaluejoin(foo1,2,foo2,2)
 assert(foo1() == 3 + 3 and foo2() == 5 + 3)
@@ -324,4 +324,4 @@ assert(not pcall(debug.upvaluejoin,foo1,0,foo2,1))
 assert(not pcall(debug.upvaluejoin,print,1,foo2,1))
 assert(not pcall(debug.upvaluejoin,{},1,foo2,1))
 assert(not pcall(debug.upvaluejoin,foo1,1,print,1))
-print("\79\75")
+print("\u{4f}\u{4b}")

@@ -1,7 +1,7 @@
-print("\116\101\115\116\105\110\103\32\118\97\114\97\114\103")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{76}\u{61}\u{72}\u{61}\u{72}\u{67}")
 local function f
 (a, ...)
-local x = {["\110"] = select("\35",...),...}
+local x = {["\u{6e}"] = select("\u{23}",...),...}
 for i = 1, x.n
 do
 assert(a[i] == x[i])
@@ -22,30 +22,30 @@ return res,2
 end
 local function vararg
 (...)
-return {["\110"] = select("\35",...),...}
+return {["\u{6e}"] = select("\u{23}",...),...}
 end
 local call = function (f,args)
 return f(table.unpack(args,1,args.n))
 end
 assert(f() == 0)
 assert(f({1,2,3},1,2,3) == 3)
-assert(f({"\97\108\111",nil,45,f,nil},"\97\108\111",nil,45,f,nil) == 5)
+assert(f({"\u{61}\u{6c}\u{6f}",nil,45,f,nil},"\u{61}\u{6c}\u{6f}",nil,45,f,nil) == 5)
 assert(vararg().n == 0)
 assert(vararg(nil,nil).n == 2)
 assert(c12(1,2) == 55)
 local a,b = assert(call(c12,{1,2}))
 assert(a == 55 and b == 2)
-a=call(c12,{1,2,["\110"] = 2})
+a=call(c12,{1,2,["\u{6e}"] = 2})
 assert(a == 55 and b == 2)
-a=call(c12,{1,2,["\110"] = 1})
+a=call(c12,{1,2,["\u{6e}"] = 1})
 assert(not a)
 assert(c12(1,2,3) == false)
-local a = vararg(call(next,{_G,nil,["\110"] = 2}))
+local a = vararg(call(next,{_G,nil,["\u{6e}"] = 2}))
 local b,c = next(_G)
 assert(a[1] == b and a[2] == c and a.n == 2)
 a=vararg(call(call,{c12,{1,2}}))
 assert(a.n == 2 and a[1] == 55 and a[2] == 2)
-a=call(print,{"\43"})
+a=call(print,{"\u{2b}"})
 assert(a == nil)
 local t = {1,10}
 function t:f(...)
@@ -54,7 +54,7 @@ local arg = {...}
 return self[...] + # arg
 end
 assert(t:f(1,4) == 3 and t:f(2) == 11)
-print("\43")
+print("\u{2b}")
 local lim = 20
 local i,a = 1,{}
 while i <= lim do
@@ -80,7 +80,7 @@ a[i]=i
 i=i + 1
 end
 assert(call(math.max,a) == lim)
-print("\43")
+print("\u{2b}")
 local function oneless
 (a, ...)
 return ...
@@ -101,11 +101,11 @@ a,b,c,d,e=assert(f(10,5,4,3,2,1))
 assert(a == 5 and b == 4 and c == 3 and d == 2 and e == 1)
 a,b,c,d,e=f(4)
 assert(a == nil and b == nil and c == nil and d == nil and e == nil)
-local f = load("\32\114\101\116\117\114\110\32\123\46\46\46\125\32")
+local f = load("\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{7b}\u{2e}\u{2e}\u{2e}\u{7d}\u{20}")
 local x = f(2,3)
 assert(x[1] == 2 and x[2] == 3 and x[3] == undef)
-f=load("\32\32\108\111\99\97\108\32\120\32\61\32\123\46\46\46\125\10\32\32\102\111\114\32\105\61\49\44\115\101\108\101\99\116\40\39\35\39\44\32\46\46\46\41\32\100\111\32\97\115\115\101\114\116\40\120\91\105\93\32\61\61\32\115\101\108\101\99\116\40\105\44\32\46\46\46\41\41\32\101\110\100\10\32\32\97\115\115\101\114\116\40\120\91\115\101\108\101\99\116\40\39\35\39\44\32\46\46\46\41\43\49\93\32\61\61\32\117\110\100\101\102\41\10\32\32\114\101\116\117\114\110\32\116\114\117\101\10")
-assert(f("\97","\98",nil,{},assert))
+f=load("\u{20}\u{20}\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{78}\u{20}\u{3d}\u{20}\u{7b}\u{2e}\u{2e}\u{2e}\u{7d}\u{a}\u{20}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{69}\u{3d}\u{31}\u{2c}\u{73}\u{65}\u{6c}\u{65}\u{63}\u{74}\u{28}\u{27}\u{23}\u{27}\u{2c}\u{20}\u{2e}\u{2e}\u{2e}\u{29}\u{20}\u{64}\u{6f}\u{20}\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}\u{28}\u{78}\u{5b}\u{69}\u{5d}\u{20}\u{3d}\u{3d}\u{20}\u{73}\u{65}\u{6c}\u{65}\u{63}\u{74}\u{28}\u{69}\u{2c}\u{20}\u{2e}\u{2e}\u{2e}\u{29}\u{29}\u{20}\u{65}\u{6e}\u{64}\u{a}\u{20}\u{20}\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}\u{28}\u{78}\u{5b}\u{73}\u{65}\u{6c}\u{65}\u{63}\u{74}\u{28}\u{27}\u{23}\u{27}\u{2c}\u{20}\u{2e}\u{2e}\u{2e}\u{29}\u{2b}\u{31}\u{5d}\u{20}\u{3d}\u{3d}\u{20}\u{75}\u{6e}\u{64}\u{65}\u{66}\u{29}\u{a}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{74}\u{72}\u{75}\u{65}\u{a}")
+assert(f("\u{61}","\u{62}",nil,{},assert))
 assert(f())
 a={select(3,table.unpack({10,20,30,40}))}
 assert(# a == 2 and a[1] == 30 and a[2] == 40)
@@ -134,4 +134,4 @@ end
 local a,b = g()
 assert(a == nil and b == 2)
 end
-print("\79\75")
+print("\u{4f}\u{4b}")

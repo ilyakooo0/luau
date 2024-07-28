@@ -64,10 +64,15 @@ print
     ::
     ^-  tape
     %-  zing
-    %+  turn  (trip string)
+    %+  turn  string
     |=  char=@t
     ^-  tape
-    :-  '\\'  (show-u `@`char)
+    %-  zing
+    :~
+      "\\u\{"
+      ((x-co:co 1) char)
+      "}"
+    ==
     "\""
   ==
 :: table

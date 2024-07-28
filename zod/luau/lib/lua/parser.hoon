@@ -101,47 +101,49 @@ apex
     |=  quot=char
     =/  quot  (just quot)
     %+  cook
-      |=([* =tape *] (crip tape))
+      |=([* =tape *] tape)
     ;~  plug
       quot
+      %+  cook  zing
       %-  star
       ;~  less  quot
         ;~  pose
-          %+  cold  '\07'  (jest '\\a')
-          %+  cold  '\08'  (jest '\\b')
-          %+  cold  '\0c'  (jest '\\f')
-          %+  cold  '\0a'  (jest '\\n')
-          %+  cold  '\0d'  (jest '\\r')
-          %+  cold  '\09'  (jest '\\t')
-          %+  cold  '\0b'  (jest '\\v')
-          %+  cold  '\\'  (jest '\\\\')
-          %+  cold  '"'  (jest '\\"')
-          %+  cold  '\''  (jest '\\\'')
-          %+  cold  '\0a'  (jest '\\\0a')
-          %+  cold  ''  ;~(plug (jest '\\z') gaw)
+          %+  cold  ~['\07']  (jest '\\a')
+          %+  cold  ~['\08']  (jest '\\b')
+          %+  cold  ~['\0c']  (jest '\\f')
+          %+  cold  ~['\0a']  (jest '\\n')
+          %+  cold  ~['\0d']  (jest '\\r')
+          %+  cold  ~['\09']  (jest '\\t')
+          %+  cold  ~['\0b']  (jest '\\v')
+          %+  cold  ~['\\']  (jest '\\\\')
+          %+  cold  ~['"']  (jest '\\"')
+          %+  cold  ~['\'']  (jest '\\\'')
+          %+  cold  ~['\0a']  (jest '\\\0a')
+          %+  cold  ~  ;~(plug (jest '\\z') gaw)
           ::
           ;~  pfix
             (jest '\\x')
             ;<  hex-digits=tape  bind  ;~(plug next next (easy ~))
             =/  digit=(unit @)  (rust hex-digits hex)
-            ?~  digit  fail  (easy `@t`u.digit)
+            ?~  digit  fail  (easy ~[`@`u.digit])
           ==
           ::
           ;~  pfix
             (jest '\\')
             ;<  digits=tape  bind  (stun [1 3] (shim '0' '9'))
             =/  digit=(unit @)  (rust digits dem)
-            ?~  digit  fail  (easy `@t`u.digit)
+            ?~  digit  fail  (easy ~[`@`u.digit])
           ==
           ::
           %+  cook
-            |=  [* point=@ *]  `@t`point
+            |=  [* point=@ *]  ~[point]
           ;~  plug
             (jest '\\u{')
             hex
             (just '}')
           ==
           ::
+          %+  cook  |=(char=@ ~[char])
           next
         ==
       ==
@@ -152,7 +154,6 @@ apex
     (parse-string '"')
     (parse-string '\'')
     ::
-    %+  cook  |=(=tape (crip tape))
     %-  long-brackets
     |*  closing=rule 
     ;~  pfix
@@ -203,7 +204,7 @@ apex
     ==
     ::
     %+  cook
-      |=([=name * =expr] [%keyed [%string name] expr])
+      |=([=name * =expr] [%keyed [%string (trip name)] expr])
     ;~  (glue ws)
       parse-name
       tis

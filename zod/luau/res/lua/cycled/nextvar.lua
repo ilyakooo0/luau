@@ -1,4 +1,4 @@
-print("\116\101\115\116\105\110\103\32\116\97\98\108\101\115\44\32\110\101\120\116\44\32\97\110\100\32\102\111\114")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{73}\u{2c}\u{20}\u{6e}\u{65}\u{78}\u{74}\u{2c}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{66}\u{6f}\u{72}")
 local function checkerror
 (msg,f, ...)
 local s,err = pcall(f,...)
@@ -18,11 +18,11 @@ end
 local a = {}
 for i = 1, 100
 do
-a[i .. "\43"]=true
+a[i .. "\u{2b}"]=true
 end
 for i = 1, 100
 do
-a[i .. "\43"]=undef
+a[i .. "\u{2b}"]=undef
 end
 for i = 1, 100
 do
@@ -58,12 +58,12 @@ end
 assert(a.x == 1)
 end
 local x = 0
-for k,v in ipairs({10,20,30,["\120"] = 12})
+for k,v in ipairs({10,20,30,["\u{78}"] = 12})
 do
 x=x + 1
 assert(k == x and v == x * 10)
 end
-for _ in ipairs({["\120"] = 12,["\121"] = 24})
+for _ in ipairs({["\u{78}"] = 12,["\u{79}"] = 24})
 do
 assert(nil)
 end
@@ -76,7 +76,7 @@ x=not x
 assert(x == v)
 end
 assert(i == 4)
-assert(type(ipairs({})) == "\102\117\110\99\116\105\111\110" and ipairs({}) == ipairs({}))
+assert(type(ipairs({})) == "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}" and ipairs({}) == ipairs({}))
 do
 local f = ipairs({})
 local k,v = f({[math.mininteger] = 10},math.maxinteger)
@@ -85,7 +85,7 @@ k,v=f({[math.mininteger] = 10},k)
 assert(k == nil)
 end
 if not T then
-(Message or print)("\10\32\62\62\62\32\116\101\115\116\67\32\110\111\116\32\97\99\116\105\118\101\58\32\115\107\105\112\112\105\110\103\32\116\101\115\116\115\32\102\111\114\32\116\97\98\108\101\32\115\105\122\101\115\32\60\60\60\10")
+(Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{73}\u{69}\u{7a}\u{65}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 else
 local function mp2
 (n)
@@ -104,21 +104,21 @@ end
 local sizes = {0,1,2,3,4,5,7,8,9,15,16,17,30,31,32,33,34,254,255,256,500,1000}
 for _,sa in ipairs(sizes)
 do
-local arr = {"\114\101\116\117\114\110\32\123"}
+local arr = {"\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{7b}"}
 for i = 1, sa
 do
-arr[1 + i]="\49\44"
+arr[1 + i]="\u{31}\u{2c}"
 end
 for _,sh in ipairs(sizes)
 do
 for j = 1, sh
 do
-arr[1 + sa + j]=string.format("\107\37\120\61\37\100\44",j,j)
+arr[1 + sa + j]=string.format("\u{6b}\u{25}\u{78}\u{3d}\u{25}\u{64}\u{2c}",j,j)
 end
-arr[1 + sa + sh + 1]="\125"
+arr[1 + sa + sh + 1]="\u{7d}"
 local prog = table.concat(arr)
 local f = assert(load(prog))
-collectgarbage("\115\116\111\112")
+collectgarbage("\u{73}\u{74}\u{6f}\u{70}")
 f()
 if sa == 0 or sh == 0 then
 T.alloccount(2)
@@ -130,7 +130,7 @@ end
 local t = f()
 T.alloccount()
 ;
-collectgarbage("\114\101\115\116\97\114\116")
+collectgarbage("\u{72}\u{65}\u{73}\u{74}\u{61}\u{72}\u{74}")
 assert(# t == sa)
 check(t,sa,mp2(sh))
 end
@@ -181,7 +181,7 @@ end
 a={}
 for i = 1, lim
 do
-a["\97" .. i]=1
+a["\u{61}" .. i]=1
 assert(# a == 0)
 check(a,0,mp2(i))
 end
@@ -239,7 +239,7 @@ local function foo
 (n, ...)
 local arg = {...}
 check(arg,n,0)
-assert(select("\35",...) == n)
+assert(select("\u{23}",...) == n)
 arg[n + 1]=true
 check(arg,mp2(n + 1),0)
 arg.x=true
@@ -279,7 +279,7 @@ assert(# {nil,nil} == 0)
 assert(# {nil,nil,nil} == 0)
 assert(# {nil,nil,nil,nil} == 0)
 assert(# {1,2,3,nil,nil} == 3)
-print("\43")
+print("\u{2b}")
 local nofind = {}
 a,b,c=1,2,3
 a,b,c=nil
@@ -308,27 +308,27 @@ end
 end
 return nil
 end
-assert(print == find("\112\114\105\110\116") and print == find1("\112\114\105\110\116"))
-assert(_G["\112\114\105\110\116"] == find("\112\114\105\110\116"))
-assert(assert == find1("\97\115\115\101\114\116"))
-assert(nofind == find("\114\101\116\117\114\110"))
-assert(not find1("\114\101\116\117\114\110"))
-_G["\114\101\116" .. "\117\114\110"]=undef
-assert(nofind == find("\114\101\116\117\114\110"))
-_G["\120\120\120"]=1
-assert(xxx == find("\120\120\120"))
-checkerror("\105\110\118\97\108\105\100\32\107\101\121",next,{10,20},3)
-checkerror("\98\97\100\32\97\114\103\117\109\101\110\116",pairs)
-checkerror("\98\97\100\32\97\114\103\117\109\101\110\116",ipairs)
-print("\43")
+assert(print == find("\u{70}\u{72}\u{69}\u{6e}\u{74}") and print == find1("\u{70}\u{72}\u{69}\u{6e}\u{74}"))
+assert(_G["\u{70}\u{72}\u{69}\u{6e}\u{74}"] == find("\u{70}\u{72}\u{69}\u{6e}\u{74}"))
+assert(assert == find1("\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}"))
+assert(nofind == find("\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}"))
+assert(not find1("\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}"))
+_G["\u{72}\u{65}\u{74}" .. "\u{75}\u{72}\u{6e}"]=undef
+assert(nofind == find("\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}"))
+_G["\u{78}\u{78}\u{78}"]=1
+assert(xxx == find("\u{78}\u{78}\u{78}"))
+checkerror("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{6b}\u{65}\u{79}",next,{10,20},3)
+checkerror("\u{62}\u{61}\u{64}\u{20}\u{61}\u{72}\u{67}\u{75}\u{6d}\u{65}\u{6e}\u{74}",pairs)
+checkerror("\u{62}\u{61}\u{64}\u{20}\u{61}\u{72}\u{67}\u{75}\u{6d}\u{65}\u{6e}\u{74}",ipairs)
+print("\u{2b}")
 a={}
 for i = 0, 10000
 do
 if math.fmod(i,10) ~= 0 then
-a["\120" .. i]=i
+a["\u{78}" .. i]=i
 end
 end
-n={["\110"] = 0}
+n={["\u{6e}"] = 0}
 for i,v in pairs(a)
 do
 n.n=n.n + 1
@@ -344,7 +344,7 @@ a[n]=v
 end
 for n,v in pairs(a)
 do
-if not package.loaded[n] and type(v) ~= "\102\117\110\99\116\105\111\110" and not string.find(n,"\94\91\37\117\95\93") then
+if not package.loaded[n] and type(v) ~= "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}" and not string.find(n,"\u{5e}\u{5b}\u{25}\u{75}\u{5f}\u{5d}") then
 _G[n]=undef
 end
 collectgarbage()
@@ -371,11 +371,11 @@ do
 assert(b[k] == v)
 end
 end
-checknext({1,["\120"] = 1,["\121"] = 2,["\122"] = 3})
-checknext({1,2,["\120"] = 1,["\121"] = 2,["\122"] = 3})
-checknext({1,2,3,["\120"] = 1,["\121"] = 2,["\122"] = 3})
-checknext({1,2,3,4,["\120"] = 1,["\121"] = 2,["\122"] = 3})
-checknext({1,2,3,4,5,["\120"] = 1,["\121"] = 2,["\122"] = 3})
+checknext({1,["\u{78}"] = 1,["\u{79}"] = 2,["\u{7a}"] = 3})
+checknext({1,2,["\u{78}"] = 1,["\u{79}"] = 2,["\u{7a}"] = 3})
+checknext({1,2,3,["\u{78}"] = 1,["\u{79}"] = 2,["\u{7a}"] = 3})
+checknext({1,2,3,4,["\u{78}"] = 1,["\u{79}"] = 2,["\u{7a}"] = 3})
+checknext({1,2,3,4,5,["\u{78}"] = 1,["\u{79}"] = 2,["\u{7a}"] = 3})
 assert(# {} == 0)
 assert(# {[- 1] = 2} == 0)
 for i = 0, 40
@@ -391,13 +391,13 @@ function table.maxn(t)
 local max = 0
 for k in pairs(t)
 do
-max=(type(k) == "\110\117\109\98\101\114") and math.max(max,k) or max
+max=(type(k) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}") and math.max(max,k) or max
 end
 return max
 end
 assert(table.maxn({}) == 0)
-assert(table.maxn({["\49\48\48\48"] = true}) == 0)
-assert(table.maxn({["\49\48\48\48"] = true,[24.5] = 3}) == 24.5)
+assert(table.maxn({["\u{31}\u{30}\u{30}\u{30}"] = true}) == 0)
+assert(table.maxn({["\u{31}\u{30}\u{30}\u{30}"] = true,[24.5] = 3}) == 24.5)
 assert(table.maxn({[1000] = true}) == 1000)
 assert(table.maxn({[10] = true,[100 * math.pi] = print}) == 100 * math.pi)
 table.maxn=nil
@@ -407,9 +407,9 @@ do
 a[2 ^ i]=true
 end
 assert(a[# a])
-print("\43")
+print("\u{2b}")
 do
-local a = {[1] = 1,[1.1] = 2,["\120"] = 3,[string.rep("\120",1000)] = 4,[print] = 5,[checkerror] = 6,[coroutine.running()] = 7,[true] = 8,[io.stdin] = 9,[{}] = 10}
+local a = {[1] = 1,[1.1] = 2,["\u{78}"] = 3,[string.rep("\u{78}",1000)] = 4,[print] = 5,[checkerror] = 6,[coroutine.running()] = 7,[true] = 8,[io.stdin] = 9,[{}] = 10}
 local b = {}
 ;
 for i = 1, 10
@@ -424,7 +424,7 @@ b[v]=undef
 end
 assert(next(b) == nil)
 end
-local t = {[{1}] = 1,[{2}] = 2,[string.rep("\120\32",4)] = 3,[100.3] = 4,[4] = 5}
+local t = {[{1}] = 1,[{2}] = 2,[string.rep("\u{78}\u{20}",4)] = 3,[100.3] = 4,[4] = 5}
 local n = 0
 for k,v in pairs(t)
 do
@@ -436,14 +436,14 @@ assert(t[k] == undef)
 end
 assert(n == 5)
 do
-print("\116\101\115\116\105\110\103\32\110\101\120\116\32\120\32\71\67\32\111\102\32\100\101\108\101\116\101\100\32\107\101\121\115")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{6e}\u{65}\u{78}\u{74}\u{20}\u{78}\u{20}\u{47}\u{43}\u{20}\u{6f}\u{66}\u{20}\u{64}\u{65}\u{6c}\u{65}\u{74}\u{65}\u{64}\u{20}\u{6b}\u{65}\u{79}\u{73}")
 local co = coroutine.wrap(function (t)
 for k,v in pairs(t)
 do
 local k1 = next(t)
 assert(k == k1)
 t[k]=nil
-local expected = (type(k) == "\116\97\98\108\101" and k[1] or type(k) == "\102\117\110\99\116\105\111\110" and k() or string.sub(k,1,1))
+local expected = (type(k) == "\u{74}\u{61}\u{62}\u{6c}\u{65}" and k[1] or type(k) == "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}" and k() or string.sub(k,1,1))
 assert(expected == v)
 coroutine.yield(v)
 end
@@ -451,16 +451,16 @@ end)
 local t = {}
 t[{1}]=1
 t[{2}]=2
-t[string.rep("\97",50)]="\97"
-t[string.rep("\98",50)]="\98"
+t[string.rep("\u{61}",50)]="\u{61}"
+t[string.rep("\u{62}",50)]="\u{62}"
 t[{3}]=3
-t[string.rep("\99",10)]="\99"
+t[string.rep("\u{63}",10)]="\u{63}"
 t[function ()
 return 10
 end]=10
 local count = 7
 while co(t) do
-collectgarbage("\99\111\108\108\101\99\116")
+collectgarbage("\u{63}\u{6f}\u{6c}\u{6c}\u{65}\u{63}\u{74}")
 count=count - 1
 end
 assert(count == 0 and next(t) == nil)
@@ -480,7 +480,7 @@ table.insert(a,40)
 table.insert(a,# a + 1,50)
 table.insert(a,2,- 2)
 assert(a[2] ~= undef)
-assert(a["\50"] == undef)
+assert(a["\u{32}"] == undef)
 assert(not pcall(table.insert,a,0,20))
 ;
 assert(not pcall(table.insert,a,# a + 2,20))
@@ -495,18 +495,18 @@ assert(table.remove(a,1) == nil)
 assert(table.remove(a) == nil)
 assert(table.remove(a,# a) == nil)
 end
-a={["\110"] = 0,[- 7] = "\98\97\110"}
+a={["\u{6e}"] = 0,[- 7] = "\u{62}\u{61}\u{6e}"}
 test(a)
-assert(a.n == 0 and a[- 7] == "\98\97\110")
-a={[- 7] = "\98\97\110"}
+assert(a.n == 0 and a[- 7] == "\u{62}\u{61}\u{6e}")
+a={[- 7] = "\u{62}\u{61}\u{6e}"}
 ;
 test(a)
-assert(a.n == nil and # a == 0 and a[- 7] == "\98\97\110")
-a={[- 1] = "\98\97\110"}
+assert(a.n == nil and # a == 0 and a[- 7] == "\u{62}\u{61}\u{6e}")
+a={[- 1] = "\u{62}\u{61}\u{6e}"}
 test(a)
-assert(# a == 0 and table.remove(a) == nil and a[- 1] == "\98\97\110")
-a={[0] = "\98\97\110"}
-assert(# a == 0 and table.remove(a) == "\98\97\110" and a[0] == undef)
+assert(# a == 0 and table.remove(a) == nil and a[- 1] == "\u{62}\u{61}\u{6e}")
+a={[0] = "\u{62}\u{61}\u{6e}"}
+assert(# a == 0 and table.remove(a) == "\u{62}\u{61}\u{6e}" and a[0] == undef)
 table.insert(a,1,10)
 ;
 table.insert(a,1,20)
@@ -516,13 +516,13 @@ assert(table.remove(a) == 10)
 assert(table.remove(a) == 20)
 assert(table.remove(a) == - 1)
 assert(table.remove(a) == nil)
-a={"\99","\100"}
-table.insert(a,3,"\97")
-table.insert(a,"\98")
-assert(table.remove(a,1) == "\99")
-assert(table.remove(a,1) == "\100")
-assert(table.remove(a,1) == "\97")
-assert(table.remove(a,1) == "\98")
+a={"\u{63}","\u{64}"}
+table.insert(a,3,"\u{61}")
+table.insert(a,"\u{62}")
+assert(table.remove(a,1) == "\u{63}")
+assert(table.remove(a,1) == "\u{64}")
+assert(table.remove(a,1) == "\u{61}")
+assert(table.remove(a,1) == "\u{62}")
 assert(table.remove(a,1) == nil)
 assert(# a == 0 and a.n == nil)
 a={10,20,30,40}
@@ -550,7 +550,7 @@ for i = 1, 10
 do
 assert(t[i] == i and proxy[i] == i)
 end
-assert(table.concat(proxy,"\44") == "\49\44\50\44\51\44\52\44\53\44\54\44\55\44\56\44\57\44\49\48")
+assert(table.concat(proxy,"\u{2c}") == "\u{31}\u{2c}\u{32}\u{2c}\u{33}\u{2c}\u{34}\u{2c}\u{35}\u{2c}\u{36}\u{2c}\u{37}\u{2c}\u{38}\u{2c}\u{39}\u{2c}\u{31}\u{30}")
 for i = 1, 8
 do
 assert(table.remove(proxy,1) == i)
@@ -560,27 +560,27 @@ local a,b,c = table.unpack(proxy)
 assert(a == 9 and b == 10 and c == nil)
 end
 local t = {}
-local proxy = setmetatable({},{["\95\95\108\101\110"] = function ()
+local proxy = setmetatable({},{["\u{5f}\u{5f}\u{6c}\u{65}\u{6e}"] = function ()
 return # t
-end,["\95\95\105\110\100\101\120"] = t,["\95\95\110\101\119\105\110\100\101\120"] = t})
+end,["\u{5f}\u{5f}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = t,["\u{5f}\u{5f}\u{6e}\u{65}\u{77}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = t})
 test(proxy,t)
 local count = 0
-t=setmetatable({},{["\95\95\110\101\119\105\110\100\101\120"] = function (t,k,v)
+t=setmetatable({},{["\u{5f}\u{5f}\u{6e}\u{65}\u{77}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = function (t,k,v)
 count=count + 1
 ;
 rawset(t,k,v)
 end})
 test(t,t)
 assert(count == 10)
-t=setmetatable({},{["\95\95\105\110\100\101\120"] = function (_,k)
+t=setmetatable({},{["\u{5f}\u{5f}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = function (_,k)
 return k + 1
-end,["\95\95\108\101\110"] = function (_)
+end,["\u{5f}\u{5f}\u{6c}\u{65}\u{6e}"] = function (_)
 return 5
 end})
-assert(table.concat(t,"\59") == "\50\59\51\59\52\59\53\59\54")
+assert(table.concat(t,"\u{3b}") == "\u{32}\u{3b}\u{33}\u{3b}\u{34}\u{3b}\u{35}\u{3b}\u{36}")
 end
 do
-local t = setmetatable({},{["\95\95\108\101\110"] = function ()
+local t = setmetatable({},{["\u{5f}\u{5f}\u{6c}\u{65}\u{6e}"] = function ()
 return math.maxinteger
 end})
 table.insert(t,20)
@@ -588,23 +588,23 @@ local k,v = next(t)
 assert(k == math.mininteger and v == 20)
 end
 if not T then
-(Message or print)("\10\32\62\62\62\32\116\101\115\116\67\32\110\111\116\32\97\99\116\105\118\101\58\32\115\107\105\112\112\105\110\103\32\116\101\115\116\115\32\102\111\114\32\116\97\98\108\101\32\108\105\98\114\97\114\121\32\111\110\32\110\111\110\45\116\97\98\108\101\115\32\60\60\60\10")
+(Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{6c}\u{69}\u{62}\u{72}\u{61}\u{72}\u{79}\u{20}\u{6f}\u{6e}\u{20}\u{6e}\u{6f}\u{6e}\u{2d}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 else
-local debug = require("\100\101\98\117\103")
+local debug = require("\u{64}\u{65}\u{62}\u{75}\u{67}")
 local tab = {10,20,30}
 local mt = {}
 local u = T.newuserdata(0)
-checkerror("\116\97\98\108\101\32\101\120\112\101\99\116\101\100",table.insert,u,40)
-checkerror("\116\97\98\108\101\32\101\120\112\101\99\116\101\100",table.remove,u)
+checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.insert,u,40)
+checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.remove,u)
 debug.setmetatable(u,mt)
-checkerror("\116\97\98\108\101\32\101\120\112\101\99\116\101\100",table.insert,u,40)
-checkerror("\116\97\98\108\101\32\101\120\112\101\99\116\101\100",table.remove,u)
+checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.insert,u,40)
+checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.remove,u)
 mt.__index=tab
-checkerror("\116\97\98\108\101\32\101\120\112\101\99\116\101\100",table.insert,u,40)
-checkerror("\116\97\98\108\101\32\101\120\112\101\99\116\101\100",table.remove,u)
+checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.insert,u,40)
+checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.remove,u)
 mt.__newindex=tab
-checkerror("\116\97\98\108\101\32\101\120\112\101\99\116\101\100",table.insert,u,40)
-checkerror("\116\97\98\108\101\32\101\120\112\101\99\116\101\100",table.remove,u)
+checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.insert,u,40)
+checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.remove,u)
 mt.__len=function ()
 return # tab
 end
@@ -617,13 +617,13 @@ mt.__newindex=nil
 mt.__len=nil
 local tab2 = {}
 local u2 = T.newuserdata(0)
-debug.setmetatable(u2,{["\95\95\110\101\119\105\110\100\101\120"] = function (_,k,v)
+debug.setmetatable(u2,{["\u{5f}\u{5f}\u{6e}\u{65}\u{77}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = function (_,k,v)
 tab2[k]=v
 end})
 table.move(u,1,4,1,u2)
 assert(# tab2 == 4 and tab2[1] == tab[1] and tab2[4] == tab[4])
 end
-print("\43")
+print("\u{2b}")
 a={}
 for i = 1, 1000
 do
@@ -636,15 +636,15 @@ assert(next({}) == nil)
 assert(next({},nil) == nil)
 for a,b in pairs({})
 do
-error("\110\111\116\32\104\101\114\101")
+error("\u{6e}\u{6f}\u{74}\u{20}\u{68}\u{65}\u{72}\u{65}")
 end
 for i = 1, 0
 do
-error("\110\111\116\32\104\101\114\101")
+error("\u{6e}\u{6f}\u{74}\u{20}\u{68}\u{65}\u{72}\u{65}")
 end
 for i = 0, 1, - 1
 do
-error("\110\111\116\32\104\101\114\101")
+error("\u{6e}\u{6f}\u{74}\u{20}\u{68}\u{65}\u{72}\u{65}")
 end
 a=nil
 ;
@@ -667,7 +667,7 @@ end
 ;
 assert(a)
 do
-print("\116\101\115\116\105\110\103\32\102\108\111\97\116\115\32\105\110\32\110\117\109\101\114\105\99\32\102\111\114")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{66}\u{6c}\u{6f}\u{61}\u{74}\u{73}\u{20}\u{69}\u{6e}\u{20}\u{6e}\u{75}\u{6d}\u{65}\u{72}\u{69}\u{63}\u{20}\u{66}\u{6f}\u{72}")
 local a
 a=0
 ;
@@ -774,7 +774,7 @@ for i = 1, 10
 do
 a=a + 1
 ;
-i="\120"
+i="\u{78}"
 end
 ;
 assert(a == 10)
@@ -784,14 +784,14 @@ for i = 10.0, 1, - 1
 do
 a=a + 1
 ;
-i="\120"
+i="\u{78}"
 end
 ;
 assert(a == 10)
 end
 a=0
 ;
-for i = "\49\48", "\49", "\45\50"
+for i = "\u{31}\u{30}", "\u{31}", "\u{2d}\u{32}"
 do
 a=a + 1
 end
@@ -801,7 +801,7 @@ do
 local c
 local function checkfloat
 (i)
-assert(math.type(i) == "\102\108\111\97\116")
+assert(math.type(i) == "\u{66}\u{6c}\u{6f}\u{61}\u{74}")
 c=c + 1
 end
 c=0
@@ -820,7 +820,7 @@ end
 assert(c == 10)
 local function checkint
 (i)
-assert(math.type(i) == "\105\110\116\101\103\101\114")
+assert(math.type(i) == "\u{69}\u{6e}\u{74}\u{65}\u{67}\u{65}\u{72}")
 c=c + 1
 end
 local m = math.maxinteger
@@ -847,28 +847,28 @@ end
 assert(c == 10)
 c=0
 ;
-for i = 1, "\49\48\46\56"
+for i = 1, "\u{31}\u{30}\u{2e}\u{38}"
 do
 checkint(i)
 end
 assert(c == 10)
 c=0
 ;
-for i = 9, "\51\46\52", - 1
+for i = 9, "\u{33}\u{2e}\u{34}", - 1
 do
 checkint(i)
 end
 assert(c == 6)
 c=0
 ;
-for i = 0, "\32\45\51\46\52\32\32", - 1
+for i = 0, "\u{20}\u{2d}\u{33}\u{2e}\u{34}\u{20}\u{20}", - 1
 do
 checkint(i)
 end
 assert(c == 4)
 c=0
 ;
-for i = 100, "\57\54\46\51", - 2
+for i = 100, "\u{39}\u{36}\u{2e}\u{33}", - 2
 do
 checkint(i)
 end
@@ -944,19 +944,19 @@ checkfor(maxi,maxi,mini,{maxi})
 checkfor(mini,mini,maxi,{mini})
 checkfor(mini,mini,mini,{mini})
 end
-checkerror("\39\102\111\114\39\32\115\116\101\112\32\105\115\32\122\101\114\111",function ()
+checkerror("\u{27}\u{66}\u{6f}\u{72}\u{27}\u{20}\u{73}\u{74}\u{65}\u{70}\u{20}\u{69}\u{73}\u{20}\u{7a}\u{65}\u{72}\u{6f}",function ()
 for i = 1, 10, 0
 do
 
 end
 end)
-checkerror("\39\102\111\114\39\32\115\116\101\112\32\105\115\32\122\101\114\111",function ()
+checkerror("\u{27}\u{66}\u{6f}\u{72}\u{27}\u{20}\u{73}\u{74}\u{65}\u{70}\u{20}\u{69}\u{73}\u{20}\u{7a}\u{65}\u{72}\u{6f}",function ()
 for i = 1, - 10, 0
 do
 
 end
 end)
-checkerror("\39\102\111\114\39\32\115\116\101\112\32\105\115\32\122\101\114\111",function ()
+checkerror("\u{27}\u{66}\u{6f}\u{72}\u{27}\u{20}\u{73}\u{74}\u{65}\u{70}\u{20}\u{69}\u{73}\u{20}\u{7a}\u{65}\u{72}\u{6f}",function ()
 for i = 1.0, - 10, 0.0
 do
 
@@ -972,7 +972,7 @@ do
 t[i]=i * 10
 end
 return function (_,n, ...)
-assert(select("\35",...) == 0)
+assert(select("\u{23}",...) == 0)
 if n > 0 then
 n=n - 1
 return n,table.unpack(t)
@@ -989,7 +989,7 @@ assert(x == 5)
 a={}
 do
 local x,y,z = pairs(a)
-assert(type(x) == "\102\117\110\99\116\105\111\110" and y == a and z == nil)
+assert(type(x) == "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}" and y == a and z == nil)
 end
 local function foo
 (e,i)
@@ -1006,7 +1006,7 @@ if i <= e.n then
 return i,a[i]
 end
 end
-setmetatable(a,{["\95\95\112\97\105\114\115"] = function (x)
+setmetatable(a,{["\u{5f}\u{5f}\u{70}\u{61}\u{69}\u{72}\u{73}"] = function (x)
 return foo,x,0
 end})
 local i = 0
@@ -1017,8 +1017,8 @@ assert(k == i and v == k + 1)
 end
 a.n=5
 a[3]=30
-a={["\110"] = 10}
-setmetatable(a,{["\95\95\105\110\100\101\120"] = function (t,k)
+a={["\u{6e}"] = 10}
+setmetatable(a,{["\u{5f}\u{5f}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = function (t,k)
 if k <= t.n then
 return k * 10
 end
@@ -1031,7 +1031,7 @@ assert(k == i and v == i * 10)
 end
 assert(i == a.n)
 do
-local t = setmetatable({10,20,30},{["\95\95\112\97\105\114\115"] = function (t)
+local t = setmetatable({10,20,30},{["\u{5f}\u{5f}\u{70}\u{61}\u{69}\u{72}\u{73}"] = function (t)
 local inc = coroutine.yield()
 return function (t,i)
 if i > 1 then
@@ -1052,4 +1052,4 @@ co()
 co(1)
 assert(res[1] == 30 and res[2] == 20 and res[3] == 10 and # res == 3)
 end
-print("\79\75")
+print("\u{4f}\u{4b}")

@@ -19,7 +19,7 @@
     [%false ~]
     [%nil ~]
   ==
-+$  string  @t
++$  string  (list @)
 +$  table  field-list
 +$  field-list  (list field)
 +$  field

@@ -1,8 +1,8 @@
-print("\116\101\115\116\105\110\103\32\99\111\114\111\117\116\105\110\101\115")
-local debug = require("\100\101\98\117\103")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{73}")
+local debug = require("\u{64}\u{65}\u{62}\u{75}\u{67}")
 local f
 local main,ismain = coroutine.running()
-assert(type(main) == "\116\104\114\101\97\100" and ismain)
+assert(type(main) == "\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}" and ismain)
 assert(not coroutine.resume(main))
 assert(not coroutine.isyieldable(main) and not coroutine.isyieldable())
 assert(not pcall(coroutine.yield))
@@ -24,7 +24,7 @@ local function foo
 local x,y = coroutine.running()
 assert(x == f and y == false)
 assert(coroutine.resume(f) == false)
-assert(coroutine.status(f) == "\114\117\110\110\105\110\103")
+assert(coroutine.status(f) == "\u{72}\u{75}\u{6e}\u{6e}\u{69}\u{6e}\u{67}")
 local arg = {...}
 assert(coroutine.isyieldable(x))
 for i = 1, # arg
@@ -35,25 +35,25 @@ return table.unpack(a)
 end
 f=coroutine.create(foo)
 assert(coroutine.isyieldable(f))
-assert(type(f) == "\116\104\114\101\97\100" and coroutine.status(f) == "\115\117\115\112\101\110\100\101\100")
-assert(string.find(tostring(f),"\116\104\114\101\97\100"))
+assert(type(f) == "\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}" and coroutine.status(f) == "\u{73}\u{75}\u{73}\u{70}\u{65}\u{6e}\u{64}\u{65}\u{64}")
+assert(string.find(tostring(f),"\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}"))
 local s,a,b,c,d
-s,a,b,c,d=coroutine.resume(f,{1,2,3},{},{1},{"\97","\98","\99"})
+s,a,b,c,d=coroutine.resume(f,{1,2,3},{},{1},{"\u{61}","\u{62}","\u{63}"})
 assert(coroutine.isyieldable(f))
-assert(s and a == nil and coroutine.status(f) == "\115\117\115\112\101\110\100\101\100")
+assert(s and a == nil and coroutine.status(f) == "\u{73}\u{75}\u{73}\u{70}\u{65}\u{6e}\u{64}\u{65}\u{64}")
 s,a,b,c,d=coroutine.resume(f)
 eqtab(_G.x,{})
 assert(s and a == 1 and b == nil)
 assert(coroutine.isyieldable(f))
 s,a,b,c,d=coroutine.resume(f,1,2,3)
 eqtab(_G.x,{1,2,3})
-assert(s and a == "\97" and b == "\98" and c == "\99" and d == nil)
-s,a,b,c,d=coroutine.resume(f,"\120\117\120\117")
-eqtab(_G.x,{"\120\117\120\117"})
+assert(s and a == "\u{61}" and b == "\u{62}" and c == "\u{63}" and d == nil)
+s,a,b,c,d=coroutine.resume(f,"\u{78}\u{75}\u{78}\u{75}")
+eqtab(_G.x,{"\u{78}\u{75}\u{78}\u{75}"})
 assert(s and a == 1 and b == 2 and c == 3 and d == nil)
-assert(coroutine.status(f) == "\100\101\97\100")
-s,a=coroutine.resume(f,"\120\117\120\117")
-assert(not s and string.find(a,"\100\101\97\100") and coroutine.status(f) == "\100\101\97\100")
+assert(coroutine.status(f) == "\u{64}\u{65}\u{61}\u{64}")
+s,a=coroutine.resume(f,"\u{78}\u{75}\u{78}\u{75}")
+assert(not s and string.find(a,"\u{64}\u{65}\u{61}\u{64}") and coroutine.status(f) == "\u{64}\u{65}\u{61}\u{64}")
 _G.f=nil
 local function foo
 (i)
@@ -64,7 +64,7 @@ for i = 1, 10
 do
 assert(foo(i) == _G.x)
 end
-return "\97"
+return "\u{61}"
 end)
 for i = 1, 10
 do
@@ -72,9 +72,9 @@ _G.x=i
 ;
 assert(f(i) == i)
 end
-_G.x="\120\117\120\117"
+_G.x="\u{78}\u{75}\u{78}\u{75}"
 ;
-assert(f("\120\117\120\117") == "\97")
+assert(f("\u{78}\u{75}\u{78}\u{75}") == "\u{61}")
 _G.x=nil
 local function pf
 (n,i)
@@ -123,26 +123,26 @@ x=filter(n,x)
 end
 assert(# a == 22 and a[# a] == 79)
 x,a=nil
-print("\116\111\45\98\101\45\99\108\111\115\101\100\32\118\97\114\105\97\98\108\101\115\32\105\110\32\99\111\114\111\117\116\105\110\101\115")
+print("\u{74}\u{6f}\u{2d}\u{62}\u{65}\u{2d}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{20}\u{76}\u{61}\u{72}\u{69}\u{61}\u{62}\u{6c}\u{65}\u{73}\u{20}\u{69}\u{6e}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{73}")
 local function func2close
 (f)
-return setmetatable({},{["\95\95\99\108\111\115\101"] = f})
+return setmetatable({},{["\u{5f}\u{5f}\u{63}\u{6c}\u{6f}\u{73}\u{65}"] = f})
 end
 do
 local co = coroutine.create(print)
-assert(coroutine.resume(co,"\116\101\115\116\105\110\103\32\39\99\111\114\111\117\116\105\110\101\46\99\108\111\115\101\39"))
-assert(coroutine.status(co) == "\100\101\97\100")
+assert(coroutine.resume(co,"\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{27}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{2e}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{27}"))
+assert(coroutine.status(co) == "\u{64}\u{65}\u{61}\u{64}")
 local st,msg = coroutine.close(co)
 assert(st and msg == nil)
 st,msg=coroutine.close(co)
 assert(st and msg == nil)
 local st,msg = pcall(coroutine.close,coroutine.running())
-assert(not st and string.find(msg,"\114\117\110\110\105\110\103"))
+assert(not st and string.find(msg,"\u{72}\u{75}\u{6e}\u{6e}\u{69}\u{6e}\u{67}"))
 local main = coroutine.running()
 ;
 (coroutine.wrap(function ()
 local st,msg = pcall(coroutine.close,main)
-assert(not st and string.find(msg,"\110\111\114\109\97\108"))
+assert(not st and string.find(msg,"\u{6e}\u{6f}\u{72}\u{6d}\u{61}\u{6c}"))
 end))()
 do
 local co
@@ -155,7 +155,7 @@ end)
 local st,msg = coroutine.resume(co)
 assert(st and msg == 20)
 st,msg=coroutine.close(co)
-assert(not st and string.find(msg,"\114\117\110\110\105\110\103\32\99\111\114\111\117\116\105\110\101"))
+assert(not st and string.find(msg,"\u{72}\u{75}\u{6e}\u{6e}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}"))
 end
 local X
 local co = coroutine.create(error)
@@ -177,7 +177,7 @@ end)
 coroutine.resume(co)
 assert(X)
 assert(coroutine.close(co))
-assert(not X and coroutine.status(co) == "\100\101\97\100")
+assert(not X and coroutine.status(co) == "\u{64}\u{65}\u{61}\u{64}")
 local x = 0
 co=coroutine.create(function ()
 local y <close> = func2close(function (self,err)
@@ -195,7 +195,7 @@ end)
 coroutine.resume(co)
 assert(x == 0)
 local st,msg = coroutine.close(co)
-assert(st == false and coroutine.status(co) == "\100\101\97\100" and msg == 200)
+assert(st == false and coroutine.status(co) == "\u{64}\u{65}\u{61}\u{64}" and msg == 200)
 assert(x == 200)
 st,msg=coroutine.close(co)
 assert(st and msg == nil)
@@ -216,7 +216,7 @@ return pcall(foo)
 end)
 local st1,st2,err = coroutine.resume(co)
 assert(st1 and not st2 and err == 43)
-assert(X == 43 and Y.what == "\67")
+assert(X == 43 and Y.what == "\u{43}")
 local track = {}
 local function h
 (o)
@@ -247,7 +247,7 @@ local co = coroutine.create(pcall)
 local st,res = coroutine.resume(co,foo)
 assert(st and res == 1)
 local st,res1,res2 = coroutine.resume(co)
-assert(coroutine.status(co) == "\100\101\97\100")
+assert(coroutine.status(co) == "\u{64}\u{65}\u{61}\u{64}")
 assert(st and not res1 and res2 == 20)
 assert(track[1] == false and track[2] == 2 and track[3] == 10 and track[4] == 10)
 end
@@ -307,10 +307,10 @@ return c .. c
 end
 local co = coroutine.wrap(function (c)
 assert(coroutine.isyieldable())
-local s = string.gsub("\97","\46",f)
+local s = string.gsub("\u{61}","\u{2e}",f)
 return s
 end)
-assert(co() == "\97\97")
+assert(co() == "\u{61}\u{61}")
 end
 do
 local X
@@ -323,11 +323,11 @@ local function dotrace
 (event)
 trace[# trace + 1]=event
 end
-debug.sethook(co,dotrace,"\99\108\114")
+debug.sethook(co,dotrace,"\u{63}\u{6c}\u{72}")
 repeat
 
 until not coroutine.resume(co)
-local correcttrace = {"\99\97\108\108","\108\105\110\101","\99\97\108\108","\114\101\116\117\114\110","\108\105\110\101","\114\101\116\117\114\110"}
+local correcttrace = {"\u{63}\u{61}\u{6c}\u{6c}","\u{6c}\u{69}\u{6e}\u{65}","\u{63}\u{61}\u{6c}\u{6c}","\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}","\u{6c}\u{69}\u{6e}\u{65}","\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}"}
 assert(# trace == # correcttrace)
 for k,v in pairs(trace)
 do
@@ -351,9 +351,9 @@ x=coroutine.create(goo)
 a,b=coroutine.resume(x)
 assert(a and b == 3)
 a,b=coroutine.resume(x)
-assert(not a and b == foo and coroutine.status(x) == "\100\101\97\100")
+assert(not a and b == foo and coroutine.status(x) == "\u{64}\u{65}\u{61}\u{64}")
 a,b=coroutine.resume(x)
-assert(not a and string.find(b,"\100\101\97\100") and coroutine.status(x) == "\100\101\97\100")
+assert(not a and string.find(b,"\u{64}\u{65}\u{61}\u{64}") and coroutine.status(x) == "\u{64}\u{65}\u{61}\u{64}")
 goo=nil
 local function all
 (a,n,k)
@@ -377,7 +377,7 @@ end
 assert(a == 5 ^ 4)
 local C = {}
 ;
-setmetatable(C,{["\95\95\109\111\100\101"] = "\107\118"})
+setmetatable(C,{["\u{5f}\u{5f}\u{6d}\u{6f}\u{64}\u{65}"] = "\u{6b}\u{76}"})
 local x = coroutine.wrap(function ()
 local a = 10
 local function f
@@ -432,7 +432,7 @@ end)
 return pcall(A,1)
 end)
 st,res=A()
-assert(not st and string.find(res,"\110\111\110\37\45\115\117\115\112\101\110\100\101\100") and X == true)
+assert(not st and string.find(res,"\u{6e}\u{6f}\u{6e}\u{25}\u{2d}\u{73}\u{75}\u{73}\u{70}\u{65}\u{6e}\u{64}\u{65}\u{64}") and X == true)
 end
 do
 local co
@@ -445,20 +445,20 @@ end)
 local st,errobj = pcall(co)
 assert(not st and errobj == 111)
 st,errobj=pcall(co)
-assert(not st and string.find(errobj,"\100\101\97\100\32\99\111\114\111\117\116\105\110\101"))
+assert(not st and string.find(errobj,"\u{64}\u{65}\u{61}\u{64}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}"))
 end
 local co1,co2
 co1=coroutine.create(function ()
 return co2()
 end)
 co2=coroutine.wrap(function ()
-assert(coroutine.status(co1) == "\110\111\114\109\97\108")
+assert(coroutine.status(co1) == "\u{6e}\u{6f}\u{72}\u{6d}\u{61}\u{6c}")
 assert(not coroutine.resume(co1))
 coroutine.yield(3)
 end)
 a,b=coroutine.resume(co1)
 assert(a and b == 3)
-assert(coroutine.status(co1) == "\100\101\97\100")
+assert(coroutine.status(co1) == "\u{64}\u{65}\u{61}\u{64}")
 a=function (a)
 coroutine.wrap(a)(a)
 end
@@ -471,7 +471,7 @@ a=a + 1
 ;
 return a
 end
-error("\120")
+error("\u{78}")
 end)
 assert(not coroutine.resume(x))
 assert(not coroutine.resume(x,1,1,1,1,1,1,1))
@@ -479,9 +479,9 @@ assert(_G.F() == 11)
 assert(_G.F() == 12)
 _G.F=nil
 if not T then
-(Message or print)("\10\32\62\62\62\32\116\101\115\116\67\32\110\111\116\32\97\99\116\105\118\101\58\32\115\107\105\112\112\105\110\103\32\99\111\114\111\117\116\105\110\101\32\65\80\73\32\116\101\115\116\115\32\60\60\60\10")
+(Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{20}\u{41}\u{50}\u{49}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 else
-print("\116\101\115\116\105\110\103\32\121\105\101\108\100\115\32\105\110\115\105\100\101\32\104\111\111\107\115")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{73}\u{20}\u{69}\u{6e}\u{73}\u{69}\u{64}\u{65}\u{20}\u{68}\u{6f}\u{6f}\u{6b}\u{73}")
 local turn
 local function fact
 (t,x)
@@ -494,21 +494,21 @@ end
 end
 local A,B = 0,0
 local x = coroutine.create(function ()
-T.sethook("\121\105\101\108\100\32\48","",2)
-A=fact("\65",6)
+T.sethook("\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{30}","",2)
+A=fact("\u{41}",6)
 end)
 local y = coroutine.create(function ()
-T.sethook("\121\105\101\108\100\32\48","",3)
-B=fact("\66",7)
+T.sethook("\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{30}","",3)
+B=fact("\u{42}",7)
 end)
 while A == 0 or B == 0 do
 if A == 0 then
-turn="\65"
+turn="\u{41}"
 ;
 assert(T.resume(x))
 end
 if B == 0 then
-turn="\66"
+turn="\u{42}"
 ;
 assert(T.resume(y))
 end
@@ -527,7 +527,7 @@ for i = 1, n
 do
 a[i]=i
 end
-T.sethook("\112\117\115\104\105\110\116\32\49\48\59\32\121\105\101\108\100\32\48","",1)
+T.sethook("\u{70}\u{75}\u{73}\u{68}\u{69}\u{6e}\u{74}\u{20}\u{31}\u{30}\u{3b}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{30}","",1)
 local a1 = {table.unpack(a)}
 assert(# a1 == n)
 for i = 1, n
@@ -558,7 +558,7 @@ while not done do
 co()
 end
 end
-local line = debug.getinfo(1,"\108").currentline + 2
+local line = debug.getinfo(1,"\u{6c}").currentline + 2
 local function foo
 ()
 local x = 10
@@ -566,7 +566,7 @@ x=x + 10
 _G.XX=x
 end
 local co = coroutine.wrap(function ()
-T.sethook("\115\101\116\103\108\111\98\97\108\32\88\59\32\121\105\101\108\100\32\48","\108",0)
+T.sethook("\u{73}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{58}\u{3b}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{30}","\u{6c}",0)
 ;
 foo()
 ;
@@ -597,7 +597,7 @@ assert(_G.X == line + 3 and _G.XX == 20)
 assert(co() == 10)
 _G.X=nil
 co=coroutine.wrap(function ()
-T.sethook("\121\105\101\108\100\32\48","",1)
+T.sethook("\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{30}","",1)
 ;
 foo()
 ;
@@ -613,7 +613,7 @@ local a = co()
 until a == 10
 assert(_G.XX == 20 and c >= 5)
 co=coroutine.wrap(function ()
-T.sethook("\121\105\101\108\100\32\48","",2)
+T.sethook("\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{30}","",2)
 ;
 foo()
 ;
@@ -633,27 +633,27 @@ _G.X=nil
 _G.XX=nil
 do
 c=coroutine.create(function (a, ...)
-T.sethook("\121\105\101\108\100\32\48","\108")
+T.sethook("\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{30}","\u{6c}")
 local b = a
 return ...
 end)
 assert(coroutine.resume(c,1,2,3))
 local n,v = debug.getlocal(c,0,1)
-assert(n == "\97" and v == 1 and debug.getlocal(c,0,2) ~= "\98")
+assert(n == "\u{61}" and v == 1 and debug.getlocal(c,0,2) ~= "\u{62}")
 assert(debug.setlocal(c,0,1,10))
 local t = debug.getinfo(c,0)
 assert(t.currentline == t.linedefined + 2)
 assert(not debug.getinfo(c,1))
 assert(coroutine.resume(c))
 local n,v = debug.getlocal(c,0,2)
-assert(n == "\98" and v == 10)
+assert(n == "\u{62}" and v == 10)
 v={coroutine.resume(c)}
 assert(v[1] == true and v[2] == 2 and v[3] == 3 and v[4] == undef)
 assert(not coroutine.resume(c))
 end
 do
 local c = coroutine.create(function ()
-T.testC("\121\105\101\108\100\32\49",10,20)
+T.testC("\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{31}",10,20)
 end)
 local a,b = coroutine.resume(c)
 assert(a and b == 20)
@@ -661,32 +661,32 @@ assert(debug.getinfo(c,0).linedefined == - 1)
 a,b=debug.getlocal(c,0,2)
 assert(b == 10)
 end
-print("\116\101\115\116\105\110\103\32\99\111\114\111\117\116\105\110\101\32\65\80\73")
-assert(T.testC("\32\32\32\32\110\101\119\116\104\114\101\97\100\32\32\32\32\32\32\35\32\99\114\101\97\116\101\32\116\104\114\101\97\100\10\32\32\32\32\112\117\115\104\118\97\108\117\101\32\50\32\32\32\32\35\32\112\117\115\104\32\98\111\100\121\10\32\32\32\32\112\117\115\104\115\116\114\105\110\103\32\39\97\32\97\32\97\39\32\32\35\32\112\117\115\104\32\97\114\103\117\109\101\110\116\10\32\32\32\32\120\109\111\118\101\32\48\32\51\32\50\32\32\32\35\32\109\111\118\101\32\118\97\108\117\101\115\32\116\111\32\110\101\119\32\116\104\114\101\97\100\10\32\32\32\32\114\101\115\117\109\101\32\45\49\44\32\49\32\32\32\32\35\32\99\97\108\108\32\105\116\32\102\105\114\115\116\32\116\105\109\101\10\32\32\32\32\112\117\115\104\115\116\97\116\117\115\10\32\32\32\32\120\109\111\118\101\32\51\32\48\32\48\32\32\32\35\32\109\111\118\101\32\114\101\115\117\108\116\115\32\98\97\99\107\32\116\111\32\115\116\97\99\107\10\32\32\32\32\115\101\116\103\108\111\98\97\108\32\88\32\32\32\32\35\32\114\101\115\117\108\116\10\32\32\32\32\115\101\116\103\108\111\98\97\108\32\89\32\32\32\32\35\32\115\116\97\116\117\115\10\32\32\32\32\112\117\115\104\118\97\108\117\101\32\50\32\32\32\32\32\35\32\112\117\115\104\32\98\111\100\121\32\40\116\111\32\99\97\108\108\32\105\116\32\97\103\97\105\110\41\10\32\32\32\32\112\117\115\104\115\116\114\105\110\103\32\39\98\32\98\32\98\39\10\32\32\32\32\120\109\111\118\101\32\48\32\51\32\50\10\32\32\32\32\114\101\115\117\109\101\32\45\49\44\32\49\32\32\32\32\35\32\99\97\108\108\32\105\116\32\97\103\97\105\110\10\32\32\32\32\112\117\115\104\115\116\97\116\117\115\10\32\32\32\32\120\109\111\118\101\32\51\32\48\32\48\10\32\32\32\32\114\101\116\117\114\110\32\49\32\32\32\32\32\32\32\32\35\32\114\101\116\117\114\110\32\114\101\115\117\108\116\10\32\32",function (...)
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{20}\u{41}\u{50}\u{49}")
+assert(T.testC("\u{20}\u{20}\u{20}\u{20}\u{6e}\u{65}\u{77}\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{63}\u{72}\u{65}\u{61}\u{74}\u{65}\u{20}\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{32}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{70}\u{75}\u{73}\u{68}\u{20}\u{62}\u{6f}\u{64}\u{79}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{27}\u{61}\u{20}\u{61}\u{20}\u{61}\u{27}\u{20}\u{20}\u{23}\u{20}\u{70}\u{75}\u{73}\u{68}\u{20}\u{61}\u{72}\u{67}\u{75}\u{6d}\u{65}\u{6e}\u{74}\u{a}\u{20}\u{20}\u{20}\u{20}\u{78}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{30}\u{20}\u{33}\u{20}\u{32}\u{20}\u{20}\u{20}\u{23}\u{20}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{73}\u{20}\u{74}\u{6f}\u{20}\u{6e}\u{65}\u{77}\u{20}\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6d}\u{65}\u{20}\u{2d}\u{31}\u{2c}\u{20}\u{31}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{63}\u{61}\u{6c}\u{6c}\u{20}\u{69}\u{74}\u{20}\u{66}\u{69}\u{72}\u{73}\u{74}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{a}\u{20}\u{20}\u{20}\u{20}\u{78}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{33}\u{20}\u{30}\u{20}\u{30}\u{20}\u{20}\u{20}\u{23}\u{20}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}\u{20}\u{62}\u{61}\u{63}\u{6b}\u{20}\u{74}\u{6f}\u{20}\u{73}\u{74}\u{61}\u{63}\u{6b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{73}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{58}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{a}\u{20}\u{20}\u{20}\u{20}\u{73}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{59}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{32}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{70}\u{75}\u{73}\u{68}\u{20}\u{62}\u{6f}\u{64}\u{79}\u{20}\u{28}\u{74}\u{6f}\u{20}\u{63}\u{61}\u{6c}\u{6c}\u{20}\u{69}\u{74}\u{20}\u{61}\u{67}\u{61}\u{69}\u{6e}\u{29}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{27}\u{62}\u{20}\u{62}\u{20}\u{62}\u{27}\u{a}\u{20}\u{20}\u{20}\u{20}\u{78}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{30}\u{20}\u{33}\u{20}\u{32}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6d}\u{65}\u{20}\u{2d}\u{31}\u{2c}\u{20}\u{31}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{63}\u{61}\u{6c}\u{6c}\u{20}\u{69}\u{74}\u{20}\u{61}\u{67}\u{61}\u{69}\u{6e}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{a}\u{20}\u{20}\u{20}\u{20}\u{78}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{33}\u{20}\u{30}\u{20}\u{30}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{a}\u{20}\u{20}",function (...)
 return ...
-end) == "\98\32\98\32\98")
-assert(X == "\97\32\97\32\97" and Y == "\79\75")
+end) == "\u{62}\u{20}\u{62}\u{20}\u{62}")
+assert(X == "\u{61}\u{20}\u{61}\u{20}\u{61}" and Y == "\u{4f}\u{4b}")
 X,Y=nil
 C=coroutine.create(function ()
-return T.testC("\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\112\117\115\104\110\117\109\32\49\48\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\112\117\115\104\110\117\109\32\50\48\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\114\101\115\117\109\101\32\45\51\32\50\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\112\117\115\104\115\116\97\116\117\115\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\103\101\116\116\111\112\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\114\101\116\117\114\110\32\51",C)
+return T.testC("\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{31}\u{30}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{32}\u{30}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6d}\u{65}\u{20}\u{2d}\u{33}\u{20}\u{32}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{67}\u{65}\u{74}\u{74}\u{6f}\u{70}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{33}",C)
 end)
 local a,b,c,d = coroutine.resume(C)
-assert(a == true and string.find(b,"\110\111\110\37\45\115\117\115\112\101\110\100\101\100") and c == "\69\82\82\82\85\78" and d == 4)
-a,b,c,d=T.testC("\32\32\32\32\114\97\119\103\101\116\105\32\82\32\49\32\32\32\32\35\32\103\101\116\32\109\97\105\110\32\116\104\114\101\97\100\10\32\32\32\32\112\117\115\104\110\117\109\32\49\48\59\10\32\32\32\32\112\117\115\104\110\117\109\32\50\48\59\10\32\32\32\32\114\101\115\117\109\101\32\45\51\32\50\59\10\32\32\32\32\112\117\115\104\115\116\97\116\117\115\10\32\32\32\32\103\101\116\116\111\112\59\10\32\32\32\32\114\101\116\117\114\110\32\52")
-assert(a == coroutine.running() and string.find(b,"\110\111\110\37\45\115\117\115\112\101\110\100\101\100") and c == "\69\82\82\82\85\78" and d == 4)
+assert(a == true and string.find(b,"\u{6e}\u{6f}\u{6e}\u{25}\u{2d}\u{73}\u{75}\u{73}\u{70}\u{65}\u{6e}\u{64}\u{65}\u{64}") and c == "\u{45}\u{52}\u{52}\u{52}\u{55}\u{4e}" and d == 4)
+a,b,c,d=T.testC("\u{20}\u{20}\u{20}\u{20}\u{72}\u{61}\u{77}\u{67}\u{65}\u{74}\u{69}\u{20}\u{52}\u{20}\u{31}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{67}\u{65}\u{74}\u{20}\u{6d}\u{61}\u{69}\u{6e}\u{20}\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{31}\u{30}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{32}\u{30}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6d}\u{65}\u{20}\u{2d}\u{33}\u{20}\u{32}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{a}\u{20}\u{20}\u{20}\u{20}\u{67}\u{65}\u{74}\u{74}\u{6f}\u{70}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{34}")
+assert(a == coroutine.running() and string.find(b,"\u{6e}\u{6f}\u{6e}\u{25}\u{2d}\u{73}\u{75}\u{73}\u{70}\u{65}\u{6e}\u{64}\u{65}\u{64}") and c == "\u{45}\u{52}\u{52}\u{52}\u{55}\u{4e}" and d == 4)
 local state = T.newstate()
-assert(T.testC(state,"\110\101\119\116\104\114\101\97\100\59\32\105\115\121\105\101\108\100\97\98\108\101\32\45\49\59\32\114\101\109\111\118\101\32\49\59\32\114\101\116\117\114\110\32\49"))
-assert(not T.testC(state,"\114\97\119\103\101\116\105\32\82\32\49\59\32\105\115\121\105\101\108\100\97\98\108\101\32\45\49\59\32\114\101\109\111\118\101\32\49\59\32\114\101\116\117\114\110\32\49"))
-T.testC(state,"\115\101\116\116\111\112\32\48")
+assert(T.testC(state,"\u{6e}\u{65}\u{77}\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}\u{3b}\u{20}\u{69}\u{73}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{2d}\u{31}\u{3b}\u{20}\u{72}\u{65}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{31}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}"))
+assert(not T.testC(state,"\u{72}\u{61}\u{77}\u{67}\u{65}\u{74}\u{69}\u{20}\u{52}\u{20}\u{31}\u{3b}\u{20}\u{69}\u{73}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{2d}\u{31}\u{3b}\u{20}\u{72}\u{65}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{31}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}"))
+T.testC(state,"\u{73}\u{65}\u{74}\u{74}\u{6f}\u{70}\u{20}\u{30}")
 T.loadlib(state)
-assert(T.doremote(state,"\32\32\32\32\99\111\114\111\117\116\105\110\101\32\61\32\114\101\113\117\105\114\101\39\99\111\114\111\117\116\105\110\101\39\59\10\32\32\32\32\88\32\61\32\102\117\110\99\116\105\111\110\32\40\120\41\32\99\111\114\111\117\116\105\110\101\46\121\105\101\108\100\40\120\44\32\39\66\66\39\41\59\32\114\101\116\117\114\110\32\39\67\67\39\32\101\110\100\59\10\32\32\32\32\114\101\116\117\114\110\32\39\111\107\39"))
-local t = table.pack(T.testC(state,"\32\32\32\32\114\97\119\103\101\116\105\32\82\32\49\32\32\32\32\32\35\32\103\101\116\32\109\97\105\110\32\116\104\114\101\97\100\10\32\32\32\32\112\117\115\104\115\116\114\105\110\103\32\39\88\88\39\10\32\32\32\32\103\101\116\103\108\111\98\97\108\32\88\32\32\32\32\35\32\103\101\116\32\102\117\110\99\116\105\111\110\32\102\111\114\32\98\111\100\121\10\32\32\32\32\112\117\115\104\115\116\114\105\110\103\32\65\65\32\32\32\32\32\32\35\32\97\114\103\10\32\32\32\32\114\101\115\117\109\101\32\49\32\49\32\32\32\32\32\32\35\32\39\114\101\115\117\109\101\39\32\115\104\97\100\111\119\115\32\112\114\101\118\105\111\117\115\32\115\116\97\99\107\33\10\32\32\32\32\103\101\116\116\111\112\10\32\32\32\32\115\101\116\103\108\111\98\97\108\32\84\32\32\32\32\35\32\116\111\112\10\32\32\32\32\115\101\116\103\108\111\98\97\108\32\66\32\32\32\32\35\32\115\101\99\111\110\100\32\121\105\101\108\100\101\100\32\118\97\108\117\101\10\32\32\32\32\115\101\116\103\108\111\98\97\108\32\65\32\32\32\32\35\32\102\105\115\116\32\121\105\101\108\100\101\100\32\118\97\108\117\101\10\32\32\32\32\114\97\119\103\101\116\105\32\82\32\49\32\32\32\32\32\35\32\103\101\116\32\109\97\105\110\32\116\104\114\101\97\100\10\32\32\32\32\112\117\115\104\110\117\109\32\53\32\32\32\32\32\32\32\35\32\97\114\103\32\40\110\111\105\115\101\41\10\32\32\32\32\114\101\115\117\109\101\32\49\32\49\32\32\32\32\32\32\35\32\97\102\116\101\114\32\99\111\114\111\117\116\105\110\101\32\101\110\100\115\44\32\112\114\101\118\105\111\117\115\32\115\116\97\99\107\32\105\115\32\98\97\99\107\10\32\32\32\32\112\117\115\104\115\116\97\116\117\115\10\32\32\32\32\114\101\116\117\114\110\32\42\10\32\32"))
-assert(t.n == 4 and t[2] == "\88\88" and t[3] == "\67\67" and t[4] == "\79\75")
-assert(T.doremote(state,"\114\101\116\117\114\110\32\84") == "\50")
-assert(T.doremote(state,"\114\101\116\117\114\110\32\65") == "\65\65")
-assert(T.doremote(state,"\114\101\116\117\114\110\32\66") == "\66\66")
+assert(T.doremote(state,"\u{20}\u{20}\u{20}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{20}\u{3d}\u{20}\u{72}\u{65}\u{71}\u{75}\u{69}\u{72}\u{65}\u{27}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{27}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{58}\u{20}\u{3d}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{28}\u{78}\u{29}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{2e}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{28}\u{78}\u{2c}\u{20}\u{27}\u{42}\u{42}\u{27}\u{29}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{27}\u{43}\u{43}\u{27}\u{20}\u{65}\u{6e}\u{64}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{27}\u{6f}\u{6b}\u{27}"))
+local t = table.pack(T.testC(state,"\u{20}\u{20}\u{20}\u{20}\u{72}\u{61}\u{77}\u{67}\u{65}\u{74}\u{69}\u{20}\u{52}\u{20}\u{31}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{67}\u{65}\u{74}\u{20}\u{6d}\u{61}\u{69}\u{6e}\u{20}\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{27}\u{58}\u{58}\u{27}\u{a}\u{20}\u{20}\u{20}\u{20}\u{67}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{58}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{67}\u{65}\u{74}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{62}\u{6f}\u{64}\u{79}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{41}\u{41}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{61}\u{72}\u{67}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6d}\u{65}\u{20}\u{31}\u{20}\u{31}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{27}\u{72}\u{65}\u{73}\u{75}\u{6d}\u{65}\u{27}\u{20}\u{73}\u{68}\u{61}\u{64}\u{6f}\u{77}\u{73}\u{20}\u{70}\u{72}\u{65}\u{76}\u{69}\u{6f}\u{75}\u{73}\u{20}\u{73}\u{74}\u{61}\u{63}\u{6b}\u{21}\u{a}\u{20}\u{20}\u{20}\u{20}\u{67}\u{65}\u{74}\u{74}\u{6f}\u{70}\u{a}\u{20}\u{20}\u{20}\u{20}\u{73}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{54}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{74}\u{6f}\u{70}\u{a}\u{20}\u{20}\u{20}\u{20}\u{73}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{42}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{73}\u{65}\u{63}\u{6f}\u{6e}\u{64}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{65}\u{64}\u{20}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{a}\u{20}\u{20}\u{20}\u{20}\u{73}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{41}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{66}\u{69}\u{73}\u{74}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{65}\u{64}\u{20}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{61}\u{77}\u{67}\u{65}\u{74}\u{69}\u{20}\u{52}\u{20}\u{31}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{67}\u{65}\u{74}\u{20}\u{6d}\u{61}\u{69}\u{6e}\u{20}\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{35}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{61}\u{72}\u{67}\u{20}\u{28}\u{6e}\u{6f}\u{69}\u{73}\u{65}\u{29}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6d}\u{65}\u{20}\u{31}\u{20}\u{31}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{61}\u{66}\u{74}\u{65}\u{72}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{20}\u{65}\u{6e}\u{64}\u{73}\u{2c}\u{20}\u{70}\u{72}\u{65}\u{76}\u{69}\u{6f}\u{75}\u{73}\u{20}\u{73}\u{74}\u{61}\u{63}\u{6b}\u{20}\u{69}\u{73}\u{20}\u{62}\u{61}\u{63}\u{6b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{2a}\u{a}\u{20}\u{20}"))
+assert(t.n == 4 and t[2] == "\u{58}\u{58}" and t[3] == "\u{43}\u{43}" and t[4] == "\u{4f}\u{4b}")
+assert(T.doremote(state,"\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{54}") == "\u{32}")
+assert(T.doremote(state,"\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{41}") == "\u{41}\u{41}")
+assert(T.doremote(state,"\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{42}") == "\u{42}\u{42}")
 T.closestate(state)
-print("\43")
+print("\u{2b}")
 end
 _G.TO_SURVIVE=coroutine.wrap(function ()
 local a = 10
@@ -710,103 +710,103 @@ assert(j < lim or not r)
 end
 end
 assert(coroutine.running() == main)
-print("\43")
-print("\116\101\115\116\105\110\103\32\121\105\101\108\100\115\32\105\110\115\105\100\101\32\109\101\116\97\109\101\116\104\111\100\115")
+print("\u{2b}")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{73}\u{20}\u{69}\u{6e}\u{73}\u{69}\u{64}\u{65}\u{20}\u{6d}\u{65}\u{74}\u{61}\u{6d}\u{65}\u{74}\u{68}\u{6f}\u{64}\u{73}")
 local function val
 (x)
-if type(x) == "\116\97\98\108\101" then
+if type(x) == "\u{74}\u{61}\u{62}\u{6c}\u{65}" then
 return x.x
 else
 return x
 end
 end
-local mt = {["\95\95\101\113"] = function (a,b)
-coroutine.yield(nil,"\101\113")
+local mt = {["\u{5f}\u{5f}\u{65}\u{71}"] = function (a,b)
+coroutine.yield(nil,"\u{65}\u{71}")
 ;
 return val(a) == val(b)
-end,["\95\95\108\116"] = function (a,b)
-coroutine.yield(nil,"\108\116")
+end,["\u{5f}\u{5f}\u{6c}\u{74}"] = function (a,b)
+coroutine.yield(nil,"\u{6c}\u{74}")
 ;
 return val(a) < val(b)
-end,["\95\95\108\101"] = function (a,b)
-coroutine.yield(nil,"\108\101")
+end,["\u{5f}\u{5f}\u{6c}\u{65}"] = function (a,b)
+coroutine.yield(nil,"\u{6c}\u{65}")
 ;
 return a - b <= 0
-end,["\95\95\97\100\100"] = function (a,b)
-coroutine.yield(nil,"\97\100\100")
+end,["\u{5f}\u{5f}\u{61}\u{64}\u{64}"] = function (a,b)
+coroutine.yield(nil,"\u{61}\u{64}\u{64}")
 ;
 return val(a) + val(b)
-end,["\95\95\115\117\98"] = function (a,b)
-coroutine.yield(nil,"\115\117\98")
+end,["\u{5f}\u{5f}\u{73}\u{75}\u{62}"] = function (a,b)
+coroutine.yield(nil,"\u{73}\u{75}\u{62}")
 ;
 return val(a) - val(b)
-end,["\95\95\109\117\108"] = function (a,b)
-coroutine.yield(nil,"\109\117\108")
+end,["\u{5f}\u{5f}\u{6d}\u{75}\u{6c}"] = function (a,b)
+coroutine.yield(nil,"\u{6d}\u{75}\u{6c}")
 ;
 return val(a) * val(b)
-end,["\95\95\100\105\118"] = function (a,b)
-coroutine.yield(nil,"\100\105\118")
+end,["\u{5f}\u{5f}\u{64}\u{69}\u{76}"] = function (a,b)
+coroutine.yield(nil,"\u{64}\u{69}\u{76}")
 ;
 return val(a) / val(b)
-end,["\95\95\105\100\105\118"] = function (a,b)
-coroutine.yield(nil,"\105\100\105\118")
+end,["\u{5f}\u{5f}\u{69}\u{64}\u{69}\u{76}"] = function (a,b)
+coroutine.yield(nil,"\u{69}\u{64}\u{69}\u{76}")
 ;
 return val(a) // val(b)
-end,["\95\95\112\111\119"] = function (a,b)
-coroutine.yield(nil,"\112\111\119")
+end,["\u{5f}\u{5f}\u{70}\u{6f}\u{77}"] = function (a,b)
+coroutine.yield(nil,"\u{70}\u{6f}\u{77}")
 ;
 return val(a) ^ val(b)
-end,["\95\95\109\111\100"] = function (a,b)
-coroutine.yield(nil,"\109\111\100")
+end,["\u{5f}\u{5f}\u{6d}\u{6f}\u{64}"] = function (a,b)
+coroutine.yield(nil,"\u{6d}\u{6f}\u{64}")
 ;
 return val(a) % val(b)
-end,["\95\95\117\110\109"] = function (a,b)
-coroutine.yield(nil,"\117\110\109")
+end,["\u{5f}\u{5f}\u{75}\u{6e}\u{6d}"] = function (a,b)
+coroutine.yield(nil,"\u{75}\u{6e}\u{6d}")
 ;
 return - val(a)
-end,["\95\95\98\110\111\116"] = function (a,b)
-coroutine.yield(nil,"\98\110\111\116")
+end,["\u{5f}\u{5f}\u{62}\u{6e}\u{6f}\u{74}"] = function (a,b)
+coroutine.yield(nil,"\u{62}\u{6e}\u{6f}\u{74}")
 ;
 return ~ val(a)
-end,["\95\95\115\104\108"] = function (a,b)
-coroutine.yield(nil,"\115\104\108")
+end,["\u{5f}\u{5f}\u{73}\u{68}\u{6c}"] = function (a,b)
+coroutine.yield(nil,"\u{73}\u{68}\u{6c}")
 ;
 return val(a) << val(b)
-end,["\95\95\115\104\114"] = function (a,b)
-coroutine.yield(nil,"\115\104\114")
+end,["\u{5f}\u{5f}\u{73}\u{68}\u{72}"] = function (a,b)
+coroutine.yield(nil,"\u{73}\u{68}\u{72}")
 ;
 return val(a) >> val(b)
-end,["\95\95\98\97\110\100"] = function (a,b)
-coroutine.yield(nil,"\98\97\110\100")
+end,["\u{5f}\u{5f}\u{62}\u{61}\u{6e}\u{64}"] = function (a,b)
+coroutine.yield(nil,"\u{62}\u{61}\u{6e}\u{64}")
 return val(a) & val(b)
-end,["\95\95\98\111\114"] = function (a,b)
-coroutine.yield(nil,"\98\111\114")
+end,["\u{5f}\u{5f}\u{62}\u{6f}\u{72}"] = function (a,b)
+coroutine.yield(nil,"\u{62}\u{6f}\u{72}")
 ;
 return val(a) | val(b)
-end,["\95\95\98\120\111\114"] = function (a,b)
-coroutine.yield(nil,"\98\120\111\114")
+end,["\u{5f}\u{5f}\u{62}\u{78}\u{6f}\u{72}"] = function (a,b)
+coroutine.yield(nil,"\u{62}\u{78}\u{6f}\u{72}")
 ;
 return val(a) ~ val(b)
-end,["\95\95\99\111\110\99\97\116"] = function (a,b)
-coroutine.yield(nil,"\99\111\110\99\97\116")
+end,["\u{5f}\u{5f}\u{63}\u{6f}\u{6e}\u{63}\u{61}\u{74}"] = function (a,b)
+coroutine.yield(nil,"\u{63}\u{6f}\u{6e}\u{63}\u{61}\u{74}")
 ;
 return val(a) .. val(b)
-end,["\95\95\105\110\100\101\120"] = function (t,k)
-coroutine.yield(nil,"\105\100\120")
+end,["\u{5f}\u{5f}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = function (t,k)
+coroutine.yield(nil,"\u{69}\u{64}\u{78}")
 ;
 return t.k[k]
-end,["\95\95\110\101\119\105\110\100\101\120"] = function (t,k,v)
-coroutine.yield(nil,"\110\105\100\120")
+end,["\u{5f}\u{5f}\u{6e}\u{65}\u{77}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = function (t,k,v)
+coroutine.yield(nil,"\u{6e}\u{69}\u{64}\u{78}")
 ;
 t.k[k]=v
 end}
 local function new
 (x)
-return setmetatable({["\120"] = x,["\107"] = {}},mt)
+return setmetatable({["\u{78}"] = x,["\u{6b}"] = {}},mt)
 end
 local a = new(10)
 local b = new(12)
-local c = new("\104\101\108\108\111")
+local c = new("\u{68}\u{65}\u{6c}\u{6c}\u{6f}")
 local function run
 (f,t)
 local i = 1
@@ -824,149 +824,149 @@ end
 end
 assert(run(function ()
 if (a >= b) then
-return "\62\61"
+return "\u{3e}\u{3d}"
 else
-return "\60"
+return "\u{3c}"
 end
-end,{"\108\101","\115\117\98"}) == "\60")
+end,{"\u{6c}\u{65}","\u{73}\u{75}\u{62}"}) == "\u{3c}")
 assert(run(function ()
 if (a <= b) then
-return "\60\61"
+return "\u{3c}\u{3d}"
 else
-return "\62"
+return "\u{3e}"
 end
-end,{"\108\101","\115\117\98"}) == "\60\61")
+end,{"\u{6c}\u{65}","\u{73}\u{75}\u{62}"}) == "\u{3c}\u{3d}")
 assert(run(function ()
 if (a == b) then
-return "\61\61"
+return "\u{3d}\u{3d}"
 else
-return "\126\61"
+return "\u{7e}\u{3d}"
 end
-end,{"\101\113"}) == "\126\61")
+end,{"\u{65}\u{71}"}) == "\u{7e}\u{3d}")
 assert(run(function ()
 return a & b + a
-end,{"\97\100\100","\98\97\110\100"}) == 2)
+end,{"\u{61}\u{64}\u{64}","\u{62}\u{61}\u{6e}\u{64}"}) == 2)
 assert(run(function ()
 return 1 + a
-end,{"\97\100\100"}) == 11)
+end,{"\u{61}\u{64}\u{64}"}) == 11)
 assert(run(function ()
 return a - 25
-end,{"\115\117\98"}) == - 15)
+end,{"\u{73}\u{75}\u{62}"}) == - 15)
 assert(run(function ()
 return 2 * a
-end,{"\109\117\108"}) == 20)
+end,{"\u{6d}\u{75}\u{6c}"}) == 20)
 assert(run(function ()
 return a ^ 2
-end,{"\112\111\119"}) == 100)
+end,{"\u{70}\u{6f}\u{77}"}) == 100)
 assert(run(function ()
 return a / 2
-end,{"\100\105\118"}) == 5)
+end,{"\u{64}\u{69}\u{76}"}) == 5)
 assert(run(function ()
 return a % 6
-end,{"\109\111\100"}) == 4)
+end,{"\u{6d}\u{6f}\u{64}"}) == 4)
 assert(run(function ()
 return a // 3
-end,{"\105\100\105\118"}) == 3)
+end,{"\u{69}\u{64}\u{69}\u{76}"}) == 3)
 assert(run(function ()
 return a + b
-end,{"\97\100\100"}) == 22)
+end,{"\u{61}\u{64}\u{64}"}) == 22)
 assert(run(function ()
 return a - b
-end,{"\115\117\98"}) == - 2)
+end,{"\u{73}\u{75}\u{62}"}) == - 2)
 assert(run(function ()
 return a * b
-end,{"\109\117\108"}) == 120)
+end,{"\u{6d}\u{75}\u{6c}"}) == 120)
 assert(run(function ()
 return a ^ b
-end,{"\112\111\119"}) == 10 ^ 12)
+end,{"\u{70}\u{6f}\u{77}"}) == 10 ^ 12)
 assert(run(function ()
 return a / b
-end,{"\100\105\118"}) == 10 / 12)
+end,{"\u{64}\u{69}\u{76}"}) == 10 / 12)
 assert(run(function ()
 return a % b
-end,{"\109\111\100"}) == 10)
+end,{"\u{6d}\u{6f}\u{64}"}) == 10)
 assert(run(function ()
 return a // b
-end,{"\105\100\105\118"}) == 0)
+end,{"\u{69}\u{64}\u{69}\u{76}"}) == 0)
 local a1000 = new(1000)
 assert(run(function ()
 return a1000 + 1000
-end,{"\97\100\100"}) == 2000)
+end,{"\u{61}\u{64}\u{64}"}) == 2000)
 assert(run(function ()
 return a1000 - 25000
-end,{"\115\117\98"}) == - 24000)
+end,{"\u{73}\u{75}\u{62}"}) == - 24000)
 assert(run(function ()
 return 2000 * a
-end,{"\109\117\108"}) == 20000)
+end,{"\u{6d}\u{75}\u{6c}"}) == 20000)
 assert(run(function ()
 return a1000 / 1000
-end,{"\100\105\118"}) == 1)
+end,{"\u{64}\u{69}\u{76}"}) == 1)
 assert(run(function ()
 return a1000 % 600
-end,{"\109\111\100"}) == 400)
+end,{"\u{6d}\u{6f}\u{64}"}) == 400)
 assert(run(function ()
 return a1000 // 500
-end,{"\105\100\105\118"}) == 2)
+end,{"\u{69}\u{64}\u{69}\u{76}"}) == 2)
 assert(run(function ()
 return a % b
-end,{"\109\111\100"}) == 10)
+end,{"\u{6d}\u{6f}\u{64}"}) == 10)
 assert(run(function ()
 return ~ a & b
-end,{"\98\110\111\116","\98\97\110\100"}) == ~ 10 & 12)
+end,{"\u{62}\u{6e}\u{6f}\u{74}","\u{62}\u{61}\u{6e}\u{64}"}) == ~ 10 & 12)
 assert(run(function ()
 return a | b
-end,{"\98\111\114"}) == 10 | 12)
+end,{"\u{62}\u{6f}\u{72}"}) == 10 | 12)
 assert(run(function ()
 return a ~ b
-end,{"\98\120\111\114"}) == 10 ~ 12)
+end,{"\u{62}\u{78}\u{6f}\u{72}"}) == 10 ~ 12)
 assert(run(function ()
 return a << b
-end,{"\115\104\108"}) == 10 << 12)
+end,{"\u{73}\u{68}\u{6c}"}) == 10 << 12)
 assert(run(function ()
 return a >> b
-end,{"\115\104\114"}) == 10 >> 12)
+end,{"\u{73}\u{68}\u{72}"}) == 10 >> 12)
 assert(run(function ()
 return 10 & b
-end,{"\98\97\110\100"}) == 10 & 12)
+end,{"\u{62}\u{61}\u{6e}\u{64}"}) == 10 & 12)
 assert(run(function ()
 return a | 2
-end,{"\98\111\114"}) == 10 | 2)
+end,{"\u{62}\u{6f}\u{72}"}) == 10 | 2)
 assert(run(function ()
 return a ~ 2
-end,{"\98\120\111\114"}) == 10 ~ 2)
+end,{"\u{62}\u{78}\u{6f}\u{72}"}) == 10 ~ 2)
 assert(run(function ()
 return a >> 2
-end,{"\115\104\114"}) == 10 >> 2)
+end,{"\u{73}\u{68}\u{72}"}) == 10 >> 2)
 assert(run(function ()
 return 1 >> a
-end,{"\115\104\114"}) == 1 >> 10)
+end,{"\u{73}\u{68}\u{72}"}) == 1 >> 10)
 assert(run(function ()
 return a << 2
-end,{"\115\104\108"}) == 10 << 2)
+end,{"\u{73}\u{68}\u{6c}"}) == 10 << 2)
 assert(run(function ()
 return 1 << a
-end,{"\115\104\108"}) == 1 << 10)
+end,{"\u{73}\u{68}\u{6c}"}) == 1 << 10)
 assert(run(function ()
 return 2 ~ a
-end,{"\98\120\111\114"}) == 2 ~ 10)
+end,{"\u{62}\u{78}\u{6f}\u{72}"}) == 2 ~ 10)
 assert(run(function ()
 return a .. b
-end,{"\99\111\110\99\97\116"}) == "\49\48\49\50")
+end,{"\u{63}\u{6f}\u{6e}\u{63}\u{61}\u{74}"}) == "\u{31}\u{30}\u{31}\u{32}")
 assert(run(function ()
 return a .. b .. c .. a
-end,{"\99\111\110\99\97\116","\99\111\110\99\97\116","\99\111\110\99\97\116"}) == "\49\48\49\50\104\101\108\108\111\49\48")
+end,{"\u{63}\u{6f}\u{6e}\u{63}\u{61}\u{74}","\u{63}\u{6f}\u{6e}\u{63}\u{61}\u{74}","\u{63}\u{6f}\u{6e}\u{63}\u{61}\u{74}"}) == "\u{31}\u{30}\u{31}\u{32}\u{68}\u{65}\u{6c}\u{6c}\u{6f}\u{31}\u{30}")
 assert(run(function ()
-return "\97" .. "\98" .. a .. "\99" .. c .. b .. "\120"
-end,{"\99\111\110\99\97\116","\99\111\110\99\97\116","\99\111\110\99\97\116"}) == "\97\98\49\48\99\104\101\108\108\111\49\50\120")
+return "\u{61}" .. "\u{62}" .. a .. "\u{63}" .. c .. b .. "\u{78}"
+end,{"\u{63}\u{6f}\u{6e}\u{63}\u{61}\u{74}","\u{63}\u{6f}\u{6e}\u{63}\u{61}\u{74}","\u{63}\u{6f}\u{6e}\u{63}\u{61}\u{74}"}) == "\u{61}\u{62}\u{31}\u{30}\u{63}\u{68}\u{65}\u{6c}\u{6c}\u{6f}\u{31}\u{32}\u{78}")
 do
-local mt1 = {["\95\95\108\101"] = function (a,b)
+local mt1 = {["\u{5f}\u{5f}\u{6c}\u{65}"] = function (a,b)
 coroutine.yield(10)
 return (val(a) <= val(b))
-end,["\95\95\108\116"] = function (a,b)
+end,["\u{5f}\u{5f}\u{6c}\u{74}"] = function (a,b)
 coroutine.yield(10)
 return val(a) < val(b)
 end}
-local mt2 = {["\95\95\108\116"] = mt1.__lt,["\95\95\108\101"] = mt1.__le}
+local mt2 = {["\u{5f}\u{5f}\u{6c}\u{74}"] = mt1.__lt,["\u{5f}\u{5f}\u{6c}\u{65}"] = mt1.__le}
 local function run
 (f)
 local co = coroutine.wrap(f)
@@ -978,8 +978,8 @@ return res
 end
 local function test
 ()
-local a1 = setmetatable({["\120"] = 1},mt1)
-local a2 = setmetatable({["\120"] = 2},mt2)
+local a1 = setmetatable({["\u{78}"] = 1},mt1)
+local a2 = setmetatable({["\u{78}"] = 2},mt2)
 assert(a1 < a2)
 assert(a1 <= a2)
 assert(1 < a2)
@@ -993,7 +993,7 @@ end
 assert(run(function ()
 a.BB=print
 return a.BB
-end,{"\110\105\100\120","\105\100\120"}) == print)
+end,{"\u{6e}\u{69}\u{64}\u{78}","\u{69}\u{64}\u{78}"}) == print)
 do
 local _ENV = _ENV
 f=function ()
@@ -1007,13 +1007,13 @@ local g = new(10)
 g.k.BBB=10
 ;
 debug.setupvalue(f,1,g)
-assert(run(f,{"\105\100\120","\110\105\100\120","\105\100\120"}) == 11)
+assert(run(f,{"\u{69}\u{64}\u{78}","\u{6e}\u{69}\u{64}\u{78}","\u{69}\u{64}\u{78}"}) == 11)
 assert(g.k.AAA == 11)
-print("\43")
-print("\116\101\115\116\105\110\103\32\121\105\101\108\100\115\32\105\110\115\105\100\101\32\39\102\111\114\39\32\105\116\101\114\97\116\111\114\115")
+print("\u{2b}")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{73}\u{20}\u{69}\u{6e}\u{73}\u{69}\u{64}\u{65}\u{20}\u{27}\u{66}\u{6f}\u{72}\u{27}\u{20}\u{69}\u{74}\u{65}\u{72}\u{61}\u{74}\u{6f}\u{72}\u{73}")
 local f = function (s,i)
 if i % 2 == 0 then
-coroutine.yield(nil,"\102\111\114")
+coroutine.yield(nil,"\u{66}\u{6f}\u{72}")
 end
 if i < s then
 return i + 1
@@ -1026,14 +1026,14 @@ do
 s=s + i
 end
 return s
-end,{"\102\111\114","\102\111\114","\102\111\114"}) == 10)
+end,{"\u{66}\u{6f}\u{72}","\u{66}\u{6f}\u{72}","\u{66}\u{6f}\u{72}"}) == 10)
 if T == nil then
-(Message or print)("\10\32\62\62\62\32\116\101\115\116\67\32\110\111\116\32\97\99\116\105\118\101\58\32\115\107\105\112\112\105\110\103\32\99\111\114\111\117\116\105\110\101\32\65\80\73\32\116\101\115\116\115\32\60\60\60\10")
-print("\79\75")
+(Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{20}\u{41}\u{50}\u{49}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
+print("\u{4f}\u{4b}")
 ;
 return 
 end
-print("\116\101\115\116\105\110\103\32\99\111\114\111\117\116\105\110\101\32\65\80\73")
+print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{20}\u{41}\u{50}\u{49}")
 local function apico
 (...)
 local x = {...}
@@ -1041,15 +1041,15 @@ return coroutine.wrap(function ()
 return T.testC(table.unpack(x))
 end)
 end
-local a = {apico("\32\32\112\117\115\104\115\116\114\105\110\103\32\101\114\114\111\114\99\111\100\101\10\32\32\112\99\97\108\108\107\32\49\32\48\32\50\59\10\32\32\105\110\118\97\108\105\100\32\99\111\109\109\97\110\100\32\40\115\104\111\117\108\100\32\110\111\116\32\97\114\114\105\118\101\32\104\101\114\101\41\10","\114\101\116\117\114\110\32\42","\115\116\97\99\107\109\97\114\107",error)()}
-assert(# a == 4 and a[3] == "\115\116\97\99\107\109\97\114\107" and a[4] == "\101\114\114\111\114\99\111\100\101" and _G.status == "\69\82\82\82\85\78" and _G.ctx == 2)
-local co = apico("\112\117\115\104\118\97\108\117\101\32\50\59\32\112\117\115\104\110\117\109\32\49\48\59\32\112\99\97\108\108\107\32\49\32\50\32\51\59\32\105\110\118\97\108\105\100\32\99\111\109\109\97\110\100\59",coroutine.yield,"\103\101\116\103\108\111\98\97\108\32\115\116\97\116\117\115\59\32\103\101\116\103\108\111\98\97\108\32\99\116\120\59\32\112\117\115\104\118\97\108\117\101\32\50\59\32\112\117\115\104\115\116\114\105\110\103\32\97\59\32\112\99\97\108\108\107\32\49\32\48\32\52\59\32\105\110\118\97\108\105\100\32\99\111\109\109\97\110\100","\103\101\116\103\108\111\98\97\108\32\115\116\97\116\117\115\59\32\103\101\116\103\108\111\98\97\108\32\99\116\120\59\32\114\101\116\117\114\110\32\42")
+local a = {apico("\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{65}\u{72}\u{72}\u{6f}\u{72}\u{63}\u{6f}\u{64}\u{65}\u{a}\u{20}\u{20}\u{70}\u{63}\u{61}\u{6c}\u{6c}\u{6b}\u{20}\u{31}\u{20}\u{30}\u{20}\u{32}\u{3b}\u{a}\u{20}\u{20}\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{63}\u{6f}\u{6d}\u{6d}\u{61}\u{6e}\u{64}\u{20}\u{28}\u{73}\u{68}\u{6f}\u{75}\u{6c}\u{64}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{72}\u{72}\u{69}\u{76}\u{65}\u{20}\u{68}\u{65}\u{72}\u{65}\u{29}\u{a}","\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{2a}","\u{73}\u{74}\u{61}\u{63}\u{6b}\u{6d}\u{61}\u{72}\u{6b}",error)()}
+assert(# a == 4 and a[3] == "\u{73}\u{74}\u{61}\u{63}\u{6b}\u{6d}\u{61}\u{72}\u{6b}" and a[4] == "\u{65}\u{72}\u{72}\u{6f}\u{72}\u{63}\u{6f}\u{64}\u{65}" and _G.status == "\u{45}\u{52}\u{52}\u{52}\u{55}\u{4e}" and _G.ctx == 2)
+local co = apico("\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{32}\u{3b}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{31}\u{30}\u{3b}\u{20}\u{70}\u{63}\u{61}\u{6c}\u{6c}\u{6b}\u{20}\u{31}\u{20}\u{32}\u{20}\u{33}\u{3b}\u{20}\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{63}\u{6f}\u{6d}\u{6d}\u{61}\u{6e}\u{64}\u{3b}",coroutine.yield,"\u{67}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{3b}\u{20}\u{67}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{63}\u{74}\u{78}\u{3b}\u{20}\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{32}\u{3b}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{61}\u{3b}\u{20}\u{70}\u{63}\u{61}\u{6c}\u{6c}\u{6b}\u{20}\u{31}\u{20}\u{30}\u{20}\u{34}\u{3b}\u{20}\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{63}\u{6f}\u{6d}\u{6d}\u{61}\u{6e}\u{64}","\u{67}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{3b}\u{20}\u{67}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{63}\u{74}\u{78}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{2a}")
 assert(co() == 10)
-assert(co(20,30) == "\97")
+assert(co(20,30) == "\u{61}")
 a={co()}
-assert(# a == 10 and a[2] == coroutine.yield and a[5] == 20 and a[6] == 30 and a[7] == "\89\73\69\76\68" and a[8] == 3 and a[9] == "\89\73\69\76\68" and a[10] == 4)
+assert(# a == 10 and a[2] == coroutine.yield and a[5] == 20 and a[6] == 30 and a[7] == "\u{59}\u{49}\u{45}\u{4c}\u{44}" and a[8] == 3 and a[9] == "\u{59}\u{49}\u{45}\u{4c}\u{44}" and a[10] == 4)
 assert(not pcall(co))
-f=T.makeCfunc("\112\117\115\104\110\117\109\32\51\59\32\112\117\115\104\110\117\109\32\53\59\32\121\105\101\108\100\32\49\59")
+f=T.makeCfunc("\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{33}\u{3b}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{35}\u{3b}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{31}\u{3b}")
 co=coroutine.wrap(function ()
 assert(f() == 23)
 ;
@@ -1060,15 +1060,15 @@ end)
 assert(co(23,16) == 5)
 assert(co(23,16) == 5)
 assert(co(23,16) == 10)
-f=T.makeCfunc("\32\32\32\32\32\32\32\32\112\117\115\104\110\117\109\32\49\48\50\10\9\121\105\101\108\100\107\9\49\32\85\50\10\9\99\97\110\110\111\116\32\98\101\32\104\101\114\101\33\10","\32\32\32\32\32\32\35\32\99\111\110\116\105\110\117\97\116\105\111\110\10\9\112\117\115\104\118\97\108\117\101\32\85\51\32\32\32\35\32\97\99\99\101\115\115\105\110\103\32\117\112\118\97\108\117\101\115\32\105\110\115\105\100\101\32\97\32\99\111\110\116\105\110\117\97\116\105\111\110\10\32\32\32\32\32\32\32\32\112\117\115\104\118\97\108\117\101\32\85\52\10\9\114\101\116\117\114\110\32\42\10",23,"\104\117\117")
+f=T.makeCfunc("\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{31}\u{30}\u{32}\u{a}\u{9}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{6b}\u{9}\u{31}\u{20}\u{55}\u{32}\u{a}\u{9}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{68}\u{65}\u{72}\u{65}\u{21}\u{a}","\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{9}\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{55}\u{33}\u{20}\u{20}\u{20}\u{23}\u{20}\u{61}\u{63}\u{63}\u{65}\u{73}\u{73}\u{69}\u{6e}\u{67}\u{20}\u{75}\u{70}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{73}\u{20}\u{69}\u{6e}\u{73}\u{69}\u{64}\u{65}\u{20}\u{61}\u{20}\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{55}\u{34}\u{a}\u{9}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{2a}\u{a}",23,"\u{68}\u{75}\u{75}")
 x=coroutine.wrap(f)
 assert(x() == 102)
-eqtab({x()},{23,"\104\117\117"})
-f=T.makeCfunc("\112\117\115\104\115\116\114\105\110\103\32\39\97\39\59\32\112\117\115\104\110\117\109\32\49\48\50\59\32\121\105\101\108\100\32\50\59\32")
-a,b,c,d=T.testC("\110\101\119\116\104\114\101\97\100\59\32\112\117\115\104\118\97\108\117\101\32\50\59\32\120\109\111\118\101\32\48\32\51\32\49\59\32\114\101\115\117\109\101\32\51\32\48\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\112\117\115\104\115\116\97\116\117\115\59\32\120\109\111\118\101\32\51\32\48\32\48\59\32\32\114\101\115\117\109\101\32\51\32\48\59\32\112\117\115\104\115\116\97\116\117\115\59\10\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\32\114\101\116\117\114\110\32\52\59\32",f)
-assert(a == "\89\73\69\76\68" and b == "\97" and c == 102 and d == "\79\75")
+eqtab({x()},{23,"\u{68}\u{75}\u{75}"})
+f=T.makeCfunc("\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{27}\u{61}\u{27}\u{3b}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{31}\u{30}\u{32}\u{3b}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{32}\u{3b}\u{20}")
+a,b,c,d=T.testC("\u{6e}\u{65}\u{77}\u{74}\u{68}\u{72}\u{65}\u{61}\u{64}\u{3b}\u{20}\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{32}\u{3b}\u{20}\u{78}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{30}\u{20}\u{33}\u{20}\u{31}\u{3b}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6d}\u{65}\u{20}\u{33}\u{20}\u{30}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{3b}\u{20}\u{78}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{33}\u{20}\u{30}\u{20}\u{30}\u{3b}\u{20}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6d}\u{65}\u{20}\u{33}\u{20}\u{30}\u{3b}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{34}\u{3b}\u{20}",f)
+assert(a == "\u{59}\u{49}\u{45}\u{4c}\u{44}" and b == "\u{61}" and c == 102 and d == "\u{4f}\u{4b}")
 local count = 3
-f=T.makeCfunc("\32\32\114\101\109\111\118\101\32\49\59\32\32\32\32\32\32\32\32\32\32\32\32\32\35\32\114\101\109\111\118\101\32\97\114\103\117\109\101\110\116\10\32\32\112\117\115\104\118\97\108\117\101\32\85\51\59\32\32\32\32\32\32\32\32\32\35\32\103\101\116\32\115\101\108\101\99\116\105\111\110\32\102\117\110\99\116\105\111\110\10\32\32\99\97\108\108\32\48\32\49\59\32\32\32\32\32\32\32\32\32\32\32\32\32\35\32\99\97\108\108\32\105\116\32\32\40\114\101\115\117\108\116\32\105\115\32\39\102\39\32\111\114\32\39\121\105\101\108\100\39\41\10\32\32\112\117\115\104\115\116\114\105\110\103\32\104\101\108\108\111\32\32\32\32\32\32\35\32\115\105\110\103\108\101\32\97\114\103\117\109\101\110\116\32\102\111\114\32\115\101\108\101\99\116\101\100\32\102\117\110\99\116\105\111\110\10\32\32\112\117\115\104\117\112\118\97\108\117\101\105\110\100\101\120\32\50\59\32\32\32\35\32\105\110\100\101\120\32\111\102\32\99\111\110\116\105\110\117\97\116\105\111\110\32\112\114\111\103\114\97\109\10\32\32\99\97\108\108\107\32\49\32\45\49\32\46\59\9\9\35\32\99\97\108\108\32\115\101\108\101\99\116\101\100\32\102\117\110\99\116\105\111\110\10\32\32\101\114\114\111\114\101\114\114\111\114\9\9\35\32\115\104\111\117\108\100\32\110\101\118\101\114\32\97\114\114\105\118\101\32\104\101\114\101\10","\32\32\35\32\99\111\110\116\105\110\117\97\116\105\111\110\32\112\114\111\103\114\97\109\10\32\32\112\117\115\104\110\117\109\32\51\52\9\35\32\114\101\116\117\114\110\32\118\97\108\117\101\10\32\32\114\101\116\117\114\110\32\42\32\32\32\32\32\35\32\114\101\116\117\114\110\32\97\108\108\32\114\101\115\117\108\116\115\10",function ()
+f=T.makeCfunc("\u{20}\u{20}\u{72}\u{65}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{31}\u{3b}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{72}\u{65}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{61}\u{72}\u{67}\u{75}\u{6d}\u{65}\u{6e}\u{74}\u{a}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{55}\u{33}\u{3b}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{67}\u{65}\u{74}\u{20}\u{73}\u{65}\u{6c}\u{65}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{63}\u{61}\u{6c}\u{6c}\u{20}\u{30}\u{20}\u{31}\u{3b}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{63}\u{61}\u{6c}\u{6c}\u{20}\u{69}\u{74}\u{20}\u{20}\u{28}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{20}\u{69}\u{73}\u{20}\u{27}\u{66}\u{27}\u{20}\u{6f}\u{72}\u{20}\u{27}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{27}\u{29}\u{a}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{68}\u{65}\u{6c}\u{6c}\u{6f}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{73}\u{69}\u{6e}\u{67}\u{6c}\u{65}\u{20}\u{61}\u{72}\u{67}\u{75}\u{6d}\u{65}\u{6e}\u{74}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{73}\u{65}\u{6c}\u{65}\u{63}\u{74}\u{65}\u{64}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{75}\u{70}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{69}\u{6e}\u{64}\u{65}\u{78}\u{20}\u{32}\u{3b}\u{20}\u{20}\u{20}\u{23}\u{20}\u{69}\u{6e}\u{64}\u{65}\u{78}\u{20}\u{6f}\u{66}\u{20}\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{70}\u{72}\u{6f}\u{67}\u{72}\u{61}\u{6d}\u{a}\u{20}\u{20}\u{63}\u{61}\u{6c}\u{6c}\u{6b}\u{20}\u{31}\u{20}\u{2d}\u{31}\u{20}\u{2e}\u{3b}\u{9}\u{9}\u{23}\u{20}\u{63}\u{61}\u{6c}\u{6c}\u{20}\u{73}\u{65}\u{6c}\u{65}\u{63}\u{74}\u{65}\u{64}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{65}\u{72}\u{72}\u{6f}\u{72}\u{65}\u{72}\u{72}\u{6f}\u{72}\u{9}\u{9}\u{23}\u{20}\u{73}\u{68}\u{6f}\u{75}\u{6c}\u{64}\u{20}\u{6e}\u{65}\u{76}\u{65}\u{72}\u{20}\u{61}\u{72}\u{72}\u{69}\u{76}\u{65}\u{20}\u{68}\u{65}\u{72}\u{65}\u{a}","\u{20}\u{20}\u{23}\u{20}\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{70}\u{72}\u{6f}\u{67}\u{72}\u{61}\u{6d}\u{a}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{33}\u{34}\u{9}\u{23}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{a}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{2a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{23}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{61}\u{6c}\u{6c}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}\u{a}",function ()
 count=count - 1
 if count == 0 then
 return coroutine.yield
@@ -1079,41 +1079,41 @@ end)
 co=coroutine.wrap(function ()
 return f(nil)
 end)
-assert(co() == "\104\101\108\108\111")
+assert(co() == "\u{68}\u{65}\u{6c}\u{6c}\u{6f}")
 a={co()}
 assert(# a == 3 and a[1] == a[2] and a[2] == a[3] and a[3] == 34)
 local y
 co=coroutine.wrap(function (...)
-return T.testC("\32\35\32\105\110\105\116\105\97\108\32\102\117\110\99\116\105\111\110\10\32\32\32\32\32\32\32\32\32\32\121\105\101\108\100\107\32\49\32\50\10\32\32\32\32\32\32\32\32\32\32\99\97\110\110\111\116\32\98\101\32\104\101\114\101\33\10\32\32\32\32\32\32\32","\32\32\35\32\49\115\116\32\99\111\110\116\105\110\117\97\116\105\111\110\10\32\32\32\32\32\32\32\32\32\121\105\101\108\100\107\32\48\32\51\32\10\32\32\32\32\32\32\32\32\32\99\97\110\110\111\116\32\98\101\32\104\101\114\101\33\10\32\32\32\32\32\32\32","\32\32\35\32\50\110\100\32\99\111\110\116\105\110\117\97\116\105\111\110\10\32\32\32\32\32\32\32\32\32\121\105\101\108\100\107\32\48\32\52\32\10\32\32\32\32\32\32\32\32\32\99\97\110\110\111\116\32\98\101\32\104\101\114\101\33\10\32\32\32\32\32\32\32","\32\32\35\32\51\116\104\32\99\111\110\116\105\110\117\97\116\105\111\110\10\32\32\32\32\32\32\32\32\32\32\112\117\115\104\118\97\108\117\101\32\54\32\32\32\35\32\102\117\110\99\116\105\111\110\32\119\104\105\99\104\32\105\115\32\108\97\115\116\32\97\114\103\46\32\116\111\32\39\116\101\115\116\67\39\32\104\101\114\101\10\32\32\32\32\32\32\32\32\32\32\112\117\115\104\110\117\109\32\49\48\59\32\112\117\115\104\110\117\109\32\50\48\59\10\32\32\32\32\32\32\32\32\32\32\112\99\97\108\108\32\50\32\48\32\48\32\32\32\35\32\99\97\108\108\32\115\104\111\117\108\100\32\116\104\114\111\119\32\97\110\32\101\114\114\111\114\32\97\110\100\32\114\101\116\117\114\110\32\116\111\32\110\101\120\116\32\108\105\110\101\10\32\32\32\32\32\32\32\32\32\32\112\111\112\32\49\9\9\35\32\114\101\109\111\118\101\32\101\114\114\111\114\32\109\101\115\115\97\103\101\10\32\32\32\32\32\32\32\32\32\32\112\117\115\104\118\97\108\117\101\32\54\10\32\32\32\32\32\32\32\32\32\32\103\101\116\103\108\111\98\97\108\32\115\116\97\116\117\115\59\32\103\101\116\103\108\111\98\97\108\32\99\116\120\10\32\32\32\32\32\32\32\32\32\32\112\99\97\108\108\107\32\50\32\50\32\53\32\32\35\32\99\97\108\108\32\115\104\111\117\108\100\32\116\104\114\111\119\32\97\110\32\101\114\114\111\114\32\97\110\100\32\106\117\109\112\32\116\111\32\99\111\110\116\105\110\117\97\116\105\111\110\10\32\32\32\32\32\32\32\32\32\32\99\97\110\110\111\116\32\98\101\32\104\101\114\101\33\10\32\32\32\32\32\32\32","\32\32\35\32\52\116\104\32\40\97\110\100\32\108\97\115\116\41\32\99\111\110\116\105\110\117\97\116\105\111\110\10\32\32\32\32\32\32\32\32\32\114\101\116\117\114\110\32\42\10\32\32\32\32\32\32\32",function (a,b)
+return T.testC("\u{20}\u{23}\u{20}\u{69}\u{6e}\u{69}\u{74}\u{69}\u{61}\u{6c}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{6b}\u{20}\u{31}\u{20}\u{32}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{68}\u{65}\u{72}\u{65}\u{21}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}","\u{20}\u{20}\u{23}\u{20}\u{31}\u{73}\u{74}\u{20}\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{6b}\u{20}\u{30}\u{20}\u{33}\u{20}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{68}\u{65}\u{72}\u{65}\u{21}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}","\u{20}\u{20}\u{23}\u{20}\u{32}\u{6e}\u{64}\u{20}\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{79}\u{69}\u{65}\u{6c}\u{64}\u{6b}\u{20}\u{30}\u{20}\u{34}\u{20}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{68}\u{65}\u{72}\u{65}\u{21}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}","\u{20}\u{20}\u{23}\u{20}\u{33}\u{74}\u{68}\u{20}\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{36}\u{20}\u{20}\u{20}\u{23}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{77}\u{68}\u{69}\u{63}\u{68}\u{20}\u{69}\u{73}\u{20}\u{6c}\u{61}\u{73}\u{74}\u{20}\u{61}\u{72}\u{67}\u{2e}\u{20}\u{74}\u{6f}\u{20}\u{27}\u{74}\u{65}\u{73}\u{74}\u{43}\u{27}\u{20}\u{68}\u{65}\u{72}\u{65}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{31}\u{30}\u{3b}\u{20}\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}\u{32}\u{30}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{63}\u{61}\u{6c}\u{6c}\u{20}\u{32}\u{20}\u{30}\u{20}\u{30}\u{20}\u{20}\u{20}\u{23}\u{20}\u{63}\u{61}\u{6c}\u{6c}\u{20}\u{73}\u{68}\u{6f}\u{75}\u{6c}\u{64}\u{20}\u{74}\u{68}\u{72}\u{6f}\u{77}\u{20}\u{61}\u{6e}\u{20}\u{65}\u{72}\u{72}\u{6f}\u{72}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{74}\u{6f}\u{20}\u{6e}\u{65}\u{78}\u{74}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{6f}\u{70}\u{20}\u{31}\u{9}\u{9}\u{23}\u{20}\u{72}\u{65}\u{6d}\u{6f}\u{76}\u{65}\u{20}\u{65}\u{72}\u{72}\u{6f}\u{72}\u{20}\u{6d}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{75}\u{73}\u{68}\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{36}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{67}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{73}\u{74}\u{61}\u{74}\u{75}\u{73}\u{3b}\u{20}\u{67}\u{65}\u{74}\u{67}\u{6c}\u{6f}\u{62}\u{61}\u{6c}\u{20}\u{63}\u{74}\u{78}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{70}\u{63}\u{61}\u{6c}\u{6c}\u{6b}\u{20}\u{32}\u{20}\u{32}\u{20}\u{35}\u{20}\u{20}\u{23}\u{20}\u{63}\u{61}\u{6c}\u{6c}\u{20}\u{73}\u{68}\u{6f}\u{75}\u{6c}\u{64}\u{20}\u{74}\u{68}\u{72}\u{6f}\u{77}\u{20}\u{61}\u{6e}\u{20}\u{65}\u{72}\u{72}\u{6f}\u{72}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{6a}\u{75}\u{6d}\u{70}\u{20}\u{74}\u{6f}\u{20}\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{68}\u{65}\u{72}\u{65}\u{21}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}","\u{20}\u{20}\u{23}\u{20}\u{34}\u{74}\u{68}\u{20}\u{28}\u{61}\u{6e}\u{64}\u{20}\u{6c}\u{61}\u{73}\u{74}\u{29}\u{20}\u{63}\u{6f}\u{6e}\u{74}\u{69}\u{6e}\u{75}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{2a}\u{a}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}",function (a,b)
 x=a
 ;
 y=b
 ;
-error("\101\114\114\109\115\103")
+error("\u{65}\u{72}\u{72}\u{6d}\u{73}\u{67}")
 end,...)
 end)
 local a = {co(3,4,6)}
 assert(a[1] == 6 and a[2] == undef)
 a={co()}
 ;
-assert(a[1] == undef and _G.status == "\89\73\69\76\68" and _G.ctx == 2)
+assert(a[1] == undef and _G.status == "\u{59}\u{49}\u{45}\u{4c}\u{44}" and _G.ctx == 2)
 a={co()}
 ;
-assert(a[1] == undef and _G.status == "\89\73\69\76\68" and _G.ctx == 3)
+assert(a[1] == undef and _G.status == "\u{59}\u{49}\u{45}\u{4c}\u{44}" and _G.ctx == 3)
 a={co(7,8)}
 ;
-assert(type(a[1]) == "\115\116\114\105\110\103" and type(a[2]) == "\115\116\114\105\110\103" and type(a[3]) == "\115\116\114\105\110\103" and type(a[4]) == "\115\116\114\105\110\103" and type(a[5]) == "\115\116\114\105\110\103" and type(a[6]) == "\102\117\110\99\116\105\111\110")
+assert(type(a[1]) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and type(a[2]) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and type(a[3]) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and type(a[4]) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and type(a[5]) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}" and type(a[6]) == "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}")
 assert(a[7] == 3 and a[8] == 4)
 assert(a[9] == 7 and a[10] == 8)
-assert(a[11]:find("\101\114\114\109\115\103") and # a == 11)
-assert(x == "\89\73\69\76\68" and y == 4)
+assert(a[11]:find("\u{65}\u{72}\u{72}\u{6d}\u{73}\u{67}") and # a == 11)
+assert(x == "\u{59}\u{49}\u{45}\u{4c}\u{44}" and y == 4)
 assert(not pcall(co))
 _G.ctx=nil
 _G.status=nil
 local co = coroutine.wrap(function ()
-local a = {pcall(pcall,pcall,pcall,pcall,pcall,pcall,pcall,error,"\104\105")}
+local a = {pcall(pcall,pcall,pcall,pcall,pcall,pcall,pcall,error,"\u{68}\u{69}")}
 return pcall(assert,table.unpack(a))
 end)
 local a = {co()}
-assert(a[10] == "\104\105")
-print("\79\75")
+assert(a[10] == "\u{68}\u{69}")
+print("\u{4f}\u{4b}")
