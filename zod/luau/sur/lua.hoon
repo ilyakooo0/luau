@@ -60,7 +60,7 @@
   ==
 +$  numeral
   $%
-    [%int @u]
+    [%int @st]
     [%float @rd]
   ==
 +$  exprlist  (lest expr)

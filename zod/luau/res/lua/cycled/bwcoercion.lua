@@ -20,7 +20,7 @@ if mm then
 return mm(x,y)
 end
 end
-error("\u{61}\u{74}\u{74}\u{65}\u{6d}\u{70}\u{74}\u{20}\u{74}\u{6f}\u{20}\u{27}" .. strsub(mtname,3) .. "\u{27}\u{20}\u{61}\u{20}" .. type(x) .. "\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{61}\u{20}" .. type(y),4)
+error("\u{61}\u{74}\u{74}\u{65}\u{6d}\u{70}\u{74}\u{20}\u{74}\u{6f}\u{20}\u{27}" .. strsub(mtname,0x3) .. "\u{27}\u{20}\u{61}\u{20}" .. type(x) .. "\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{61}\u{20}" .. type(y),0x4)
 end
 local function checkargs
 (x,y,mtname)

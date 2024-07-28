@@ -1,4 +1,5 @@
 /-  *lua
+/+  st
 =<
 print
 |%
@@ -143,7 +144,7 @@ print
   |=  [num=numeral]
   ^-  tape
   ?-  -.num
-    %int  (show-u +.num)
+    %int  (z-co:co +.num)
     %float  (show-float +.num)
   ==
 :: exprlist
@@ -503,7 +504,7 @@ print
   %-  zing
   %+  join  "."  l
 ++  show-s
-  |=(s=@s `tape`[?:((syn:si s) %$ '-') (slag 2 (scow %ui (abs:si s)))])
+  |=(s=@s `tape`(zing [?:((syn:si s) "" "-") ~[(slag 2 (scow %ui (abs:si s)))]]))
 ++  show-u
   |=(u=@u `tape`(slag 2 (scow %ui u)))
 ++  show-float

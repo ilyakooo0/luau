@@ -1,4 +1,5 @@
 /-  *lua
+/+  st
 /+  *interlist
 =<
 apex
@@ -248,7 +249,7 @@ apex
     parse-hex-float
     ::
     %+  cook
-      |=  x=@u  [%int x]
+      |=  x=@u  [%int (new:st x)]
     ;~  pfix
       (just '0')
       (mask "xX")
@@ -260,7 +261,10 @@ apex
     parse-float
     ::
     %+  cook
-      |=  x=@u  [%int x]
+      |=  x=@u
+      ?:  (gth x max-int)
+      [%float (sun:rd x)]
+      [%int (new:st x)]
     (bass 10 (plus dit))
   ==
 ++  parse-exprlist
@@ -888,4 +892,5 @@ apex
   |=  =blok
   ^-  ?
   &(?=(~ body.blok) ?=(~ ret.blok))
+++  max-int  9.223.372.036.854.775.807
 --
