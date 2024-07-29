@@ -1,6 +1,7 @@
 /-  *lua
 /+  st
-/+  *interlist
+/+  interlist
+/+  *bintree
 =<
 apex
 |%
@@ -75,17 +76,64 @@ apex
 :: Parse expressions separated by binary operators
 ::
 ++  parse-expr-list
-  %^  tnee  %parse-expr-list  (interlist binop expr)
-  %+  parse-interlist  (ifix [ws ws] parse-binop)  parse-atomic-expr
+  %^  tnee  %parse-expr-list  (interlist:interlist binop expr)
+  %+  parse:interlist  (ifix [ws ws] parse-binop)  parse-atomic-expr
 :: TODO: This is mock and should take operator priority into account.
 ::
 ++  process-expr-list
-  |=  l=(interlist binop expr)
+  =<
+  |=  l=(interlist:interlist binop expr)
   ^-  expr
-  ?-  -.l
-    %single  val.l
-    %double  [%binop val.l sep.l (process-expr-list tail.l)]
-  ==
+  %-  strip-tree
+  %-  (process-left-assoc ~[%or])
+  %-  (process-left-assoc ~[%and])
+  %-  (process-left-assoc ~[%lt %gt %lteq %gteq %neq %eq])
+  %-  (process-left-assoc ~[%bor])
+  %-  (process-left-assoc ~[%bxor])
+  %-  (process-left-assoc ~[%band])
+  %-  (process-left-assoc ~[%rshft %lshft])
+  %-  (process-right-assoc ~[%concat])
+  %-  (process-left-assoc ~[%add %sub])
+  %-  (process-left-assoc ~[%mul %div %int-div %mod])
+  %-  (process-left-assoc ~[%pow])
+  [%leaf l]
+  |%
+  ++  strip-tree
+    |=  tree=(bintree binop (interlist:interlist binop expr))
+    ^-  expr
+    ?-  -.tree
+      %leaf  ?>  ?=(%single +<.tree)  +>.tree
+      %node  [%binop $(tree l.tree) n.tree $(tree r.tree)]
+    ==
+  ++  process-right-assoc
+    |=  ops=(lest binop)
+    |=  tree=(bintree binop (interlist:interlist binop expr))
+    ^+  tree
+    ?-  -.tree
+      %leaf
+        =/  l  +.tree
+        |-
+        =/  splitted  (split-left-on:interlist |=(op=binop (elem op ops)) l)
+        ?~  splitted  [%leaf l]
+        [%node $(l lhs.u.splitted) pivot.u.splitted $(l rhs.u.splitted)]
+      %node
+        [%node $(tree l.tree) n.tree $(tree r.tree)]
+    ==
+  ++  process-left-assoc
+    |=  ops=(lest binop)
+    |=  tree=(bintree binop (interlist:interlist binop expr))
+    ^+  tree
+    ?-  -.tree
+      %leaf
+        =/  l  +.tree
+        |-
+        =/  splitted  (split-right-on:interlist |=(op=binop (elem op ops)) l)
+        ?~  splitted  [%leaf l]
+        [%node $(l lhs.u.splitted) pivot.u.splitted $(l rhs.u.splitted)]
+      %node
+        [%node $(tree l.tree) n.tree $(tree r.tree)]
+    ==
+  --
 ++  parse-expr
   %^  tnee  %parse-expr  expr
   %+  cook  process-expr-list  parse-expr-list
@@ -893,4 +941,8 @@ apex
   ^-  ?
   &(?=(~ body.blok) ?=(~ ret.blok))
 ++  max-int  9.223.372.036.854.775.807
+++  elem
+  |=  [nedl=* stak=(list *)]
+  ^-  ?
+  ?=(^ (find ~[nedl] stak))
 --

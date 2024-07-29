@@ -56,7 +56,6 @@ print
   ==
 :: string
 ::
-:: NOTE: does not handle escaping chars
 ++  print-string
   |=  =string
   %-  zing
