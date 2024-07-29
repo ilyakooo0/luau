@@ -85,17 +85,17 @@ apex
   |=  l=(interlist:interlist binop expr)
   ^-  expr
   %-  strip-tree
-  %-  (process-left-assoc ~[%or])
-  %-  (process-left-assoc ~[%and])
-  %-  (process-left-assoc ~[%lt %gt %lteq %gteq %neq %eq])
-  %-  (process-left-assoc ~[%bor])
-  %-  (process-left-assoc ~[%bxor])
-  %-  (process-left-assoc ~[%band])
-  %-  (process-left-assoc ~[%rshft %lshft])
-  %-  (process-right-assoc ~[%concat])
-  %-  (process-left-assoc ~[%add %sub])
-  %-  (process-left-assoc ~[%mul %div %int-div %mod])
   %-  (process-left-assoc ~[%pow])
+  %-  (process-left-assoc ~[%mul %div %int-div %mod])
+  %-  (process-left-assoc ~[%add %sub])
+  %-  (process-right-assoc ~[%concat])
+  %-  (process-left-assoc ~[%rshft %lshft])
+  %-  (process-left-assoc ~[%band])
+  %-  (process-left-assoc ~[%bxor])
+  %-  (process-left-assoc ~[%bor])
+  %-  (process-left-assoc ~[%lt %gt %lteq %gteq %neq %eq])
+  %-  (process-left-assoc ~[%and])
+  %-  (process-left-assoc ~[%or])
   [%leaf l]
   |%
   ++  strip-tree

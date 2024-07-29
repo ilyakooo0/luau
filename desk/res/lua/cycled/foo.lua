@@ -2,7 +2,7 @@ foosjis=nil
 az=bar[nil]
 baz=bar(0x1).foo
 i=0x3
-i,a[i]=i + 0x1,0x14 >> 0x9
+i,a[i]=(i + 0x1),(0x14 >> 0x9)
 hello="\u{68}\u{65}\u{6c}\u{6c}\u{6f}\u{64}\u{6b}\u{6e}\u{64}\u{6a}\u{d0}\u{b2}\u{d0}\u{b3}\u{d0}\u{be}\u{d0}\u{b2}\u{d1}\u{88}\u{d0}\u{be}\u{d0}\u{b2}"
 x={[hello] = 0x8,["\u{68}\u{65}\u{6c}\u{6c}\u{6f}"] = 0xc}
 ;
@@ -27,24 +27,24 @@ foo=0x9
 ;
 end
 until true
-if l == 0x3 then
-a=a + 0x1
+if (l == 0x3) then
+a=(a + 0x1)
 ;
-assert(getlocal(0x2,0x1) == "\u{28}\u{74}\u{65}\u{6d}\u{70}\u{6f}\u{72}\u{61}\u{72}\u{79}\u{29}")
-elseif l == 0x4 then
-a=a + 0x1
+assert((getlocal(0x2,0x1) == "\u{28}\u{74}\u{65}\u{6d}\u{70}\u{6f}\u{72}\u{61}\u{72}\u{79}\u{29}"))
+elseif (l == 0x4) then
+a=(a + 0x1)
 ;
-assert(getlocal(0x2,0x1) == "\u{41}")
+assert((getlocal(0x2,0x1) == "\u{41}"))
 else
 ;
 end
 for i = 0x1, 0x64
 do
-karlSum=karlSum + i
+karlSum=(karlSum + i)
 end
 for j = 0x64, 0x1, 0x1
 do
-fredSum=fredSum + j
+fredSum=(fredSum + j)
 end
 for key,val in pairs(u)
 do
@@ -56,7 +56,7 @@ self.__index=self
 return setmetatable(newObj,self)
 end
 function Dog:makeSound()
-print("\u{49}\u{20}\u{73}\u{61}\u{79}\u{20}" .. self.sound)
+print(("\u{49}\u{20}\u{73}\u{61}\u{79}\u{20}" .. self.sound))
 end
 local function g
 (x)
@@ -66,11 +66,11 @@ local a = require("\u{6d}\u{6f}\u{64}\u{32}")
 local b = require("\u{6d}\u{6f}\u{64}\u{32}")
 function adder(x)
 return function (y)
-return x + y
+return (x + y)
 end
 end
-x=- 0x1 + 0x8
-if _VERSION ~= version then
+x=- (0x1 + 0x8)
+if (_VERSION ~= version) then
 io.stderr:write("\u{54}\u{68}\u{69}\u{73}\u{20}\u{74}\u{65}\u{73}\u{74}\u{20}\u{73}\u{75}\u{69}\u{74}\u{65}\u{20}\u{69}\u{73}\u{20}\u{66}\u{6f}\u{72}\u{20}",version,"\u{2c}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{66}\u{6f}\u{72}\u{20}",_VERSION,"\u{a}\u{45}\u{78}\u{69}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}")
 return 
 end

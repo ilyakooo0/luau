@@ -24,11 +24,13 @@ print
     %binop
       %-  zing
       :~
+        "("
         (print-expr +<.expr)
         " "
         (print-binop +>-.expr)
         " "
         (print-expr +>+.expr)
+        ")"
       ==
     %num  (print-numeral +.expr)
     %table  (print-table +.expr)
