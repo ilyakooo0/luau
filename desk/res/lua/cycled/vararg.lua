@@ -14,7 +14,7 @@ assert((arg == _G.arg))
 local x = {...}
 ;
 x.n=# x
-local res = ((((x.n == 0x2) and (x[0x1] == 0x1)) and (x[0x2] == 0x2)))
+local res = (((x.n == 0x2) and (x[0x1] == 0x1)) and (x[0x2] == 0x2))
 if res then
 res=0x37
 end

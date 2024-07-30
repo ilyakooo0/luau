@@ -94,7 +94,7 @@ print("\u{2b}")
 local function f1
 (s,p)
 p=string.gsub(p,"\u{25}\u{25}\u{28}\u{5b}\u{30}\u{2d}\u{39}\u{5d}\u{29}",function (s)
-return ("\u{25}" .. ((tonumber(s) + 0x1)))
+return ("\u{25}" .. (tonumber(s) + 0x1))
 end)
 p=string.gsub(p,"\u{5e}\u{28}\u{5e}\u{3f}\u{29}","\u{25}\u{31}\u{28}\u{29}",0x1)
 p=string.gsub(p,"\u{28}\u{24}\u{3f}\u{29}\u{24}","\u{28}\u{29}\u{25}\u{31}",0x1)

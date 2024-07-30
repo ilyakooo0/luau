@@ -56,7 +56,7 @@ local _6,_7,_8,_9,_10
 local x = 0x3
 local b = a
 local c,d = a,b
-if ((d == b)) then
+if (d == b) then
 local x = "\u{71}"
 x=b
 assert((x == 0x2))
@@ -221,7 +221,7 @@ end
 print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{6f}\u{2d}\u{62}\u{65}\u{2d}\u{63}\u{6c}\u{6f}\u{73}\u{65}\u{64}\u{20}\u{76}\u{61}\u{72}\u{69}\u{61}\u{62}\u{6c}\u{65}\u{73}")
 local function stack
 (n)
-n=((((n == 0x0)) or stack((n - 0x1))))
+n=((n == 0x0) or stack((n - 0x1)))
 end
 local function func2close
 (f,x,y)
@@ -688,7 +688,7 @@ do
 local trace = {}
 local function hook
 (event)
-trace[# (trace + 0x1)]=(event .. ("\u{20}" .. ((debug.getinfo(0x2).name or "\u{3f}"))))
+trace[# (trace + 0x1)]=(event .. ("\u{20}" .. (debug.getinfo(0x2).name or "\u{3f}")))
 end
 local x = func2close(function (_,msg)
 trace[# (trace + 0x1)]="\u{78}"
@@ -825,14 +825,14 @@ coroutine.yield("\u{7a}")
 return 0x64,0xc8
 end)
 local y <close> = func2close(function (_,msg)
-assert(((msg == err) or (((msg == nil) and (err == 0x1)))))
+assert(((msg == err) or ((msg == nil) and (err == 0x1))))
 coroutine.yield("\u{79}")
 if err then
 error((err + 0x14))
 end
 end)
 local x <close> = func2close(function (_,msg)
-assert(((msg == err) or (((msg == nil) and (err == 0x1)))))
+assert(((msg == err) or ((msg == nil) and (err == 0x1))))
 coroutine.yield("\u{78}")
 return 0x64,0xc8
 end)

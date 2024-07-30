@@ -150,7 +150,7 @@ end
 assert((utf8.char() == ""))
 assert((utf8.char(0x0,0x61,0x62,0x63,0x1) == "\u{0}\u{61}\u{62}\u{63}\u{1}"))
 assert((utf8.codepoint(utf8.char(0x10ffff)) == 0x10ffff))
-assert((utf8.codepoint(utf8.char(0x7fffffff),0x1,0x1,true) == (((0x1 << 0x1f)) - 0x1)))
+assert((utf8.codepoint(utf8.char(0x7fffffff),0x1,0x1,true) == ((0x1 << 0x1f) - 0x1)))
 checkerror("\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{72}\u{61}\u{6e}\u{67}\u{65}",utf8.char,(0x7fffffff + 0x1))
 checkerror("\u{76}\u{61}\u{6c}\u{75}\u{65}\u{20}\u{6f}\u{75}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{72}\u{61}\u{6e}\u{67}\u{65}",utf8.char,- 0x1)
 local function invalid

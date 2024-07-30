@@ -1,5 +1,5 @@
 if (T == nil) then
-((Message or print))("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{41}\u{50}\u{49}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
+(Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{41}\u{50}\u{49}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 return 
 end
 local debug = require("\u{64}\u{65}\u{62}\u{75}\u{67}")
@@ -7,7 +7,7 @@ local pack = table.pack
 local MEMERRMSG = "\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}"
 local function tcheck
 (t1,t2)
-assert((t1.n == (((t2.n or # t2)) + 0x1)))
+assert((t1.n == ((t2.n or # t2) + 0x1)))
 for i = 0x2, t1.n
 do
 assert((t1[i] == t2[(i - 0x1)]))
@@ -142,7 +142,7 @@ a,b,c=setmetatable({0x4},mt),setmetatable({0x8},mt),setmetatable({- 0x3},mt)
 local x,y,z = T.testC("\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{2b}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{32}",0xa,a,b)
 assert((((x == 0xa) and (y[0x1] == 0xc)) and (z == nil)))
 assert((T.testC("\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{25}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}",a,c)[0x1] == (0x4 % - 0x3)))
-assert((T.testC("\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{5f}\u{3b}\u{20}\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{2b}\u{3b}\u{20}\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{25}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}",b,a,c)[0x1] == (0x8 % ((0x4 + ((- 0x3) * 0x2))))))
+assert((T.testC("\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{5f}\u{3b}\u{20}\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{2b}\u{3b}\u{20}\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{25}\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}",b,a,c)[0x1] == (0x8 % (0x4 + ((- 0x3) * 0x2)))))
 checkerr("\u{64}\u{69}\u{76}\u{69}\u{64}\u{65}\u{20}\u{62}\u{79}\u{20}\u{7a}\u{65}\u{72}\u{6f}",T.testC,"\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{5c}",0xa,0x0)
 checkerr("\u{25}\u{25}\u{30}",T.testC,"\u{61}\u{72}\u{69}\u{74}\u{68}\u{20}\u{25}",0xa,0x0)
 assert(T.testC("\u{63}\u{6f}\u{6d}\u{70}\u{61}\u{72}\u{65}\u{20}\u{4c}\u{54}\u{20}\u{32}\u{20}\u{35}\u{2c}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}",0x3,0x2,0x2,0x4,0x2,0x2))
@@ -219,7 +219,7 @@ n=(n or 0x2)
 local prog = "\u{20}\u{20}\u{20}\u{20}\u{69}\u{73}\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}\u{20}\u{25}\u{64}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{69}\u{73}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{25}\u{64}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{69}\u{73}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{25}\u{64}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{69}\u{73}\u{63}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{25}\u{64}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{69}\u{73}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{25}\u{64}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{69}\u{73}\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}\u{20}\u{25}\u{64}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{69}\u{73}\u{6e}\u{69}\u{6c}\u{20}\u{25}\u{64}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{69}\u{73}\u{6e}\u{75}\u{6c}\u{6c}\u{20}\u{25}\u{64}\u{3b}\u{a}\u{20}\u{20}\u{20}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{38}\u{a}\u{20}\u{20}"
 prog=string.format(prog,n,n,n,n,n,n,n,n)
 local a,b,c,d,e,f,g,h = T.testC(prog,x)
-return (((((((B(a) + B(b)) + B(c)) + B(d)) + B(e)) + B(f)) + B(g)) + ((0x64 * B(h))))
+return (((((((B(a) + B(b)) + B(c)) + B(d)) + B(e)) + B(f)) + B(g)) + (0x64 * B(h)))
 end
 assert((count(0x3) == 0x2))
 assert((count("\u{61}\u{6c}\u{6f}") == 0x1))
@@ -303,17 +303,17 @@ collectgarbage("\u{72}\u{65}\u{73}\u{74}\u{61}\u{72}\u{74}")
 print("\u{2b}")
 end
 local lim = ((_soft and 0x1f4) or 0x2ee0)
-local prog = {("\u{63}\u{68}\u{65}\u{63}\u{6b}\u{73}\u{74}\u{61}\u{63}\u{6b}\u{20}" .. ((((lim * 0x2) + 0x64)) .. "\u{6d}\u{73}\u{67}")),"\u{6e}\u{65}\u{77}\u{74}\u{61}\u{62}\u{6c}\u{65}"}
+local prog = {("\u{63}\u{68}\u{65}\u{63}\u{6b}\u{73}\u{74}\u{61}\u{63}\u{6b}\u{20}" .. (((lim * 0x2) + 0x64) .. "\u{6d}\u{73}\u{67}")),"\u{6e}\u{65}\u{77}\u{74}\u{61}\u{62}\u{6c}\u{65}"}
 for i = 0x1, lim
 do
 prog[# (prog + 0x1)]=("\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}" .. i)
 prog[# (prog + 0x1)]=("\u{70}\u{75}\u{73}\u{68}\u{6e}\u{75}\u{6d}\u{20}" .. (i * 0xa))
 end
 prog[# (prog + 0x1)]="\u{72}\u{61}\u{77}\u{67}\u{65}\u{74}\u{69}\u{20}\u{52}\u{20}\u{32}"
-prog[# (prog + 0x1)]=("\u{69}\u{6e}\u{73}\u{65}\u{72}\u{74}\u{20}" .. - (((0x2 * lim) + 0x2)))
+prog[# (prog + 0x1)]=("\u{69}\u{6e}\u{73}\u{65}\u{72}\u{74}\u{20}" .. - ((0x2 * lim) + 0x2))
 for i = 0x1, lim
 do
-prog[# (prog + 0x1)]=("\u{73}\u{65}\u{74}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}" .. - (((0x2 * (((lim - i) + 0x1))) + 0x1)))
+prog[# (prog + 0x1)]=("\u{73}\u{65}\u{74}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}" .. - ((0x2 * ((lim - i) + 0x1)) + 0x1))
 end
 prog[# (prog + 0x1)]="\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{32}"
 prog=table.concat(prog,"\u{3b}")
@@ -1029,7 +1029,7 @@ testamem("\u{67}\u{73}\u{75}\u{62}",function ()
 local a,b = string.gsub("\u{61}\u{6c}\u{6f}\u{20}\u{61}\u{6c}\u{6f}","\u{28}\u{61}\u{29}",function (x)
 return (x .. "\u{62}")
 end)
-return ((a == "\u{61}\u{62}\u{6c}\u{6f}\u{20}\u{61}\u{62}\u{6c}\u{6f}"))
+return (a == "\u{61}\u{62}\u{6c}\u{6f}\u{20}\u{61}\u{62}\u{6c}\u{6f}")
 end)
 testamem("\u{64}\u{75}\u{6d}\u{70}\u{2f}\u{75}\u{6e}\u{64}\u{75}\u{6d}\u{70}",function ()
 local a = load(testprog)
@@ -1055,11 +1055,11 @@ a[i]=i
 ;
 a[(i .. "\u{61}")]={}
 end
-return (((type(a[(lim .. "\u{61}")]) == "\u{74}\u{61}\u{62}\u{6c}\u{65}") and (a[lim] == lim)))
+return ((type(a[(lim .. "\u{61}")]) == "\u{74}\u{61}\u{62}\u{6c}\u{65}") and (a[lim] == lim))
 end)
 testamem("\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{72}\u{75}\u{63}\u{74}\u{6f}\u{72}\u{73}",function ()
 local a = {0xa,0x14,0x1e,0x28,0x32,["\u{61}"] = 0x1,["\u{62}"] = 0x2,["\u{63}"] = 0x3,["\u{64}"] = 0x4,["\u{65}"] = 0x5}
-return (((type(a) == "\u{74}\u{61}\u{62}\u{6c}\u{65}") and (a.e == 0x5)))
+return ((type(a) == "\u{74}\u{61}\u{62}\u{6c}\u{65}") and (a.e == 0x5))
 end)
 local a = 0x1
 local close = nil
@@ -1069,7 +1069,7 @@ return function (x)
 return (b + x)
 end
 end
-return ((close(0x2)(0x4) == 0x6))
+return (close(0x2)(0x4) == 0x6)
 end)
 testamem("\u{75}\u{73}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6f}\u{72}\u{6f}\u{75}\u{74}\u{69}\u{6e}\u{65}\u{73}",function ()
 local a = coroutine.wrap(function ()

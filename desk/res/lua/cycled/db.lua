@@ -236,8 +236,8 @@ do
 local n,v = debug.getlocal(0x1,- i)
 assert(((n == "\u{28}\u{76}\u{61}\u{72}\u{61}\u{72}\u{67}\u{29}") and (v == t[i])))
 end
-assert(not debug.getlocal(0x1,- ((t.n + 0x1))))
-assert(not debug.setlocal(0x1,- ((t.n + 0x1)),0x1e))
+assert(not debug.getlocal(0x1,- (t.n + 0x1)))
+assert(not debug.setlocal(0x1,- (t.n + 0x1),0x1e))
 if (t.n > 0x0) then
 (function (x)
 assert((debug.setlocal(0x2,- 0x1,x) == "\u{28}\u{76}\u{61}\u{72}\u{61}\u{72}\u{67}\u{29}"))
@@ -250,7 +250,7 @@ foo()
 foo(print)
 foo(0xc8,0x3,0x4)
 local a = {}
-for i = 0x1, (((_soft and 0x64) or 0x3e8))
+for i = 0x1, ((_soft and 0x64) or 0x3e8)
 do
 a[i]=i
 end
@@ -349,7 +349,7 @@ debug.setlocal(0x2,0x3,0xa)
 return 0x14
 end
 function g(a,b)
-return (((a + 0x1)) + f())
+return ((a + 0x1) + f())
 end
 assert((g(0x0,0x0) == 0x1e))
 _G.f,_G.g=nil
@@ -388,7 +388,7 @@ local tab = {}
 for i = 0x1, math.huge
 do
 local n,v = debug.getlocal((level + 0x1),i)
-if not ((n and string.find(n,"\u{5e}\u{5b}\u{61}\u{2d}\u{7a}\u{41}\u{2d}\u{5a}\u{30}\u{2d}\u{39}\u{5f}\u{5d}\u{2b}\u{24}"))) then
+if not (n and string.find(n,"\u{5e}\u{5b}\u{61}\u{2d}\u{7a}\u{41}\u{2d}\u{5a}\u{30}\u{2d}\u{39}\u{5f}\u{5d}\u{2b}\u{24}")) then
 break
 end
 tab[n]=v

@@ -267,7 +267,7 @@ print("\u{2b}")
 local function unlpack
 (t,i)
 i=(i or 0x1)
-if ((i <= # t)) then
+if (i <= # t) then
 return t[i],unlpack(t,(i + 0x1))
 end
 end

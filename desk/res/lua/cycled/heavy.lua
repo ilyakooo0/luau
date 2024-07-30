@@ -9,7 +9,7 @@ a=(a .. (a .. (a .. (a .. (a .. (a .. (a .. (a .. (a .. (a .. (a .. (a .. (a .. 
 print(string.format("\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{25}\u{64}\u{20}\u{62}\u{79}\u{74}\u{65}\u{73}",# a))
 end
 end)
-assert(not (st and ((string.find(msg,"\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{6c}\u{65}\u{6e}\u{67}\u{74}\u{68}\u{20}\u{6f}\u{76}\u{65}\u{72}\u{66}\u{6c}\u{6f}\u{77}") or string.find(msg,"\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}")))))
+assert(not (st and (string.find(msg,"\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{6c}\u{65}\u{6e}\u{67}\u{74}\u{68}\u{20}\u{6f}\u{76}\u{65}\u{72}\u{66}\u{6c}\u{6f}\u{77}") or string.find(msg,"\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}"))))
 print(("\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{20}\u{6c}\u{65}\u{6e}\u{67}\u{74}\u{68}\u{20}\u{6f}\u{76}\u{65}\u{72}\u{66}\u{6c}\u{6f}\u{77}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}" .. # (a * 0x64)))
 end
 print("\u{2b}")
@@ -22,7 +22,7 @@ local count = 0x0
 local function f
 ()
 count=(count + p)
-if ((count % ((0x80 * p))) == 0x0) then
+if ((count % (0x80 * p)) == 0x0) then
 io.stderr:write("\u{28}",(count // (0x2 ^ 0x14)),"\u{20}\u{4d}\u{29}")
 end
 return s
@@ -35,7 +35,7 @@ return st,msg
 end
 function controlstruct()
 print("\u{63}\u{6f}\u{6e}\u{74}\u{72}\u{6f}\u{6c}\u{20}\u{73}\u{74}\u{72}\u{75}\u{63}\u{74}\u{75}\u{72}\u{65}\u{20}\u{74}\u{6f}\u{6f}\u{20}\u{6c}\u{6f}\u{6e}\u{67}")
-local lim = (((((0x1 << 0x18)) - 0x2)) // 0x3)
+local lim = (((0x1 << 0x18) - 0x2) // 0x3)
 local s = string.rep("\u{61}\u{20}\u{3d}\u{20}\u{61}\u{20}\u{2b}\u{20}\u{31}\u{a}",lim)
 s=("\u{77}\u{68}\u{69}\u{6c}\u{65}\u{20}\u{74}\u{72}\u{75}\u{65}\u{20}\u{64}\u{6f}\u{20}" .. (s .. "\u{65}\u{6e}\u{64}"))
 assert(load(s))
@@ -56,7 +56,7 @@ end
 function hugeid()
 print("\u{6c}\u{6f}\u{61}\u{64}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{68}\u{75}\u{6e}\u{6b}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{68}\u{75}\u{67}\u{65}\u{20}\u{69}\u{64}\u{65}\u{6e}\u{74}\u{69}\u{66}\u{69}\u{65}\u{72}")
 local st,msg = loadrep("\u{61}","\u{63}\u{68}\u{61}\u{72}\u{73}")
-assert(not (st and ((string.find(msg,"\u{6c}\u{65}\u{78}\u{69}\u{63}\u{61}\u{6c}\u{20}\u{65}\u{6c}\u{65}\u{6d}\u{65}\u{6e}\u{74}\u{20}\u{74}\u{6f}\u{6f}\u{20}\u{6c}\u{6f}\u{6e}\u{67}") or string.find(msg,"\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}")))))
+assert(not (st and (string.find(msg,"\u{6c}\u{65}\u{78}\u{69}\u{63}\u{61}\u{6c}\u{20}\u{65}\u{6c}\u{65}\u{6d}\u{65}\u{6e}\u{74}\u{20}\u{74}\u{6f}\u{6f}\u{20}\u{6c}\u{6f}\u{6e}\u{67}") or string.find(msg,"\u{6e}\u{6f}\u{74}\u{20}\u{65}\u{6e}\u{6f}\u{75}\u{67}\u{68}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}"))))
 print("\u{2b}")
 end
 function toomanyinst()
@@ -87,7 +87,7 @@ end
 function toomanyconst()
 print("\u{6c}\u{6f}\u{61}\u{64}\u{69}\u{6e}\u{67}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{77}\u{69}\u{74}\u{68}\u{20}\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{61}\u{6e}\u{74}\u{73}")
 loadrepfunc("\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{66}\u{6f}\u{6f}\u{20}\u{28}\u{29}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{7b}\u{30}\u{2c}",function (n)
-return string.char(0x22,(((((n // (0x80 ^ 0x0))) & 0x7f)) + 0x80),(((((n // (0x80 ^ 0x1))) & 0x7f)) + 0x80),(((((n // (0x80 ^ 0x2))) & 0x7f)) + 0x80),(((((n // (0x80 ^ 0x3))) & 0x7f)) + 0x80),(((((n // (0x80 ^ 0x4))) & 0x7f)) + 0x80),0x22,0x2c)
+return string.char(0x22,(((n // (0x80 ^ 0x0)) & 0x7f) + 0x80),(((n // (0x80 ^ 0x1)) & 0x7f) + 0x80),(((n // (0x80 ^ 0x2)) & 0x7f) + 0x80),(((n // (0x80 ^ 0x3)) & 0x7f) + 0x80),(((n // (0x80 ^ 0x4)) & 0x7f) + 0x80),0x22,0x2c)
 end)
 end
 function toomanystr()

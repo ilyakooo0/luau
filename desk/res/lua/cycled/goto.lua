@@ -206,7 +206,7 @@ for i = 0x3, 0x5, 0x2
 do
 for j = 0x1, 0x6
 do
-assert((((debug.upvalueid(a[i],0x4) == debug.upvalueid(a[j],0x4))) == ((i == j))))
+assert(((debug.upvalueid(a[i],0x4) == debug.upvalueid(a[j],0x4)) == (i == j)))
 end
 end
 local function testG

@@ -63,7 +63,7 @@ if not T then
 local max = 0x0
 showmem=function ()
 local m = (collectgarbage("\u{63}\u{6f}\u{75}\u{6e}\u{74}") * 0x400)
-max=((((m > max)) and m) or max)
+max=(((m > max) and m) or max)
 print(format("\u{20}\u{20}\u{20}\u{20}\u{2d}\u{2d}\u{2d}\u{2d}\u{20}\u{74}\u{6f}\u{74}\u{61}\u{6c}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}\u{3a}\u{20}\u{25}\u{73}\u{2c}\u{20}\u{6d}\u{61}\u{78}\u{20}\u{6d}\u{65}\u{6d}\u{6f}\u{72}\u{79}\u{3a}\u{20}\u{25}\u{73}\u{20}\u{2d}\u{2d}\u{2d}\u{2d}\u{a}",F(m),F(max)))
 end
 Cstacklevel=function ()
@@ -193,9 +193,9 @@ walltime=difftime(time(),walltime)
 print(format("\u{a}\u{a}\u{74}\u{6f}\u{74}\u{61}\u{6c}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{3a}\u{20}\u{25}\u{2e}\u{32}\u{66}\u{73}\u{20}\u{28}\u{77}\u{61}\u{6c}\u{6c}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{3a}\u{20}\u{25}\u{67}\u{73}\u{29}\u{a}",clocktime,walltime))
 if not usertests then
 lasttime=(lasttime or clocktime)
-local diff = (((clocktime - lasttime)) / lasttime)
+local diff = ((clocktime - lasttime) / lasttime)
 local tolerance = 0.05
-if (((diff >= tolerance) or (diff <= - tolerance))) then
+if ((diff >= tolerance) or (diff <= - tolerance)) then
 warn(format("\u{23}\u{74}\u{69}\u{6d}\u{65}\u{20}\u{64}\u{69}\u{66}\u{66}\u{65}\u{72}\u{65}\u{6e}\u{63}\u{65}\u{20}\u{66}\u{72}\u{6f}\u{6d}\u{20}\u{70}\u{72}\u{65}\u{76}\u{69}\u{6f}\u{75}\u{73}\u{20}\u{74}\u{65}\u{73}\u{74}\u{3a}\u{20}\u{25}\u{2b}\u{2e}\u{31}\u{66}\u{25}\u{25}",(diff * 0x64)))
 end
 assert(open(fname,"\u{77}")):write(clocktime):close()

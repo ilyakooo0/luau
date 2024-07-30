@@ -33,7 +33,7 @@ assert((setmetatable(a,t) == a))
 function f(t,i,e)
 assert(not e)
 local p = rawget(t,"\u{70}\u{61}\u{72}\u{65}\u{6e}\u{74}")
-return ((p and (p[i] + 0x3))),"\u{64}\u{75}\u{6d}\u{6d}\u{79}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}"
+return (p and (p[i] + 0x3)),"\u{64}\u{75}\u{6d}\u{6d}\u{79}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}"
 end
 t.__index=f
 a.parent={["\u{7a}"] = 0x19,["\u{78}"] = 0xc,[0x4] = 0x18}
@@ -221,7 +221,7 @@ checkcap({"\u{64}\u{69}\u{76}",a,0.0})
 assert(((a % 0x2) == a))
 ;
 checkcap({"\u{6d}\u{6f}\u{64}",a,0x2})
-assert(((a // ((0x1 / 0x0))) == a))
+assert(((a // (0x1 / 0x0)) == a))
 ;
 checkcap({"\u{69}\u{64}\u{69}\u{76}",a,(0x1 / 0x0)})
 ;
@@ -339,18 +339,18 @@ return setmetatable({["\u{78}"] = x},t)
 end
 local function test
 (a,b,c)
-assert(not ((((Op(0x1) < Op(0x1))) and ((Op(0x1) < Op(0x2)))) and not ((Op(0x2) < Op(0x1)))))
-assert(not ((((0x1 < Op(0x1))) and ((Op(0x1) < 0x2))) and not ((0x2 < Op(0x1)))))
-assert(not ((((Op("\u{61}") < Op("\u{61}"))) and ((Op("\u{61}") < Op("\u{62}")))) and not ((Op("\u{62}") < Op("\u{61}")))))
-assert(not (((("\u{61}" < Op("\u{61}"))) and ((Op("\u{61}") < "\u{62}"))) and not ((Op("\u{62}") < Op("\u{61}")))))
-assert(((((Op(0x1) <= Op(0x1))) and ((Op(0x1) <= Op(0x2)))) and not ((Op(0x2) <= Op(0x1)))))
-assert(((((Op("\u{61}") <= Op("\u{61}"))) and ((Op("\u{61}") <= Op("\u{62}")))) and not ((Op("\u{62}") <= Op("\u{61}")))))
-assert(not (((Op(0x1) > Op(0x1))) and not (((Op(0x1) > Op(0x2))) and ((Op(0x2) > Op(0x1))))))
-assert(not (((Op("\u{61}") > Op("\u{61}"))) and not (((Op("\u{61}") > Op("\u{62}"))) and ((Op("\u{62}") > Op("\u{61}"))))))
-assert((((Op(0x1) >= Op(0x1))) and not (((Op(0x1) >= Op(0x2))) and ((Op(0x2) >= Op(0x1))))))
-assert((((0x1 >= Op(0x1))) and not (((0x1 >= Op(0x2))) and ((Op(0x2) >= 0x1)))))
-assert((((Op("\u{61}") >= Op("\u{61}"))) and not (((Op("\u{61}") >= Op("\u{62}"))) and ((Op("\u{62}") >= Op("\u{61}"))))))
-assert(((("\u{61}" >= Op("\u{61}"))) and not (((Op("\u{61}") >= "\u{62}")) and ((Op("\u{62}") >= Op("\u{61}"))))))
+assert(not (((Op(0x1) < Op(0x1)) and (Op(0x1) < Op(0x2))) and not (Op(0x2) < Op(0x1))))
+assert(not (((0x1 < Op(0x1)) and (Op(0x1) < 0x2)) and not (0x2 < Op(0x1))))
+assert(not (((Op("\u{61}") < Op("\u{61}")) and (Op("\u{61}") < Op("\u{62}"))) and not (Op("\u{62}") < Op("\u{61}"))))
+assert(not ((("\u{61}" < Op("\u{61}")) and (Op("\u{61}") < "\u{62}")) and not (Op("\u{62}") < Op("\u{61}"))))
+assert((((Op(0x1) <= Op(0x1)) and (Op(0x1) <= Op(0x2))) and not (Op(0x2) <= Op(0x1))))
+assert((((Op("\u{61}") <= Op("\u{61}")) and (Op("\u{61}") <= Op("\u{62}"))) and not (Op("\u{62}") <= Op("\u{61}"))))
+assert(not ((Op(0x1) > Op(0x1)) and not ((Op(0x1) > Op(0x2)) and (Op(0x2) > Op(0x1)))))
+assert(not ((Op("\u{61}") > Op("\u{61}")) and not ((Op("\u{61}") > Op("\u{62}")) and (Op("\u{62}") > Op("\u{61}")))))
+assert(((Op(0x1) >= Op(0x1)) and not ((Op(0x1) >= Op(0x2)) and (Op(0x2) >= Op(0x1)))))
+assert(((0x1 >= Op(0x1)) and not ((0x1 >= Op(0x2)) and (Op(0x2) >= 0x1))))
+assert(((Op("\u{61}") >= Op("\u{61}")) and not ((Op("\u{61}") >= Op("\u{62}")) and (Op("\u{62}") >= Op("\u{61}")))))
+assert((("\u{61}" >= Op("\u{61}")) and not ((Op("\u{61}") >= "\u{62}") and (Op("\u{62}") >= Op("\u{61}")))))
 assert(((Op(0x1) == Op(0x1)) and (Op(0x1) ~= Op(0x2))))
 assert(((Op("\u{61}") == Op("\u{61}")) and (Op("\u{61}") ~= Op("\u{62}"))))
 assert(((a == a) and (a ~= b)))
@@ -390,12 +390,12 @@ end
 return true
 end
 assert((Set({0x1,0x2,0x3}) < Set({0x1,0x2,0x3,0x4})))
-assert(not ((Set({0x1,0x2,0x3,0x4}) < Set({0x1,0x2,0x3,0x4}))))
-assert(((Set({0x1,0x2,0x3,0x4}) <= Set({0x1,0x2,0x3,0x4}))))
-assert(((Set({0x1,0x2,0x3,0x4}) >= Set({0x1,0x2,0x3,0x4}))))
-assert(not ((Set({0x1,0x3}) <= Set({0x3,0x5}))))
-assert(not ((Set({0x1,0x3}) <= Set({0x3,0x5}))))
-assert(not ((Set({0x1,0x3}) >= Set({0x3,0x5}))))
+assert(not (Set({0x1,0x2,0x3,0x4}) < Set({0x1,0x2,0x3,0x4})))
+assert((Set({0x1,0x2,0x3,0x4}) <= Set({0x1,0x2,0x3,0x4})))
+assert((Set({0x1,0x2,0x3,0x4}) >= Set({0x1,0x2,0x3,0x4})))
+assert(not (Set({0x1,0x3}) <= Set({0x3,0x5})))
+assert(not (Set({0x1,0x3}) <= Set({0x3,0x5})))
+assert(not (Set({0x1,0x3}) >= Set({0x3,0x5})))
 t.__eq=function (a,b)
 for k in pairs(a)
 do
@@ -427,7 +427,7 @@ end
 assert((a == b))
 end
 if not T then
-((Message or print))("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
+(Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 else
 local u1 = T.newuserdata(0x0,0x1)
 local u2 = T.newuserdata(0x0,0x1)
@@ -482,9 +482,9 @@ d={["\u{76}\u{61}\u{6c}"] = "\u{64}"}
 setmetatable(d,t)
 A=true
 assert(((c .. d) == "\u{63}\u{64}"))
-assert(((0x0 .. ("\u{61}" .. ("\u{62}" .. (c .. (d .. ("\u{65}" .. ("\u{66}" .. (((0x5 + 0x3)) .. "\u{67}")))))))) == "\u{30}\u{61}\u{62}\u{63}\u{64}\u{65}\u{66}\u{38}\u{67}"))
+assert(((0x0 .. ("\u{61}" .. ("\u{62}" .. (c .. (d .. ("\u{65}" .. ("\u{66}" .. ((0x5 + 0x3) .. "\u{67}")))))))) == "\u{30}\u{61}\u{62}\u{63}\u{64}\u{65}\u{66}\u{38}\u{67}"))
 A=false
-assert((((c .. (d .. (c .. d)))).val == "\u{63}\u{64}\u{63}\u{64}"))
+assert(((c .. (d .. (c .. d))).val == "\u{63}\u{64}\u{63}\u{64}"))
 x=(c .. d)
 assert(((getmetatable(x) == t) and (x.val == "\u{63}\u{64}")))
 x=(0x0 .. ("\u{61}" .. ("\u{62}" .. (c .. (d .. ("\u{65}" .. ("\u{66}" .. "\u{67}")))))))
@@ -514,12 +514,12 @@ t1.__le=function ()
 return false
 end
 setmetatable(d,t1)
-assert((((c == d) and (c < d)) and not ((d <= c))))
+assert((((c == d) and (c < d)) and not (d <= c)))
 t2={}
 t2.__eq=t1.__eq
 t2.__lt=t1.__lt
 setmetatable(d,t2)
-assert((((c == d) and (c < d)) and not ((d <= c))))
+assert((((c == d) and (c < d)) and not (d <= c)))
 local i
 local tt = {["\u{5f}\u{5f}\u{63}\u{61}\u{6c}\u{6c}"] = function (t, ...)
 i=(i + 0x1)
@@ -570,7 +570,7 @@ assert((getmetatable(true) == nil))
 debug.setmetatable(nil,mt)
 assert((getmetatable(nil) == mt))
 mt.__add=function (a,b)
-return (((a or 0x1)) + ((b or 0x2)))
+return ((a or 0x1) + (b or 0x2))
 end
 assert(((0xa + nil) == 0xc))
 assert(((nil + 0x17) == 0x18))

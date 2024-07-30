@@ -173,7 +173,7 @@ print("\u{6c}\u{6f}\u{6e}\u{67}\u{20}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}\u{73}"
 local x = "\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}"
 assert((string.len(x) == 0x50))
 local s = ""
-local k = math.min(0x12c,(((math.maxinteger // 0x50)) // 0x2))
+local k = math.min(0x12c,((math.maxinteger // 0x50) // 0x2))
 for n = 0x1, k
 do
 s=(s .. x)
@@ -355,7 +355,7 @@ assert((next(a) ~= nil))
 local i = 0x0
 for k,v in pairs(a)
 do
-assert(((((((k == 0x1) and (v == x))) or (((k == 0x2) and (v == y)))) or (((k == 0x3) and (v == z)))) or (k == v)))
+assert((((((k == 0x1) and (v == x)) or ((k == 0x2) and (v == y))) or ((k == 0x3) and (v == z))) or (k == v)))
 ;
 i=(i + 0x1)
 end
@@ -490,7 +490,7 @@ warn("\u{40}\u{6e}\u{6f}\u{72}\u{6d}\u{61}\u{6c}")
 end
 print("\u{2b}")
 if (T == nil) then
-((Message or print))("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}\u{20}\u{47}\u{43}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
+(Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}\u{20}\u{47}\u{43}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 else
 local function newproxy
 (u)
@@ -744,7 +744,7 @@ local setmetatable,assert,type,print,getmetatable = setmetatable,assert,type,pri
 local tt = {}
 tt.__gc=function (o)
 assert((getmetatable(o) == tt))
-local a = ("\u{78}\u{75}\u{78}\u{75}" .. (((0xa + 0x3)) .. "\u{6a}\u{6f}\u{61}\u{6f}")),{}
+local a = ("\u{78}\u{75}\u{78}\u{75}" .. ((0xa + 0x3) .. "\u{6a}\u{6f}\u{61}\u{6f}")),{}
 ___Glob=o
 setmetatable({},tt)
 print(("\u{3e}\u{3e}\u{3e}\u{20}\u{63}\u{6c}\u{6f}\u{73}\u{69}\u{6e}\u{67}\u{20}\u{73}\u{74}\u{61}\u{74}\u{65}\u{20}" .. "\u{3c}\u{3c}\u{3c}\u{a}"))

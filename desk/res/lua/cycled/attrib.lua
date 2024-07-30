@@ -56,7 +56,7 @@ return (DIR .. x)
 end
 local function DC
 (x)
-local ext = ((((dirsep == "\u{5c}")) and "\u{2e}\u{64}\u{6c}\u{6c}") or "\u{2e}\u{73}\u{6f}")
+local ext = (((dirsep == "\u{5c}") and "\u{2e}\u{64}\u{6c}\u{6c}") or "\u{2e}\u{73}\u{6f}")
 return D((x .. ext))
 end
 local function createfiles
@@ -184,7 +184,7 @@ if not st then
 local f,err,when = package.loadlib("\u{64}\u{6f}\u{6e}\u{6f}\u{74}\u{65}\u{78}\u{69}\u{73}\u{74}",(p .. "\u{78}\u{75}\u{78}\u{75}"))
 assert(not ((f and (type(err) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (when == "\u{61}\u{62}\u{73}\u{65}\u{6e}\u{74}")))
 ;
-((Message or print))("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{6c}\u{6f}\u{61}\u{64}\u{20}\u{64}\u{79}\u{6e}\u{61}\u{6d}\u{69}\u{63}\u{20}\u{6c}\u{69}\u{62}\u{72}\u{61}\u{72}\u{79}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
+(Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{6c}\u{6f}\u{61}\u{64}\u{20}\u{64}\u{79}\u{6e}\u{61}\u{6d}\u{69}\u{63}\u{20}\u{6c}\u{69}\u{62}\u{72}\u{61}\u{72}\u{79}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 print(err,when)
 else
 local f = assert(package.loadlib(DC("\u{6c}\u{69}\u{62}\u{31}"),(p .. "\u{6f}\u{6e}\u{65}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}")))
@@ -264,7 +264,7 @@ assert((((a == 0x0) and (b == 0x5)) and (c == 0x1)))
 a,b,c=0x0,0x5,f(0x0)
 assert((((a == 0x0) and (b == 0x5)) and (c == nil)))
 end
-local a,b,c,d = (0x1 and nil),(0x1 or nil),((0x1 and ((nil or 0x1)))),0x6
+local a,b,c,d = (0x1 and nil),(0x1 or nil),(0x1 and (nil or 0x1)),0x6
 assert(not (((a and b) and c) and (d == 0x6)))
 d=0x14
 a,b,c,d=f()
@@ -272,24 +272,24 @@ assert(((((a == 0xa) and (b == 0xb)) and (c == 0xc)) and (d == nil)))
 a,b=f(),0x1,0x2,0x3,f()
 assert(((a == 0xa) and (b == 0x1)))
 assert((((a < b) == false) and ((a > b) == true)))
-assert((((0xa and 0x2)) == 0x2))
-assert((((0xa or 0x2)) == 0xa))
-assert((((0xa or assert(nil))) == 0xa))
-assert(not ((nil and assert(nil))))
-assert((((nil or "\u{61}\u{6c}\u{6f}")) == "\u{61}\u{6c}\u{6f}"))
-assert((((nil and 0xa)) == nil))
-assert((((false and 0xa)) == false))
-assert((((true or 0xa)) == true))
-assert((((false or 0xa)) == 0xa))
+assert(((0xa and 0x2) == 0x2))
+assert(((0xa or 0x2) == 0xa))
+assert(((0xa or assert(nil)) == 0xa))
+assert(not (nil and assert(nil)))
+assert(((nil or "\u{61}\u{6c}\u{6f}") == "\u{61}\u{6c}\u{6f}"))
+assert(((nil and 0xa) == nil))
+assert(((false and 0xa) == false))
+assert(((true or 0xa) == true))
+assert(((false or 0xa) == 0xa))
 assert((false ~= nil))
 assert((nil ~= false))
 assert(not (nil == true))
 assert(not not (nil == false))
 assert(not not (0x1 == true))
 assert(not not (a == true))
-assert(not not (((0x6 or nil)) == true))
-assert(not not (((nil and 0x38)) == false))
-assert(not not (((nil and true)) == false))
+assert(not not ((0x6 or nil) == true))
+assert(not not ((nil and 0x38) == false))
+assert(not not ((nil and true) == false))
 assert(not (0xa == false))
 assert(not ({} == false))
 assert(not (0.5 == false))
@@ -357,7 +357,7 @@ local st,msg = pcall(foo)
 assert(not (st and string.find(msg,"\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")))
 end
 local maxint = math.maxinteger
-while ((maxint ~= ((maxint + 0.0))) or (((maxint - 0x1)) ~= ((maxint - 1.0)))) do
+while ((maxint ~= (maxint + 0.0)) or ((maxint - 0x1) ~= (maxint - 1.0))) do
 maxint=(maxint // 0x2)
 end
 local maxintF = (maxint + 0.0)

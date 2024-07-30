@@ -1,5 +1,5 @@
 if (T == nil) then
-((Message or print))("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{6f}\u{70}\u{63}\u{6f}\u{64}\u{65}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
+(Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{6f}\u{70}\u{63}\u{6f}\u{64}\u{65}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 return 
 end
 print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{63}\u{6f}\u{64}\u{65}\u{20}\u{67}\u{65}\u{6e}\u{65}\u{72}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{61}\u{6e}\u{64}\u{20}\u{6f}\u{70}\u{74}\u{69}\u{6d}\u{69}\u{7a}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{73}")
@@ -7,7 +7,7 @@ local k0aux <const> = 0x0
 local k0 <const> = k0aux
 local k1 <const> = 0x1
 local k3 <const> = 0x3
-local k6 <const> = (k3 + ((k3 << k0)))
+local k6 <const> = (k3 + (k3 << k0))
 local kFF0 <const> = 0xff0
 local k3_78 <const> = 3.78
 local x,k3_78_4 <const> = 0xa,(k3_78 / 0x4)
@@ -218,7 +218,7 @@ end,"\u{4c}\u{4f}\u{41}\u{44}\u{54}\u{52}\u{55}\u{45}","\u{52}\u{45}\u{54}\u{55}
 check(function ()
 local a,b,c,d
 a=(b * a)
-c.x,a[b]=- (((((a + (d / b)) - a[b])) ^ a.x)),b
+c.x,a[b]=- (((a + (d / b)) - a[b]) ^ a.x),b
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{4e}\u{49}\u{4c}","\u{4d}\u{55}\u{4c}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{44}\u{49}\u{56}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{41}\u{44}\u{44}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{47}\u{45}\u{54}\u{54}\u{41}\u{42}\u{4c}\u{45}","\u{53}\u{55}\u{42}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{47}\u{45}\u{54}\u{46}\u{49}\u{45}\u{4c}\u{44}","\u{50}\u{4f}\u{57}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{55}\u{4e}\u{4d}","\u{53}\u{45}\u{54}\u{54}\u{41}\u{42}\u{4c}\u{45}","\u{53}\u{45}\u{54}\u{46}\u{49}\u{45}\u{4c}\u{44}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{30}")
 check(function ()
 local a,b
@@ -339,10 +339,10 @@ checkK(function ()
 return (0x3 ^ - 0x1)
 end,(0x1 / 0x3))
 checkK(function ()
-return (((0x1 + 0x1)) ^ ((0x32 + 0x32)))
+return ((0x1 + 0x1) ^ (0x32 + 0x32))
 end,(0x2 ^ 0x64))
 checkK(function ()
-return ((- 0x2) ^ ((0x1f - 0x2)))
+return ((- 0x2) ^ (0x1f - 0x2))
 end,- (0x20000000 + 0.0))
 checkF(function ()
 return ((- ((k3 ^ 0x0) + 0x5)) // 3.0)
@@ -351,10 +351,10 @@ checkI(function ()
 return - (k3 % 0x5)
 end,0x2)
 checkF(function ()
-return - ((((((((2.0 ^ 0x8) + - (- 0x1))) % 0x8)) / 0x2) * 0x4) - 0x3)
+return - ((((((2.0 ^ 0x8) + - (- 0x1)) % 0x8) / 0x2) * 0x4) - 0x3)
 end,- 5.0)
 checkF(function ()
-return - ((((((((0x2 ^ 0x8) + - (- 0x1))) % 0x8)) // 0x2) * 0x4) - 0x3)
+return - ((((((0x2 ^ 0x8) + - (- 0x1)) % 0x8) // 0x2) * 0x4) - 0x3)
 end,- 7.0)
 checkI(function ()
 return (240.0 | (204.0 ~ (0xaa & 0xfd)))
@@ -366,11 +366,11 @@ checkI(function ()
 return ~ ~ - 1024.0
 end,- 0x400)
 checkI(function ()
-return (((((0x64 << k6)) << - 0x4)) >> 0x2)
+return (((0x64 << k6) << - 0x4) >> 0x2)
 end,0x64)
 local a = 0x11
 ;
-local sbx = (((((0x1 << a)) - 0x1)) >> 0x1)
+local sbx = (((0x1 << a) - 0x1) >> 0x1)
 local border <const> = 0xffff
 checkI(function ()
 return border
@@ -385,8 +385,8 @@ checkK(function ()
 return (border + 0x2)
 end,(sbx + 0x2))
 checkK(function ()
-return - ((border + 0x1))
-end,- ((sbx + 0x1)))
+return - (border + 0x1)
+end,- (sbx + 0x1))
 local border <const> = 65535.0
 checkF(function ()
 return border
@@ -396,13 +396,13 @@ return - border
 end,- (sbx + 0.0))
 checkF(function ()
 return (border + 0x1)
-end,((sbx + 1.0)))
+end,(sbx + 1.0))
 checkK(function ()
 return (border + 0x2)
-end,((sbx + 2.0)))
+end,(sbx + 2.0))
 checkK(function ()
-return - ((border + 0x1))
-end,- ((sbx + 1.0)))
+return - (border + 0x1)
+end,- (sbx + 1.0))
 checkR(function (x)
 return (x + k1)
 end,0xa,0xb,"\u{41}\u{44}\u{44}\u{49}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
@@ -428,7 +428,7 @@ checkR(function (x)
 return (x // 0x1)
 end,10.0,10.0,"\u{49}\u{44}\u{49}\u{56}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
-return (x % ((0x64 - 0xa)))
+return (x % (0x64 - 0xa))
 end,0x5b,0x1,"\u{4d}\u{4f}\u{44}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
 return (k1 << x)
@@ -470,7 +470,7 @@ checkR(function (x)
 return (x // 0x2710)
 end,0x2710,0x1,"\u{49}\u{44}\u{49}\u{56}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
-return (x % ((100.0 - 0xa)))
+return (x % (100.0 - 0xa))
 end,0x5b,1.0,"\u{4d}\u{4f}\u{44}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
 return - 0.0
@@ -527,7 +527,7 @@ end
 checkequal(function ()
 local a
 ;
-if not ((a or b)) then
+if not (a or b) then
 b=a
 end
 end,function ()
@@ -544,7 +544,7 @@ return ((0x0 <= a) and (a <= l))
 end,function (l)
 local a
 ;
-return not (not (((a >= 0x0)) or not ((a <= l))))
+return not (not ((a >= 0x0) or not (a <= l)))
 end)
 check(function (a,b)
 while a do
