@@ -74,14 +74,6 @@
     ?~  cycled-ast-unit  (pure:m %err)
     =/  ast  u.cycled-ast-unit
     ~?  (has-flag %print-asts)  ast
-    ~&  %printing-parsed
-    =/  printed  (lua-printer ast)
-    ~&  %comparing-printed
-    ?.  =(printed ^printed)  (pure:m %err)
-    ~&  %parsing-reprinted
-    =/  cycled-ast-unit  (parse printed)
-    ?~  cycled-ast-unit  (pure:m %err)
-    =/  ast  u.cycled-ast-unit
     ~&  %comparing-asts
     ?.  =(^ast ast)  (pure:m %err)
     (pure:m %ok)

@@ -33,7 +33,7 @@ apex
     parse-numeral
     ::
     %+  cook
-      |=(=prefix-expr [%prefix-expr prefix-expr])
+      |=(=prefix-expr (unwrap-prefix [%prefix-expr prefix-expr]))
     (knee *prefix-expr |.(parse-prefix-expr))
     ::
     %+  cook
@@ -136,7 +136,11 @@ apex
   --
 ++  parse-expr
   %^  tnee  %parse-expr  expr
-  %+  cook  process-expr-list  parse-expr-list
+  %+  cook  unwrap-prefix
+  ;~  pose
+    %+  cook  process-expr-list  parse-expr-list
+    (ifix [;~(plug (just '(') ws) ;~(plug ws (just ')'))] (knee *expr |.(parse-expr)))
+  ==
 ++  parse-parened-expr
   %^  tnee  %parse-parened-expr  prefix-expr
   %+  cook
@@ -960,4 +964,9 @@ apex
   |=  [nedl=* stak=(list *)]
   ^-  ?
   ?=(^ (find ~[nedl] stak))
+++  unwrap-prefix
+  |=  x=expr
+  ^-  expr
+  ?:  ?=([%prefix-expr %expr *] x)  $(x +>.x)
+  x
 --
