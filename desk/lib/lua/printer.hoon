@@ -189,7 +189,9 @@ print
   |=  [=prefix-expr]
   ?-  -.prefix-expr
     %var  (print-var +.prefix-expr)
-    %expr  
+    %expr
+      :: since binops already have parens
+      ?:  ?=(%binop +<.prefix-expr)  (print-expr +.prefix-expr)
       %-  zing
       :~
         "("

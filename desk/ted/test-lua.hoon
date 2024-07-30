@@ -30,7 +30,12 @@
   ?-  -.flag
     %restrict  ~[+.flag]
   ==
-;<  bek=beak  bind:m  get-beak
+=/  parse
+  |*  src=tape
+  ?:  (has-flag %crash-parser) 
+    (some (scan src lua-parser))
+    (rust src lua-parser)
+ ;<  bek=beak  bind:m  get-beak
 ;<  lua-files=(list path)  bind:m  (list-tree [bek /res/lua])
 =/  lua-files  %+  skim  lua-files
   |=  =path
@@ -51,10 +56,7 @@
   ;<  =cage  bind:m  (read-file [bek current-file])
   =/  lua-code=@t  (of-wain:format !<(wain +.cage))
   ~&  %parsing
-  =/  ast-unit
-    ?:  (has-flag %crash-parser) 
-      (some (rash lua-code lua-parser))
-      (rush lua-code lua-parser)
+  =/  ast-unit  (parse (trip lua-code))
   ;<  parse-result=test-result  bind:m
     =/  m  (strand:spider ,test-result)
     ?~  ast-unit  (pure:m %err)
@@ -68,13 +70,18 @@
         %&  [(into current-file 2 ~.cycled) %ins %lua !>((to-wain:format (crip printed)))]~
       ==
     ~&  %parsing-printed
-    =/  cycled-ast-unit  
-      ?:  (has-flag %crash-parser) 
-        (some (scan printed lua-parser))
-        (rust printed lua-parser)
+    =/  cycled-ast-unit  (parse printed)
     ?~  cycled-ast-unit  (pure:m %err)
     =/  ast  u.cycled-ast-unit
     ~?  (has-flag %print-asts)  ast
+    ~&  %printing-parsed
+    =/  printed  (lua-printer ast)
+    ~&  %comparing-printed
+    ?.  =(printed ^printed)  (pure:m %err)
+    ~&  %parsing-reprinted
+    =/  cycled-ast-unit  (parse printed)
+    ?~  cycled-ast-unit  (pure:m %err)
+    =/  ast  u.cycled-ast-unit
     ~&  %comparing-asts
     ?.  =(^ast ast)  (pure:m %err)
     (pure:m %ok)
