@@ -33,7 +33,7 @@ return t
 end
 local function checkprogout
 (s)
-assert((string.sub(s,- 0x1) == "\u{a}"))
+assert((string.sub(s,(- 0x1)) == "\u{a}"))
 local t = getoutput()
 for line in string.gmatch(s,"\u{2e}\u{2d}\u{a}")
 do
@@ -60,7 +60,7 @@ local function NoRun
 p=string.gsub(p,"\u{6c}\u{75}\u{61}",("\u{22}" .. (progname .. "\u{22}")),0x1)
 local s = string.format(p,...)
 s=string.format("\u{25}\u{73}\u{20}\u{3e}\u{25}\u{73}\u{20}\u{32}\u{3e}\u{26}\u{31}",s,out)
-assert(not os.execute(s))
+assert((not os.execute(s)))
 assert(string.find(getoutput(),msg,0x1,true))
 end
 RUN("\u{6c}\u{75}\u{61}\u{20}\u{2d}\u{76}")
@@ -124,13 +124,13 @@ local out = getoutput()
 assert((defaultpath == string.match(output,"\u{5e}\u{28}\u{2e}\u{2d}\u{29}\u{9}")))
 assert((defaultCpath == string.match(output,"\u{9}\u{28}\u{2e}\u{2d}\u{29}\u{24}")))
 end
-assert(not ((string.find(defaultpath,"\u{78}\u{78}\u{78}") and string.find(defaultpath,"\u{6c}\u{75}\u{61}")) and not (string.find(defaultCpath,"\u{78}\u{78}\u{78}") and string.find(defaultCpath,"\u{6c}\u{75}\u{61}"))))
+assert((not ((string.find(defaultpath,"\u{78}\u{78}\u{78}") and string.find(defaultpath,"\u{6c}\u{75}\u{61}")) and (not (string.find(defaultCpath,"\u{78}\u{78}\u{78}") and string.find(defaultCpath,"\u{6c}\u{75}\u{61}"))))))
 local function convert
 (p)
 prepfile("\u{70}\u{72}\u{69}\u{6e}\u{74}\u{28}\u{70}\u{61}\u{63}\u{6b}\u{61}\u{67}\u{65}\u{2e}\u{70}\u{61}\u{74}\u{68}\u{29}")
 RUN("\u{65}\u{6e}\u{76}\u{20}\u{4c}\u{55}\u{41}\u{5f}\u{50}\u{41}\u{54}\u{48}\u{3d}\u{22}\u{25}\u{73}\u{22}\u{20}\u{6c}\u{75}\u{61}\u{20}\u{25}\u{73}\u{20}\u{3e}\u{20}\u{25}\u{73}",p,prog,out)
 local expected = getoutput()
-expected=string.sub(expected,0x1,- 0x2)
+expected=string.sub(expected,0x1,(- 0x2))
 if string.find(p,"\u{3b}\u{3b}") then
 p=string.gsub(p,"\u{3b}\u{3b}",("\u{3b}" .. (defaultpath .. "\u{3b}")))
 p=string.gsub(p,"\u{5e}\u{3b}","")
@@ -240,7 +240,7 @@ RUN("\u{6c}\u{75}\u{61}\u{20}\u{25}\u{73}\u{20}\u{3e}\u{20}\u{25}\u{73}",prog,ou
 checkprogout("\u{31}\u{32}\u{30}\u{a}\u{4f}\u{6b}\u{a}")
 assert(os.remove(prog))
 assert(os.remove(otherprog))
-assert(not os.remove(out))
+assert((not os.remove(out)))
 NoRun("\u{75}\u{6e}\u{72}\u{65}\u{63}\u{6f}\u{67}\u{6e}\u{69}\u{7a}\u{65}\u{64}\u{20}\u{6f}\u{70}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{27}\u{2d}\u{68}\u{27}","\u{6c}\u{75}\u{61}\u{20}\u{2d}\u{68}")
 NoRun("\u{75}\u{6e}\u{72}\u{65}\u{63}\u{6f}\u{67}\u{6e}\u{69}\u{7a}\u{65}\u{64}\u{20}\u{6f}\u{70}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{27}\u{2d}\u{2d}\u{2d}\u{27}","\u{6c}\u{75}\u{61}\u{20}\u{2d}\u{2d}\u{2d}")
 NoRun("\u{75}\u{6e}\u{72}\u{65}\u{63}\u{6f}\u{67}\u{6e}\u{69}\u{7a}\u{65}\u{64}\u{20}\u{6f}\u{70}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{27}\u{2d}\u{45}\u{78}\u{27}","\u{6c}\u{75}\u{61}\u{20}\u{2d}\u{45}\u{78}")
@@ -300,7 +300,7 @@ assert(os.execute("\u{73}\u{6c}\u{65}\u{65}\u{70}\u{20}\u{31}"))
 local n = 0x64
 for i = 0x0, 0x64
 do
-if not kill(pid) then
+if (not kill(pid)) then
 n=i
 break
 end

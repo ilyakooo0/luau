@@ -6,7 +6,7 @@ _ENV=nil
 local function toint
 (x)
 x=tonumber(x)
-if not x then
+if (not x) then
 return false
 end
 return tointeger(x)
@@ -55,5 +55,5 @@ return ((y and (x >> y)) or x)
 end
 smt.__bnot=function (x)
 local x,y = checkargs(x,x,"\u{5f}\u{5f}\u{62}\u{6e}\u{6f}\u{74}")
-return (y and ~ (x or x))
+return (y and (~ (x or x)))
 end

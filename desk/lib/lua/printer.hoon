@@ -40,9 +40,11 @@ print
     %unop
       %-  zing
       :~
+        "("
         (print-unop +<.expr)
         " "
         (print-expr +>.expr)
+        ")"
       ==
   ==
 :: unop

@@ -32,31 +32,31 @@ assert((((0x2 ^ 0x3) ^ 0x2) == (0x2 ^ (0x3 ^ 0x2))))
 ;
 assert((((0x2 ^ 0x3) * 0x4) == ((0x2 ^ 0x3) * 0x4)))
 ;
-assert((2.0 ^ - ((0x2 == (0x1 / 0x4)) and - (0x2 ^ - - (0x2 == - - - 0x4)))))
+assert((2.0 ^ (- ((0x2 == (0x1 / 0x4)) and (- (0x2 ^ (- (- (0x2 == (- (- (- 0x4))))))))))))
 ;
-assert(not ((nil and 0x2) and not ((0x2 > 0x3) or (0x3 < 0x2))))
+assert((not ((nil and 0x2) and (not ((0x2 > 0x3) or (0x3 < 0x2))))))
 ;
-assert(- (((0x3 - 0x1) - 0x5) == ((0x0 + 0x0) - 0x9)))
+assert((- (((0x3 - 0x1) - 0x5) == ((0x0 + 0x0) - 0x9))))
 ;
-assert(- ((0x2 ^ 0x2) == - ((0x4 and (((- 0x2) ^ 0x2) == 0x4)) and ((((0x2 * 0x2) - 0x3) - 0x1) == 0x0))))
+assert((- ((0x2 ^ 0x2) == (- ((0x4 and (((- 0x2) ^ 0x2) == 0x4)) and ((((0x2 * 0x2) - 0x3) - 0x1) == 0x0))))))
 ;
-assert(- (((0x3 % 0x5) == 0x2) and - ((0x3 + 0x5) == 0x2)))
+assert((- (((0x3 % 0x5) == 0x2) and (- ((0x3 + 0x5) == 0x2)))))
 assert(((((0x2 * 0x1) + (0x3 / 0x3)) == 0x3) and (((0x1 + 0x2) .. (0x3 * 0x1)) == "\u{33}\u{33}")))
 ;
-assert(not (((0x2 + 0x1) > (0x3 * 0x1)) and (("\u{61}" .. "\u{62}") > "\u{61}")))
+assert((not (((0x2 + 0x1) > (0x3 * 0x1)) and (("\u{61}" .. "\u{62}") > "\u{61}"))))
 ;
 assert(((0xf0 | (0xcc ~ (0xaa & 0xfd))) == 0xf4))
 assert(((((0xfd & 0xaa) ~ 0xcc) | 0xf0) == 0xf4))
 assert(((0xf0 & (0xf + 0x1)) == 0x10))
 assert(((((0x3 ^ 0x4) // (0x2 ^ 0x3)) // 0x5) == 0x2))
-assert(- (((0x3 + (((0x4 * 0x5) // ((0x2 ^ 0x3) ^ 0x2)) // 0x9)) + ((0x4 % 0xa) / 0x3)) == (((- 0x3) + (((0x4 * 0x5) // (0x2 ^ (0x3 ^ 0x2))) // 0x9)) + ((0x4 % 0xa) / 0x3))))
-assert(not ((true or false) and nil))
+assert((- (((0x3 + (((0x4 * 0x5) // ((0x2 ^ 0x3) ^ 0x2)) // 0x9)) + ((0x4 % 0xa) / 0x3)) == (((- 0x3) + (((0x4 * 0x5) // (0x2 ^ (0x3 ^ 0x2))) // 0x9)) + ((0x4 % 0xa) / 0x3)))))
+assert((not ((true or false) and nil)))
 assert((true or (false and nil)))
 assert(((((0x1 or false) and true) or false) == true))
 assert(((((nil and true) or false) and true) == false))
 local a,b = 0x1,nil
 ;
-assert(- ((0x1 or 0x2) == - (0x1 and (((0x1 and 0x2) + (- (1.25 or - 0x4))) == 0.75))))
+assert((- ((0x1 or 0x2) == (- (0x1 and (((0x1 and 0x2) + (- (1.25 or (- 0x4)))) == 0.75))))))
 ;
 local x = ((((b or a) + 0x1) == 0x2) and (((0xa or a) + 0x1) == 0xb))
 ;
@@ -76,7 +76,7 @@ assert((((x > y) and x) or (y == 0x2)))
 ;
 assert(((0x499602d2 == tonumber("\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{30}")) and ((0x499602d2 + 0x1) == 0x499602d3)))
 do
-local operand = {0x3,0x64,5.0,- 0xa,- 5.0,0x2710,- 0x2710}
+local operand = {0x3,0x64,5.0,(- 0xa),(- 5.0),0x2710,(- 0x2710)}
 local operator = {"\u{2b}","\u{2d}","\u{2a}","\u{2f}","\u{2f}\u{2f}","\u{25}","\u{5e}","\u{26}","\u{7c}","\u{5e}","\u{3c}\u{3c}","\u{3e}\u{3e}","\u{3d}\u{3d}","\u{7e}\u{3d}","\u{3c}","\u{3e}","\u{3c}\u{3d}","\u{3e}\u{3d}"}
 for _,op in ipairs(operator)
 do
@@ -135,9 +135,9 @@ do
 local code = {"\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{78}\u{20}\u{3d}\u{20}\u{7b}"}
 for i = 0x1, 0x101
 do
-code[# (code + 0x1)]=(i .. "\u{2e}\u{31}\u{2c}")
+code[(# (code + 0x1))]=(i .. "\u{2e}\u{31}\u{2c}")
 end
-code[# (code + 0x1)]="\u{7d}\u{3b}"
+code[(# (code + 0x1))]="\u{7d}\u{3b}"
 code=table.concat(code)
 local function check
 (ret,val)
@@ -199,12 +199,12 @@ local i = 0x3
 local t = {}
 ;
 local a = nil
-while not a do
+while (not a) do
 a=0x0
 ;
 for i = 0x1, n
 do
-for i = i, 0x1, - 0x1
+for i = i, 0x1, (- 0x1)
 do
 a=(a + 0x1)
 ;
@@ -217,7 +217,7 @@ end
 end
 assert(((a == ((n * (n + 0x1)) / 0x2)) and (i == 0x3)))
 ;
-assert(((t[0x1] and t[n]) and not (t[0x0] and not t[(n + 0x1)])))
+assert(((t[0x1] and t[n]) and (not (t[0x0] and (not t[(n + 0x1)])))))
 function f(b)
 local x = 0x1
 ;
@@ -305,7 +305,7 @@ end
 local a,b,c = f()
 ;
 assert((((a == 0x1) and (b == 0x2)) and (c == 0x3)))
-a,b,c=(f())
+a,b,c=f()
 ;
 assert((((a == 0x1) and (b == nil)) and (c == nil)))
 end
@@ -340,7 +340,7 @@ f,a=load(f)()
 ;
 assert(((a.a == 0x1) and a.b))
 function g(a,b,c,d,e)
-if not ((((a >= b) or c) or (d and e)) or nil) then
+if (not ((((a >= b) or c) or (d and e)) or nil)) then
 return 0x0
 else
 return 0x1
@@ -364,7 +364,7 @@ assert((((f(0x1,0x2,nil,0x1,"\u{78}") == "\u{78}") and (g(0x1,0x2,nil,0x1,"\u{78
 assert((((f(0x1,0x2,nil,nil,"\u{78}") == nil) and (g(0x1,0x2,nil,nil,"\u{78}") == 0x0)) and (h(0x1,0x2,nil,nil,"\u{78}") == 0x0)))
 assert((((f(0x1,0x2,nil,0x1,nil) == nil) and (g(0x1,0x2,nil,0x1,nil) == 0x0)) and (h(0x1,0x2,nil,0x1,nil) == 0x0)))
 assert((((0x1 and ((0x2 < 0x3) == true)) and (0x2 < 0x3)) and (("\u{61}" < "\u{62}") == true)))
-x=((0x2 < 0x3) and not 0x3)
+x=((0x2 < 0x3) and (not 0x3))
 ;
 assert((x == false))
 x=((0x2 < 0x1) or ((0x2 > 0x1) and "\u{61}"))
@@ -407,7 +407,7 @@ prog="\u{20}\u{20}\u{20}\u{20}\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{6b}\u{31}\u
 end
 print(("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{73}\u{68}\u{6f}\u{72}\u{74}\u{2d}\u{63}\u{69}\u{72}\u{63}\u{75}\u{69}\u{74}\u{20}\u{6f}\u{70}\u{74}\u{69}\u{6d}\u{69}\u{7a}\u{61}\u{74}\u{69}\u{6f}\u{6e}\u{73}\u{20}\u{28}" .. (_ENV.GLOB1 .. "\u{29}")))
 local binops <const> = {{"\u{20}\u{61}\u{6e}\u{64}\u{20}",function (a,b)
-if not a then
+if (not a) then
 return a
 else
 return b
@@ -432,8 +432,8 @@ do
 for _,op in ipairs(binops)
 do
 local t = {("\u{28}" .. (v1[0x1] .. (op[0x1] .. (v2[0x1] .. "\u{29}")))),op[0x2](v1[0x2],v2[0x2])}
-res[# (res + 0x1)]=t
-res[# (res + 0x1)]={("\u{6e}\u{6f}\u{74}" .. t[0x1]),not t[0x2]}
+res[(# (res + 0x1))]=t
+res[(# (res + 0x1))]={("\u{6e}\u{6f}\u{74}" .. t[0x1]),(not t[0x2])}
 end
 end
 end
@@ -455,7 +455,7 @@ do
 local s = v[0x1]
 local p = load(string.format(prog,s,s),"")
 IX=false
-assert(((p() == v[0x2]) and (IX == not not v[0x2])))
+assert(((p() == v[0x2]) and (IX == (not (not v[0x2])))))
 i=(i + 0x1)
 if ((i % 0xea60) == 0x0) then
 print("\u{2b}")

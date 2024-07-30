@@ -2,14 +2,14 @@ print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{66}\u{75}\u{6e}\u{63}\
 local debug = require("\u{64}\u{65}\u{62}\u{75}\u{67}")
 assert((type((0x1 < 0x2)) == "\u{62}\u{6f}\u{6f}\u{6c}\u{65}\u{61}\u{6e}"))
 assert(((type(true) == "\u{62}\u{6f}\u{6f}\u{6c}\u{65}\u{61}\u{6e}") and (type(false) == "\u{62}\u{6f}\u{6f}\u{6c}\u{65}\u{61}\u{6e}")))
-assert((((((type(nil) == "\u{6e}\u{69}\u{6c}") and (type(- 0x3) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")) and (type("\u{78}") == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type({}) == "\u{74}\u{61}\u{62}\u{6c}\u{65}")) and (type(type) == "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}")))
+assert((((((type(nil) == "\u{6e}\u{69}\u{6c}") and (type((- 0x3)) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")) and (type("\u{78}") == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type({}) == "\u{74}\u{61}\u{62}\u{6c}\u{65}")) and (type(type) == "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}")))
 assert((type(assert) == type(print)))
 local function f
 (x)
 return a:x(x)
 end
 assert((type(f) == "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}"))
-assert(not pcall(type))
+assert((not pcall(type)))
 fact=false
 do
 local res = 0x1
@@ -34,11 +34,11 @@ function a.y(x)
 return (x + self)
 end
 assert(((a:x(0x1) + 0xa) == a.y(0x1)))
-a.t={["\u{69}"] = - 0x64}
+a.t={["\u{69}"] = (- 0x64)}
 a["\u{74}"].x=function (self,a,b)
 return ((self.i + a) + b)
 end
-assert((a.t:x(0x2,0x3) == - 0x5f))
+assert((a.t:x(0x2,0x3) == (- 0x5f)))
 do
 local a = {["\u{78}"] = 0x0}
 function a:add(x)
@@ -102,7 +102,7 @@ do
 local function dummy
 (n)
 if (n > 0x0) then
-assert(not pcall(err_on_n,n))
+assert((not pcall(err_on_n,n)))
 dummy((n - 0x1))
 end
 end
@@ -145,8 +145,8 @@ local function foo1
 (x)
 return foo(0xa,x,(x + 0x1))
 end
-local a,b,c = foo1(- 0x2)
-assert(((a == 0xa) and (b == - (0x2 and (c == - 0x1)))))
+local a,b,c = foo1((- 0x2))
+assert(((a == 0xa) and (b == (- (0x2 and (c == (- 0x1)))))))
 local t = setmetatable({},{["\u{5f}\u{5f}\u{63}\u{61}\u{6c}\u{6c}"] = foo})
 local function foo2
 (x)
@@ -172,13 +172,13 @@ local function foo1
 return foo(...)
 end
 local a,b,c = foo1()
-assert((((X == nil) and (Y == nil)) and # (A == 0x0)))
+assert((((X == nil) and (Y == nil)) and (# (A == 0x0))))
 a,b,c=foo1(0xa)
-assert((((X == 0xa) and (Y == nil)) and # (A == 0x0)))
+assert((((X == 0xa) and (Y == nil)) and (# (A == 0x0))))
 a,b,c=foo1(0xa,0x14)
-assert((((X == 0xa) and (Y == 0x14)) and # (A == 0x0)))
+assert((((X == 0xa) and (Y == 0x14)) and (# (A == 0x0))))
 a,b,c=foo1(0xa,0x14,0x1e)
-assert((((X == 0xa) and (Y == 0x14)) and # ((A == 0x1) and (A[0x1] == 0x1e))))
+assert((((X == 0xa) and (Y == 0x14)) and (# ((A == 0x1) and (A[0x1] == 0x1e)))))
 end
 do
 local function loop
@@ -186,7 +186,7 @@ local function loop
 assert(pcall(loop))
 end
 local err,msg = xpcall(loop,loop)
-assert(not (err and string.find(msg,"\u{65}\u{72}\u{72}\u{6f}\u{72}")))
+assert((not (err and string.find(msg,"\u{65}\u{72}\u{72}\u{6f}\u{72}"))))
 end
 do
 local n = 0x2710
@@ -267,20 +267,20 @@ print("\u{2b}")
 local function unlpack
 (t,i)
 i=(i or 0x1)
-if (i <= # t) then
+if (i <= (# t)) then
 return t[i],unlpack(t,(i + 0x1))
 end
 end
 local function equaltab
 (t1,t2)
-assert(# (t1 == # t2))
-for i = 0x1, # t1
+assert((# (t1 == (# t2))))
+for i = 0x1, (# t1)
 do
 assert((t1[i] == t2[i]))
 end
 end
 local pack = function (...)
-return (table.pack(...))
+return table.pack(...)
 end
 local function f
 ()
@@ -294,12 +294,12 @@ local a,b,c,d = unlpack({0x1,0x2,0x3})
 assert(((((a == 0x1) and (b == 0x2)) and (c == 0x3)) and (d == nil)))
 a={0x1,0x2,0x3,0x4,false,0xa,"\u{61}\u{6c}\u{6f}",false,assert}
 equaltab(pack(unlpack(a)),a)
-equaltab(pack(unlpack(a),- 0x1),{0x1,- 0x1})
+equaltab(pack(unlpack(a),(- 0x1)),{0x1,(- 0x1)})
 a,b,c,d=ret2(f()),ret2(f())
 assert(((((a == 0x1) and (b == 0x1)) and (c == 0x2)) and (d == nil)))
 a,b,c,d=unlpack(pack(ret2(f()),ret2(f())))
 assert(((((a == 0x1) and (b == 0x1)) and (c == 0x2)) and (d == nil)))
-a,b,c,d=unlpack(pack(ret2(f()),(ret2(f()))))
+a,b,c,d=unlpack(pack(ret2(f()),ret2(f())))
 assert(((((a == 0x1) and (b == 0x1)) and (c == nil)) and (d == nil)))
 a=ret2({unlpack({0x1,0x2,0x3}),unlpack({0x3,0x2,0x1}),unlpack({"\u{61}","\u{62}"})})
 assert(((((a[0x1] == 0x1) and (a[0x2] == 0x3)) and (a[0x3] == "\u{61}")) and (a[0x4] == "\u{62}")))
@@ -321,7 +321,7 @@ end
 end
 local function cannotload
 (msg,a,b)
-assert(not (a and string.find(b,msg)))
+assert((not (a and string.find(b,msg))))
 end
 a=assert(load(read1(x),"\u{6d}\u{6f}\u{64}\u{6e}\u{61}\u{6d}\u{65}","\u{74}",_G))
 assert(((a() == "\u{0}") and (_G.x == 0x21)))
@@ -332,9 +332,9 @@ a=assert(load(function ()
 return nil
 end))
 a()
-assert(not load(function ()
+assert((not load(function ()
 return true
-end))
+end)))
 local t = {nil,"\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}","\u{33}"}
 f,msg=load(function ()
 return table.remove(t,0x1)
@@ -357,7 +357,7 @@ assert(((a() == 0x1) and (_G.x == 0x1)))
 cannotload("\u{61}\u{74}\u{74}\u{65}\u{6d}\u{70}\u{74}\u{20}\u{74}\u{6f}\u{20}\u{6c}\u{6f}\u{61}\u{64}\u{20}\u{61}\u{20}\u{62}\u{69}\u{6e}\u{61}\u{72}\u{79}\u{20}\u{63}\u{68}\u{75}\u{6e}\u{6b}",load(read1(x),nil,"\u{74}"))
 cannotload("\u{61}\u{74}\u{74}\u{65}\u{6d}\u{70}\u{74}\u{20}\u{74}\u{6f}\u{20}\u{6c}\u{6f}\u{61}\u{64}\u{20}\u{61}\u{20}\u{62}\u{69}\u{6e}\u{61}\u{72}\u{79}\u{20}\u{63}\u{68}\u{75}\u{6e}\u{6b}",load(x,nil,"\u{74}"))
 _G.x=nil
-assert(not pcall(string.dump,print))
+assert((not pcall(string.dump,print)))
 cannotload("\u{75}\u{6e}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}\u{20}\u{73}\u{79}\u{6d}\u{62}\u{6f}\u{6c}",load(read1("\u{2a}\u{61}\u{20}\u{3d}\u{20}\u{31}\u{32}\u{33}")))
 cannotload("\u{75}\u{6e}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}\u{20}\u{73}\u{79}\u{6d}\u{62}\u{6f}\u{6c}",load("\u{2a}\u{61}\u{20}\u{3d}\u{20}\u{31}\u{32}\u{33}"))
 cannotload("\u{68}\u{68}\u{69}",load(function ()
@@ -399,7 +399,7 @@ assert((x() == nil))
 assert((debug.setupvalue(x,0x1,"\u{68}\u{69}") == "\u{61}"))
 assert((x() == "\u{68}\u{69}"))
 assert((debug.setupvalue(x,0x2,0xd) == "\u{62}"))
-assert(not debug.setupvalue(x,0x3,0xa))
+assert((not debug.setupvalue(x,0x3,0xa)))
 x("\u{73}\u{65}\u{74}")
 assert((x() == 0x17))
 x("\u{73}\u{65}\u{74}")
@@ -409,22 +409,22 @@ local nup = 0xc8
 local prog = {"\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{61}\u{31}"}
 for i = 0x2, nup
 do
-prog[# (prog + 0x1)]=("\u{2c}\u{20}\u{61}" .. i)
+prog[(# (prog + 0x1))]=("\u{2c}\u{20}\u{61}" .. i)
 end
-prog[# (prog + 0x1)]="\u{20}\u{3d}\u{20}\u{31}"
+prog[(# (prog + 0x1))]="\u{20}\u{3d}\u{20}\u{31}"
 for i = 0x2, nup
 do
-prog[# (prog + 0x1)]=("\u{2c}\u{20}" .. i)
+prog[(# (prog + 0x1))]=("\u{2c}\u{20}" .. i)
 end
 local sum = 0x1
-prog[# (prog + 0x1)]="\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{28}\u{29}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{61}\u{31}"
+prog[(# (prog + 0x1))]="\u{3b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}\u{20}\u{28}\u{29}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{61}\u{31}"
 for i = 0x2, nup
 do
-prog[# (prog + 0x1)]=("\u{20}\u{2b}\u{20}\u{61}" .. i)
+prog[(# (prog + 0x1))]=("\u{20}\u{2b}\u{20}\u{61}" .. i)
 ;
 sum=(sum + i)
 end
-prog[# (prog + 0x1)]="\u{20}\u{65}\u{6e}\u{64}"
+prog[(# (prog + 0x1))]="\u{20}\u{65}\u{6e}\u{64}"
 prog=table.concat(prog)
 local f = assert(load(prog))()
 assert((f() == sum))
@@ -473,19 +473,19 @@ local s2 = "\u{61}\u{6e}\u{6f}\u{74}\u{68}\u{65}\u{72}\u{20}\u{63}\u{6f}\u{6e}\u
 return (a + (b * 0x3))
 end)
 assert((assert(load(c))() == 0xa))
-assert((string.sub(c,0x1,# header) == header))
-local ci,cn = string.unpack("\u{6a}\u{6e}",c,# (header + 0x1))
+assert((string.sub(c,0x1,(# header)) == header))
+local ci,cn = string.unpack("\u{6a}\u{6e}",c,(# (header + 0x1)))
 assert(((ci == 0x5678) and (cn == 370.5)))
-for i = 0x1, # header
+for i = 0x1, (# header)
 do
-local s = (string.sub(c,0x1,(i - 0x1)) .. (string.char((string.byte(string.sub(c,i,i)) + 0x1)) .. string.sub(c,(i + 0x1),- 0x1)))
-assert(# (s == # c))
-assert(not load(s))
+local s = (string.sub(c,0x1,(i - 0x1)) .. (string.char((string.byte(string.sub(c,i,i)) + 0x1)) .. string.sub(c,(i + 0x1),(- 0x1))))
+assert((# (s == (# c))))
+assert((not load(s)))
 end
-for i = 0x1, # (c - 0x1)
+for i = 0x1, (# (c - 0x1))
 do
 local st,msg = load(string.sub(c,0x1,i))
-assert(not (st and string.find(msg,"\u{74}\u{72}\u{75}\u{6e}\u{63}\u{61}\u{74}\u{65}\u{64}")))
+assert((not (st and string.find(msg,"\u{74}\u{72}\u{75}\u{6e}\u{63}\u{61}\u{74}\u{65}\u{64}"))))
 end
 end
 print("\u{4f}\u{4b}")

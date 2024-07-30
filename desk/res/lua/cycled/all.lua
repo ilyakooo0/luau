@@ -32,9 +32,9 @@ local collectgarbage = collectgarbage
 do
 local msgs = {}
 function Message(m)
-if not _nomsg then
+if (not _nomsg) then
 print(m)
-msgs[# (msgs + 0x1)]=string.sub(m,0x3,- 0x3)
+msgs[(# (msgs + 0x1))]=string.sub(m,0x3,(- 0x3))
 end
 end
 assert(os.setlocale("\u{43}"))
@@ -59,7 +59,7 @@ end
 end
 local Cstacklevel
 local showmem
-if not T then
+if (not T) then
 local max = 0x0
 showmem=function ()
 local m = (collectgarbage("\u{63}\u{6f}\u{75}\u{6e}\u{74}") * 0x400)
@@ -115,7 +115,7 @@ dofile("\u{67}\u{65}\u{6e}\u{67}\u{63}\u{2e}\u{6c}\u{75}\u{61}")
 assert((dofile("\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{73}\u{2e}\u{6c}\u{75}\u{61}") == 0x5))
 dofile("\u{63}\u{6f}\u{6e}\u{73}\u{74}\u{72}\u{75}\u{63}\u{74}\u{73}\u{2e}\u{6c}\u{75}\u{61}")
 dofile("\u{63}\u{6f}\u{64}\u{65}\u{2e}\u{6c}\u{75}\u{61}",true)
-if not _G._soft then
+if (not _G._soft) then
 report("\u{62}\u{69}\u{67}\u{2e}\u{6c}\u{75}\u{61}")
 local f = coroutine.wrap(assert(loadfile("\u{62}\u{69}\u{67}\u{2e}\u{6c}\u{75}\u{61}")))
 assert((f() == "\u{62}"))
@@ -139,7 +139,7 @@ assert((dofile("\u{76}\u{65}\u{72}\u{79}\u{62}\u{69}\u{67}\u{2e}\u{6c}\u{75}\u{6
 ;
 collectgarbage()
 dofile("\u{66}\u{69}\u{6c}\u{65}\u{73}\u{2e}\u{6c}\u{75}\u{61}")
-if # (msgs > 0x0) then
+if (# (msgs > 0x0)) then
 local m = table.concat(msgs,"\u{a}\u{20}\u{20}")
 warn("\u{23}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{70}\u{65}\u{72}\u{66}\u{6f}\u{72}\u{6d}\u{65}\u{64}\u{3a}\u{a}\u{20}\u{20}",m,"\u{a}")
 end
@@ -163,7 +163,7 @@ end
 local _G,showmem,print,format,clock,time,difftime,assert,open,warn = _G,showmem,print,string.format,os.clock,os.time,os.difftime,assert,io.open,warn
 local fname = ((T and "\u{74}\u{69}\u{6d}\u{65}\u{2d}\u{64}\u{65}\u{62}\u{75}\u{67}\u{2e}\u{74}\u{78}\u{74}") or "\u{74}\u{69}\u{6d}\u{65}\u{2e}\u{74}\u{78}\u{74}")
 local lasttime
-if not usertests then
+if (not usertests) then
 local f = io.open(fname)
 if f then
 lasttime=assert(tonumber(f:read("\u{61}")))
@@ -176,7 +176,7 @@ end
 print("\u{63}\u{6c}\u{65}\u{61}\u{6e}\u{69}\u{6e}\u{67}\u{20}\u{61}\u{6c}\u{6c}\u{21}\u{21}\u{21}\u{21}")
 for n in pairs(_G)
 do
-if not ({["\u{5f}\u{5f}\u{5f}\u{47}\u{6c}\u{6f}\u{62}"] = 0x1,["\u{74}\u{6f}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}"] = 0x1})[n] then
+if (not ({["\u{5f}\u{5f}\u{5f}\u{47}\u{6c}\u{6f}\u{62}"] = 0x1,["\u{74}\u{6f}\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}"] = 0x1})[n]) then
 _G[n]=undef
 end
 end
@@ -191,11 +191,11 @@ showmem()
 local clocktime = (clock() - initclock)
 walltime=difftime(time(),walltime)
 print(format("\u{a}\u{a}\u{74}\u{6f}\u{74}\u{61}\u{6c}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{3a}\u{20}\u{25}\u{2e}\u{32}\u{66}\u{73}\u{20}\u{28}\u{77}\u{61}\u{6c}\u{6c}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{3a}\u{20}\u{25}\u{67}\u{73}\u{29}\u{a}",clocktime,walltime))
-if not usertests then
+if (not usertests) then
 lasttime=(lasttime or clocktime)
 local diff = ((clocktime - lasttime) / lasttime)
 local tolerance = 0.05
-if ((diff >= tolerance) or (diff <= - tolerance)) then
+if ((diff >= tolerance) or (diff <= (- tolerance))) then
 warn(format("\u{23}\u{74}\u{69}\u{6d}\u{65}\u{20}\u{64}\u{69}\u{66}\u{66}\u{65}\u{72}\u{65}\u{6e}\u{63}\u{65}\u{20}\u{66}\u{72}\u{6f}\u{6d}\u{20}\u{70}\u{72}\u{65}\u{76}\u{69}\u{6f}\u{75}\u{73}\u{20}\u{74}\u{65}\u{73}\u{74}\u{3a}\u{20}\u{25}\u{2b}\u{2e}\u{31}\u{66}\u{25}\u{25}",(diff * 0x64)))
 end
 assert(open(fname,"\u{77}")):write(clocktime):close()

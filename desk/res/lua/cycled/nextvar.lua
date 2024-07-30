@@ -2,11 +2,11 @@ print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{61}\u{62}\u{6c}\
 local function checkerror
 (msg,f, ...)
 local s,err = pcall(f,...)
-assert(not (s and string.find(err,msg)))
+assert((not (s and string.find(err,msg))))
 end
 local function check
 (t,na,nh)
-if not T then
+if (not T) then
 return 
 end
 local a,h = T.querytab(t)
@@ -27,7 +27,7 @@ end
 for i = 0x1, 0x64
 do
 a[i]=true
-assert(# (a == i))
+assert((# (a == i)))
 end
 do
 local a = {}
@@ -72,7 +72,7 @@ local i = 0x0
 for k,v in ipairs({true,false,true,false})
 do
 i=(i + 0x1)
-x=not x
+x=(not x)
 assert((x == v))
 end
 assert((i == 0x4))
@@ -84,7 +84,7 @@ assert(((k == math.mininteger) and (v == 0xa)))
 k,v=f({[math.mininteger] = 0xa},k)
 assert((k == nil))
 end
-if not T then
+if (not T) then
 (Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{73}\u{69}\u{7a}\u{65}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 else
 local function mp2
@@ -131,23 +131,23 @@ local t = f()
 T.alloccount()
 ;
 collectgarbage("\u{72}\u{65}\u{73}\u{74}\u{61}\u{72}\u{74}")
-assert(# (t == sa))
+assert((# (t == sa)))
 check(t,sa,mp2(sh))
 end
 end
 local a = {}
-for i = 0x1, sizes[# sizes]
+for i = 0x1, sizes[(# sizes)]
 do
 a[i]=i
 end
 for k in ipairs(sizes)
 do
 local t = {table.unpack(a,0x1,k)}
-assert(# (t == k))
+assert((# (t == k)))
 check(t,k,0x0)
 t={0x1,0x2,0x3,table.unpack(a,0x1,k)}
 check(t,(k + 0x3),0x0)
-assert(# (t == (k + 0x3)))
+assert((# (t == (k + 0x3))))
 end
 local lim = 0x82
 local a = {}
@@ -175,14 +175,14 @@ a={}
 for i = 0x1, lim
 do
 a[i]=0x1
-assert(# (a == i))
+assert((# (a == i)))
 check(a,mp2(i),0x0)
 end
 a={}
 for i = 0x1, lim
 do
 a[("\u{61}" .. i)]=0x1
-assert(# (a == 0x0))
+assert((# (a == 0x0)))
 check(a,0x0,mp2(i))
 end
 a={}
@@ -228,7 +228,7 @@ end
 for i = 0x1, lim
 do
 local a = {}
-for i = i, 0x1, - 0x1
+for i = i, 0x1, (- 0x1)
 do
 a[i]=i
 end
@@ -267,18 +267,18 @@ a[0x20]=true
 a[0x30]=true
 ;
 a[0x33]=true
-assert(# (a == 0x30))
+assert((# (a == 0x30)))
 assert((select(0x4,T.querytab(a)) == 0x30))
 a[0x32]=true
 assert((select(0x4,T.querytab(a)) == 0x32))
-assert(# (a == 0x33))
+assert((# (a == 0x33)))
 end
-assert(# ({} == 0x0))
-assert(# ({nil} == 0x0))
-assert(# ({nil,nil} == 0x0))
-assert(# ({nil,nil,nil} == 0x0))
-assert(# ({nil,nil,nil,nil} == 0x0))
-assert(# ({0x1,0x2,0x3,nil,nil} == 0x3))
+assert((# ({} == 0x0)))
+assert((# ({nil} == 0x0)))
+assert((# ({nil,nil} == 0x0)))
+assert((# ({nil,nil,nil} == 0x0)))
+assert((# ({nil,nil,nil,nil} == 0x0)))
+assert((# ({0x1,0x2,0x3,nil,nil} == 0x3)))
 print("\u{2b}")
 local nofind = {}
 a,b,c=0x1,0x2,0x3
@@ -289,7 +289,7 @@ local function find
 local n,v
 while 0x1 do
 n,v=next(_G,n)
-if not n then
+if (not n) then
 return nofind
 end
 assert((_G[n] ~= undef))
@@ -312,7 +312,7 @@ assert(((print == find("\u{70}\u{72}\u{69}\u{6e}\u{74}")) and (print == find1("\
 assert((_G["\u{70}\u{72}\u{69}\u{6e}\u{74}"] == find("\u{70}\u{72}\u{69}\u{6e}\u{74}")))
 assert((assert == find1("\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}")))
 assert((nofind == find("\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}")))
-assert(not find1("\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}"))
+assert((not find1("\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}")))
 _G[("\u{72}\u{65}\u{74}" .. "\u{75}\u{72}\u{6e}")]=undef
 assert((nofind == find("\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}")))
 _G["\u{78}\u{78}\u{78}"]=0x1
@@ -344,7 +344,7 @@ a[n]=v
 end
 for n,v in pairs(a)
 do
-if not ((package.loaded[n] and (type(v) ~= "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}")) and not string.find(n,"\u{5e}\u{5b}\u{25}\u{75}\u{5f}\u{5d}")) then
+if (not ((package.loaded[n] and (type(v) ~= "\u{66}\u{75}\u{6e}\u{63}\u{74}\u{69}\u{6f}\u{6e}")) and (not string.find(n,"\u{5e}\u{5b}\u{25}\u{75}\u{5f}\u{5d}")))) then
 _G[n]=undef
 end
 collectgarbage()
@@ -376,8 +376,8 @@ checknext({0x1,0x2,["\u{78}"] = 0x1,["\u{79}"] = 0x2,["\u{7a}"] = 0x3})
 checknext({0x1,0x2,0x3,["\u{78}"] = 0x1,["\u{79}"] = 0x2,["\u{7a}"] = 0x3})
 checknext({0x1,0x2,0x3,0x4,["\u{78}"] = 0x1,["\u{79}"] = 0x2,["\u{7a}"] = 0x3})
 checknext({0x1,0x2,0x3,0x4,0x5,["\u{78}"] = 0x1,["\u{79}"] = 0x2,["\u{7a}"] = 0x3})
-assert(# ({} == 0x0))
-assert(# ({[- 0x1] = 0x2} == 0x0))
+assert((# ({} == 0x0)))
+assert((# ({[(- 0x1)] = 0x2} == 0x0)))
 for i = 0x0, 0x28
 do
 local a = {}
@@ -385,7 +385,7 @@ for j = 0x1, i
 do
 a[j]=j
 end
-assert(# (a == i))
+assert((# (a == i)))
 end
 function table.maxn(t)
 local max = 0x0
@@ -406,7 +406,7 @@ for i = 0x0, 0x32
 do
 a[(0x2 ^ i)]=true
 end
-assert(a[# a])
+assert(a[(# a)])
 print("\u{2b}")
 do
 local a = {[0x1] = 0x1,[1.1] = 0x2,["\u{78}"] = 0x3,[string.rep("\u{78}",0x3e8)] = 0x4,[print] = 0x5,[checkerror] = 0x6,[coroutine.running()] = 0x7,[true] = 0x8,[io.stdin] = 0x9,[{}] = 0xa}
@@ -467,54 +467,54 @@ assert(((count == 0x0) and (next(t) == nil)))
 end
 local function test
 (a)
-assert(not pcall(table.insert,a,0x2,0x14))
+assert((not pcall(table.insert,a,0x2,0x14)))
 ;
 table.insert(a,0xa)
 ;
 table.insert(a,0x2,0x14)
 ;
-table.insert(a,0x1,- 0x1)
+table.insert(a,0x1,(- 0x1))
 ;
 table.insert(a,0x28)
 ;
-table.insert(a,# (a + 0x1),0x32)
-table.insert(a,0x2,- 0x2)
+table.insert(a,(# (a + 0x1)),0x32)
+table.insert(a,0x2,(- 0x2))
 assert((a[0x2] ~= undef))
 assert((a["\u{32}"] == undef))
-assert(not pcall(table.insert,a,0x0,0x14))
+assert((not pcall(table.insert,a,0x0,0x14)))
 ;
-assert(not pcall(table.insert,a,# (a + 0x2),0x14))
+assert((not pcall(table.insert,a,(# (a + 0x2)),0x14)))
 ;
-assert((table.remove(a,0x1) == - 0x1))
-assert((table.remove(a,0x1) == - 0x2))
+assert((table.remove(a,0x1) == (- 0x1)))
+assert((table.remove(a,0x1) == (- 0x2)))
 assert((table.remove(a,0x1) == 0xa))
 assert((table.remove(a,0x1) == 0x14))
 assert((table.remove(a,0x1) == 0x28))
 assert((table.remove(a,0x1) == 0x32))
 assert((table.remove(a,0x1) == nil))
 assert((table.remove(a) == nil))
-assert((table.remove(a,# a) == nil))
+assert((table.remove(a,(# a)) == nil))
 end
-a={["\u{6e}"] = 0x0,[- 0x7] = "\u{62}\u{61}\u{6e}"}
+a={["\u{6e}"] = 0x0,[(- 0x7)] = "\u{62}\u{61}\u{6e}"}
 test(a)
-assert(((a.n == 0x0) and (a[- 0x7] == "\u{62}\u{61}\u{6e}")))
-a={[- 0x7] = "\u{62}\u{61}\u{6e}"}
+assert(((a.n == 0x0) and (a[(- 0x7)] == "\u{62}\u{61}\u{6e}")))
+a={[(- 0x7)] = "\u{62}\u{61}\u{6e}"}
 ;
 test(a)
-assert(((a.n == nil) and # ((a == 0x0) and (a[- 0x7] == "\u{62}\u{61}\u{6e}"))))
-a={[- 0x1] = "\u{62}\u{61}\u{6e}"}
+assert(((a.n == nil) and (# ((a == 0x0) and (a[(- 0x7)] == "\u{62}\u{61}\u{6e}")))))
+a={[(- 0x1)] = "\u{62}\u{61}\u{6e}"}
 test(a)
-assert(# (((a == 0x0) and (table.remove(a) == nil)) and (a[- 0x1] == "\u{62}\u{61}\u{6e}")))
+assert((# (((a == 0x0) and (table.remove(a) == nil)) and (a[(- 0x1)] == "\u{62}\u{61}\u{6e}"))))
 a={[0x0] = "\u{62}\u{61}\u{6e}"}
-assert(# (((a == 0x0) and (table.remove(a) == "\u{62}\u{61}\u{6e}")) and (a[0x0] == undef)))
+assert((# (((a == 0x0) and (table.remove(a) == "\u{62}\u{61}\u{6e}")) and (a[0x0] == undef))))
 table.insert(a,0x1,0xa)
 ;
 table.insert(a,0x1,0x14)
 ;
-table.insert(a,0x1,- 0x1)
+table.insert(a,0x1,(- 0x1))
 assert((table.remove(a) == 0xa))
 assert((table.remove(a) == 0x14))
-assert((table.remove(a) == - 0x1))
+assert((table.remove(a) == (- 0x1)))
 assert((table.remove(a) == nil))
 a={"\u{63}","\u{64}"}
 table.insert(a,0x3,"\u{61}")
@@ -524,15 +524,15 @@ assert((table.remove(a,0x1) == "\u{64}"))
 assert((table.remove(a,0x1) == "\u{61}"))
 assert((table.remove(a,0x1) == "\u{62}"))
 assert((table.remove(a,0x1) == nil))
-assert(# ((a == 0x0) and (a.n == nil)))
+assert((# ((a == 0x0) and (a.n == nil))))
 a={0xa,0x14,0x1e,0x28}
-assert((table.remove(a,# (a + 0x1)) == nil))
-assert(not pcall(table.remove,a,0x0))
-assert((a[# a] == 0x28))
-assert((table.remove(a,# a) == 0x28))
-assert((a[# a] == 0x1e))
+assert((table.remove(a,(# (a + 0x1))) == nil))
+assert((not pcall(table.remove,a,0x0)))
+assert((a[(# a)] == 0x28))
+assert((table.remove(a,(# a)) == 0x28))
+assert((a[(# a)] == 0x1e))
 assert((table.remove(a,0x2) == 0x14))
-assert(((a[# a] == 0x1e) and # (a == 0x2)))
+assert(((a[(# a)] == 0x1e) and (# (a == 0x2))))
 do
 local function test
 (proxy,t)
@@ -540,7 +540,7 @@ for i = 0x1, 0xa
 do
 table.insert(proxy,0x1,i)
 end
-assert(# ((proxy == 0xa) and # ((t == 0xa) and (proxy[0x1] ~= undef))))
+assert((# ((proxy == 0xa) and (# ((t == 0xa) and (proxy[0x1] ~= undef))))))
 for i = 0x1, 0xa
 do
 assert((t[i] == (0xb - i)))
@@ -555,13 +555,13 @@ for i = 0x1, 0x8
 do
 assert((table.remove(proxy,0x1) == i))
 end
-assert(# ((proxy == 0x2) and # (t == 0x2)))
+assert((# ((proxy == 0x2) and (# (t == 0x2)))))
 local a,b,c = table.unpack(proxy)
 assert((((a == 0x9) and (b == 0xa)) and (c == nil)))
 end
 local t = {}
 local proxy = setmetatable({},{["\u{5f}\u{5f}\u{6c}\u{65}\u{6e}"] = function ()
-return # t
+return (# t)
 end,["\u{5f}\u{5f}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = t,["\u{5f}\u{5f}\u{6e}\u{65}\u{77}\u{69}\u{6e}\u{64}\u{65}\u{78}"] = t})
 test(proxy,t)
 local count = 0x0
@@ -587,7 +587,7 @@ table.insert(t,0x14)
 local k,v = next(t)
 assert(((k == math.mininteger) and (v == 0x14)))
 end
-if not T then
+if (not T) then
 (Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{74}\u{65}\u{73}\u{74}\u{43}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{63}\u{74}\u{69}\u{76}\u{65}\u{3a}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}\u{20}\u{66}\u{6f}\u{72}\u{20}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{6c}\u{69}\u{62}\u{72}\u{61}\u{72}\u{79}\u{20}\u{6f}\u{6e}\u{20}\u{6e}\u{6f}\u{6e}\u{2d}\u{74}\u{61}\u{62}\u{6c}\u{65}\u{73}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 else
 local debug = require("\u{64}\u{65}\u{62}\u{75}\u{67}")
@@ -606,13 +606,13 @@ mt.__newindex=tab
 checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.insert,u,0x28)
 checkerror("\u{74}\u{61}\u{62}\u{6c}\u{65}\u{20}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}",table.remove,u)
 mt.__len=function ()
-return # tab
+return (# tab)
 end
 table.insert(u,0x28)
-assert(# ((u == 0x4) and # (((tab == 0x4) and (u[0x4] == 0x28)) and (tab[0x4] == 0x28))))
+assert((# ((u == 0x4) and (# (((tab == 0x4) and (u[0x4] == 0x28)) and (tab[0x4] == 0x28))))))
 assert((table.remove(u) == 0x28))
 table.insert(u,0x1,0x32)
-assert(# ((u == 0x4) and # (((tab == 0x4) and (u[0x4] == 0x1e)) and (tab[0x1] == 0x32))))
+assert((# ((u == 0x4) and (# (((tab == 0x4) and (u[0x4] == 0x1e)) and (tab[0x1] == 0x32))))))
 mt.__newindex=nil
 mt.__len=nil
 local tab2 = {}
@@ -621,7 +621,7 @@ debug.setmetatable(u2,{["\u{5f}\u{5f}\u{6e}\u{65}\u{77}\u{69}\u{6e}\u{64}\u{65}\
 tab2[k]=v
 end})
 table.move(u,0x1,0x4,0x1,u2)
-assert(# (((tab2 == 0x4) and (tab2[0x1] == tab[0x1])) and (tab2[0x4] == tab[0x4])))
+assert((# (((tab2 == 0x4) and (tab2[0x1] == tab[0x1])) and (tab2[0x4] == tab[0x4]))))
 end
 print("\u{2b}")
 a={}
@@ -642,7 +642,7 @@ for i = 0x1, 0x0
 do
 error("\u{6e}\u{6f}\u{74}\u{20}\u{68}\u{65}\u{72}\u{65}")
 end
-for i = 0x0, 0x1, - 0x1
+for i = 0x0, 0x1, (- 0x1)
 do
 error("\u{6e}\u{6f}\u{74}\u{20}\u{68}\u{65}\u{72}\u{65}")
 end
@@ -650,7 +650,7 @@ a=nil
 ;
 for i = 0x1, 0x1
 do
-assert(not a)
+assert((not a))
 ;
 a=0x1
 end
@@ -658,9 +658,9 @@ end
 assert(a)
 a=nil
 ;
-for i = 0x1, 0x1, - 0x1
+for i = 0x1, 0x1, (- 0x1)
 do
-assert(not a)
+assert((not a))
 ;
 a=0x1
 end
@@ -679,7 +679,7 @@ end
 assert((a == 0x1))
 a=0x0
 ;
-for i = 0x2710, 1e4, - 0x1
+for i = 0x2710, 1e4, (- 0x1)
 do
 a=(a + 0x1)
 end
@@ -695,7 +695,7 @@ end
 assert((a == 0x0))
 a=0x0
 ;
-for i = 0x270f, 1e4, - 0x1
+for i = 0x270f, 1e4, (- 0x1)
 do
 a=(a + 0x1)
 end
@@ -703,7 +703,7 @@ end
 assert((a == 0x0))
 a=0x0
 ;
-for i = 0x1, 0.99999, - 0x1
+for i = 0x1, 0.99999, (- 0x1)
 do
 a=(a + 0x1)
 end
@@ -727,7 +727,7 @@ end
 assert((a == 0x1))
 a=0x0
 ;
-for i = - 1.5, - 1.5, 0x1
+for i = (- 1.5), (- 1.5), 0x1
 do
 a=(a + 0x1)
 end
@@ -735,7 +735,7 @@ end
 assert((a == 0x1))
 a=0x0
 ;
-for i = 1e6, 1e6, - 0x1
+for i = 1e6, 1e6, (- 0x1)
 do
 a=(a + 0x1)
 end
@@ -751,7 +751,7 @@ end
 assert((a == 0x0))
 a=0x0
 ;
-for i = 0x1869f, 1e5, - 1.0
+for i = 0x1869f, 1e5, (- 1.0)
 do
 a=(a + 0x1)
 end
@@ -759,7 +759,7 @@ end
 assert((a == 0x0))
 a=0x0
 ;
-for i = 1.0, 0.99999, - 0x1
+for i = 1.0, 0.99999, (- 0x1)
 do
 a=(a + 0x1)
 end
@@ -780,7 +780,7 @@ end
 assert((a == 0xa))
 a=0x0
 ;
-for i = 10.0, 0x1, - 0x1
+for i = 10.0, 0x1, (- 0x1)
 do
 a=(a + 0x1)
 ;
@@ -813,7 +813,7 @@ end
 assert((c == 0xa))
 c=0x0
 ;
-for i = - 0x1, - 0xa, - 1.0
+for i = (- 0x1), (- 0xa), (- 1.0)
 do
 checkfloat(i)
 end
@@ -826,7 +826,7 @@ end
 local m = math.maxinteger
 c=0x0
 ;
-for i = m, (m - 0xa), - 0x1
+for i = m, (m - 0xa), (- 0x1)
 do
 checkint(i)
 end
@@ -840,7 +840,7 @@ end
 assert((c == 0xa))
 c=0x0
 ;
-for i = 0xa, 1e-3, - 0x1
+for i = 0xa, 1e-3, (- 0x1)
 do
 checkint(i)
 end
@@ -854,21 +854,21 @@ end
 assert((c == 0xa))
 c=0x0
 ;
-for i = 0x9, "\u{33}\u{2e}\u{34}", - 0x1
+for i = 0x9, "\u{33}\u{2e}\u{34}", (- 0x1)
 do
 checkint(i)
 end
 assert((c == 0x6))
 c=0x0
 ;
-for i = 0x0, "\u{20}\u{2d}\u{33}\u{2e}\u{34}\u{20}\u{20}", - 0x1
+for i = 0x0, "\u{20}\u{2d}\u{33}\u{2e}\u{34}\u{20}\u{20}", (- 0x1)
 do
 checkint(i)
 end
 assert((c == 0x4))
 c=0x0
 ;
-for i = 0x64, "\u{39}\u{36}\u{2e}\u{33}", - 0x2
+for i = 0x64, "\u{39}\u{36}\u{2e}\u{33}", (- 0x2)
 do
 checkint(i)
 end
@@ -886,20 +886,20 @@ end
 assert((c == 0xa))
 c=0x0
 ;
-for i = - 0x1, - math.huge, - 0x1
+for i = (- 0x1), (- math.huge), (- 0x1)
 do
-if (i < - 0xa) then
+if (i < (- 0xa)) then
 break
 end
 ;
 checkint(i)
 end
 assert((c == 0xa))
-for i = math.mininteger, - 1e101
+for i = math.mininteger, (- 1e101)
 do
 assert(false)
 end
-for i = math.maxinteger, 1e101, - 0x1
+for i = math.maxinteger, 1e101, (- 0x1)
 do
 assert(false)
 end
@@ -913,19 +913,19 @@ do
 c=(c + 0x1)
 assert((i == t[c]))
 end
-assert((c == # t))
+assert((c == (# t)))
 end
 local maxi = math.maxinteger
 local mini = math.mininteger
-checkfor(mini,maxi,maxi,{mini,- 0x1,(maxi - 0x1)})
-checkfor(mini,math.huge,maxi,{mini,- 0x1,(maxi - 0x1)})
-checkfor(maxi,mini,mini,{maxi,- 0x1})
-checkfor(maxi,mini,- maxi,{maxi,0x0,- maxi})
-checkfor(maxi,- math.huge,mini,{maxi,- 0x1})
+checkfor(mini,maxi,maxi,{mini,(- 0x1),(maxi - 0x1)})
+checkfor(mini,math.huge,maxi,{mini,(- 0x1),(maxi - 0x1)})
+checkfor(maxi,mini,mini,{maxi,(- 0x1)})
+checkfor(maxi,mini,(- maxi),{maxi,0x0,(- maxi)})
+checkfor(maxi,(- math.huge),mini,{maxi,(- 0x1)})
 checkfor(maxi,mini,0x1,{})
-checkfor(mini,maxi,- 0x1,{})
+checkfor(mini,maxi,(- 0x1),{})
 checkfor((maxi - 0x6),maxi,0x3,{(maxi - 0x6),(maxi - 0x3),maxi})
-checkfor((mini + 0x4),mini,- 0x2,{(mini + 0x4),(mini + 0x2),mini})
+checkfor((mini + 0x4),mini,(- 0x2),{(mini + 0x4),(mini + 0x2),mini})
 local step = (maxi // 0xa)
 local c = mini
 for i = mini, maxi, step
@@ -934,7 +934,7 @@ assert((i == c))
 c=(c + step)
 end
 c=maxi
-for i = maxi, mini, - step
+for i = maxi, mini, (- step)
 do
 assert((i == c))
 c=(c - step)
@@ -951,13 +951,13 @@ do
 end
 end)
 checkerror("\u{27}\u{66}\u{6f}\u{72}\u{27}\u{20}\u{73}\u{74}\u{65}\u{70}\u{20}\u{69}\u{73}\u{20}\u{7a}\u{65}\u{72}\u{6f}",function ()
-for i = 0x1, - 0xa, 0x0
+for i = 0x1, (- 0xa), 0x0
 do
 
 end
 end)
 checkerror("\u{27}\u{66}\u{6f}\u{72}\u{27}\u{20}\u{73}\u{74}\u{65}\u{70}\u{20}\u{69}\u{73}\u{20}\u{7a}\u{65}\u{72}\u{6f}",function ()
-for i = 1.0, - 0xa, 0.0
+for i = 1.0, (- 0xa), 0.0
 do
 
 end
@@ -1039,17 +1039,17 @@ return (i - inc),t[(i - inc)]
 else
 return nil
 end
-end,t,# (t + 0x1)
+end,t,(# (t + 0x1))
 end})
 local res = {}
 local co = coroutine.wrap(function ()
 for i,p in pairs(t)
 do
-res[# (res + 0x1)]=p
+res[(# (res + 0x1))]=p
 end
 end)
 co()
 co(0x1)
-assert(((((res[0x1] == 0x1e) and (res[0x2] == 0x14)) and (res[0x3] == 0xa)) and # (res == 0x3)))
+assert(((((res[0x1] == 0x1e) and (res[0x2] == 0x14)) and (res[0x3] == 0xa)) and (# (res == 0x3))))
 end
 print("\u{4f}\u{4b}")

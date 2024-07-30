@@ -2,7 +2,7 @@ collectgarbage()
 local function errmsg
 (code,m)
 local st,msg = load(code)
-assert(not (st and string.find(msg,m)))
+assert((not (st and string.find(msg,m))))
 end
 errmsg("\u{20}\u{67}\u{6f}\u{74}\u{6f}\u{20}\u{6c}\u{31}\u{3b}\u{20}\u{64}\u{6f}\u{20}\u{3a}\u{3a}\u{6c}\u{31}\u{3a}\u{3a}\u{20}\u{65}\u{6e}\u{64}\u{20}","\u{6c}\u{61}\u{62}\u{65}\u{6c}\u{20}\u{27}\u{6c}\u{31}\u{27}")
 errmsg("\u{20}\u{64}\u{6f}\u{20}\u{3a}\u{3a}\u{6c}\u{31}\u{3a}\u{3a}\u{20}\u{65}\u{6e}\u{64}\u{20}\u{67}\u{6f}\u{74}\u{6f}\u{20}\u{6c}\u{31}\u{3b}\u{20}","\u{6c}\u{61}\u{62}\u{65}\u{6c}\u{20}\u{27}\u{6c}\u{31}\u{27}")
@@ -72,34 +72,34 @@ local function foo
 local a = {}
 goto l3
 ::l1::
-a[# (a + 0x1)]=0x1
+a[(# (a + 0x1))]=0x1
 ;
 goto l2
 ;
 ::l2::
-a[# (a + 0x1)]=0x2
+a[(# (a + 0x1))]=0x2
 ;
 goto l5
 ;
 ::l3::
 ::l3a::
-a[# (a + 0x1)]=0x3
+a[(# (a + 0x1))]=0x3
 ;
 goto l1
 ;
 ::l4::
-a[# (a + 0x1)]=0x4
+a[(# (a + 0x1))]=0x4
 ;
 goto l6
 ;
 ::l5::
-a[# (a + 0x1)]=0x5
+a[(# (a + 0x1))]=0x5
 ;
 goto l4
 ;
 ::l6::
 assert((((((a[0x1] == 0x3) and (a[0x2] == 0x1)) and (a[0x3] == 0x2)) and (a[0x4] == 0x5)) and (a[0x5] == 0x4)))
-if not a[0x6] then
+if (not a[0x6]) then
 a[0x6]=true
 ;
 goto l3a
@@ -160,7 +160,7 @@ end
 local b
 do
 local c
-t[# (t + 0x1)]=function ()
+t[(# (t + 0x1))]=function ()
 return a,b,c,d
 end
 if (i > 0x2) then
@@ -168,7 +168,7 @@ goto l2
 end
 do
 local d
-t[# (t + 0x1)]=function ()
+t[(# (t + 0x1))]=function ()
 return a,b,c,d
 end
 i=(i + 0x1)
@@ -181,7 +181,7 @@ end
 return t
 end
 local a = foo()
-assert(# (a == 0x6))
+assert((# (a == 0x6)))
 for i = 0x2, 0x6
 do
 assert((debug.upvalueid(a[0x1],0x1) == debug.upvalueid(a[i],0x1)))

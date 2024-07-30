@@ -46,7 +46,7 @@ io.output(file)
 for s in string.gmatch(prog,"\u{24}\u{28}\u{5b}\u{5e}\u{24}\u{5d}\u{2b}\u{29}")
 do
 local n = tonumber(s)
-if not n then
+if (not n) then
 io.write(s)
 else
 F[n]()

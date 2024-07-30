@@ -28,8 +28,8 @@ end
 local function checkKlist
 (func,list)
 local k = T.listk(func)
-assert(# (k == # list))
-for i = 0x1, # k
+assert((# (k == (# list))))
+for i = 0x1, (# k)
 do
 assert(((k[i] == list[i]) and (math.type(k[i]) == math.type(list[i]))))
 end
@@ -43,20 +43,20 @@ a=0x0
 ;
 a=0.0
 ;
-a=- (0x7 + 0x7)
+a=(- (0x7 + 0x7))
 a=(k3_78 / 0x4)
 ;
 a=k3_78_4
-a=- (k3_78 / 0x4)
+a=(- (k3_78 / 0x4))
 ;
 a=(k3_78 / 0x4)
 ;
-a=- (3.78 / 0x4)
-a=- (3.79 / 0x4)
+a=(- (3.78 / 0x4))
+a=(- (3.79 / 0x4))
 ;
 a=0.0
 ;
-a=- 0x0
+a=(- 0x0)
 ;
 a=k3
 ;
@@ -66,18 +66,18 @@ a=0x3
 ;
 a=3.0
 end
-checkKlist(foo,{(3.78 / 0x4),- (3.78 / 0x4),- (3.79 / 0x4)})
+checkKlist(foo,{(3.78 / 0x4),(- (3.78 / 0x4)),(- (3.79 / 0x4))})
 foo=function (f,a)
 f((0x64 * 0x3e8))
 f((100.0 * 0x3e8))
-f(- (0x64 * 0x3e8))
-f(- (0x64 * 1e3))
+f((- (0x64 * 0x3e8)))
+f((- (0x64 * 1e3)))
 f(0x186a0)
 f(1e5)
-f(- 0x186a0)
-f(- 1e5)
+f((- 0x186a0))
+f((- 1e5))
 end
-checkKlist(foo,{0x186a0,1e5,- 0x186a0,- 1e5})
+checkKlist(foo,{0x186a0,1e5,(- 0x186a0),(- 1e5)})
 foo=function (t,a)
 t[a]=0x1
 ;
@@ -106,12 +106,12 @@ local function check
 (f, ...)
 local arg = {...}
 local c = T.listcode(f)
-for i = 0x1, # arg
+for i = 0x1, (# arg)
 do
 local opcode = string.match(c[i],"\u{25}\u{75}\u{25}\u{77}\u{2b}")
 assert((arg[i] == opcode))
 end
-assert((c[# (arg + 0x2)] == undef))
+assert((c[(# (arg + 0x2))] == undef))
 end
 local function checkR
 (f,p,r, ...)
@@ -123,8 +123,8 @@ local function checkequal
 (a,b)
 a=T.listcode(a)
 b=T.listcode(b)
-assert(# (a == # b))
-for i = 0x1, # a
+assert((# (a == (# b))))
+for i = 0x1, (# a)
 do
 a[i]=string.gsub(a[i],"\u{25}\u{62}\u{28}\u{29}","")
 b[i]=string.gsub(b[i],"\u{25}\u{62}\u{28}\u{29}","")
@@ -187,12 +187,12 @@ return a
 end,"\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
 while kTrue do
-local a = - 0x1
+local a = (- 0x1)
 end
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{4a}\u{4d}\u{50}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{30}")
 check(function ()
 while 0x1 do
-local a = - 0x1
+local a = (- 0x1)
 end
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{4a}\u{4d}\u{50}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{30}")
 check(function ()
@@ -204,21 +204,21 @@ check(function (a,b,c,d)
 return (a .. (b .. (c .. d)))
 end,"\u{4d}\u{4f}\u{56}\u{45}","\u{4d}\u{4f}\u{56}\u{45}","\u{4d}\u{4f}\u{56}\u{45}","\u{4d}\u{4f}\u{56}\u{45}","\u{43}\u{4f}\u{4e}\u{43}\u{41}\u{54}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
-return not not nil
+return (not (not nil))
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{46}\u{41}\u{4c}\u{53}\u{45}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
-return not not kFalse
+return (not (not kFalse))
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{46}\u{41}\u{4c}\u{53}\u{45}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
-return not not true
+return (not (not true))
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{54}\u{52}\u{55}\u{45}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
-return not not k3
+return (not (not k3))
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{54}\u{52}\u{55}\u{45}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
 local a,b,c,d
 a=(b * a)
-c.x,a[b]=- (((a + (d / b)) - a[b]) ^ a.x),b
+c.x,a[b]=(- (((a + (d / b)) - a[b]) ^ a.x)),b
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{4e}\u{49}\u{4c}","\u{4d}\u{55}\u{4c}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{44}\u{49}\u{56}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{41}\u{44}\u{44}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{47}\u{45}\u{54}\u{54}\u{41}\u{42}\u{4c}\u{45}","\u{53}\u{55}\u{42}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{47}\u{45}\u{54}\u{46}\u{49}\u{45}\u{4c}\u{44}","\u{50}\u{4f}\u{57}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{55}\u{4e}\u{4d}","\u{53}\u{45}\u{54}\u{54}\u{41}\u{42}\u{4c}\u{45}","\u{53}\u{45}\u{54}\u{46}\u{49}\u{45}\u{4c}\u{44}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{30}")
 check(function ()
 local a,b
@@ -249,10 +249,10 @@ return 0x2
 end
 end,0x1,0x2,"\u{45}\u{51}\u{49}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (a)
-if - (4.0 == a) then
+if (- (4.0 == a)) then
 return 0x2
 end
-end,- 0x4,0x2,"\u{45}\u{51}\u{49}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
+end,(- 0x4),0x2,"\u{45}\u{51}\u{49}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (a)
 if (a == "\u{68}\u{69}") then
 return 0x2
@@ -264,25 +264,25 @@ return 0x2
 end
 end,0x1,nil,"\u{45}\u{51}\u{4b}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (a)
-if - (0x2710 == a) then
+if (- (0x2710 == a)) then
 return 0x2
 end
-end,- 0x2710,0x2,"\u{45}\u{51}\u{4b}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
+end,(- 0x2710),0x2,"\u{45}\u{51}\u{4b}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (a)
-if - (0xa <= a) then
+if (- (0xa <= a)) then
 return 0x2
 end
-end,- 0xa,0x2,"\u{47}\u{45}\u{49}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
+end,(- 0xa),0x2,"\u{47}\u{45}\u{49}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (a)
 if (128.0 > a) then
 return 0x2
 end
 end,0x81,nil,"\u{4c}\u{54}\u{49}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (a)
-if - (127.0 < a) then
+if (- (127.0 < a)) then
 return 0x2
 end
-end,- 0x7f,nil,"\u{47}\u{54}\u{49}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
+end,(- 0x7f),nil,"\u{47}\u{54}\u{49}","\u{4a}\u{4d}\u{50}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (a)
 if (0xa < a) then
 return 0x2
@@ -333,40 +333,40 @@ checkI(function ()
 return k0
 end,0x0)
 checkI(function ()
-return - (k0 // 0x1)
+return (- (k0 // 0x1))
 end,0x0)
 checkK(function ()
-return (0x3 ^ - 0x1)
+return (0x3 ^ (- 0x1))
 end,(0x1 / 0x3))
 checkK(function ()
 return ((0x1 + 0x1) ^ (0x32 + 0x32))
 end,(0x2 ^ 0x64))
 checkK(function ()
 return ((- 0x2) ^ (0x1f - 0x2))
-end,- (0x20000000 + 0.0))
+end,(- (0x20000000 + 0.0)))
 checkF(function ()
 return ((- ((k3 ^ 0x0) + 0x5)) // 3.0)
 end,1.0)
 checkI(function ()
-return - (k3 % 0x5)
+return (- (k3 % 0x5))
 end,0x2)
 checkF(function ()
-return - ((((((2.0 ^ 0x8) + - (- 0x1)) % 0x8) / 0x2) * 0x4) - 0x3)
-end,- 5.0)
+return (- ((((((2.0 ^ 0x8) + (- (- 0x1))) % 0x8) / 0x2) * 0x4) - 0x3))
+end,(- 5.0))
 checkF(function ()
-return - ((((((0x2 ^ 0x8) + - (- 0x1)) % 0x8) // 0x2) * 0x4) - 0x3)
-end,- 7.0)
+return (- ((((((0x2 ^ 0x8) + (- (- 0x1))) % 0x8) // 0x2) * 0x4) - 0x3))
+end,(- 7.0))
 checkI(function ()
 return (240.0 | (204.0 ~ (0xaa & 0xfd)))
 end,0xf4)
 checkI(function ()
-return ~ (~ (kFF0 | kFF0))
+return (~ (~ (kFF0 | kFF0)))
 end,0x0)
 checkI(function ()
-return ~ ~ - 1024.0
-end,- 0x400)
+return (~ (~ (- 1024.0)))
+end,(- 0x400))
 checkI(function ()
-return (((0x64 << k6) << - 0x4) >> 0x2)
+return (((0x64 << k6) << (- 0x4)) >> 0x2)
 end,0x64)
 local a = 0x11
 ;
@@ -376,8 +376,8 @@ checkI(function ()
 return border
 end,sbx)
 checkI(function ()
-return - border
-end,- sbx)
+return (- border)
+end,(- sbx))
 checkI(function ()
 return (border + 0x1)
 end,(sbx + 0x1))
@@ -385,15 +385,15 @@ checkK(function ()
 return (border + 0x2)
 end,(sbx + 0x2))
 checkK(function ()
-return - (border + 0x1)
-end,- (sbx + 0x1))
+return (- (border + 0x1))
+end,(- (sbx + 0x1)))
 local border <const> = 65535.0
 checkF(function ()
 return border
 end,(sbx + 0.0))
 checkF(function ()
-return - border
-end,- (sbx + 0.0))
+return (- border)
+end,(- (sbx + 0.0)))
 checkF(function ()
 return (border + 0x1)
 end,(sbx + 1.0))
@@ -401,25 +401,25 @@ checkK(function ()
 return (border + 0x2)
 end,(sbx + 2.0))
 checkK(function ()
-return - (border + 0x1)
-end,- (sbx + 1.0))
+return (- (border + 0x1))
+end,(- (sbx + 1.0)))
 checkR(function (x)
 return (x + k1)
 end,0xa,0xb,"\u{41}\u{44}\u{44}\u{49}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
 return (x - 0x7f)
-end,0xa,- 0x75,"\u{41}\u{44}\u{44}\u{49}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
+end,0xa,(- 0x75),"\u{41}\u{44}\u{44}\u{49}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
 return (0x80 + x)
 end,0.0,128.0,"\u{41}\u{44}\u{44}\u{49}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
-return (x * - 0x7f)
-end,- 1.0,127.0,"\u{4d}\u{55}\u{4c}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
+return (x * (- 0x7f))
+end,(- 1.0),127.0,"\u{4d}\u{55}\u{4c}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
 return (0x14 * x)
 end,0x2,0x28,"\u{4d}\u{55}\u{4c}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
-return (x ^ - 0x2)
+return (x ^ (- 0x2))
 end,0x2,0.25,"\u{50}\u{4f}\u{57}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
 return (x / 0x28)
@@ -437,13 +437,13 @@ checkR(function (x)
 return (x << 0x7f)
 end,0xa,0x0,"\u{53}\u{48}\u{52}\u{49}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
-return (x << - 0x7f)
+return (x << (- 0x7f))
 end,0xa,0x0,"\u{53}\u{48}\u{52}\u{49}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
 return (x >> 0x80)
 end,0x8,0x0,"\u{53}\u{48}\u{52}\u{49}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
-return (x >> - 0x7f)
+return (x >> (- 0x7f))
 end,0x8,0x0,"\u{53}\u{48}\u{52}\u{49}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{49}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
 return (x & 0x1)
@@ -452,14 +452,14 @@ checkR(function (x)
 return (0xa | x)
 end,0x1,0xb,"\u{42}\u{4f}\u{52}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
-return - (0xa ~ x)
-end,- 0x1,0x9,"\u{42}\u{58}\u{4f}\u{52}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
+return (- (0xa ~ x))
+end,(- 0x1),0x9,"\u{42}\u{58}\u{4f}\u{52}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
 return (x + 0.0)
 end,0x1,1.0,"\u{41}\u{44}\u{44}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
-return (x * - 0x2710)
-end,0x2,- 0x4e20,"\u{4d}\u{55}\u{4c}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
+return (x * (- 0x2710))
+end,0x2,(- 0x4e20),"\u{4d}\u{55}\u{4c}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 checkR(function (x)
 return (x ^ 0.5)
 end,0x4,2.0,"\u{50}\u{4f}\u{57}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
@@ -473,7 +473,7 @@ checkR(function (x)
 return (x % (100.0 - 0xa))
 end,0x5b,1.0,"\u{4d}\u{4f}\u{44}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
-return - 0.0
+return (- 0.0)
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{46}","\u{55}\u{4e}\u{4d}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
 return (k3 / 0x0)
@@ -482,7 +482,7 @@ check(function ()
 return (0x0 % 0x0)
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{4d}\u{4f}\u{44}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
-return - (0x4 // 0x0)
+return (- (0x4 // 0x0))
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{49}\u{44}\u{49}\u{56}\u{4b}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}\u{4b}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function (x)
 return (x >> 2.0)
@@ -494,7 +494,7 @@ check(function (x)
 return (x & 2.0)
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{46}","\u{42}\u{41}\u{4e}\u{44}","\u{4d}\u{4d}\u{42}\u{49}\u{4e}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
-for i = - 0xa, 10.5
+for i = (- 0xa), 10.5
 do
 
 end
@@ -506,7 +506,7 @@ do
 end
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{4b}","\u{4c}\u{4f}\u{41}\u{44}\u{46}","\u{4c}\u{4f}\u{41}\u{44}\u{49}","\u{46}\u{4f}\u{52}\u{50}\u{52}\u{45}\u{50}","\u{46}\u{4f}\u{52}\u{4c}\u{4f}\u{4f}\u{50}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{30}")
 check(function ()
-return - nil
+return (- nil)
 end,"\u{4c}\u{4f}\u{41}\u{44}\u{4e}\u{49}\u{4c}","\u{55}\u{4e}\u{4d}","\u{52}\u{45}\u{54}\u{55}\u{52}\u{4e}\u{31}")
 check(function ()
 local a,b,c
@@ -527,13 +527,13 @@ end
 checkequal(function ()
 local a
 ;
-if not (a or b) then
+if (not (a or b)) then
 b=a
 end
 end,function ()
 local a
 ;
-if (not (a and not b)) then
+if (not (a and (not b))) then
 b=a
 end
 end)
@@ -544,7 +544,7 @@ return ((0x0 <= a) and (a <= l))
 end,function (l)
 local a
 ;
-return not (not ((a >= 0x0) or not (a <= l)))
+return (not (not ((a >= 0x0) or (not (a <= l)))))
 end)
 check(function (a,b)
 while a do

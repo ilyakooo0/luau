@@ -10,7 +10,7 @@ setmetatable(o,mt)
 end
 end
 function M.start()
-if not active then
+if (not active) then
 active=true
 setmetatable({},mt)
 end

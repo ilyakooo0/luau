@@ -13,7 +13,7 @@ local function c12
 assert((arg == _G.arg))
 local x = {...}
 ;
-x.n=# x
+x.n=(# x)
 local res = (((x.n == 0x2) and (x[0x1] == 0x1)) and (x[0x2] == 0x2))
 if res then
 res=0x37
@@ -38,7 +38,7 @@ assert(((a == 0x37) and (b == 0x2)))
 a=call(c12,{0x1,0x2,["\u{6e}"] = 0x2})
 assert(((a == 0x37) and (b == 0x2)))
 a=call(c12,{0x1,0x2,["\u{6e}"] = 0x1})
-assert(not a)
+assert((not a))
 assert((c12(0x1,0x2,0x3) == false))
 local a = vararg(call(next,{_G,nil,["\u{6e}"] = 0x2}))
 local b,c = next(_G)
@@ -51,7 +51,7 @@ local t = {0x1,0xa}
 function t:f(...)
 local arg = {...}
 ;
-return (self[...] + # arg)
+return (self[...] + (# arg))
 end
 assert(((t:f(0x1,0x4) == 0x3) and (t:f(0x2) == 0xb)))
 print("\u{2b}")
@@ -64,7 +64,7 @@ i=(i + 0x1)
 end
 function f(a,b,c,d, ...)
 local more = {...}
-assert(((((a == 1.3) and (more[0x1] == 5.3)) and (more[(lim - 0x4)] == (lim + 0.3))) and not more[(lim - 0x3)]))
+assert(((((a == 1.3) and (more[0x1] == 5.3)) and (more[(lim - 0x4)] == (lim + 0.3))) and (not more[(lim - 0x3)])))
 end
 local function g
 (a,b,c)
@@ -108,15 +108,15 @@ f=load("\u{20}\u{20}\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{78}\u{20}\u{3d}\u{20}
 assert(f("\u{61}","\u{62}",nil,{},assert))
 assert(f())
 a={select(0x3,table.unpack({0xa,0x14,0x1e,0x28}))}
-assert(# (((a == 0x2) and (a[0x1] == 0x1e)) and (a[0x2] == 0x28)))
+assert((# (((a == 0x2) and (a[0x1] == 0x1e)) and (a[0x2] == 0x28))))
 a={select(0x1)}
 assert((next(a) == nil))
-a={select(- 0x1,0x3,0x5,0x7)}
+a={select((- 0x1),0x3,0x5,0x7)}
 assert(((a[0x1] == 0x7) and (a[0x2] == undef)))
-a={select(- 0x2,0x3,0x5,0x7)}
+a={select((- 0x2),0x3,0x5,0x7)}
 assert((((a[0x1] == 0x5) and (a[0x2] == 0x7)) and (a[0x3] == undef)))
 pcall(select,0x2710)
-pcall(select,- 0x2710)
+pcall(select,(- 0x2710))
 function f(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26,p27,p28,p29,p30,p31,p32,p33,p34,p35,p36,p37,p38,p39,p40,p41,p42,p43,p44,p45,p46,p48,p49,p50, ...)
 local a1,a2,a3,a4,a5,a6,a7
 local a8,a9,a10,a11,a12,a13,a14

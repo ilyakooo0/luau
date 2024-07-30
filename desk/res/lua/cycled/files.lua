@@ -2,7 +2,7 @@ local debug = require("\u{64}\u{65}\u{62}\u{75}\u{67}")
 local maxint = math.maxinteger
 assert((type(os.getenv("\u{50}\u{41}\u{54}\u{48}")) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}"))
 assert((io.input(io.stdin) == io.stdin))
-assert(not pcall(io.input,"\u{6e}\u{6f}\u{6e}\u{2d}\u{65}\u{78}\u{69}\u{73}\u{74}\u{65}\u{6e}\u{74}\u{2d}\u{66}\u{69}\u{6c}\u{65}"))
+assert((not pcall(io.input,"\u{6e}\u{6f}\u{6e}\u{2d}\u{65}\u{78}\u{69}\u{73}\u{74}\u{65}\u{6e}\u{74}\u{2d}\u{66}\u{69}\u{6c}\u{65}")))
 assert((io.output(io.stdout) == io.stdout))
 local function testerr
 (msg,f, ...)
@@ -13,23 +13,23 @@ local function checkerr
 (msg,f, ...)
 assert(testerr(msg,f,...))
 end
-assert(not (io.close(io.stdin) and not (io.stdout:close() and not io.stderr:close())))
+assert((not (io.close(io.stdin) and (not (io.stdout:close() and (not io.stderr:close()))))))
 checkerr("\u{67}\u{6f}\u{74}\u{20}\u{6e}\u{6f}\u{20}\u{76}\u{61}\u{6c}\u{75}\u{65}",io.stdin.close)
 assert(((type(io.input()) == "\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}") and (io.type(io.output()) == "\u{66}\u{69}\u{6c}\u{65}")))
 assert(((type(io.stdin) == "\u{75}\u{73}\u{65}\u{72}\u{64}\u{61}\u{74}\u{61}") and (io.type(io.stderr) == "\u{66}\u{69}\u{6c}\u{65}")))
-assert(not io.type(0x8))
+assert((not io.type(0x8)))
 local a = {}
 ;
 setmetatable(a,{})
-assert(not io.type(a))
+assert((not io.type(a)))
 assert((getmetatable(io.input()).__name == "\u{46}\u{49}\u{4c}\u{45}\u{2a}"))
 local a,b,c = io.open("\u{78}\u{75}\u{78}\u{75}\u{5f}\u{6e}\u{61}\u{6f}\u{5f}\u{65}\u{78}\u{69}\u{73}\u{74}\u{65}")
-assert(not ((a and (type(b) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")))
+assert((not ((a and (type(b) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}"))))
 a,b,c=io.open("\u{2f}\u{61}\u{2f}\u{62}\u{2f}\u{63}\u{2f}\u{64}","\u{77}")
-assert(not ((a and (type(b) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")))
+assert((not ((a and (type(b) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}"))))
 local file = os.tmpname()
 local f,msg = io.open(file,"\u{77}")
-if not f then
+if (not f) then
 (Message or print)("\u{27}\u{6f}\u{73}\u{2e}\u{74}\u{6d}\u{70}\u{6e}\u{61}\u{6d}\u{65}\u{27}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{20}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{62}\u{65}\u{20}\u{6f}\u{70}\u{65}\u{6e}\u{3b}\u{20}\u{73}\u{6b}\u{69}\u{70}\u{70}\u{69}\u{6e}\u{67}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{20}\u{74}\u{65}\u{73}\u{74}\u{73}")
 else
 f:close()
@@ -50,18 +50,18 @@ io.input(io.stdin)
 io.output(io.stdout)
 ;
 os.remove(file)
-assert(not loadfile(file))
+assert((not loadfile(file)))
 checkerr("",dofile,file)
-assert(not io.open(file))
+assert((not io.open(file)))
 io.output(file)
 assert((io.output() ~= io.stdout))
-if not _port then
+if (not _port) then
 local status,msg,code = io.stdin:seek("\u{73}\u{65}\u{74}",0x3e8)
-assert(not ((status and (type(msg) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type(code) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")))
+assert((not ((status and (type(msg) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type(code) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}"))))
 end
 assert((io.output():seek() == 0x0))
 assert((io.write("\u{61}\u{6c}\u{6f}\u{20}\u{61}\u{6c}\u{6f}"):seek() == string.len("\u{61}\u{6c}\u{6f}\u{20}\u{61}\u{6c}\u{6f}")))
-assert((io.output():seek("\u{63}\u{75}\u{72}",- 0x3) == (string.len("\u{61}\u{6c}\u{6f}\u{20}\u{61}\u{6c}\u{6f}") - 0x3)))
+assert((io.output():seek("\u{63}\u{75}\u{72}",(- 0x3)) == (string.len("\u{61}\u{6c}\u{6f}\u{20}\u{61}\u{6c}\u{6f}") - 0x3)))
 assert(io.write("\u{6a}\u{6f}\u{61}\u{6f}"))
 assert((io.output():seek("\u{65}\u{6e}\u{64}") == string.len("\u{61}\u{6c}\u{6f}\u{20}\u{6a}\u{6f}\u{61}\u{6f}")))
 assert((io.output():seek("\u{73}\u{65}\u{74}") == 0x0))
@@ -85,7 +85,7 @@ end
 io.input():close()
 io.close()
 assert(os.rename(file,otherfile))
-assert(not os.rename(file,otherfile))
+assert((not os.rename(file,otherfile)))
 io.output(io.open(otherfile,"\u{61}\u{62}"))
 assert(io.write("\u{a}\u{a}\u{9}\u{9}\u{20}\u{20}",0xd7a,"\u{a}"))
 ;
@@ -105,8 +105,8 @@ f:write(maxint,"\u{a}")
 f:write(string.format("\u{30}\u{58}\u{25}\u{78}\u{a}",maxint))
 f:write("\u{30}\u{78}\u{41}\u{42}\u{43}\u{70}\u{2d}\u{33}","\u{a}")
 f:write(0x0,"\u{a}")
-f:write(- maxint,"\u{a}")
-f:write(string.format("\u{30}\u{78}\u{25}\u{58}\u{a}",- maxint))
+f:write((- maxint),"\u{a}")
+f:write(string.format("\u{30}\u{78}\u{25}\u{58}\u{a}",(- maxint)))
 f:write("\u{2d}\u{30}\u{78}\u{41}\u{42}\u{43}\u{70}\u{2d}\u{33}","\u{a}")
 assert(f:close())
 local f <close> = assert(io.open(file,"\u{72}"))
@@ -114,9 +114,9 @@ assert((f:read("\u{6e}") == maxint))
 assert((f:read("\u{6e}") == maxint))
 assert((f:read("\u{6e}") == 343.5))
 assert((f:read("\u{6e}") == 0x0))
-assert((f:read("\u{2a}\u{6e}") == - maxint))
-assert((f:read("\u{6e}") == - maxint))
-assert((f:read("\u{2a}\u{6e}") == - 343.5))
+assert((f:read("\u{2a}\u{6e}") == (- maxint)))
+assert((f:read("\u{6e}") == (- maxint)))
+assert((f:read("\u{2a}\u{6e}") == (- 343.5)))
 end
 assert(os.remove(file))
 do
@@ -134,7 +134,7 @@ assert(((((((((l1 == "\u{61}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{a}") and (l2 == "\u
 assert(f:close())
 local f <close> = assert(io.open(file,"\u{72}"))
 l1,n1,n2,dummy=f:read("\u{6c}","\u{6e}","\u{6e}","\u{6c}")
-assert(((l1 == "\u{61}\u{20}\u{6c}\u{69}\u{6e}\u{65}") and not n1))
+assert(((l1 == "\u{61}\u{20}\u{6c}\u{69}\u{6e}\u{65}") and (not n1)))
 end
 assert(os.remove(file))
 f=assert(io.open(file,"\u{77}"))
@@ -158,10 +158,10 @@ f:write("\u{a}")
 f:write("\u{2e}\u{65}\u{2b}\u{9}\u{30}\u{2e}\u{65}\u{3b}\u{9}\u{2d}\u{2d}\u{3b}\u{20}\u{20}\u{30}\u{78}\u{58}\u{3b}\u{a}")
 assert(f:close())
 f=assert(io.open(file,"\u{72}"))
-assert((f:read("\u{6e}") == - 12.3))
+assert((f:read("\u{6e}") == (- 12.3)))
 ;
 assert((f:read(0x1) == "\u{2d}"))
-assert((f:read("\u{6e}") == - 0xffff))
+assert((f:read("\u{6e}") == (- 0xffff)))
 ;
 assert((f:read(0x2) == "\u{2b}\u{20}"))
 assert((f:read("\u{6e}") == 0.3))
@@ -180,31 +180,31 @@ assert((f:read("\u{6e}") == 8.61328125))
 ;
 assert((f:read(0x1) == "\u{65}"))
 do
-assert(not f:read("\u{6e}"))
+assert((not f:read("\u{6e}")))
 local s = f:read("\u{4c}")
 assert(string.find(s,"\u{5e}\u{30}\u{30}\u{2a}\u{a}\u{24}"))
 end
-assert(not f:read("\u{6e}"))
+assert((not f:read("\u{6e}")))
 ;
 assert((f:read(0x2) == "\u{65}\u{2b}"))
-assert(not f:read("\u{6e}"))
+assert((not f:read("\u{6e}")))
 ;
 assert((f:read(0x1) == "\u{3b}"))
-assert(not f:read("\u{6e}"))
+assert((not f:read("\u{6e}")))
 ;
 assert((f:read(0x2) == "\u{2d}\u{3b}"))
-assert(not f:read("\u{6e}"))
+assert((not f:read("\u{6e}")))
 ;
 assert((f:read(0x1) == "\u{58}"))
-assert(not f:read("\u{6e}"))
+assert((not f:read("\u{6e}")))
 ;
 assert((f:read(0x1) == "\u{3b}"))
-assert(not f:read("\u{6e}"))
+assert((not f:read("\u{6e}")))
 ;
-assert(not f:read(0x0))
+assert((not f:read(0x0)))
 assert(f:close())
 assert(os.remove(file))
-assert(not pcall(io.lines,"\u{6e}\u{6f}\u{6e}\u{2d}\u{65}\u{78}\u{69}\u{73}\u{74}\u{65}\u{6e}\u{74}\u{2d}\u{66}\u{69}\u{6c}\u{65}"))
+assert((not pcall(io.lines,"\u{6e}\u{6f}\u{6e}\u{2d}\u{65}\u{78}\u{69}\u{73}\u{74}\u{65}\u{6e}\u{74}\u{2d}\u{66}\u{69}\u{6c}\u{65}")))
 assert(os.rename(otherfile,file))
 io.output(otherfile)
 local n = 0x0
@@ -228,7 +228,7 @@ assert((n == 0x6))
 local f = assert(io.open(otherfile))
 assert((io.type(f) == "\u{66}\u{69}\u{6c}\u{65}"))
 io.output(file)
-assert(not io.output():read())
+assert((not io.output():read()))
 n=0x0
 for l in f:lines()
 do
@@ -269,8 +269,8 @@ do
 t[i]=0x1
 end
 t={io.lines(otherfile,table.unpack(t))()}
-assert(# (((t == 0xfa) and (t[0x1] == "\u{61}")) and (t[# t] == "\u{61}")))
-t[# (t + 0x1)]=0x1
+assert((# (((t == 0xfa) and (t[0x1] == "\u{61}")) and (t[(# t)] == "\u{61}"))))
+t[(# (t + 0x1))]=0x1
 checkerr("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{61}\u{72}\u{67}\u{75}\u{6d}\u{65}\u{6e}\u{74}\u{73}",io.lines,otherfile,table.unpack(t))
 collectgarbage()
 assert(os.remove(otherfile))
@@ -278,7 +278,7 @@ end
 io.input(file)
 do
 local a,b,c = io.input():write("\u{78}\u{75}\u{78}\u{75}")
-assert(not ((a and (type(b) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")))
+assert((not ((a and (type(b) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}"))))
 end
 checkerr("\u{69}\u{6e}\u{76}\u{61}\u{6c}\u{69}\u{64}\u{20}\u{66}\u{6f}\u{72}\u{6d}\u{61}\u{74}",io.read,"\u{78}")
 assert((io.read(0x0) == ""))
@@ -291,18 +291,18 @@ assert(io.input():seek("\u{73}\u{65}\u{74}",x))
 assert((io.read("\u{4c}") == "\u{74}\u{68}\u{69}\u{72}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}\u{20}\u{a}"))
 assert((io.read(0x1) == "\u{58}"))
 assert((io.read(string.len("\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}")) == "\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}"))
-assert(io.input():seek("\u{63}\u{75}\u{72}",- string.len("\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}")))
+assert(io.input():seek("\u{63}\u{75}\u{72}",(- string.len("\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}"))))
 assert((io.read() == "\u{66}\u{6f}\u{75}\u{72}\u{74}\u{68}\u{5f}\u{6c}\u{69}\u{6e}\u{65}"))
 assert((io.read() == ""))
 assert((io.read("\u{6e}") == 0xd7a))
 assert((io.read(0x1) == "\u{a}"))
-assert(not io.read(0x0))
-assert(not io.read(0x1))
-assert(not io.read(0x7530))
+assert((not io.read(0x0)))
+assert((not io.read(0x1)))
+assert((not io.read(0x7530)))
 assert((({io.read(0x1)})[0x2] == undef))
-assert(not io.read())
+assert((not io.read()))
 assert((({io.read()})[0x2] == undef))
-assert(not io.read("\u{6e}"))
+assert((not io.read("\u{6e}")))
 assert((({io.read("\u{6e}")})[0x2] == undef))
 assert((io.read("\u{61}") == ""))
 assert((io.read("\u{61}") == ""))
@@ -339,20 +339,20 @@ assert((io.read(string.len(t)) == t))
 assert((io.read(0x1) == "\u{20}"))
 assert(io.read(0x0))
 assert((io.read("\u{61}") == "\u{3b}\u{65}\u{6e}\u{64}\u{20}\u{6f}\u{66}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{a}"))
-assert(not io.read(0x0))
+assert((not io.read(0x0)))
 assert(io.close(io.input()))
 do
 local function ismsg
 (m)
-return ((type(m) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}") and not tonumber(m))
+return ((type(m) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}") and (not tonumber(m)))
 end
 local f = io.open(file,"\u{77}")
 local r,m,c = f:read()
-assert(not ((r and ismsg(m)) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")))
+assert((not ((r and ismsg(m)) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}"))))
 assert(f:close())
 f=io.open(file,"\u{72}")
 r,m,c=f:write("\u{77}\u{68}\u{61}\u{74}\u{65}\u{76}\u{65}\u{72}")
-assert(not ((r and ismsg(m)) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")))
+assert((not ((r and ismsg(m)) and (type(c) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}"))))
 assert(f:close())
 f=io.open(file,"\u{77}")
 r,m=pcall(f:lines())
@@ -368,7 +368,7 @@ assert((io.read("\u{4c}") == "\u{a}"))
 assert((io.read("\u{4c}") == "\u{a}"))
 assert((io.read("\u{4c}") == "\u{6c}\u{69}\u{6e}\u{65}\u{a}"))
 assert((io.read("\u{4c}") == "\u{6f}\u{74}\u{68}\u{65}\u{72}"))
-assert(not io.read("\u{4c}"))
+assert((not io.read("\u{4c}")))
 io.input():close()
 local f = assert(io.open(file))
 local s = ""
@@ -403,7 +403,7 @@ io.output(file)
 io.write("\u{61}\u{20}\u{3d}\u{20}\u{31}\u{30}\u{20}\u{2b}\u{20}\u{33}\u{34}\u{a}\u{61}\u{20}\u{3d}\u{20}\u{32}\u{2a}\u{61}\u{a}\u{61}\u{20}\u{3d}\u{20}\u{2d}\u{61}\u{a}"):close()
 local t = {}
 assert(load(io.lines(file,"\u{4c}"),nil,nil,t))()
-assert((t.a == - ((0xa + 0x22) * 0x2)))
+assert((t.a == (- ((0xa + 0x22) * 0x2))))
 do
 local function gettoclose
 (lv)
@@ -447,7 +447,7 @@ io.write("\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{a}"):cl
 for a,b in io.lines(file,0x1,0x1)
 do
 if (a == "\u{a}") then
-assert(not b)
+assert((not b))
 else
 assert((tonumber(a) == (tonumber(b) - 0x1)))
 end
@@ -461,7 +461,7 @@ do
 if (a == "") then
 break
 end
-assert(((a == "\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{a}") and not (b and not c)))
+assert(((a == "\u{30}\u{31}\u{32}\u{33}\u{34}\u{35}\u{36}\u{37}\u{38}\u{39}\u{a}") and (not (b and (not c)))))
 end
 collectgarbage()
 io.output(file)
@@ -470,7 +470,7 @@ io.write("\u{30}\u{30}\u{a}\u{31}\u{30}\u{a}\u{32}\u{30}\u{a}\u{33}\u{30}\u{a}\u
 for a,b in io.lines(file,"\u{6e}","\u{6e}")
 do
 if (a == 0x28) then
-assert(not b)
+assert((not b))
 else
 assert((a == (b - 0xa)))
 end
@@ -479,13 +479,13 @@ io.output(file)
 ;
 io.write("\u{6c}\u{6f}\u{63}\u{61}\u{6c}\u{20}\u{79}\u{a}\u{3d}\u{20}\u{58}\u{a}\u{58}\u{20}\u{3d}\u{a}\u{58}\u{20}\u{2a}\u{a}\u{32}\u{20}\u{2b}\u{a}\u{58}\u{3b}\u{a}\u{58}\u{20}\u{3d}\u{a}\u{58}\u{a}\u{2d}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{20}\u{79}\u{3b}\u{a}"):close()
 _G.X=0x1
-assert(not load((io.lines(file))))
+assert((not load(io.lines(file))))
 collectgarbage()
-load((io.lines(file,"\u{4c}")))()
+load(io.lines(file,"\u{4c}"))()
 assert((_G.X == 0x2))
-load((io.lines(file,0x1)))()
+load(io.lines(file,0x1))()
 assert((_G.X == 0x4))
-load((io.lines(file,0x3)))()
+load(io.lines(file,0x3))()
 assert((_G.X == 0x8))
 _G.X=nil
 print("\u{2b}")
@@ -498,8 +498,8 @@ assert((x1 == _G.X2))
 _G.X2=nil
 print("\u{2b}")
 assert(os.remove(file))
-assert(not os.remove(file))
-assert(not os.remove(otherfile))
+assert((not os.remove(file)))
+assert((not os.remove(otherfile)))
 local function testloadfile
 (s,expres)
 io.output(file)
@@ -561,10 +561,10 @@ end
 do
 io.open(file,"\u{77}"):write("\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}\u{30}"):close()
 local s,m = loadfile(file,"\u{62}")
-assert(not (s and string.find(m,"\u{61}\u{20}\u{74}\u{65}\u{78}\u{74}\u{20}\u{63}\u{68}\u{75}\u{6e}\u{6b}")))
+assert((not (s and string.find(m,"\u{61}\u{20}\u{74}\u{65}\u{78}\u{74}\u{20}\u{63}\u{68}\u{75}\u{6e}\u{6b}"))))
 io.open(file,"\u{77}"):write("\u{1b}\u{20}\u{72}\u{65}\u{74}\u{75}\u{72}\u{6e}\u{20}\u{31}\u{30}"):close()
 local s,m = loadfile(file,"\u{74}")
-assert(not (s and string.find(m,"\u{61}\u{20}\u{62}\u{69}\u{6e}\u{61}\u{72}\u{79}\u{20}\u{63}\u{68}\u{75}\u{6e}\u{6b}")))
+assert((not (s and string.find(m,"\u{61}\u{20}\u{62}\u{69}\u{6e}\u{61}\u{72}\u{79}\u{20}\u{63}\u{68}\u{75}\u{6e}\u{6b}"))))
 assert(os.remove(file))
 end
 io.output(file)
@@ -589,7 +589,7 @@ assert((io.read(0x3) == "\u{0}\u{0}\u{0}"))
 assert((io.read(0x0) == ""))
 assert((io.read(0x1) == "\u{ff}"))
 assert((io.read("\u{61}") == "\u{0}"))
-assert(not io.read(0x0))
+assert((not io.read(0x0)))
 assert((otherfilehandle == io.input()))
 otherfilehandle:close()
 assert(os.remove(file))
@@ -599,8 +599,8 @@ io.output(file):write("\u{20}\u{31}\u{32}\u{33}\u{2e}\u{34}\u{9}\u{2d}\u{35}\u{3
 io.input(file)
 local _,a,b,c,d,e,h,__ = io.read(0x1,"\u{6e}","\u{6e}","\u{6c}","\u{6c}","\u{6c}","\u{61}",0xa)
 assert(io.close(io.input()))
-assert(((_ == "\u{20}") and not __))
-assert((((type(a) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}") and (a == 123.4)) and (b == - 0.56)))
+assert(((_ == "\u{20}") and (not __)))
+assert((((type(a) == "\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}") and (a == 123.4)) and (b == (- 0.56))))
 assert(((d == "\u{73}\u{65}\u{63}\u{6f}\u{6e}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}") and (e == "\u{74}\u{68}\u{69}\u{72}\u{64}\u{20}\u{6c}\u{69}\u{6e}\u{65}")))
 assert((h == "\u{a}\u{61}\u{6e}\u{64}\u{20}\u{74}\u{68}\u{65}\u{20}\u{72}\u{65}\u{73}\u{74}\u{20}\u{6f}\u{66}\u{20}\u{74}\u{68}\u{65}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{a}"))
 assert(os.remove(file))
@@ -632,7 +632,7 @@ f:close()
 fr:close()
 assert(os.remove(file))
 end
-if not _soft then
+if (not _soft) then
 print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{6c}\u{61}\u{72}\u{67}\u{65}\u{20}\u{66}\u{69}\u{6c}\u{65}\u{73}\u{20}\u{28}\u{3e}\u{20}\u{42}\u{55}\u{46}\u{53}\u{49}\u{5a}\u{29}")
 io.output(file)
 for i = 0x1, 0x1389
@@ -648,14 +648,14 @@ assert(((x == y) and (string.len(x) == ((0x1389 * 0xd) + 0x6))))
 io.input():seek("\u{73}\u{65}\u{74}",0x0)
 y=io.read()
 assert((x == (y .. ("\u{a}" .. io.read()))))
-assert(not io.read())
+assert((not io.read()))
 io.close(io.input())
 assert(os.remove(file))
 x=nil
 ;
 y=nil
 end
-if not _port then
+if (not _port) then
 local progname
 do
 local arg = (arg or ARG)
@@ -689,7 +689,7 @@ assert((((x == x1) and (y == y1)) and (z == z1)))
 if (v[0x2] == "\u{6f}\u{6b}") then
 assert(((x and (y == "\u{65}\u{78}\u{69}\u{74}")) and (z == 0x0)))
 else
-assert(not (x and (y == v[0x2])))
+assert((not (x and (y == v[0x2]))))
 assert((((v[0x3] == nil) and (z > 0x0)) or (v[0x3] == z)))
 end
 end
@@ -720,7 +720,7 @@ load(os.date("\u{61}\u{73}\u{73}\u{65}\u{72}\u{74}\u{28}\u{44}\u{2e}\u{79}\u{65}
 _G.D=nil
 end
 checkDateTable(os.time())
-if not _port then
+if (not _port) then
 checkDateTable(0x0)
 checkDateTable(0x1)
 checkDateTable(0x3e8)
@@ -737,23 +737,23 @@ checkerr("\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{6e}\u{20}\u{69}\u{6e}\u{74}\u{65}\u{6
 checkerr("\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{6e}\u{20}\u{69}\u{6e}\u{74}\u{65}\u{67}\u{65}\u{72}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 0x3e8,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1,["\u{68}\u{6f}\u{75}\u{72}"] = 1.5})
 checkerr("\u{6d}\u{69}\u{73}\u{73}\u{69}\u{6e}\u{67}",os.time,{["\u{68}\u{6f}\u{75}\u{72}"] = 0xc})
 if (string.packsize("\u{69}") == 0x4) then
-checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = - ((0x1 << 0x1f) + 0x76b),["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1})
-checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = - (0x1 << 0x1f),["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1})
+checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = (- ((0x1 << 0x1f) + 0x76b)),["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1})
+checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = (- (0x1 << 0x1f)),["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1})
 if (math.maxinteger > (0x2 ^ 0x1f)) then
 checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = ((0x1 << 0x1f) + 0x76c),["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1})
 end
 end
-if not _port then
+if (not _port) then
 assert((type(os.date("\u{25}\u{45}\u{78}")) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}"))
 assert((type(os.date("\u{25}\u{4f}\u{79}")) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}"))
 local t0 = os.time({["\u{79}\u{65}\u{61}\u{72}"] = 0x7b2,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x0})
 local t1 = os.time({["\u{79}\u{65}\u{61}\u{72}"] = 0x7b2,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x0,["\u{73}\u{65}\u{63}"] = ((0x1 << 0x1f) - 0x1)})
 assert(((t1 - t0) == ((0x1 << 0x1f) - 0x1)))
 t0=os.time({["\u{79}\u{65}\u{61}\u{72}"] = 0x7b2,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1})
-t1=os.time({["\u{79}\u{65}\u{61}\u{72}"] = 0x7b2,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1,["\u{73}\u{65}\u{63}"] = - (0x1 << 0x1f)})
-assert(((t1 - t0) == - (0x1 << 0x1f)))
+t1=os.time({["\u{79}\u{65}\u{61}\u{72}"] = 0x7b2,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1,["\u{73}\u{65}\u{63}"] = (- (0x1 << 0x1f))})
+assert(((t1 - t0) == (- (0x1 << 0x1f))))
 if (maxint >= (0x2 ^ 0x3e)) then
-checkerr("\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = - maxint,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1})
+checkerr("\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = (- maxint),["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1})
 if (string.packsize("\u{69}") == 0x4) then
 if testerr("\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.date,"\u{25}\u{59}",(0x2 ^ 0x28)) then
 print("\u{20}\u{20}\u{34}\u{2d}\u{62}\u{79}\u{74}\u{65}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{5f}\u{74}")
@@ -765,7 +765,7 @@ assert(tonumber(os.time({["\u{79}\u{65}\u{61}\u{72}"] = ((0x1 << 0x1f) + 0x76b),
 checkerr("\u{72}\u{65}\u{70}\u{72}\u{65}\u{73}\u{65}\u{6e}\u{74}\u{65}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = ((0x1 << 0x1f) + 0x76b),["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0xc,["\u{64}\u{61}\u{79}"] = 0x1f,["\u{68}\u{6f}\u{75}\u{72}"] = 0x17,["\u{6d}\u{69}\u{6e}"] = 0x3b,["\u{73}\u{65}\u{63}"] = 0x3c})
 end
 checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{64}\u{61}\u{79}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 0x0,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = (0x2 ^ 0x20)})
-checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{6d}\u{6f}\u{6e}\u{74}\u{68}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 0x0,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = - ((0x1 << 0x1f) + 0x1),["\u{64}\u{61}\u{79}"] = 0x1})
+checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{6d}\u{6f}\u{6e}\u{74}\u{68}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = 0x0,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = (- ((0x1 << 0x1f) + 0x1)),["\u{64}\u{61}\u{79}"] = 0x1})
 checkerr("\u{66}\u{69}\u{65}\u{6c}\u{64}\u{20}\u{27}\u{79}\u{65}\u{61}\u{72}\u{27}\u{20}\u{69}\u{73}\u{20}\u{6f}\u{75}\u{74}\u{2d}\u{6f}\u{66}\u{2d}\u{62}\u{6f}\u{75}\u{6e}\u{64}",os.time,{["\u{79}\u{65}\u{61}\u{72}"] = ((0x1 << 0x1f) + 0x76c),["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1})
 else
 print("\u{20}\u{20}\u{38}\u{2d}\u{62}\u{79}\u{74}\u{65}\u{20}\u{74}\u{69}\u{6d}\u{65}\u{5f}\u{74}")
@@ -797,11 +797,11 @@ t1=os.time(os.date("\u{2a}\u{74}"))
 local diff = os.difftime(t1,t)
 assert(((0x0 <= diff) and (diff <= 0x1)))
 diff=os.difftime(t,t1)
-assert(- ((0x1 <= diff) and (diff <= 0x0)))
+assert((- ((0x1 <= diff) and (diff <= 0x0))))
 local t1 = os.time({["\u{79}\u{65}\u{61}\u{72}"] = 0x7d0,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0xa,["\u{64}\u{61}\u{79}"] = 0x1,["\u{68}\u{6f}\u{75}\u{72}"] = 0x17,["\u{6d}\u{69}\u{6e}"] = 0xc})
 local t2 = os.time({["\u{79}\u{65}\u{61}\u{72}"] = 0x7d0,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0xa,["\u{64}\u{61}\u{79}"] = 0x1,["\u{68}\u{6f}\u{75}\u{72}"] = 0x17,["\u{6d}\u{69}\u{6e}"] = 0xa,["\u{73}\u{65}\u{63}"] = 0x13})
 assert((os.difftime(t1,t2) == ((0x3c * 0x2) - 0x13)))
-t1={["\u{79}\u{65}\u{61}\u{72}"] = 0x7d5,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1,["\u{68}\u{6f}\u{75}\u{72}"] = 0x1,["\u{6d}\u{69}\u{6e}"] = 0x0,["\u{73}\u{65}\u{63}"] = - 0xe12}
+t1={["\u{79}\u{65}\u{61}\u{72}"] = 0x7d5,["\u{6d}\u{6f}\u{6e}\u{74}\u{68}"] = 0x1,["\u{64}\u{61}\u{79}"] = 0x1,["\u{68}\u{6f}\u{75}\u{72}"] = 0x1,["\u{6d}\u{69}\u{6e}"] = 0x0,["\u{73}\u{65}\u{63}"] = (- 0xe12)}
 os.time(t1)
 assert((((((((t1.day == 0x1f) and (t1.month == 0xc)) and (t1.year == 0x7d4)) and (t1.hour == 0x17)) and (t1.min == 0x3b)) and (t1.sec == 0x3a)) and (t1.yday == 0x16e)))
 io.output(io.stdout)

@@ -3,7 +3,7 @@ print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{73}\u{74}\u{61}\u{63}\
 local function checkerror
 (msg,f, ...)
 local s,err = pcall(f,...)
-assert(not (s and string.find(err,msg)))
+assert((not (s and string.find(err,msg))))
 end
 do
 print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{73}\u{74}\u{61}\u{63}\u{6b}\u{20}\u{6f}\u{76}\u{65}\u{72}\u{66}\u{6c}\u{6f}\u{77}\u{20}\u{69}\u{6e}\u{20}\u{6d}\u{65}\u{73}\u{73}\u{61}\u{67}\u{65}\u{20}\u{68}\u{61}\u{6e}\u{64}\u{6c}\u{69}\u{6e}\u{67}")
@@ -28,7 +28,7 @@ local p = string.rep("\u{2e}\u{3f}",size)
 return string.match(s,p)
 end
 local m = f(0x50)
-assert(# (m == 0x50))
+assert((# (m == 0x50)))
 checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{63}\u{6f}\u{6d}\u{70}\u{6c}\u{65}\u{78}",f,0x7d0)
 end
 do
@@ -69,7 +69,7 @@ end
 local st,msg = xpcall(stack,function ()
 return "\u{6f}\u{6b}"
 end,lim)
-assert(not (st and (msg == "\u{6f}\u{6b}")))
+assert((not (st and (msg == "\u{6f}\u{6b}"))))
 print("\u{66}\u{69}\u{6e}\u{61}\u{6c}\u{20}\u{63}\u{6f}\u{75}\u{6e}\u{74}\u{3a}\u{20}",count)
 end
 do
@@ -91,7 +91,7 @@ end)
 assert(coroutine.resume(coro))
 end
 local st,msg = coroutine.close(coro)
-assert(not (st and string.find(msg,"\u{43}\u{20}\u{73}\u{74}\u{61}\u{63}\u{6b}\u{20}\u{6f}\u{76}\u{65}\u{72}\u{66}\u{6c}\u{6f}\u{77}")))
+assert((not (st and string.find(msg,"\u{43}\u{20}\u{73}\u{74}\u{61}\u{63}\u{6b}\u{20}\u{6f}\u{76}\u{65}\u{72}\u{66}\u{6c}\u{6f}\u{77}"))))
 print("\u{66}\u{69}\u{6e}\u{61}\u{6c}\u{20}\u{63}\u{6f}\u{75}\u{6e}\u{74}\u{3a}\u{20}",count)
 end
 do
@@ -108,7 +108,7 @@ f()
 end
 local f = coroutine.wrap(body)
 f()
-assert(not pcall(f))
+assert((not pcall(f)))
 print("\u{66}\u{69}\u{6e}\u{61}\u{6c}\u{20}\u{63}\u{6f}\u{75}\u{6e}\u{74}\u{3a}\u{20}",count)
 end
 do
@@ -126,7 +126,7 @@ end
 if T then
 print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{73}\u{74}\u{61}\u{63}\u{6b}\u{20}\u{72}\u{65}\u{63}\u{6f}\u{76}\u{65}\u{72}\u{79}")
 local N = 0x0
-local LIM = - 0x1
+local LIM = (- 0x1)
 local stack1
 local dummy
 local function err

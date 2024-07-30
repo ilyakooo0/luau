@@ -87,7 +87,7 @@ assert((a[0x3].get() == 0x3))
 assert((a[0x2].get() == "\u{61}"))
 a={}
 local t = {"\u{61}","\u{62}"}
-for i = 0x1, # t
+for i = 0x1, (# t)
 do
 local k = t[i]
 a[i]={["\u{73}\u{65}\u{74}"] = function (x,y)
@@ -118,7 +118,7 @@ end
 break
 end
 assert((f() == 0x1))
-for k = 0x1, # t
+for k = 0x1, (# t)
 do
 local v = t[k]
 f=function ()
@@ -132,7 +132,7 @@ local b
 function f(x)
 local first = 0x1
 while 0x1 do
-if ((x == 0x3) and not first) then
+if ((x == 0x3) and (not first)) then
 return 
 end
 local a = "\u{78}\u{75}\u{78}\u{75}"
@@ -303,7 +303,7 @@ end
 end
 assert(debug.upvalueid(foo1,0x1))
 assert(debug.upvalueid(foo1,0x2))
-assert(not debug.upvalueid(foo1,0x3))
+assert((not debug.upvalueid(foo1,0x3)))
 assert((debug.upvalueid(foo1,0x1) == debug.upvalueid(foo2,0x2)))
 assert((debug.upvalueid(foo1,0x2) == debug.upvalueid(foo2,0x1)))
 assert(debug.upvalueid(foo3,0x1))
@@ -318,10 +318,10 @@ debug.upvaluejoin(foo3,0x2,foo2,0x1)
 assert((foo3() == (0xa + 0x5)))
 debug.upvaluejoin(foo3,0x2,foo2,0x2)
 assert((foo3() == (0xa + 0x3)))
-assert(not pcall(debug.upvaluejoin,foo1,0x3,foo2,0x1))
-assert(not pcall(debug.upvaluejoin,foo1,0x1,foo2,0x3))
-assert(not pcall(debug.upvaluejoin,foo1,0x0,foo2,0x1))
-assert(not pcall(debug.upvaluejoin,print,0x1,foo2,0x1))
-assert(not pcall(debug.upvaluejoin,{},0x1,foo2,0x1))
-assert(not pcall(debug.upvaluejoin,foo1,0x1,print,0x1))
+assert((not pcall(debug.upvaluejoin,foo1,0x3,foo2,0x1)))
+assert((not pcall(debug.upvaluejoin,foo1,0x1,foo2,0x3)))
+assert((not pcall(debug.upvaluejoin,foo1,0x0,foo2,0x1)))
+assert((not pcall(debug.upvaluejoin,print,0x1,foo2,0x1)))
+assert((not pcall(debug.upvaluejoin,{},0x1,foo2,0x1)))
+assert((not pcall(debug.upvaluejoin,foo1,0x1,print,0x1)))
 print("\u{4f}\u{4b}")

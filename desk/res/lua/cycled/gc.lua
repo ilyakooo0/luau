@@ -19,10 +19,10 @@ do
 local a = collectgarbage("\u{73}\u{65}\u{74}\u{70}\u{61}\u{75}\u{73}\u{65}",0xc8)
 local b = collectgarbage("\u{73}\u{65}\u{74}\u{73}\u{74}\u{65}\u{70}\u{6d}\u{75}\u{6c}",0xc8)
 local t = {0x0,0x2,0xa,0x5a,0x1f4,0x1388,0x7530,0x7ffffffe}
-for i = 0x1, # t
+for i = 0x1, (# t)
 do
 local p = t[i]
-for j = 0x1, # t
+for j = 0x1, (# t)
 do
 local m = t[j]
 collectgarbage("\u{73}\u{65}\u{74}\u{70}\u{61}\u{75}\u{73}\u{65}",p)
@@ -209,17 +209,17 @@ assert((gcinfo() < x))
 return i
 end
 collectgarbage("\u{73}\u{74}\u{6f}\u{70}")
-if not _port then
+if (not _port) then
 assert((dosteps(0xa) < dosteps(0x2)))
 end
 assert((dosteps(0x4e20) == 0x1))
 assert((collectgarbage("\u{73}\u{74}\u{65}\u{70}",0x4e20) == true))
 assert((collectgarbage("\u{73}\u{74}\u{65}\u{70}",0x4e20) == true))
-assert(not collectgarbage("\u{69}\u{73}\u{72}\u{75}\u{6e}\u{6e}\u{69}\u{6e}\u{67}"))
+assert((not collectgarbage("\u{69}\u{73}\u{72}\u{75}\u{6e}\u{6e}\u{69}\u{6e}\u{67}")))
 collectgarbage("\u{72}\u{65}\u{73}\u{74}\u{61}\u{72}\u{74}")
 assert(collectgarbage("\u{69}\u{73}\u{72}\u{75}\u{6e}\u{6e}\u{69}\u{6e}\u{67}"))
 end
-if not _port then
+if (not _port) then
 collectgarbage()
 ;
 collectgarbage()
@@ -453,7 +453,7 @@ setmetatable(s,{["\u{5f}\u{5f}\u{6d}\u{6f}\u{64}\u{65}"] = "\u{6b}"})
 setmetatable(u,{["\u{5f}\u{5f}\u{67}\u{63}"] = function (o)
 local i = s[o]
 s[i]=true
-assert(not s[(i - 0x1)])
+assert((not s[(i - 0x1)]))
 if (i == 0x8) then
 error("\u{40}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}\u{40}")
 end
@@ -599,7 +599,7 @@ assert(string.find(_WARN,"\u{40}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}
 _WARN=false
 warn("\u{40}\u{6e}\u{6f}\u{72}\u{6d}\u{61}\u{6c}")
 end
-if not _soft then
+if (not _soft) then
 print("\u{6c}\u{6f}\u{6e}\u{67}\u{20}\u{6c}\u{69}\u{73}\u{74}")
 local a = {}
 for i = 0x1, 0x30d40
@@ -772,7 +772,7 @@ warn("\u{40}\u{73}\u{74}\u{6f}\u{72}\u{65}")
 _WARN=false
 error("\u{40}\u{65}\u{78}\u{70}\u{65}\u{63}\u{74}\u{65}\u{64}\u{20}\u{77}\u{61}\u{72}\u{6e}\u{69}\u{6e}\u{67}")
 end}
-for i = 0xa, 0x1, - 0x1
+for i = 0xa, 0x1, (- 0x1)
 do
 table.insert(___Glob,setmetatable({i},mt))
 end
@@ -784,7 +784,7 @@ setmetatable({},{["\u{5f}\u{5f}\u{67}\u{63}"] = function ()
 res=collectgarbage()
 end})
 collectgarbage()
-assert(not res)
+assert((not res))
 end
 collectgarbage(oldmode)
 print("\u{4f}\u{4b}")

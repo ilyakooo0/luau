@@ -6,7 +6,7 @@ local minI = math.mininteger
 local function checkerror
 (msg,f, ...)
 local s,err = pcall(f,...)
-assert(not (s and string.find(err,msg)))
+assert((not (s and string.find(err,msg))))
 end
 checkerror("\u{77}\u{72}\u{6f}\u{6e}\u{67}\u{20}\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}\u{20}\u{6f}\u{66}\u{20}\u{61}\u{72}\u{67}\u{75}\u{6d}\u{65}\u{6e}\u{74}\u{73}",table.insert,{},0x2,0x3,0x4)
 local x,y,z,a,n
@@ -21,9 +21,9 @@ assert(((select(lim,unpack(a)) == lim) and (select("\u{23}",unpack(a)) == lim)))
 x=unpack(a)
 assert((x == 0x1))
 x={unpack(a)}
-assert(# (((x == lim) and (x[0x1] == 0x1)) and (x[lim] == lim)))
+assert((# (((x == lim) and (x[0x1] == 0x1)) and (x[lim] == lim))))
 x={unpack(a,(lim - 0x2))}
-assert(# (((x == 0x3) and (x[0x1] == (lim - 0x2))) and (x[0x3] == lim)))
+assert((# (((x == 0x3) and (x[0x1] == (lim - 0x2))) and (x[0x3] == lim))))
 x={unpack(a,0xa,0x6)}
 assert((next(x) == nil))
 x={unpack(a,0xb,0xa)}
@@ -38,13 +38,13 @@ a,x=unpack({0x1,0x2},0x1,0x1)
 assert(((a == 0x1) and (x == nil)))
 do
 local maxi = ((0x1 << 0x1f) - 0x1)
-local mini = - (0x1 << 0x1f)
+local mini = (- (0x1 << 0x1f))
 checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}",unpack,{},0x0,maxi)
 checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}",unpack,{},0x1,maxi)
 checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}",unpack,{},0x0,maxI)
 checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}",unpack,{},0x1,maxI)
 checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}",unpack,{},mini,maxi)
-checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}",unpack,{},- maxi,maxi)
+checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}",unpack,{},(- maxi),maxi)
 checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}\u{20}\u{72}\u{65}\u{73}\u{75}\u{6c}\u{74}\u{73}",unpack,{},minI,maxI)
 unpack({},maxi,0x0)
 unpack({},maxi,0x1)
@@ -79,7 +79,7 @@ do
 local t = setmetatable({},{["\u{5f}\u{5f}\u{6c}\u{65}\u{6e}"] = function ()
 return "\u{61}\u{62}\u{63}"
 end})
-assert(# (t == "\u{61}\u{62}\u{63}"))
+assert((# (t == "\u{61}\u{62}\u{63}")))
 checkerror("\u{6f}\u{62}\u{6a}\u{65}\u{63}\u{74}\u{20}\u{6c}\u{65}\u{6e}\u{67}\u{74}\u{68}\u{20}\u{69}\u{73}\u{20}\u{6e}\u{6f}\u{74}\u{20}\u{61}\u{6e}\u{20}\u{69}\u{6e}\u{74}\u{65}\u{67}\u{65}\u{72}",table.insert,t,0x1)
 end
 print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{70}\u{61}\u{63}\u{6b}")
@@ -119,10 +119,10 @@ assert((table.move({0xa,0x14,0x1e},0x1,0x0,0x3,a) == a))
 eqT(a,{})
 a=table.move({0xa,0x14,0x1e},0x1,0xa,0x1)
 eqT(a,{0xa,0x14,0x1e})
-a=table.move({[(maxI - 0x2)] = 0x1,[(maxI - 0x1)] = 0x2,[maxI] = 0x3},(maxI - 0x2),maxI,- 0xa,{})
-eqT(a,{[- 0xa] = 0x1,[- 0x9] = 0x2,[- 0x8] = 0x3})
-a=table.move({[minI] = 0x1,[(minI + 0x1)] = 0x2,[(minI + 0x2)] = 0x3},minI,(minI + 0x2),- 0xa,{})
-eqT(a,{[- 0xa] = 0x1,[- 0x9] = 0x2,[- 0x8] = 0x3})
+a=table.move({[(maxI - 0x2)] = 0x1,[(maxI - 0x1)] = 0x2,[maxI] = 0x3},(maxI - 0x2),maxI,(- 0xa),{})
+eqT(a,{[(- 0xa)] = 0x1,[(- 0x9)] = 0x2,[(- 0x8)] = 0x3})
+a=table.move({[minI] = 0x1,[(minI + 0x1)] = 0x2,[(minI + 0x2)] = 0x3},minI,(minI + 0x2),(- 0xa),{})
+eqT(a,{[(- 0xa)] = 0x1,[(- 0x9)] = 0x2,[(- 0x8)] = 0x3})
 a=table.move({0x2d},0x1,0x1,maxI)
 eqT(a,{0x2d,[maxI] = 0x2d})
 a=table.move({[maxI] = 0x64},maxI,maxI,minI)
@@ -141,7 +141,7 @@ end})
 table.move(a,0xa,0xd,0x3,b)
 assert((b[0x1] == "\u{28}\u{33}\u{2c}\u{31}\u{30}\u{30}\u{29}\u{28}\u{34}\u{2c}\u{31}\u{31}\u{30}\u{29}\u{28}\u{35}\u{2c}\u{31}\u{32}\u{30}\u{29}\u{28}\u{36}\u{2c}\u{31}\u{33}\u{30}\u{29}"))
 local stat,msg = pcall(table.move,b,0xa,0xd,0x3,b)
-assert(not (stat and (msg == b)))
+assert((not (stat and (msg == b))))
 end
 do
 local function checkmove
@@ -155,27 +155,27 @@ pos2=k
 error()
 end})
 local st,msg = pcall(table.move,a,f,e,t)
-assert(not (st and not ((msg and (pos1 == x)) and (pos2 == y))))
+assert((not (st and (not ((msg and (pos1 == x)) and (pos2 == y))))))
 end
 checkmove(0x1,maxI,0x0,0x1,0x0)
 checkmove(0x0,(maxI - 0x1),0x1,(maxI - 0x1),maxI)
-checkmove(minI,- 0x2,- 0x5,- 0x2,(maxI - 0x6))
-checkmove((minI + 0x1),- 0x1,- 0x2,- 0x1,(maxI - 0x3))
-checkmove(minI,- 0x2,0x0,minI,0x0)
-checkmove((minI + 0x1),- 0x1,0x1,(minI + 0x1),0x1)
+checkmove(minI,(- 0x2),(- 0x5),(- 0x2),(maxI - 0x6))
+checkmove((minI + 0x1),(- 0x1),(- 0x2),(- 0x1),(maxI - 0x3))
+checkmove(minI,(- 0x2),0x0,minI,0x0)
+checkmove((minI + 0x1),(- 0x1),0x1,(minI + 0x1),0x1)
 end
 checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}",table.move,{},0x0,maxI,0x1)
-checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}",table.move,{},- 0x1,(maxI - 0x1),0x1)
-checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}",table.move,{},minI,- 0x1,0x1)
+checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}",table.move,{},(- 0x1),(maxI - 0x1),0x1)
+checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}",table.move,{},minI,(- 0x1),0x1)
 checkerror("\u{74}\u{6f}\u{6f}\u{20}\u{6d}\u{61}\u{6e}\u{79}",table.move,{},minI,maxI,0x1)
 checkerror("\u{77}\u{72}\u{61}\u{70}\u{20}\u{61}\u{72}\u{6f}\u{75}\u{6e}\u{64}",table.move,{},0x1,maxI,0x2)
 checkerror("\u{77}\u{72}\u{61}\u{70}\u{20}\u{61}\u{72}\u{6f}\u{75}\u{6e}\u{64}",table.move,{},0x1,0x2,maxI)
-checkerror("\u{77}\u{72}\u{61}\u{70}\u{20}\u{61}\u{72}\u{6f}\u{75}\u{6e}\u{64}",table.move,{},minI,- 0x2,0x2)
+checkerror("\u{77}\u{72}\u{61}\u{70}\u{20}\u{61}\u{72}\u{6f}\u{75}\u{6e}\u{64}",table.move,{},minI,(- 0x2),0x2)
 print("\u{74}\u{65}\u{73}\u{74}\u{69}\u{6e}\u{67}\u{20}\u{73}\u{6f}\u{72}\u{74}")
 local a = setmetatable({},{["\u{5f}\u{5f}\u{6c}\u{65}\u{6e}"] = function ()
-return - 0x1
+return (- 0x1)
 end})
-assert(# (a == - 0x1))
+assert((# (a == (- 0x1))))
 table.sort(a,error)
 a=setmetatable({},{["\u{5f}\u{5f}\u{6c}\u{65}\u{6e}"] = function ()
 return maxI
@@ -199,9 +199,9 @@ f=(f or function (x,y)
 return (x < y)
 end)
 ;
-for n = # a, 0x2, - 0x1
+for n = (# a), 0x2, (- 0x1)
 do
-assert(not f(a[n],a[(n - 0x1)]))
+assert((not f(a[n],a[(n - 0x1)])))
 end
 end
 a={"\u{4a}\u{61}\u{6e}","\u{46}\u{65}\u{62}","\u{4d}\u{61}\u{72}","\u{41}\u{70}\u{72}","\u{4d}\u{61}\u{79}","\u{4a}\u{75}\u{6e}","\u{4a}\u{75}\u{6c}","\u{41}\u{75}\u{67}","\u{53}\u{65}\u{70}","\u{4f}\u{63}\u{74}","\u{4e}\u{6f}\u{76}","\u{44}\u{65}\u{63}"}
@@ -209,7 +209,7 @@ table.sort(a)
 check(a)
 local function perm
 (s,n)
-n=(n or # s)
+n=(n or (# s))
 if (n == 0x1) then
 local t = {unpack(s)}
 table.sort(t)

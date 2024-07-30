@@ -18,19 +18,19 @@ for i = 0x1, max
 do
 t[i]=string.rep("\u{3f}",((i % 0xa) + 0x1))
 end
-t[# (t + 0x1)]="\u{3b}"
+t[(# (t + 0x1))]="\u{3b}"
 local path = table.concat(t,"\u{3b}")
 local s,err = package.searchpath("\u{78}\u{75}\u{78}\u{75}",path)
-assert(not ((s and string.find(err,string.rep("\u{78}\u{75}\u{78}\u{75}",0xa))) and # (string.gsub(err,"\u{5b}\u{5e}\u{a}\u{5d}","") >= max)))
+assert((not ((s and string.find(err,string.rep("\u{78}\u{75}\u{78}\u{75}",0xa))) and (# (string.gsub(err,"\u{5b}\u{5e}\u{a}\u{5d}","") >= max)))))
 local path = string.rep("\u{3f}",max)
 local s,err = package.searchpath("\u{78}\u{75}\u{78}\u{75}",path)
-assert(not (s and string.find(err,string.rep("\u{78}\u{75}\u{78}\u{75}",max))))
+assert((not (s and string.find(err,string.rep("\u{78}\u{75}\u{78}\u{75}",max)))))
 end
 do
 local oldpath = package.path
 package.path={}
 local s,err = pcall(require,"\u{6e}\u{6f}\u{2d}\u{73}\u{75}\u{63}\u{68}\u{2d}\u{66}\u{69}\u{6c}\u{65}")
-assert(not (s and string.find(err,"\u{70}\u{61}\u{63}\u{6b}\u{61}\u{67}\u{65}\u{2e}\u{70}\u{61}\u{74}\u{68}")))
+assert((not (s and string.find(err,"\u{70}\u{61}\u{63}\u{6b}\u{61}\u{67}\u{65}\u{2e}\u{70}\u{61}\u{74}\u{68}"))))
 package.path=oldpath
 end
 do
@@ -46,7 +46,7 @@ package.path=oldpath
 package.cpath=oldcpath
 end
 print("\u{2b}")
-if not _port then
+if (not _port) then
 local dirsep = string.match(package.config,"\u{5e}\u{28}\u{5b}\u{5e}\u{a}\u{5d}\u{2b}\u{29}\u{a}")
 local DIR = ("\u{6c}\u{69}\u{62}\u{73}" .. dirsep)
 local function D
@@ -100,9 +100,9 @@ end
 local a = require("\u{6e}\u{61}\u{6d}\u{65}\u{73}")
 assert(((a[0x1] == "\u{6e}\u{61}\u{6d}\u{65}\u{73}") and (a[0x2] == D("\u{6e}\u{61}\u{6d}\u{65}\u{73}\u{2e}\u{6c}\u{75}\u{61}"))))
 local st,msg = pcall(require,"\u{65}\u{72}\u{72}")
-assert(not ((st and string.find(msg,"\u{61}\u{72}\u{69}\u{74}\u{68}\u{6d}\u{65}\u{74}\u{69}\u{63}")) and (B == 0xf)))
+assert((not ((st and string.find(msg,"\u{61}\u{72}\u{69}\u{74}\u{68}\u{6d}\u{65}\u{74}\u{69}\u{63}")) and (B == 0xf))))
 st,msg=pcall(require,"\u{73}\u{79}\u{6e}\u{65}\u{72}\u{72}")
-assert(not (st and string.find(msg,"\u{65}\u{72}\u{72}\u{6f}\u{72}\u{20}\u{6c}\u{6f}\u{61}\u{64}\u{69}\u{6e}\u{67}\u{20}\u{6d}\u{6f}\u{64}\u{75}\u{6c}\u{65}")))
+assert((not (st and string.find(msg,"\u{65}\u{72}\u{72}\u{6f}\u{72}\u{20}\u{6c}\u{6f}\u{61}\u{64}\u{69}\u{6e}\u{67}\u{20}\u{6d}\u{6f}\u{64}\u{75}\u{6c}\u{65}"))))
 assert((package.searchpath("\u{43}",package.path) == D("\u{43}\u{2e}\u{6c}\u{75}\u{61}")))
 assert((require("\u{43}") == 0x19))
 assert((require("\u{43}") == 0x19))
@@ -149,9 +149,9 @@ assert(((require("\u{50}\u{31}") == m) and (m.AA == 0xa)))
 removefiles(files)
 AA=nil
 package.path=""
-assert(not pcall(require,"\u{66}\u{69}\u{6c}\u{65}\u{5f}\u{64}\u{6f}\u{65}\u{73}\u{5f}\u{6e}\u{6f}\u{74}\u{5f}\u{65}\u{78}\u{69}\u{73}\u{74}"))
+assert((not pcall(require,"\u{66}\u{69}\u{6c}\u{65}\u{5f}\u{64}\u{6f}\u{65}\u{73}\u{5f}\u{6e}\u{6f}\u{74}\u{5f}\u{65}\u{78}\u{69}\u{73}\u{74}")))
 package.path="\u{3f}\u{3f}\u{0}\u{3f}"
-assert(not pcall(require,"\u{66}\u{69}\u{6c}\u{65}\u{5f}\u{64}\u{6f}\u{65}\u{73}\u{5f}\u{6e}\u{6f}\u{74}\u{5f}\u{65}\u{78}\u{69}\u{73}\u{74}\u{31}"))
+assert((not pcall(require,"\u{66}\u{69}\u{6c}\u{65}\u{5f}\u{64}\u{6f}\u{65}\u{73}\u{5f}\u{6e}\u{6f}\u{74}\u{5f}\u{65}\u{78}\u{69}\u{73}\u{74}\u{31}")))
 package.path=oldpath
 local fname = "\u{66}\u{69}\u{6c}\u{65}\u{5f}\u{64}\u{6f}\u{65}\u{73}\u{5f}\u{6e}\u{6f}\u{74}\u{5f}\u{65}\u{78}\u{69}\u{73}\u{74}\u{32}"
 local m,err = pcall(require,fname)
@@ -164,25 +164,25 @@ do
 local searchers = package.searchers
 package.searchers=0x3
 local st,msg = pcall(require,"\u{61}")
-assert(not (st and string.find(msg,"\u{6d}\u{75}\u{73}\u{74}\u{20}\u{62}\u{65}\u{20}\u{61}\u{20}\u{74}\u{61}\u{62}\u{6c}\u{65}")))
+assert((not (st and string.find(msg,"\u{6d}\u{75}\u{73}\u{74}\u{20}\u{62}\u{65}\u{20}\u{61}\u{20}\u{74}\u{61}\u{62}\u{6c}\u{65}"))))
 package.searchers=searchers
 end
 local function import
 (...)
 local f = {...}
 return function (m)
-for i = 0x1, # f
+for i = 0x1, (# f)
 do
 m[f[i]]=_G[f[i]]
 end
 end
 end
-assert(not pcall(module,"\u{58}\u{55}\u{58}\u{55}"))
+assert((not pcall(module,"\u{58}\u{55}\u{58}\u{55}")))
 local p = ""
 local st,err,when = package.loadlib(DC("\u{6c}\u{69}\u{62}\u{31}"),"\u{2a}")
-if not st then
+if (not st) then
 local f,err,when = package.loadlib("\u{64}\u{6f}\u{6e}\u{6f}\u{74}\u{65}\u{78}\u{69}\u{73}\u{74}",(p .. "\u{78}\u{75}\u{78}\u{75}"))
-assert(not ((f and (type(err) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (when == "\u{61}\u{62}\u{73}\u{65}\u{6e}\u{74}")))
+assert((not ((f and (type(err) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (when == "\u{61}\u{62}\u{73}\u{65}\u{6e}\u{74}"))))
 ;
 (Message or print)("\u{a}\u{20}\u{3e}\u{3e}\u{3e}\u{20}\u{63}\u{61}\u{6e}\u{6e}\u{6f}\u{74}\u{20}\u{6c}\u{6f}\u{61}\u{64}\u{20}\u{64}\u{79}\u{6e}\u{61}\u{6d}\u{69}\u{63}\u{20}\u{6c}\u{69}\u{62}\u{72}\u{61}\u{72}\u{79}\u{20}\u{3c}\u{3c}\u{3c}\u{a}")
 print(err,when)
@@ -193,9 +193,9 @@ assert(((a == 0x19) and (b == 0xf)))
 f=assert(package.loadlib(DC("\u{6c}\u{69}\u{62}\u{31}"),(p .. "\u{61}\u{6e}\u{6f}\u{74}\u{68}\u{65}\u{72}\u{66}\u{75}\u{6e}\u{63}")))
 assert((f(0xa,0x14) == "\u{31}\u{30}\u{25}\u{32}\u{30}\u{a}"))
 local f,err,when = package.loadlib(DC("\u{6c}\u{69}\u{62}\u{31}"),(p .. "\u{78}\u{75}\u{78}\u{75}"))
-assert(not ((f and (type(err) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (when == "\u{69}\u{6e}\u{69}\u{74}")))
+assert((not ((f and (type(err) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (when == "\u{69}\u{6e}\u{69}\u{74}"))))
 f,err,when=package.loadlib("\u{64}\u{6f}\u{6e}\u{6f}\u{74}\u{65}\u{78}\u{69}\u{73}\u{74}",(p .. "\u{78}\u{75}\u{78}\u{75}"))
-assert(not ((f and (type(err) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (when == "\u{6f}\u{70}\u{65}\u{6e}")))
+assert((not ((f and (type(err) == "\u{73}\u{74}\u{72}\u{69}\u{6e}\u{67}")) and (when == "\u{6f}\u{70}\u{65}\u{6e}"))))
 f=assert(package.loadlib(DC("\u{6c}\u{69}\u{62}\u{31}\u{31}"),(p .. "\u{6c}\u{75}\u{61}\u{6f}\u{70}\u{65}\u{6e}\u{5f}\u{6c}\u{69}\u{62}\u{31}\u{31}")))
 assert((f() == "\u{65}\u{78}\u{70}\u{6f}\u{72}\u{74}\u{65}\u{64}"))
 package.cpath=DC("\u{3f}")
@@ -265,7 +265,7 @@ a,b,c=0x0,0x5,f(0x0)
 assert((((a == 0x0) and (b == 0x5)) and (c == nil)))
 end
 local a,b,c,d = (0x1 and nil),(0x1 or nil),(0x1 and (nil or 0x1)),0x6
-assert(not (((a and b) and c) and (d == 0x6)))
+assert((not (((a and b) and c) and (d == 0x6))))
 d=0x14
 a,b,c,d=f()
 assert(((((a == 0xa) and (b == 0xb)) and (c == 0xc)) and (d == nil)))
@@ -275,7 +275,7 @@ assert((((a < b) == false) and ((a > b) == true)))
 assert(((0xa and 0x2) == 0x2))
 assert(((0xa or 0x2) == 0xa))
 assert(((0xa or assert(nil)) == 0xa))
-assert(not (nil and assert(nil)))
+assert((not (nil and assert(nil))))
 assert(((nil or "\u{61}\u{6c}\u{6f}") == "\u{61}\u{6c}\u{6f}"))
 assert(((nil and 0xa) == nil))
 assert(((false and 0xa) == false))
@@ -283,17 +283,17 @@ assert(((true or 0xa) == true))
 assert(((false or 0xa) == 0xa))
 assert((false ~= nil))
 assert((nil ~= false))
-assert(not (nil == true))
-assert(not not (nil == false))
-assert(not not (0x1 == true))
-assert(not not (a == true))
-assert(not not ((0x6 or nil) == true))
-assert(not not ((nil and 0x38) == false))
-assert(not not ((nil and true) == false))
-assert(not (0xa == false))
-assert(not ({} == false))
-assert(not (0.5 == false))
-assert(not ("\u{78}" == false))
+assert((not (nil == true)))
+assert((not (not (nil == false))))
+assert((not (not (0x1 == true))))
+assert((not (not (a == true))))
+assert((not (not ((0x6 or nil) == true))))
+assert((not (not ((nil and 0x38) == false))))
+assert((not (not ((nil and true) == false))))
+assert((not (0xa == false)))
+assert((not ({} == false)))
+assert((not (0.5 == false)))
+assert((not ("\u{78}" == false)))
 assert(({} ~= {}))
 print("\u{2b}")
 a={}
@@ -304,7 +304,7 @@ function f(a)
 return a
 end
 local a = {}
-for i = 0xbb8, - 0xbb8, - 0x1
+for i = 0xbb8, (- 0xbb8), (- 0x1)
 do
 a[(i + 0.0)]=i
 ;
@@ -314,8 +314,8 @@ a[1e31]="\u{61}\u{6c}\u{6f}"
 a[true]=0xa
 ;
 a[false]=0x14
-assert((((a[1e31] == "\u{61}\u{6c}\u{6f}") and (a[not 0x1] == 0x14)) and (a[(0xa < 0x14)] == 0xa)))
-for i = 0xbb8, - 0xbb8, - 0x1
+assert((((a[1e31] == "\u{61}\u{6c}\u{6f}") and (a[(not 0x1)] == 0x14)) and (a[(0xa < 0x14)] == 0xa)))
+for i = 0xbb8, (- 0xbb8), (- 0x1)
 do
 assert((a[i] == i))
 ;
@@ -325,20 +325,20 @@ a[f]=print
 a[a]=a
 assert((a[a][a][a][a][print] == assert))
 a[print]((a[a[f]] == a[print]))
-assert(not pcall(function ()
+assert((not pcall(function ()
 local a = {}
 ;
 a[nil]=0xa
-end))
-assert(not pcall(function ()
+end)))
+assert((not pcall(function ()
 local a = {[nil] = 0xa}
-end))
+end)))
 assert((a[nil] == undef))
 a=nil
 local a,b,c
-a={0xa,0x9,0x8,0x7,0x6,0x5,0x4,0x3,0x2,[- 0x3] = "\u{61}",[f] = print,["\u{61}"] = "\u{61}",["\u{62}"] = "\u{61}\u{62}"}
-a,a.x,a.y=a,a[- 0x3]
-assert((((((a[0x1] == 0xa) and (a[- 0x3] == a.a)) and (a[f] == print)) and (a.x == "\u{61}")) and not a.y))
+a={0xa,0x9,0x8,0x7,0x6,0x5,0x4,0x3,0x2,[(- 0x3)] = "\u{61}",[f] = print,["\u{61}"] = "\u{61}",["\u{62}"] = "\u{61}\u{62}"}
+a,a.x,a.y=a,a[(- 0x3)]
+assert((((((a[0x1] == 0xa) and (a[(- 0x3)] == a.a)) and (a[f] == print)) and (a.x == "\u{61}")) and (not a.y)))
 a[0x1],f(a)[0x2],b,c={["\u{61}\u{6c}\u{6f}"] = assert},0xa,a[0x1],a[f],0x6,0xa,0x17,f(a),0x2
 a[0x1].alo((((a[0x2] == 0xa) and (b == 0xa)) and (c == print)))
 a.aVeryLongName012345678901234567890123456789012345678901234567890123456789=0xa
@@ -354,7 +354,7 @@ local _ENV <const> = 0xb
 X="\u{68}\u{69}"
 end
 local st,msg = pcall(foo)
-assert(not (st and string.find(msg,"\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}")))
+assert((not (st and string.find(msg,"\u{6e}\u{75}\u{6d}\u{62}\u{65}\u{72}"))))
 end
 local maxint = math.maxinteger
 while ((maxint ~= (maxint + 0.0)) or ((maxint - 0x1) ~= (maxint - 1.0))) do
@@ -366,14 +366,14 @@ a[maxintF]=0xa
 ;
 a[(maxintF - 1.0)]=0xb
 ;
-a[- maxintF]=0xc
+a[(- maxintF)]=0xc
 ;
-a[- (maxintF + 1.0)]=0xd
+a[(- (maxintF + 1.0))]=0xd
 ;
-assert(((((a[maxint] == 0xa) and (a[(maxint - 0x1)] == 0xb)) and (a[- maxint] == 0xc)) and (a[- (maxint + 0x1)] == 0xd)))
+assert(((((a[maxint] == 0xa) and (a[(maxint - 0x1)] == 0xb)) and (a[(- maxint)] == 0xc)) and (a[(- (maxint + 0x1))] == 0xd)))
 a[maxint]=0x14
-a[- maxint]=0x16
-assert(((((a[maxintF] == 0x14) and (a[(maxintF - 1.0)] == 0xb)) and (a[- maxintF] == 0x16)) and (a[- (maxintF + 1.0)] == 0xd)))
+a[(- maxint)]=0x16
+assert(((((a[maxintF] == 0x14) and (a[(maxintF - 1.0)] == 0xb)) and (a[(- maxintF)] == 0x16)) and (a[(- (maxintF + 1.0))] == 0xd)))
 a=nil
 do
 local a,i,j,b

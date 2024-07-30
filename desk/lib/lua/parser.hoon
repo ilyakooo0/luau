@@ -1,7 +1,6 @@
 /-  *lua
 /+  st
 /+  interlist
-/+  *bintree
 =<
 apex
 |%
@@ -54,38 +53,38 @@ apex
       parse-funcbody
     ==
     ::
-    %+  cook  |=  [=unop =expr]  [%unop unop expr]
-    ;~  plug
-      ;~  pose
-        ;~  sfix
-          ;~  pose
-            (cold %minus (just '-'))
-            (cold %sig (just '~'))
-            (cold %hax (just '#'))
-          ==
-          ws
-        ==
-        ;~  sfix
-          (cold %not (jest 'not'))
-          ;~(less parse-name ws)
-        ==
-      ==
-      %+  knee  *expr  |.(parse-expr)
-    ==
   ==
 :: Parse expressions separated by binary operators
 ::
 ++  parse-expr-list
-  %^  tnee  %parse-expr-list  (interlist:interlist binop expr)
-  %+  parse:interlist  (ifix [ws ws] parse-binop)  parse-atomic-expr
-:: TODO: This is mock and should take operator priority into account.
-::
+  %^  tnee  %parse-expr-list  ,(interlist:interlist binop [(list unop) expr])
+  %+  parse:interlist  (ifix [ws ws] parse-binop)
+  ;~  plug
+    %-  star
+    ;~  pose
+      ;~  sfix
+        ;~  pose
+          (cold %minus (just '-'))
+          (cold %sig (just '~'))
+          (cold %hax (just '#'))
+        ==
+        ws
+      ==
+      ;~  sfix
+        (cold %not (jest 'not'))
+        ;~(less parse-name ws)
+      ==
+    ==
+    ::
+    parse-atomic-expr
+  ==
 ++  process-expr-list
   =<
-  |=  l=(interlist:interlist binop expr)
+  |=  l=(interlist:interlist binop [(list unop) expr])
   ^-  expr
   %-  strip-tree
-  %-  (process-left-assoc ~[%pow])
+  %-  (process-right-assoc ~[%pow])
+  %-  process-unops
   %-  (process-left-assoc ~[%mul %div %int-div %mod])
   %-  (process-left-assoc ~[%add %sub])
   %-  (process-right-assoc ~[%concat])
@@ -96,19 +95,89 @@ apex
   %-  (process-left-assoc ~[%lt %gt %lteq %gteq %neq %eq])
   %-  (process-left-assoc ~[%and])
   %-  (process-left-assoc ~[%or])
-  [%leaf l]
+  (preprocess-tree l)
   |%
+  +$  working-tree
+    $%
+      [%node l=working-tree n=binop r=working-tree]
+      [%branch b=unop t=working-tree]
+      [%tbd-unop l=(list [=expr =binop]) =unop r=working-tree]
+      [%unoped l=(list [=expr =binop]) r=working-tree]
+      [%leaf (interlist:interlist binop expr)]
+    ==
+  ++  preprocess-tree
+    |=  l=(interlist:interlist binop [(list unop) expr])
+    ^-  working-tree
+    =/  splitted  (find-unop l)
+    ?~  splitted  leaf+(turn:interlist l |=([* =expr] expr))
+    tbd-unop+[l.u.splitted unop.u.splitted $(l r.u.splitted)]
+  ++  apply-unops
+    |=  [unops=(list unop) =expr]
+    ^+  expr
+    ?~  unops  expr
+    [%unop i.unops $(unops t.unops)]
   ++  strip-tree
-    |=  tree=(bintree binop (interlist:interlist binop expr))
+    |=  tree=working-tree
     ^-  expr
     ?-  -.tree
       %leaf  ?>  ?=(%single +<.tree)  +>.tree
       %node  [%binop $(tree l.tree) n.tree $(tree r.tree)]
+      %branch  [%unop b.tree $(tree t.tree)]
+      %tbd-unop  !!
+      %unoped  ?>  =(~ l.tree)  $(tree r.tree)
     ==
+  ++  find-unop
+    |=  l=(interlist:interlist binop [(list unop) expr])
+    ^-  (unit [l=(list [=expr =binop]) =unop r=(interlist:interlist binop [(list unop) expr])])
+    ?-  -.l
+      %single
+        ?~  +<.l  ~
+        %-  some
+        [~ i.-.val.l single+[t.-.val.l +.val.l]]
+      %double
+        ?~  -.val.l  
+          %+  ^^bind  $(l tail.l)
+          |=  [k=(list [expr binop]) =unop tail=(interlist:interlist binop [(list unop) expr])] 
+          [[[+.val.l sep.l] k] unop tail]
+        %-  some
+        [~ i.-.val.l double+[[t.-.val.l +.val.l] sep.l tail.l]]
+    ==
+  ++  process-unops
+    |=  tree=working-tree
+    ^-  working-tree
+    ?-  -.tree
+      %node  node+[$(tree l.tree) n.tree $(tree r.tree)]
+      %branch  branch+[b.tree $(tree t.tree)]
+      %tbd-unop  unoped+[l.tree branch+[unop.tree $(tree r.tree)]]
+      %leaf  tree
+      %unoped  unoped+[l.tree $(tree r.tree)]
+    ==
+  ++  split-left-unop-list
+    |=  [is-pivot=$-(binop ?) l=(list [=expr =binop])]
+    ^-  (unit [l=(interlist:interlist binop expr) =binop r=(list [=expr =binop])])
+    ?~  l  ~
+    ?:  (is-pivot binop.i.l)  `[single+expr.i.l binop.i.l t.l]
+    =/  rest  $(l t.l)
+    ?~  rest  ~
+    `[double+[expr.i.l binop.i.l -.u.rest] +.u.rest]
+  ++  split-right-unop-list
+    |=  [is-pivot=$-(binop ?) l=(list [=expr =binop])]
+    ^-  (unit [l=(interlist:interlist binop expr) =binop r=(list [=expr =binop])])
+    =/  reversed=(unit [l=(list [=binop =expr]) =binop r=(interlist:interlist binop expr)])
+      =/  l=(list [=binop =expr])  (flop (turn l swap))
+      |-
+      ?~  l  ~
+      ?:  (is-pivot binop.i.l)  `[~ binop.i.l (new:interlist expr.i.l t.l)]
+      =/  rest=(unit [l=(list [=binop =expr]) =binop r=(interlist:interlist binop expr)])  $(l t.l)
+      ?~  rest  ~
+      `[[i.l l.u.rest] +.u.rest]
+    ?~  reversed  ~
+    `[(reverse:interlist r.u.reversed) binop.u.reversed (turn (flop l.u.reversed) swap)]
+  ++  swap  |*([a=* b=*] [b a])
   ++  process-right-assoc
     |=  ops=(lest binop)
-    |=  tree=(bintree binop (interlist:interlist binop expr))
-    ^+  tree
+    |=  tree=working-tree
+    ^-  working-tree
     ?-  -.tree
       %leaf
         =/  l  +.tree
@@ -116,22 +185,46 @@ apex
         =/  splitted  (split-left-on:interlist |=(op=binop (elem op ops)) l)
         ?~  splitted  [%leaf l]
         [%node $(l lhs.u.splitted) pivot.u.splitted $(l rhs.u.splitted)]
+      %branch  branch+[b.tree $(tree t.tree)]
+      %tbd-unop
+        =/  splitted
+          (split-left-unop-list |=(op=binop (elem op ops)) l.tree)
+        ?~  splitted  tbd-unop+[l.tree unop.tree $(tree r.tree)]
+        $(tree [%node $(tree leaf+l.u.splitted) binop.u.splitted tbd-unop+[r.u.splitted +>.tree]])
       %node
         [%node $(tree l.tree) n.tree $(tree r.tree)]
+      %unoped
+        =/  splitted
+          (split-left-unop-list |=(op=binop (elem op ops)) l.tree)
+        ?~  splitted  unoped+[l.tree $(tree r.tree)]
+        [%node $(tree leaf+l.u.splitted) binop.u.splitted $(tree unoped+[r.u.splitted r.tree])]
     ==
   ++  process-left-assoc
     |=  ops=(lest binop)
-    |=  tree=(bintree binop (interlist:interlist binop expr))
-    ^+  tree
+    |=  tree=working-tree
+    ^-  working-tree
     ?-  -.tree
       %leaf
         =/  l  +.tree
         |-
+        ^-  working-tree
         =/  splitted  (split-right-on:interlist |=(op=binop (elem op ops)) l)
         ?~  splitted  [%leaf l]
         [%node $(l lhs.u.splitted) pivot.u.splitted $(l rhs.u.splitted)]
+      %tbd-unop
+        =/  splitted
+          (split-right-unop-list |=(op=binop (elem op ops)) l.tree)
+        ?~  splitted  tbd-unop+[l.tree unop.tree $(tree r.tree)]
+        $(tree [%node $(tree leaf+l.u.splitted) binop.u.splitted tbd-unop+[r.u.splitted +>.tree]])
       %node
         [%node $(tree l.tree) n.tree $(tree r.tree)]
+      %branch
+        [%branch b.tree $(tree t.tree)]
+      %unoped
+        =/  splitted
+          (split-right-unop-list |=(op=binop (elem op ops)) l.tree)
+        ?~  splitted  unoped+[l.tree $(tree r.tree)]
+        [%node $(tree leaf+l.u.splitted) binop.u.splitted $(tree unoped+[r.u.splitted +>.tree])]
     ==
   --
 ++  parse-expr
