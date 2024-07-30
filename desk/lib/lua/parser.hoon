@@ -766,7 +766,7 @@ apex
   ++  name-fst-char  ;~(pose alf:ab (just '_'))
   --
   %+  cook  |=  =tape  (crip tape)
-  ;~(less ;~(plug keyword ;~(less name-char (easy ~))) ;~(plug name-fst-char (star name-char)))
+  ;~(less keyword ;~(plug name-fst-char (star name-char)))
 ++  bind
   |*  =mold
   |*  [prev=rule cont=$-(mold rule)]
@@ -900,31 +900,39 @@ apex
   ;<  res=_p:(need q:$:$:inner)  bind  (inner closing)
   %+  cold  res  closing
 ++  keyword
-  %+  cold  ~
-  ;~  pose
-    (jest 'and')
-    (jest 'break')
-    (jest 'do')
-    (jest 'else')
-    (jest 'elseif')
-    (jest 'end')
-    (jest 'false')
-    (jest 'for')
-    (jest 'function')
-    (jest 'goto')
-    (jest 'if')
-    (jest 'in')
-    (jest 'local')
-    (jest 'nil')
-    (jest 'not')
-    (jest 'or')
-    (jest 'repeat')
-    (jest 'return')
-    (jest 'then')
-    (jest 'true')
-    (jest 'until')
-    (jest 'while')
-  ==
+  =<
+  %+  sear
+    |=  word=tape
+    ^-  (unit ~)
+    ?:  (elem word keyword-names)  `~  ~
+  (plus alf:ab)
+  |%
+  ++  keyword-names
+    :~
+      "and"
+      "break"
+      "do"
+      "else"
+      "elseif"
+      "end"
+      "false"
+      "for"
+      "function"
+      "goto"
+      "if"
+      "in"
+      "local"
+      "nil"
+      "not"
+      "or"
+      "repeat"
+      "return"
+      "then"
+      "true"
+      "until"
+      "while"
+    ==
+  --
 ++  tnee
   |*  [=term gar=mold sef=rule]
   |=  tub=nail
@@ -936,6 +944,13 @@ apex
   ?~  q.res
   ~&  [term %nope]  res
   ~&  >  [term %ok]  res
+++  neg
+  |*  =rule
+  |=  =nail
+  ^-  (like ~)
+  =/  x  (rule nail)
+  :-  p.nail 
+  ?~  q.x  `[~ nail]  ~
 ++  blok-is-empty
   |=  =blok
   ^-  ?
