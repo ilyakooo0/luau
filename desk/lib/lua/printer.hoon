@@ -6,10 +6,10 @@ print
 :: AST
 ::
 ++  print
-  |=  [=ast]
+  |=  [=chunk]
   ^-  tape
-  ?-  -.ast
-    %blok  (print-blok +.ast)
+  ?-  -.chunk
+    %blok  (print-blok +.chunk)
   ==
 :: Expr
 ::

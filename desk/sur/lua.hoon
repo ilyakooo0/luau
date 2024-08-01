@@ -1,7 +1,7 @@
 |%
 +$  name  @t
 +$  namelist  (lest name)
-+$  ast
++$  chunk
   $%
     [%blok blok]
   ==

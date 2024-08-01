@@ -6,7 +6,7 @@
 apex
 |%
 ++  apex
-  %^  tnee  %apex  ast
+  %^  tnee  %apex  chunk
   ;~  pfix
     %-  punt
     ;~  plug
@@ -867,7 +867,7 @@ apex
   ;~(less keyword ;~(plug name-fst-char (star name-char)))
 ++  bind
   |*  =mold
-  |*  [prev=rule cont=$-(mold rule)]
+  |*  [prev=rule cont=$-(* rule)]
   |=  =nail
   =/  prev-edge  (prev nail)
   ?~  q.prev-edge  prev-edge

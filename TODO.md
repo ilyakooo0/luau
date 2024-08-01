@@ -7,3 +7,7 @@
 - [x] binary operator priority
 - [x] ^ should be higher priority than unary ops
 - [x] Unifiy parened exprs
+- [ ] pow
+
+
+     {f()}              -- creates a list with all results from f().
