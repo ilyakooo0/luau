@@ -1,11 +1,6 @@
+/-  *interlist
 =<
 |%
-++  interlist
-  |$  [sep val]
-  $%
-    [%double =val =sep tail=(interlist sep val)]
-    [%single =val]
-  ==
 ++  new
   |*  [a=* b=(list [* *])]
   ^-  (interlist _?<(?=(~ b) -.i.b) _a)
