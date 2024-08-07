@@ -59,9 +59,11 @@
   |=  state
   [st ~]
 ++  eval-blok
+  =<
   |=  =blok
   ^-  (eval-m value)
   =/  body  body.blok
+  ;<  ~  bind  push-local
   |-
   ^-  (eval-m value)
   ?~  body
@@ -70,7 +72,23 @@
     ;<  rets=(lest value)  bind  (eval-exprlist u.u.ret.blok)
     (pure multires+rets)
   ;<  ~  bind  (eval-stat i.body)
-  $(body t.body)
+  ;<  ret=value  bind  $(body t.body)
+  ;<  ~  bind  pop-local
+  (pure ret)
+  |%
+  ++  push-local
+    ^-  (eval-m ~)
+    |=  st=state
+    =.  local-envs.st  [*(map name value) local-envs.st]
+    [st ~]
+  ++  pop-local
+    ^-  (eval-m ~)
+    |=  st=state
+    =.  local-envs.st
+      ?~  local-envs.st  !!
+      t.local-envs.st
+    [st ~]
+  --
 ++  eval-exprlist
   |=  vals=exprlist
   ^-  (eval-m (lest value))
