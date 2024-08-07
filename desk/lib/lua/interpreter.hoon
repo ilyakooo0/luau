@@ -127,7 +127,7 @@
   |=  vals=(list value)
   ^-  (list value)
   ?~  vals  ~
-  ?~  t.vals  ~[(normalize-multires)]
+  ?~  t.vals  ~[(normalize-multires i.vals)]
   [i.vals $(vals t.vals)]
 ++  normalize-multires
   |=  val=value
