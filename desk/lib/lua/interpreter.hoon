@@ -159,6 +159,7 @@
           =/  tail=value  (normalize-multires i.vals)
           ?:  ?=(%multires -.tail)  +.tail  [tail ~]
         [i.vals $(vals t.vals)]
+      ?~  t.res  i.res
       multires+res
   ==
 ++  process-varlist
