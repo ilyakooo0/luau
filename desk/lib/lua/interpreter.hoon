@@ -33,7 +33,7 @@
   $:
     tables=$~([(malt ~[[0 *table]]) 1] (objects table))
     global-env=table
-    local-envs=$~(~[(malt ~[['_ENV' table+[0 ~]]])] (list (map name value)))
+    local-envs=$~(~[(malt ~[['_ENV' table+[0 ~]]])] (lest (map name value)))
   ==
 ++  eval-m
   |$  [val]
@@ -62,20 +62,26 @@
   =<
   |=  =blok
   ^-  (eval-m value)
+  %-  with-local
   =/  body  body.blok
-  ;<  ~  bind  push-local
   |-
   ^-  (eval-m value)
   ?~  body
     ?~  ret.blok  (pure nil+~)
     ?~  u.ret.blok  (pure nil+~)
     ;<  rets=(lest value)  bind  (eval-exprlist u.u.ret.blok)
-    (pure multires+rets)
+    (pure (multires rets))
   ;<  ~  bind  (eval-stat i.body)
   ;<  ret=value  bind  $(body t.body)
-  ;<  ~  bind  pop-local
   (pure ret)
   |%
+  ++  with-local
+    |*  act=(eval-m)
+    ^-  _act
+    ;<  ~  bind  push-local
+    ;<  res=_val:$:act  bind  act
+    ;<  ~  bind  pop-local
+    (pure res)
   ++  push-local
     ^-  (eval-m ~)
     |=  st=state
@@ -85,10 +91,15 @@
     ^-  (eval-m ~)
     |=  st=state
     =.  local-envs.st
-      ?~  local-envs.st  !!
+      ?~  t.local-envs.st  !!
       t.local-envs.st
     [st ~]
   --
+++  multires
+  |=  vals=(lest value)
+  ^-  value
+  ?~  t.vals  i.vals
+  multires+vals
 ++  eval-exprlist
   |=  vals=exprlist
   ^-  (eval-m (lest value))
@@ -114,15 +125,31 @@
             (set-table ->-.i.asmnts (~(put by tabl) ->+.i.asmnts +.i.asmnts))
         ==
       $(asmnts t.asmnts)
+    %local-asmnt
+      =/  lhs=(list name)
+        %+  turn  attrnamelist.stat
+        |=  [=name attr=(unit attrib)]
+        ?>  ?=(~ attr)
+        name
+      ;<  actual-values=(list [name value])  bind  
+        ?~  rhs.stat  (pure ~)
+        ;<  rhs=(list value)  bind  (eval-exprlist u.rhs.stat)
+        (pure (zip lhs rhs))
+      ;<  st=state  bind  get-state
+      =.  i.local-envs.st
+        %-  ~(uni by i.local-envs.st)
+        %-  malt
+        (weld (turn lhs |=(=name [name `value`nil+~])) actual-values)
+      (set-state st)
   ==
 ++  set-var
   |=  var=name
   |=  val=value
   ^-  (eval-m ~)
   ;<  envs=(list (map name value))  bind  get-local-envs
-  =/  new-envs=(unit (list (map name value)))
+  =/  new-envs=(unit (lest (map name value)))
     |-
-    ^-  (unit (list (map name value)))
+    ^-  (unit (lest (map name value)))
     ?~  envs  ~
     ?.  (~(has by i.envs) var)
       =/  rest  $(envs t.envs)

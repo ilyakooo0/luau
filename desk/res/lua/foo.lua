@@ -47,9 +47,9 @@ do
 	return 8, foo;
 end
 
-print('the way of the future')
+-- print('the way of the future')
 
-print 'hello'
+-- print 'hello'
 
 h{key1 = 'Sonmi~451'}
 

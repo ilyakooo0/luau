@@ -104,8 +104,8 @@
 +$  funcbody  [pars=parlist body=blok]
 +$  parlist  [pars=(list name) wildcard=?]
 +$  local-function  [=name body=funcbody]
-+$  local-asmnt  [=attnamelist rhs=(unit exprlist)]
-+$  attnamelist  (lest [=name attr=(unit attrib)])
++$  local-asmnt  [=attrnamelist rhs=(unit exprlist)]
++$  attrnamelist  (lest [=name attr=(unit attrib)])
 +$  attrib
   $?
   %const

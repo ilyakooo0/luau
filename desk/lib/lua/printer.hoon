@@ -264,7 +264,7 @@ print
   %-  zing
   :~
     "local "
-    (print-attnamelist attnamelist.local-asmnt)
+    (print-attrnamelist attrnamelist.local-asmnt)
     ?~  rhs.local-asmnt  ""
     %-  zing
     :~
@@ -272,13 +272,13 @@ print
       (print-explist u.rhs.local-asmnt)
     ==
   ==
-:: attnamelist
+:: attrnamelist
 ::
-++  print-attnamelist
-  |=  =attnamelist
+++  print-attrnamelist
+  |=  =attrnamelist
   ^-  tape
   %-  commaed
-  %+  turn  attnamelist
+  %+  turn  attrnamelist
   |=  [=name attr=(unit attrib)]
   %-  zing
   :~

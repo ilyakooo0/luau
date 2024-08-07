@@ -8,3 +8,4 @@
 - [x] ^ should be higher priority than unary ops
 - [x] Unifiy parened exprs
 - [ ] pow
+- [ ] attributes

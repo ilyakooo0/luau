@@ -1,5 +1,6 @@
 x = 8
 
-y = x
+local y = x + 3
 
-return y
+
+return y / 2

@@ -568,7 +568,7 @@ apex
 ++  parse-local-asmnt
   %^  tnee  %parse-local-asmnt  local-asmnt
   %+  cook
-    |=  [* * =attnamelist rhs=(unit explist)]  [attnamelist rhs]
+    |=  [* * =attrnamelist rhs=(unit explist)]  [attrnamelist rhs]
   ;~  plug
     (jest 'local')
     wss
@@ -582,7 +582,7 @@ apex
     ==
   ==
 ++  parse-attnamelist
-  %^  tnee  %parse-attnamelist  attnamelist
+  %^  tnee  %parse-attnamelist  attrnamelist
   %+  most  (ifix [ws ws] com)
   ;~  plug
     parse-name
